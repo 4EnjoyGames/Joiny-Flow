@@ -1,0 +1,4 @@
+#ifndef BINARYLOGIC_H
+#define BINARYLOGIC_H
+
+#endif // BINARYLOGIC_H

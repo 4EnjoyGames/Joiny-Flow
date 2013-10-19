@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<directory>
+	<file>
+		<name>flow.plist</name>
+	</file>
+	<file>
+		<name>flow.png</name>
+	</file>
+	<file>
+		<name>puzzle_5x5.ad</name>
+	</file>
+	<file>
+		<name>background.png</name>
+	</file>
+
+	<file>
+		<name>level_end/level_end_buttons.plist.xml</name>
+		<lang>1</lang>
+	</file>
+	
+	<file>
+		<name>level_buttons.plist.xml</name>
+	</file>
+	
+</directory>

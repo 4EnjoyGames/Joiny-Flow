@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>level_end_buttons.{lang}.png</texture>
+	<sheet>level_end_buttons.{lang}.plist</sheet>
+	
+	<image>next_level_button.png.xml</image>
+	<image>play_more_button.png.xml</image>
+</spritesheet>

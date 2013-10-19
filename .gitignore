@@ -1,0 +1,38 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+JoinyGenerator/*.ad
+JoinyGenerator/release
+Resources
+build
+assets
+bin
+gen
+obj
+*.local.bat
+*.user
+Makefile
+Makefile.*
+
+Thumbs.db
+*.keystore
+*.psd
+*.__mk
+
+local.properties
+*.user
+*.user.*
+debug
+*.pdb
+*.apk
