@@ -22,12 +22,12 @@ bool FileUtils::openPackageFile(const std::string& name, std::stringstream& out)
 
 const FileUtils::FileName FileUtils::getPackageFilePath(const std::string& name)
 {
-    return cocos2d::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(name.c_str());
+    return cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(name.c_str());
 }
 
 const FileUtils::FileName FileUtils::getStorageFilePath(const std::string &name)
 {
-    return cocos2d::CCFileUtils::sharedFileUtils()->getWriteablePath() + name;
+    return cocos2d::CCFileUtils::sharedFileUtils()->getWritablePath() + name;
 }
 
 bool FileUtils::isFileExists(const FileName& name)

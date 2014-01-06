@@ -40,20 +40,20 @@ AppDelegate::~AppDelegate()
 bool AppDelegate::initInstance()
 {
     bool bRet = false;
-    do 
+    do
     {
 
 
 
-	// fix bug: 16bit aligned
-	void* buff=_aligned_malloc(sizeof(CCEGLView),16);
-	CCEGLView* mainView = new (buff) CCEGLView();
+        // fix bug: 16bit aligned
+        void* buff=_aligned_malloc(sizeof(CCEGLView),16);
+        CCEGLView* mainView = new (buff) CCEGLView();
 
-	CCDirector *pDirector = CCDirector::sharedDirector();
-	mainView->Create();
-	pDirector->setOpenGLView(mainView);
-	
-	
+        CCDirector *pDirector = CCDirector::sharedDirector();
+        mainView->Create();
+        pDirector->setOpenGLView(mainView);
+
+
 
         bRet = true;
     } while (0);
@@ -78,7 +78,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
     CCSize vsize = pEGLView->getVisibleSize();
 
-	CCSize frameSize = pEGLView->getFrameSize();
+    CCSize frameSize = pEGLView->getFrameSize();
     //std::cout << "TESST" <<std::endl;
     // In this demo, we select resource according to the frame's height.
     // If the resource size is different from design resolution size, you need to set contentScaleFactor.
@@ -86,26 +86,31 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // this can make sure that the resource's height could fit for the height of design resolution.
     float width_change = vsize.width / designResolutionSize.width;
     // if the frame's height is larger than the height of medium resource size, select large resource.
-    CCFileUtils::sharedFileUtils()->setResourceDirectory(mediumResource.directory);
+    //CCFileUtils::sharedFileUtils()->setResourceDirectory(mediumResource.directory);
+
+    std::vector<std::string> searchPath;
+    searchPath.push_back(mediumResource.directory);
+
+    CCFileUtils::sharedFileUtils()->setSearchPaths(searchPath);
     pDirector->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height/width_change, mediumResource.size.width/designResolutionSize.width/width_change));
     /*if (frameSize.height > mediumResource.size.height)
-	{ 
-		CCFileUtils::sharedFileUtils()->setResourceDirectory(largeResource.directory);
+    {
+        CCFileUtils::sharedFileUtils()->setResourceDirectory(largeResource.directory);
         pDirector->setContentScaleFactor(MIN(largeResource.size.height/designResolutionSize.height, largeResource.size.width/designResolutionSize.width));
-	}
+    }
     // if the frame's height is larger than the height of small resource size, select medium resource.
     else if (frameSize.height > smallResource.size.height)
-    { 
+    {
         CCFileUtils::sharedFileUtils()->setResourceDirectory(mediumResource.directory);
         pDirector->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height, mediumResource.size.width/designResolutionSize.width));
     }
     // if the frame's height is smaller than the height of medium resource size, select small resource.
-	else
-    { 
-		CCFileUtils::sharedFileUtils()->setResourceDirectory(smallResource.directory);
+    else
+    {
+        CCFileUtils::sharedFileUtils()->setResourceDirectory(smallResource.directory);
         pDirector->setContentScaleFactor(MIN(smallResource.size.height/designResolutionSize.height, smallResource.size.width/designResolutionSize.width));
     }*/
-	
+
     // turn on display FPS
     pDirector->setDisplayStats(false);
 

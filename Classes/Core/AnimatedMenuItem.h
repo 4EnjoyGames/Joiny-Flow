@@ -11,7 +11,7 @@ using namespace cocos2d;
 
  @since v0.8.0
  */
-class AnimatedMenuItem : public CCMenuItem, public CCRGBAProtocol
+class AnimatedMenuItem : public CCMenuItem
 {
     /** the image used when the item is not selected */
     CC_PROPERTY(CCNode*, m_pNormalImage, NormalImage);
@@ -29,7 +29,7 @@ public:
     bool initWithNormalSprite(CCNode* normalSprite, CCObject* target, SEL_MenuHandler selector);
     // super methods
     virtual void setColor(const ccColor3B& color);
-    virtual ccColor3B getColor();
+    virtual const ccColor3B& getColor();
     virtual void setOpacity(GLubyte opacity);
     virtual GLubyte getOpacity();
     virtual void addNephew(CCNode *node);

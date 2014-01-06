@@ -1,5 +1,4 @@
 #include "AnimatedMenuItem.h"
-#include "Core/MusicSettings.h"
 
 //
 //CCAnimatedMenuItem
@@ -26,7 +25,7 @@ CCAction* AnimatedMenuItem::createUpAction()
 
 CCAction* AnimatedMenuItem::createDownAction()
 {
-    return CCScaleTo::create(0.05f, _base_scale*1.15f);
+    return CCScaleTo::create(0.05f, _base_scale*1.10f);
 }
 
 float AnimatedMenuItem::getBaseScale()
@@ -51,7 +50,8 @@ void AnimatedMenuItem::addNephew(CCNode* node)
 
 void AnimatedMenuItem::setPosition(const CCPoint& newPosition)
 {
-    this->getNormalImage()->setPosition(newPosition);
+    if(this->getNormalImage())
+        this->getNormalImage()->setPosition(newPosition);
     CCNode::setPosition(newPosition);
 
 
@@ -219,7 +219,7 @@ GLubyte AnimatedMenuItem::getOpacity()
     return dynamic_cast<CCRGBAProtocol*>(m_pNormalImage)->getOpacity();
 }
 
-ccColor3B AnimatedMenuItem::getColor()
+const ccColor3B &AnimatedMenuItem::getColor()
 {
     return dynamic_cast<CCRGBAProtocol*>(m_pNormalImage)->getColor();
 }
@@ -257,7 +257,8 @@ bool AnimatedMenuItem::initWithNormalSprite(CCNode* normalSprite, CCObject* targ
  */
 void AnimatedMenuItem::activate()
 {
-    MusicSettings::playSoundEffect("music/choose.wav");
+    //TODO: place music effect on click
+    //MusicSettings::playSoundEffect("music/choose.wav");
     CCMenuItem::activate();
 }
 
@@ -319,7 +320,7 @@ void AnimatedMenuItem::unselected()
 
 void AnimatedMenuItem::setEnabled(bool bEnabled)
 {
-    if( m_bIsEnabled != bEnabled )
+    if( m_bEnabled != bEnabled )
     {
         CCMenuItem::setEnabled(bEnabled);
         this->updateImagesVisibility();
@@ -329,7 +330,7 @@ void AnimatedMenuItem::setEnabled(bool bEnabled)
 // Helper
 void AnimatedMenuItem::updateImagesVisibility()
 {
-    if (m_bIsEnabled)
+    if (m_bEnabled)
     {
         if (m_pNormalImage)   m_pNormalImage->setVisible(true);
         //if (m_pSelectedImage) m_pSelectedImage->setVisible(false);

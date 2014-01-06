@@ -26,14 +26,16 @@ set CHMOD="%CYGWIN_DIR%\chmod.exe"
 
 
 cd %ANDROID_PROJ%
-cd ../../ResourceCompiler
+pwd
+cd ../../Resource-Compiler
 
 set startdir=%~dp0
 
 for %%A in ("%~dp0.") do set startdir=%%~nA
 
-set params="texture_packer=%TEXTURE_PACKER_DIR%;platform=%PLATFORM%;project=%BUILD_PROJECT%;source=../samples/%startdir%/Resources_storage;destination=../samples/%startdir%/Resources;translate=en;translation_dir=../Resources_storage/translations"
+set params="texture_packer=%TEXTURE_PACKER_DIR%;platform=%PLATFORM%;project=%BUILD_PROJECT%;source=../projects/%startdir%/Resources_storage;destination=../projects/%startdir%/Resources;translate=en;translation_dir=../Resources_storage/translations"
 
+echo "%PHP_DIR%" ResourceCompiler.php %params%
 "%PHP_DIR%" ResourceCompiler.php %params%
 
 echo Texture build finished
