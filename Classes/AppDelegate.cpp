@@ -8,6 +8,7 @@
 #include <string>
 #include "Logic/Language.h"
 #include "Scenes/Loading.h"
+#include "Core/Screen.h"
 
 USING_NS_CC;
 
@@ -62,7 +63,7 @@ bool AppDelegate::initInstance()
 #endif
 bool AppDelegate::applicationDidFinishLaunching() {
 
-
+    Screen::setDesignScale(1);
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();

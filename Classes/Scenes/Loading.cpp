@@ -1,5 +1,6 @@
 #include "Loading.h"
-#include "SelectLevel.h"
+//#include "SelectLevel.h"
+#include "MainScene.h"
 #include "Core/CCTime.h"
 #include "SimpleAudioEngine.h"
 #include "Logic/Language.h"
@@ -61,7 +62,8 @@ void Loading::hideLogo()
 
 void Loading::openMenu()
 {
-    CCDirector::sharedDirector()->replaceScene(SelectLevel::scene(RW::getLevelManager().getCollection(1)));
+    CCDirector::sharedDirector()->replaceScene(MainScene::scene());
+    //CCDirector::sharedDirector()->replaceScene(SelectLevel::scene(RW::getLevelManager().getCollection(1)));
 }
 
 void Loading::loadingCallBack(CCObject *)
@@ -182,7 +184,7 @@ void Loading::addAll()
 //    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
 	
 
-    addSoundToLoad("music/choose.wav");
+    addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
 
 //    const CollectionsArr& arr = RW::getCollections();
