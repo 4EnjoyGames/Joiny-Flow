@@ -1,6 +1,7 @@
 #include "Scenes/SelectCollection.h"
 #include "Logic/LevelManager.h"
 #include "Logic/RW.h"
+#include "Scenes/SelectLevel.h"
 
 SelectCollection::SelectCollection()
 {
@@ -189,12 +190,16 @@ void SelectCollection::doGoBack()
 
 void SelectCollection::doOpenCollection()
 {
-
+    CCDirector::sharedDirector()->replaceScene(SelectLevel::scene(_last_selected_collection));
 }
 
 void SelectCollection::hideEverything(cocos2d::CCCallFunc *callback)
 {
-
+    this->runAction(
+                CCSequence::create(
+                    CCDelayTime::create(0),
+                    callback,
+                    NULL));
 }
 
 void SelectCollection::buildCollectionTiles()

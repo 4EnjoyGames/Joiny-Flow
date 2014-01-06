@@ -10,7 +10,7 @@ public:
 
 
     SelectLevel(const JoinyCollection* collection);
-     static cocos2d::CCScene* scene(const JoinyCollection* collection);
+    static cocos2d::CCScene* scene(const JoinyCollection* collection);
     static SelectLevel* create(const JoinyCollection* collection);
 
 
