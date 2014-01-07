@@ -3,7 +3,7 @@
 #include "cocos2d-A.h"
 #include "Layers/PopUpWindow.h"
 
-class MainScene: public CCLayerColor//CCLayer
+class MainScene: public /*CCLayerColor*/ CCLayer
 {
 public:
     MainScene();
