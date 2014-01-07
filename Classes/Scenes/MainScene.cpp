@@ -55,6 +55,8 @@ bool MainScene::init()
 //        return false;
 //    }
 
+    this->setKeypadEnabled(true);
+
     //Get the screen start of cordinates
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();

@@ -69,7 +69,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 
     static ccColor3B working(ccc3(255,242,28));
 
-    CCSprite* background = spl->loadSprite("level_button.png");
+    CCSprite* background = spl->loadSprite("collection_button.png");
     background->setColor(working);
     AnimatedMenuItem* item = AnimatedMenuItem::create(
                     background,
@@ -89,46 +89,82 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 }
 bool SelectCollection::init()
 {
-    if (!CCLayerColor::initWithColor(ccc4(231, 232, 232, 255)))
+    if (!CCLayer::init() )
     {
         return false;
+
     }
+//    if (!CCLayerColor::initWithColor(ccc4(231, 232, 232, 255)))
+//    {
+//        return false;
+//    }
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
 
     CCMenu* main_menu = CCMenu::create();
     main_menu->setPosition(ORIGIN);
 
-    CCLabelTTF * collections = CCLabelTTF::create("Collections","Arial",24);
-    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height*0.75));
-    this->addChild(collections);
-    this->addChild(main_menu);
 
+    //Load one piece
+    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
+
+    //Take the texture from sprite
+    CCTexture2D *texture = sp_noise->getTexture();
+
+    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
+    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
+    texture->setTexParameters(&params);
+
+    //Final sprite
+    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
+    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
+                           ORIGIN.y + VISIBLE_SIZE.height/2));
+    this->addChild(noise);
+
+//    CCLabelTTF * collections = CCLabelTTF::create("Collections","Arial",48);
+//    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+//                          ORIGIN.y + VISIBLE_SIZE.height*0.5));
+//    this->addChild(collections);
+//    this->addChild(main_menu);
+
+    CCSprite* coll_title = CCSprite::create("collection-menu/collections.png");
+    coll_title->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width*0.52,
+                           ORIGIN.y + VISIBLE_SIZE.height*0.92));
+    this->addChild(coll_title);
+
+    //Back Button
+    CCSprite* back_logo = CCSprite::create("back_button.png");
+    AnimatedMenuItem* back_button= AnimatedMenuItem::create(
+                back_logo, this, menu_selector(SelectCollection::onButtonBackClicked));
+
+    back_button->addChild(back_logo);
+
+    CCPoint position_bb(VISIBLE_SIZE.width*0.08,
+                     VISIBLE_SIZE.height*0.92);
+    back_button->setPosition(position_bb);
+    back_logo->setPosition(ccp(back_logo->getContentSize().width/2,
+                              back_logo->getContentSize().height/2));
+
+    main_menu->addChild(back_button);
 
     //To trigger back button
     this->setKeypadEnabled(true);
 
 
-    //Get the screen start of cordinates
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
-
-
-
     //Create menu with collections
-
-
     _col_spl = GraphicsManager::getLoaderFor(
                 0,
-                "level_buttons.plist",
-                "level_buttons.png");
+                "collection_button.plist",
+                "collection_button.png");
+
+
     _buttons_menu = MenuSpriteBatch::create(_col_spl);
 
 
     //unsigned int i = 0;
     unsigned int in_row = 1;
 
-    CCSprite* image = _col_spl->loadSprite("level_button.png");
+    CCSprite* image = _col_spl->loadSprite("collection_button.png");
 
     CCSize s = image->getContentSize();
     image->removeFromParent();
@@ -176,6 +212,7 @@ bool SelectCollection::init()
     //this->addChild(_buttons_menu);
     newScrolling(_buttons_menu);
 
+    this->addChild(main_menu);
     return true;
 }
 

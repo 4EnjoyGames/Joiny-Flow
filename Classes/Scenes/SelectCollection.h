@@ -4,12 +4,17 @@
 #include "Core/Screen.h"
 #include "Logic/JoinyCollection.h"
 
-class SelectCollection: public  CCLayerColor
+class SelectCollection: public  CCLayer
 {
 public:
     SelectCollection();
     static cocos2d::CCScene* scene();
     static SelectCollection* create();
+
+    void onButtonBackClicked(CCObject*)
+    {
+        keyBackClicked();
+    }
 
 private:
     void onCollectionSelect(CCObject* sender);

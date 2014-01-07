@@ -15,10 +15,17 @@
 	<file>
 		<name>background.png</name>
 	</file>
+	<file>
+		<name>back_button.png</name>
+	</file>
 
 	<file>
 		<name>level_end/level_end_buttons.plist.xml</name>
 		<lang>1</lang>
+	</file>
+	
+	<file>
+		<name>collection_button.plist.xml</name>
 	</file>
 	
 	<file>

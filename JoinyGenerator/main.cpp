@@ -136,7 +136,8 @@ int main()
     {
         colors[i] = 0;
     }
-    //unsigned int max_colors = 0;
+    unsigned int max = 4;
+    unsigned int min = 3;
 
     for(unsigned int j=0; j<w_h_array.size(); ++j)
     {
@@ -148,7 +149,7 @@ int main()
         while(good_tasks.size() < N)
         {
 
-            if(j==1 && good_tasks.size()>=90)
+            if(j==1 && good_tasks.size()>=45)
             {
                 int a=2;
                 a++;
@@ -157,7 +158,9 @@ int main()
             FlowTask t = generate(w_h_array[j],w_h_array[j]);
             if(isGooTask(t, N))
             {
-                JoinyTask task = flowToJoiny(t, rand()%(t.size()-1 / 2) + 1);
+                const unsigned int colors = min + (rand() % (unsigned int)(max - min + 1));
+                        //rand()%(t.size()-1 / 2) + 1;
+                JoinyTask task = flowToJoiny(t, colors);
                 JoinyInfo info_old = solveJoiny(task, w_h_array[j], w_h_array[j]);
 
                 JoinyTask task_origin = flowToJoinyStaightforward(t);
