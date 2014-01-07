@@ -201,7 +201,8 @@ int main()
         std::stringstream fname;
         fname << "puzzle_" << w_h_array[j] << "x" << w_h_array[j] << ".ad";
 
-        std::ofstream file(fname.str().c_str());
+        std::ofstream file;
+        file.open(fname.str().c_str(), ios::out | ios::binary);
         OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
 
         os << res;

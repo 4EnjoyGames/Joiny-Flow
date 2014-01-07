@@ -9,14 +9,16 @@ bool FileUtils::openPackageFile(const std::string& name, std::stringstream& out)
 {
     FileName fullPath = getPackageFilePath(name);
     unsigned long size = 0;
-    unsigned char* file_cont = cocos2d::CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "r", &size);
+    unsigned char* file_cont = cocos2d::CCFileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "rb", &size);
 
     if(size == 0)
         return false;
 
-//    std::ios_base::fmtflags mode = std::ios::binary;
-//    out.setf(mode);
-    out.write((char*)file_cont, size);
+    cocos2d::CCLog("Size: %d", size);
+    //std::ios_base::fmtflags mode = std::ios::binary;
+    //out.setf(mode);
+    out.rdbuf()->sputn(reinterpret_cast<char*>(file_cont), size);
+    //out.write((char*)file_cont, size);
     return true;
 }
 
