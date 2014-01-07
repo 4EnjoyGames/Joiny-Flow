@@ -5,6 +5,7 @@
 #include "Store.h"
 #include "Core/Statistics.h"
 #include "Scenes/LevelScene.h"
+#include "Scenes/SelectCollection.h"
 
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
@@ -57,7 +58,7 @@ void SelectLevel::keyBackClicked()
 }
 void SelectLevel::doGoBack()
 {
-    CCDirector::sharedDirector()->end();
+    CCDirector::sharedDirector()->replaceScene(SelectCollection::scene());
 }
 
 
@@ -76,8 +77,6 @@ void SelectLevel::onLevelSelect(CCObject* sender)
                     CCCallFunc::create(
                         this,
                         callfunc_selector(SelectLevel::doOpenLevel)));
-
-
     }
 
 }

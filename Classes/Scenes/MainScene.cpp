@@ -1,6 +1,8 @@
 #include "MainScene.h"
 #include "Core/Screen.h"
 #include "SelectCollection.h"
+#include "SettingScene.h"
+#include "Layers/BackgroundHolder.h"
 
 MainScene::MainScene()
 {
@@ -14,7 +16,12 @@ CCScene* MainScene::scene()
     // 'layer' is an autorelease object
     MainScene *layer = MainScene::create();
 
+    // add layer as a child to scene
+    CCCallFunc* back = CCCallFunc::create(layer,
+                                          callfunc_selector(MainScene::onKeyBackClicked));
+    BackgroundHolder::backgroundSwitchTo(scene,back);
     scene->addChild(layer);
+
     // return the scene
     return scene;
 }
@@ -137,5 +144,29 @@ void MainScene::onPlayClicked(CCObject*)
 }
 void MainScene::onSettingsClicked(CCObject*)
 {
+    CCDirector::sharedDirector()->replaceScene(SettingScene::scene());
     CCLog("Settings clicked");
+}
+
+void MainScene::doGoBack()
+{
+    CCDirector::sharedDirector()->end();
+}
+void MainScene::keyBackClicked()
+{
+
+    hideEverything(
+                CCCallFunc::create(
+                    this,
+                    callfunc_selector(MainScene::doGoBack)));
+
+}
+void MainScene::hideEverything(CCCallFunc *callback)
+{
+    this->runAction(
+                CCSequence::create(
+                    CCDelayTime::create(0),
+                    callback,
+                    NULL));
+
 }

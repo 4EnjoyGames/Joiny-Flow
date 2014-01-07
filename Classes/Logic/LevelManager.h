@@ -4,6 +4,8 @@
 #include "JoinyCollection.h"
 #include <map>
 #include <memory>
+#include "GameInfo.h"
+
 class LevelManager
 {
 public:

@@ -59,28 +59,43 @@ void LevelManager::onLevelFinished(const JoinyLevel* level, const Score score)
 
 void LevelManager::loadLevelsInfo()
 {
-    std::string file("puzzle_5x5.ad");
-    std::stringstream ss;
-    if(FileUtils::openPackageFile(file, ss))
+    GameInfo* info = GameInfo::getInstance();
+
+    std::vector<std::string> coll_names = info->getCollectionNames();
+
+    std::vector<FlowPoint> flow_points = info->getFlowPoints();
+
+    for(unsigned int j=0; j<coll_names.size(); ++j)
     {
-        InputBinaryStream is(ss);
-        std::vector<JoinyPuzzle> inp;
-        is >> inp;
-
-        CollectionPtr col(new JoinyCollection);
-        col->_id = 1;
-        col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
-                    new JoinyCollection::LevelsVector(inp.size(), JoinyLevel()));
-        for(unsigned int i=0; i<inp.size(); ++i)
+        std::string file = coll_names[j];
+        std::stringstream ss;
+        if(FileUtils::openPackageFile(file, ss))
         {
-            JoinyLevel& l = col->_levels->at(i);
-            l._level_id = i+1;
-            l._parent = col.get();
-            l._puzzle = inp[i];
-            l._size = FlowPoint(5,5);
-        }
+            InputBinaryStream is(ss);
+            std::vector<JoinyPuzzle> inp;
+            is >> inp;
 
-        _collections[col->_id] = col;
+            CollectionPtr col(new JoinyCollection);
+            col->_id = j+1;
+            col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
+                        new JoinyCollection::LevelsVector(inp.size(),
+                                                          JoinyLevel()));
+            for(unsigned int i=0; i<inp.size(); ++i)
+            {
+                if(j==1 && i==67)
+                {
+                    int a=0;
+                    ++a;
+                }
+                JoinyLevel& l = col->_levels->at(i);
+                l._level_id = i+1;
+                l._parent = col.get();
+                l._puzzle = inp[i];
+                l._size = flow_points[j];
+            }
+
+            _collections[col->_id] = col;
+        }
     }
 }
 

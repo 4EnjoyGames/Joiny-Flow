@@ -65,7 +65,9 @@ SOURCES += main.cpp \
     ../Classes/Scenes/SelectLevel.cpp \
     ../Classes/Scenes/MainScene.cpp \
     ../Classes/Core/Screen.cpp \
-    ../Classes/Scenes/SelectCollection.cpp
+    ../Classes/Scenes/SelectCollection.cpp \
+    ../Classes/Scenes/SettingScene.cpp \
+    ../Classes/GameInfo.cpp
 
 HEADERS += \
     ../Classes/AppMacros.h \
@@ -110,5 +112,7 @@ HEADERS += \
     ../Classes/Scenes/SelectLevel.h \
     ../Classes/Scenes/MainScene.h \
     ../Classes/Core/Screen.h \
-    ../Classes/Scenes/SelectCollection.h
+    ../Classes/Scenes/SelectCollection.h \
+    ../Classes/Scenes/SettingScene.h \
+    ../Classes/GameInfo.h
 

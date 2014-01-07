@@ -2,6 +2,7 @@
 #include "Logic/LevelManager.h"
 #include "Logic/RW.h"
 #include "Scenes/SelectLevel.h"
+#include "Scenes/MainScene.h"
 
 SelectCollection::SelectCollection()
 {
@@ -135,35 +136,38 @@ bool SelectCollection::init()
     float margin = s.width * 0.15f;
     float width = s.width*in_row + margin*(in_row - 1);
 
-    unsigned int rows = 4;
+    unsigned int rows = 2;
     float height = rows * s.height + margin*(rows - 1);;
 
     _buttons_menu->setContentSize(CCSize(width+margin*2, height+margin*2));
 
 
+    unsigned int collection_id_first = 1;
     float working_y = height-s.height/2+margin;
     for(unsigned int y=0; y<rows; ++y)
     {
         float working_x = s.width / 2 + margin;
-        for(unsigned int x=0; x<in_row; ++x)
-        {
-            //JoinyLevelID id = y*in_row + x + 1;
-            const JoinyCollectionID coll_id = 1;y*in_row + x + 1;
-            //if(id <= _current_collection->getLevelsNumber())
-            //{
-                const JoinyCollection* l = RW::getLevelManager().getCollection(coll_id);
 
-                AnimatedMenuItem* item = createCollectionItem(l, _col_spl);
-                _buttons_menu->menu()->addChild(item, 100);
+        //JoinyLevelID id = y*in_row + x + 1;
+        const JoinyCollectionID coll_id = collection_id_first;
+        //y*in_row + x + 1;
 
-                item->setPosition(ccp(working_x, working_y));
+        //if(id <= _current_collection->getLevelsNumber())
+        //{
+        const JoinyCollection* l = RW::getLevelManager().getCollection(coll_id);
 
-                _buttons_map[item] = l;
+        AnimatedMenuItem* item = createCollectionItem(l, _col_spl);
+        _buttons_menu->menu()->addChild(item, 100);
 
-                working_x += s.width + margin;
-            //}
+        item->setPosition(ccp(working_x, working_y));
 
-        }
+        _buttons_map[item] = l;
+
+        working_x += s.width + margin;
+        //}
+
+
+        collection_id_first++;
         working_y -= s.height + margin;
     }
 
@@ -185,7 +189,9 @@ void SelectCollection::keyBackClicked()
 
 void SelectCollection::doGoBack()
 {
-    CCDirector::sharedDirector()->end();
+    //CCDirector::sharedDirector()->end();
+    CCDirector::sharedDirector()->replaceScene(MainScene::scene());
+
 }
 
 void SelectCollection::doOpenCollection()

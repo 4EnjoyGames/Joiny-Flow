@@ -15,6 +15,15 @@ private:
     bool init();
 
     void onSettingsClicked(CCObject*);
+
+    void hideEverything(CCCallFunc *callback);
+    void doGoBack();
+    void keyBackClicked();
+
+    void onKeyBackClicked()
+    {
+        keyBackClicked();
+    }
 };
 
 #endif // MAINSCENE_H
