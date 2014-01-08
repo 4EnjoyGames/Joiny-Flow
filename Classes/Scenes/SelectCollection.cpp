@@ -100,9 +100,10 @@ bool SelectCollection::init()
 //    }
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
 
     CCMenu* main_menu = CCMenu::create();
-    main_menu->setPosition(ORIGIN);
+    main_menu->setPosition(ccp(0,0));
 
 
     //Load one piece
@@ -127,10 +128,6 @@ bool SelectCollection::init()
 //    this->addChild(collections);
 //    this->addChild(main_menu);
 
-    CCSprite* coll_title = CCSprite::create("collection-menu/collections.png");
-    coll_title->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width*0.52,
-                           ORIGIN.y + VISIBLE_SIZE.height*0.92));
-    this->addChild(coll_title);
 
     //Back Button
     CCSprite* back_logo = CCSprite::create("back_button.png");
@@ -138,7 +135,6 @@ bool SelectCollection::init()
                 back_logo, this, menu_selector(SelectCollection::onButtonBackClicked));
 
     back_button->addChild(back_logo);
-
     CCPoint position_bb(VISIBLE_SIZE.width*0.08,
                      VISIBLE_SIZE.height*0.92);
     back_button->setPosition(position_bb);
@@ -146,6 +142,18 @@ bool SelectCollection::init()
                               back_logo->getContentSize().height/2));
 
     main_menu->addChild(back_button);
+
+    //coll button
+    CCSize back_size = back_logo->getContentSize();
+    CCSprite* coll_title = CCSprite::create("collection-menu/collections.png");
+//    coll_title->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width*0.51,
+//                           ORIGIN.y + VISIBLE_SIZE.height*0.92));
+    //coll_title->setPosition(ccp(ORIGIN.x + 300/SCALE, ORIGIN.y + 500/SCALE));
+    coll_title->setPosition(ccp(ORIGIN.x + back_size.width + (VISIBLE_SIZE.width - back_size.width) * 0.5,
+                                ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
+    setAnchorPoint(ccp(0.5f, 1));
+    this->addChild(coll_title);
+
 
     //To trigger back button
     this->setKeypadEnabled(true);
@@ -294,7 +302,8 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     layer->setScale(scale);
 
     _collections_scroll_view->setPosition(collections_target_position);
-    CCRect eat_zone(origin.x,origin.y, visibleSize.width, _collections_scroll_view->getPositionY() + scroll_view_height);
+    //CCRect eat_zone(origin.x,origin.y, visibleSize.width, _collections_scroll_view->getPositionY() + scroll_view_height);
+        CCRect eat_zone(origin.x,origin.y, 0, 0);
     _collections_scroll_view->setTouchEatZone(eat_zone);
     _collections_scroll_view->updateInset();
     _collections_scroll_view->setDirection(kCCScrollViewDirectionVertical);
