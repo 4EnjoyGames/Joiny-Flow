@@ -133,11 +133,11 @@ bool SelectCollection::init()
     CCSprite* back_logo = CCSprite::create("back_button.png");
     AnimatedMenuItem* back_button= AnimatedMenuItem::create(
                 back_logo, this, menu_selector(SelectCollection::onButtonBackClicked));
-
-    back_button->addChild(back_logo);
-    CCPoint position_bb(VISIBLE_SIZE.width*0.08,
-                     VISIBLE_SIZE.height*0.92);
+    back_logo = CCSprite::create("back_button.png");
+    CCPoint position_bb(ORIGIN.x+VISIBLE_SIZE.width*0.08,
+                     ORIGIN.y+ VISIBLE_SIZE.height*0.92);
     back_button->setPosition(position_bb);
+    back_button->addChild(back_logo);
     back_logo->setPosition(ccp(back_logo->getContentSize().width/2,
                               back_logo->getContentSize().height/2));
 
@@ -279,7 +279,7 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     }
     //Get the scroll area size
     float scroll_view_width = visibleSize.width - 50/scaled;
-    float scroll_view_height = visibleSize.height-150/scaled;
+    float scroll_view_height = visibleSize.height-250/scaled;
     CCSize scroll_view_size(scroll_view_width, scroll_view_height);
 
     //Create layer to fit all tiles
