@@ -29,7 +29,8 @@ typedef unsigned int Score;
 class JoinyInfo
 {
 public:
-    JoinyInfo(const Score bronze=0, const Score silver=0, const Score gold=0)
+    JoinyInfo(const Score bronze=0, const Score silver=0, const Score gold=0
+              )
         : _bronze_score(bronze), _silver_score(silver), _gold_score(gold)
     {
 
@@ -53,6 +54,7 @@ private:
     Score _bronze_score;
     Score _silver_score;
     Score _gold_score;
+
 };
 
 struct JoinyPuzzle
@@ -65,6 +67,7 @@ struct JoinyPuzzle
     {}
     JoinyTask _task;
     JoinyInfo _info;
+
 };
 
 inline OutputBinaryStream& operator<<(OutputBinaryStream& os, const JoinyPair& task)

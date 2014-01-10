@@ -117,10 +117,14 @@ int main()
     unsigned int arr_size = 2;
     unsigned int min_joiny = 5;
     std::vector<unsigned int> w_h_array;
+    std::vector<string> collection_names;
     for (unsigned int i=0; i<arr_size; ++i)
     {
+        collection_names[i] = min_joiny + 'x' + min_joiny;
+
         w_h_array.push_back(min_joiny);
         ++min_joiny;
+
     }
     //unsigned int width = w_h_array[0];
     //unsigned int height = w_h_array[0];

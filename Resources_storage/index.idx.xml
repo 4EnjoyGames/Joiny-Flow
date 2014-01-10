@@ -18,6 +18,10 @@
 	<file>
 		<name>back_button.png</name>
 	</file>
+	<file>
+		<name>game_background.png</name>
+	</file>
+	
 
 	<file>
 		<name>level_end/level_end_buttons.plist.xml</name>

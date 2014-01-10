@@ -1,7 +1,8 @@
 #include "JoinyCollection.h"
 
 JoinyCollection::JoinyCollection()
-    : _id(0), _levels(nullptr)
+    : _id(0), _levels(nullptr), _coll_name("no_name"),
+      _coll_color(Color(255,60,0))
 {
 }
 
@@ -29,4 +30,27 @@ JoinyLevel* JoinyCollection::getLevel(const JoinyLevelID id)
 const JoinyCollectionID JoinyCollection::getCollectionID() const
 {
     return _id;
+}
+const std::string JoinyCollection::getCollectionName() const
+{
+    return _coll_name;
+}
+//ccColor3B JoinyCollection::getCollectionColor() const
+//{
+//    return ccc3(_coll_color.red(), _coll_color.green(), _coll_color.blue());
+
+//}
+
+const Color& JoinyCollection::getCollectionColor() const
+{
+    return _coll_color;
+}
+void JoinyCollection::setCollectionName(const std::string name)
+{
+    _coll_name = name;
+}
+
+void JoinyCollection::setCollectionColor(const Color color)
+{
+    _coll_color = color;
 }

@@ -80,13 +80,14 @@ void LevelManager::loadLevelsInfo()
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
                         new JoinyCollection::LevelsVector(inp.size(),
                                                           JoinyLevel()));
+
+            //std::string x_str = static_cast<unsigned int>(flow_points[j].x()) + " ";
+            //std::string y_str = static_cast<unsigned int>(flow_points[j].y()) + " ";
+            std::string coll_name =  flow_points[j].getString();
+            col->setCollectionName(coll_name);
+
             for(unsigned int i=0; i<inp.size(); ++i)
             {
-                if(j==1 && i==67)
-                {
-                    int a=0;
-                    ++a;
-                }
                 JoinyLevel& l = col->_levels->at(i);
                 l._level_id = i+1;
                 l._parent = col.get();

@@ -18,6 +18,11 @@ public:
     {
         return _y;
     }
+    const std::string getString()
+    {
+        return std::to_string(_x) + 'x' + std::to_string(_y);
+    }
+
     static const FlowPoint UNDEFINED;
 private:
     Cordinate _x;

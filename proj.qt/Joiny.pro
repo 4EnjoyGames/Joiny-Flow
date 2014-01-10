@@ -67,7 +67,8 @@ SOURCES += main.cpp \
     ../Classes/Core/Screen.cpp \
     ../Classes/Scenes/SelectCollection.cpp \
     ../Classes/Scenes/SettingScene.cpp \
-    ../Classes/GameInfo.cpp
+    ../Classes/GameInfo.cpp \
+    ../Classes/BackButton.cpp
 
 HEADERS += \
     ../Classes/AppMacros.h \
@@ -114,5 +115,7 @@ HEADERS += \
     ../Classes/Core/Screen.h \
     ../Classes/Scenes/SelectCollection.h \
     ../Classes/Scenes/SettingScene.h \
-    ../Classes/GameInfo.h
+    ../Classes/GameInfo.h \
+    ../Classes/BackButton.h
+
 

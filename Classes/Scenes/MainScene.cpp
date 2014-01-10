@@ -60,58 +60,31 @@ bool MainScene::init()
     //Get the screen start of cordinates
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-
-
-    //Load one piece
-    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
-
-    //Take the texture from sprite
-    CCTexture2D *texture = sp_noise->getTexture();
-
-    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
-    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-    texture->setTexParameters(&params);
-
-    //Final sprite
-    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
-    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-                           ORIGIN.y + VISIBLE_SIZE.height/2));
-    this->addChild(noise);
-
-
-    //downer background
-    CCSprite* background = CCSprite::create("main-menu/background.png");
-    background->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-                                ORIGIN.y /*+ VISIBLE_SIZE.height/2*/));
-    this->addChild(background);
-
-    //upper background
-    CCSprite* background_upper = CCSprite::create("main-menu/background.png");
-    background_upper->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-                                ORIGIN.y + VISIBLE_SIZE.height));
-    background_upper->setFlipY(true);
-    this->addChild(background_upper);
+    const float SCALE = Screen::getScaleFactor();
 
     //game logo
     CCSprite* main_logo = CCSprite::create("main-menu/main-logo.png");
     main_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height*0.75));
     this->addChild(main_logo);
-
+    float logo_y_coordinate = main_logo->getPositionY();
 
     CCMenu* main_menu = CCMenu::create();
     main_menu->setPosition(ORIGIN);
 
     //Play Button
+    //CCSize logo_size = main_logo->getContentSize();
     CCSprite* play_logo = CCSprite::create("main-menu/play-button.png");
+    //float play_logo_y_coordinate = play_logo->getPositionY();
 
     AnimatedMenuItem* play_button = AnimatedMenuItem::create(
                 play_logo, this, menu_selector(MainScene::onPlayClicked));
 
     play_button->addChild(play_logo);
 
-    CCPoint position(VISIBLE_SIZE.width*0.5,
-                     VISIBLE_SIZE.height*0.42);
+    CCPoint position(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                     logo_y_coordinate - 500/SCALE );
+
     play_button->setPosition(position);
     play_logo->setPosition(ccp(play_logo->getContentSize().width/2,
                                play_logo->getContentSize().height/2));
@@ -126,8 +99,8 @@ bool MainScene::init()
 
     settings_button->addChild(settings_logo);
 
-    CCPoint position_settings(VISIBLE_SIZE.width*0.78,
-                              VISIBLE_SIZE.height*0.16);
+    CCPoint position_settings(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                              logo_y_coordinate - 750/SCALE  );
     settings_button->setPosition(position_settings);
     settings_logo->setPosition(ccp(settings_logo->getContentSize().width/2,
                                settings_logo->getContentSize().height/2));

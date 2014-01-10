@@ -3,6 +3,7 @@
 #include "Logic/RW.h"
 #include "Scenes/SelectLevel.h"
 #include "Scenes/MainScene.h"
+#include "BackButton.h"
 
 SelectCollection::SelectCollection()
 {
@@ -67,23 +68,30 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     std::stringstream collection_number;
     collection_number << collection->getCollectionID();
 
-    static ccColor3B working(ccc3(255,242,28));
+    std::stringstream collection_name;
+    collection_name << collection->getCollectionName();
+
+    //static ccColor3B working(ccc3(255,242,28));
+    Color label_color = collection->getCollectionColor();
 
     CCSprite* background = spl->loadSprite("collection_button.png");
-    background->setColor(working);
+    background->setColor(ccc3(label_color.red(),label_color.green(),label_color.blue()));
     AnimatedMenuItem* item = AnimatedMenuItem::create(
                     background,
                     this,
                     menu_selector(SelectCollection::onCollectionSelect));
 
-    CCLabelTTF* label = CCLabelTTF::create(collection_number.str().c_str(), "Arial", 60/scaled);
+    CCLabelTTF* label = CCLabelTTF::create(collection_name.str().c_str(), "Arial", 60/scaled);
     item->addChild(label);
 
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
     label->setPosition(ccp(background->getContentSize().width/2-3*scale, background->getContentSize().height/2));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
-    label->setColor(working);
+
+
+    label->setColor(ccc3(label_color.red(),label_color.green(),label_color.blue()));
+    //label->setColor(working);
 
     return item;
 }
@@ -106,27 +114,27 @@ bool SelectCollection::init()
     main_menu->setPosition(ccp(0,0));
 
 
-    //Load one piece
-    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
+//    //Load one piece
+//    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
 
-    //Take the texture from sprite
-    CCTexture2D *texture = sp_noise->getTexture();
+//    //Take the texture from sprite
+//    CCTexture2D *texture = sp_noise->getTexture();
 
-    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
-    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-    texture->setTexParameters(&params);
+//    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
+//    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
+//    texture->setTexParameters(&params);
 
-    //Final sprite
-    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
-    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-                           ORIGIN.y + VISIBLE_SIZE.height/2));
-    this->addChild(noise);
+//    //Final sprite
+//    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
+//    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
+//                           ORIGIN.y + VISIBLE_SIZE.height/2));
+//    this->addChild(noise);
 
-//    CCLabelTTF * collections = CCLabelTTF::create("Collections","Arial",48);
-//    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-//                          ORIGIN.y + VISIBLE_SIZE.height*0.5));
-//    this->addChild(collections);
-//    this->addChild(main_menu);
+    CCLabelTTF * collections = CCLabelTTF::create("Collections","fonts/FredokaOne-Regular.ttf",72);
+    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                          ORIGIN.y + VISIBLE_SIZE.height - 100/SCALE));
+    collections->setColor(ccc3(11,216,224));
+    this->addChild(collections);
 
 
     //Back Button
@@ -134,25 +142,28 @@ bool SelectCollection::init()
     AnimatedMenuItem* back_button= AnimatedMenuItem::create(
                 back_logo, this, menu_selector(SelectCollection::onButtonBackClicked));
     back_logo = CCSprite::create("back_button.png");
-    CCPoint position_bb(ORIGIN.x+VISIBLE_SIZE.width*0.08,
-                     ORIGIN.y+ VISIBLE_SIZE.height*0.92);
+
+    CCPoint position_bb(ORIGIN.x + 120/SCALE,
+                        ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE);
     back_button->setPosition(position_bb);
+    back_button->setAnchorPoint(ccp(1, 0.5));
+
     back_button->addChild(back_logo);
     back_logo->setPosition(ccp(back_logo->getContentSize().width/2,
                               back_logo->getContentSize().height/2));
 
+
     main_menu->addChild(back_button);
+    //BackButton back(this, SelectCollection::onButtonBackClicked, main_menu);
+
 
     //coll button
-    CCSize back_size = back_logo->getContentSize();
-    CCSprite* coll_title = CCSprite::create("collection-menu/collections.png");
-//    coll_title->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width*0.51,
-//                           ORIGIN.y + VISIBLE_SIZE.height*0.92));
-    //coll_title->setPosition(ccp(ORIGIN.x + 300/SCALE, ORIGIN.y + 500/SCALE));
-    coll_title->setPosition(ccp(ORIGIN.x + back_size.width + (VISIBLE_SIZE.width - back_size.width) * 0.5,
-                                ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
-    setAnchorPoint(ccp(0.5f, 1));
-    this->addChild(coll_title);
+//    CCSize back_size = back_logo->getContentSize();
+//    CCSprite* coll_title = CCSprite::create("collection-menu/collections.png");
+//    coll_title->setPosition(ccp(ORIGIN.x + back_size.width + (VISIBLE_SIZE.width - back_size.width) * 0.5,
+//                                ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
+//    setAnchorPoint(ccp(0.5f, 1));
+//    this->addChild(coll_title);
 
 
     //To trigger back button
@@ -192,12 +203,7 @@ bool SelectCollection::init()
     {
         float working_x = s.width / 2 + margin;
 
-        //JoinyLevelID id = y*in_row + x + 1;
         const JoinyCollectionID coll_id = collection_id_first;
-        //y*in_row + x + 1;
-
-        //if(id <= _current_collection->getLevelsNumber())
-        //{
         const JoinyCollection* l = RW::getLevelManager().getCollection(coll_id);
 
         AnimatedMenuItem* item = createCollectionItem(l, _col_spl);
@@ -208,9 +214,6 @@ bool SelectCollection::init()
         _buttons_map[item] = l;
 
         working_x += s.width + margin;
-        //}
-
-
         collection_id_first++;
         working_y -= s.height + margin;
     }
