@@ -4,7 +4,9 @@
 #include "Logic/RW.h"
 #include <vector>
 #include "Layers/PopUpWindow.h"
-class SelectLevel : public cocos2d::CCLayer
+#include "BackButton.h"
+
+class SelectLevel : public CCLayer//public cocos2d::CCLayer
 {
 public:
 
@@ -13,9 +15,12 @@ public:
     static cocos2d::CCScene* scene(const JoinyCollection* collection);
     static SelectLevel* create(const JoinyCollection* collection);
 
-
+    void onButtonBackClicked(CCObject*)
+    {
+        keyBackClicked();
+    }
 private:
-
+    BackButton back;
     void onLevelSelect(CCObject* pSender);
     virtual bool init();
 

@@ -1,4 +1,3 @@
-
 #include "Logic/RW.h"
 #include "SelectLevel.h"
 #include "Logic/Language.h"
@@ -6,6 +5,7 @@
 #include "Core/Statistics.h"
 #include "Scenes/LevelScene.h"
 #include "Scenes/SelectCollection.h"
+#include "Localization/CCLocalizedString.h"
 
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
@@ -91,15 +91,17 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const Sp
     level_number << level->getLevelId();
 
     unsigned int stars = level->getStarsNumber(level->getHighScore());
-    static ccColor3B none(ccc3(255, 255, 255));
-    static ccColor3B highscore(ccc3(65,255,28));
-    static ccColor3B finished(ccc3(255,242,28));
+    //static ccColor3B none(ccc3(255, 255, 255));
+    //static ccColor3B highscore(ccc3(65,255,28));
+    //static ccColor3B finished(ccc3(255,242,28));
+    Color color = _current_collection->getCollectionColor();
+    static ccColor3B openLevel(ccc3(color.red(),color.green(),color.blue()));
+    static ccColor3B closeLevel(ccc3(138,141,142));
+    static ccColor3B labelColor(ccc3(255,255,255));
 
-    ccColor3B working=finished;
-    if(stars == 3)
-        working = highscore;
-    else if(stars == 0)
-        working = none;
+    ccColor3B working = openLevel;
+    if(stars == 0)
+        working = closeLevel;
 
 
     CCSprite* background = spl->loadSprite("level_button.png");
@@ -109,13 +111,13 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const Sp
                     this,
                     menu_selector(SelectLevel::onLevelSelect));
 
-    CCLabelTTF* label = CCLabelTTF::create(level_number.str().c_str(), "Arial", 60/scaled);
+    CCLabelTTF* label = CCLabelTTF::create(level_number.str().c_str(), "fonts/Fredoka One.ttf", 60/scaled);
     item->addChild(label);
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
     label->setPosition(ccp(background->getContentSize().width/2-3*scale, background->getContentSize().height/2));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
-    label->setColor(working);
+    label->setColor(labelColor);
 
     return item;
 }
@@ -132,17 +134,33 @@ bool SelectLevel::init()
     this->setKeypadEnabled(true);
 
     //Get the size of the screen we can see
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+//    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 
-    //Get the screen start of cordinates
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
+//    //Get the screen start of cordinates
+//    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+//    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
+
+    //create collection name label
+    Color color = _current_collection->getCollectionColor();
+    static ccColor3B openLevel(ccc3(color.red(),color.green(),color.blue()));
+    const std::string coll_name = _current_collection->getCollectionName();
+    CCLabelTTF * collections = CCLabelTTF::create( coll_name.c_str(),"fonts/Fredoka One.ttf",72);
+    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                          ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
+    collections->setColor(openLevel);
+    this->addChild(collections);
+
+
+    //Back Button
+    CCMenu* menu = back.start(this, [this](){this->onButtonBackClicked(0);});
+    this->addChild(menu);
 
 
     //Create menu with collections
-
-
     _col_spl = GraphicsManager::getLoaderFor(
                 0,
                 "level_buttons.plist",
@@ -150,8 +168,8 @@ bool SelectLevel::init()
     _buttons_menu = MenuSpriteBatch::create(_col_spl);
 
 
-    float padding_left = 330/scaled;
-    unsigned int i = 0;
+    //float padding_left = 330/SCALE;
+    //unsigned int i = 0;
     unsigned int in_row = 5;
 
     CCSprite* image = _col_spl->loadSprite("level_button.png");
@@ -226,7 +244,7 @@ void SelectLevel::newScrolling(MenuSpriteBatch* menu)
     }
     //Get the scroll area size
     float scroll_view_width = visibleSize.width - 50/scaled;
-    float scroll_view_height = visibleSize.height-150/scaled;
+    float scroll_view_height = visibleSize.height-250/scaled;
     CCSize scroll_view_size(scroll_view_width, scroll_view_height);
 
     //Create layer to fit all tiles

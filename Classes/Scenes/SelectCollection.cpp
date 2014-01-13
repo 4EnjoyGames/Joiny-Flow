@@ -83,7 +83,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
                     this,
                     menu_selector(SelectCollection::onCollectionSelect));
 
-    CCLabelTTF* label = CCLabelTTF::create(collection_name.str().c_str(), "Arial", 60/scaled);
+    CCLabelTTF* label = CCLabelTTF::create(collection_name.str().c_str(), "fonts/Fredoka One.ttf", 60/scaled);
     item->addChild(label);
 
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
@@ -134,29 +134,12 @@ bool SelectCollection::init()
 
     CCLabelTTF * collections = CCLabelTTF::create( CCLocalizedString("Collection").c_str(),"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height - 100/SCALE));
+                          ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
     collections->setColor(ccc3(11,216,224));
     this->addChild(collections);
 
 
     //Back Button
-//    CCSprite* back_logo = CCSprite::create("back_button.png");
-//    AnimatedMenuItem* back_button= AnimatedMenuItem::create(
-//                back_logo, this, menu_selector(SelectCollection::onButtonBackClicked));
-//    back_logo = CCSprite::create("back_button.png");
-
-//    CCPoint position_bb(ORIGIN.x + 120/SCALE,
-//                        ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE);
-//    back_button->setPosition(position_bb);
-//    back_button->setAnchorPoint(ccp(1, 0.5));
-
-//    back_button->addChild(back_logo);
-//    back_logo->setPosition(ccp(back_logo->getContentSize().width/2,
-//                              back_logo->getContentSize().height/2));
-
-
-//    main_menu->addChild(back_button);
-
     CCMenu* menu = back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
