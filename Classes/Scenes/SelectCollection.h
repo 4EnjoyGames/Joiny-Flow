@@ -3,7 +3,7 @@
 #include "cocos2d-A.h"
 #include "Core/Screen.h"
 #include "Logic/JoinyCollection.h"
-
+#include "BackButton.h"
 class SelectCollection: public  CCLayer
 {
 public:
@@ -17,6 +17,8 @@ public:
     }
 
 private:
+    BackButton back;
+
     void onCollectionSelect(CCObject* sender);
     AnimatedMenuItem* createCollectionItem(
             const JoinyCollection* collection, const SpritesLoader& spl);

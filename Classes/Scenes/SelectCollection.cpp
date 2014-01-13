@@ -156,7 +156,7 @@ bool SelectCollection::init()
 
 
 //    main_menu->addChild(back_button);
-    BackButton back;
+
     CCMenu* menu = back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 

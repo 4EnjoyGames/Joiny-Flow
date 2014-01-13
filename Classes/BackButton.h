@@ -5,7 +5,7 @@
 #include <functional>
 
 
-class BackButton
+class BackButton : public CCObject
 {
 public:
     typedef std::function<void()> functionPtr;
