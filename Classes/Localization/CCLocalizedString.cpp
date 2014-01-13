@@ -30,9 +30,9 @@ std::string CCLocalizedString(const char * mKey)
         case kLanguageEnglish:
             fileName = "Localized_en";
             break;
-        case kLanguageUkrainian:
-            fileName = "Localized_ua";
-            break;
+//        case kLanguageUkrainian:
+//            fileName = "Localized_ua";
+//            break;
         /**
          case for more localize
          */
@@ -49,7 +49,7 @@ std::string CCLocalizedString(const char * mKey)
     string contents="";
     unsigned long fileSize = 0;
 
-    std::string fullPath = FileUtils::getStorageFilePath(fileName);
+    std::string fullPath = FileUtils::getPackageFilePath(fileName);
     if(FileUtils::isFileExists(fullPath))
     {
 

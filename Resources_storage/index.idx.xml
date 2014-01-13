@@ -35,5 +35,10 @@
 	<file>
 		<name>level_buttons.plist.xml</name>
 	</file>
-	
+	<file>
+		<name>Localized_ua</name>
+	</file>
+	<file>
+		<name>Localized_en</name>
+	</file>
 </directory>
