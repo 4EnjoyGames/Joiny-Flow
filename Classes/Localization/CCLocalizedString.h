@@ -8,9 +8,10 @@
 
 #ifndef _CCLocalizedString_h
 #define _CCLocalizedString_h
+#include "string"
 
 /*get the localized string by the key, if can't get the value then return mComment
  */
-const char * CCLocalizedString(const char * mKey,const char * mComment=nullptr);
+std::string CCLocalizedString(const char * mKey,const char * mComment=nullptr);
 
 #endif

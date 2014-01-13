@@ -21,7 +21,7 @@ using namespace std;
 
 static map<std::string,std::string> localizedStrings;
 
-const char * CCLocalizedString(const char * mKey,const char * mComment)
+std::string CCLocalizedString(const char * mKey,const char * mComment)
 { 
     ccLanguageType curLanguage = CCApplication::sharedApplication()->getCurrentLanguage();
     const char * fileName;
@@ -128,10 +128,11 @@ const char * CCLocalizedString(const char * mKey,const char * mComment)
 
         //return valid value
         if (resultStr.length() > 0){
-            char* res = ((char*)resultStr.c_str());
-            return res;
+            //char* res = ((char*)resultStr.c_str());
+            return resultStr;
         }
-        return mKey;
+        //return mKey;
+        return resultStr;
     }
     else
     {
@@ -140,5 +141,6 @@ const char * CCLocalizedString(const char * mKey,const char * mComment)
             return (itr->second).c_str();
         }
     }
-    return mKey;
+    //return mKey;
+    return resultStr;
 }
