@@ -132,10 +132,7 @@ bool SelectCollection::init()
 //                           ORIGIN.y + VISIBLE_SIZE.height/2));
 //    this->addChild(noise);
 
-    std::string label_str= CCLocalizedString("HELLO","HELLO");
-    CCLabelTTF * collections = CCLabelTTF::create( label_str.c_str(),"fonts/Fredoka One.ttf",72);
-
-    //CCLabelTTF * collections = CCLabelTTF::create( "HI","Arial",72);
+    CCLabelTTF * collections = CCLabelTTF::create( CCLocalizedString("Collection").c_str(),"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 100/SCALE));
     collections->setColor(ccc3(11,216,224));

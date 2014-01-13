@@ -21,7 +21,7 @@ using namespace std;
 
 static map<std::string,std::string> localizedStrings;
 
-std::string CCLocalizedString(const char * mKey,const char * mComment)
+std::string CCLocalizedString(const char * mKey)
 { 
     ccLanguageType curLanguage = CCApplication::sharedApplication()->getCurrentLanguage();
     const char * fileName;
