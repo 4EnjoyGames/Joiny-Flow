@@ -30,8 +30,8 @@ std::string CCLocalizedString(const char * mKey)
         case kLanguageEnglish:
             fileName = "Localized_en";
             break;
-        case kLanguageChinese:
-            fileName = "Localized_zh";
+        case kLanguageUkrainian:
+            fileName = "Localized_ua";
             break;
         /**
          case for more localize

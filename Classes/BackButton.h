@@ -4,14 +4,17 @@
 #include "Core/Screen.h"
 #include <functional>
 
-class SelectCollection;
+
 class BackButton
 {
 public:
     typedef std::function<void()> functionPtr;
-    BackButton(CCLayer* layer, functionPtr function, CCMenu* menu);
+    BackButton();
+    CCMenu *start(CCLayer* layer, functionPtr function);
 private:
-    void start(CCLayer *layer, functionPtr function, CCMenu *menu);
+    void doAction(CCObject* obj);
+    functionPtr _function;
+    CCLayer* _layer;
 };
 
 #endif // BACKBUTTON_H
