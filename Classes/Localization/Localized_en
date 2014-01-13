@@ -1,0 +1,4 @@
+HELLO            = "Hello \n Guys";
+HELLO2            = "===Hello \n Guys";
+Collection            = "CollectionValue";
+//the last line must have a blank line when I test this example

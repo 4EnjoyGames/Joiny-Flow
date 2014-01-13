@@ -4,6 +4,8 @@
 #include "Scenes/SelectLevel.h"
 #include "Scenes/MainScene.h"
 #include "BackButton.h"
+#include "Localization/CCLocalizedString.h"
+
 
 SelectCollection::SelectCollection()
 {
@@ -130,7 +132,8 @@ bool SelectCollection::init()
 //                           ORIGIN.y + VISIBLE_SIZE.height/2));
 //    this->addChild(noise);
 
-    CCLabelTTF * collections = CCLabelTTF::create("Collections","fonts/FredokaOne-Regular.ttf",72);
+    const char* label_char = CCLocalizedString("HELLO","HELLO");
+    CCLabelTTF * collections = CCLabelTTF::create(label_char,"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 100/SCALE));
     collections->setColor(ccc3(11,216,224));
@@ -154,7 +157,7 @@ bool SelectCollection::init()
 
 
     main_menu->addChild(back_button);
-    //BackButton back(this, SelectCollection::onButtonBackClicked, main_menu);
+    BackButton back(this, [this](){this->onButtonBackClicked(0);}, main_menu);
 
 
     //coll button

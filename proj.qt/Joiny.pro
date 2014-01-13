@@ -68,7 +68,8 @@ SOURCES += main.cpp \
     ../Classes/Scenes/SelectCollection.cpp \
     ../Classes/Scenes/SettingScene.cpp \
     ../Classes/GameInfo.cpp \
-    ../Classes/BackButton.cpp
+    ../Classes/BackButton.cpp \
+    ../Classes/Localization/CCLocalizedString.cpp
 
 HEADERS += \
     ../Classes/AppMacros.h \
@@ -116,6 +117,7 @@ HEADERS += \
     ../Classes/Scenes/SelectCollection.h \
     ../Classes/Scenes/SettingScene.h \
     ../Classes/GameInfo.h \
-    ../Classes/BackButton.h
+    ../Classes/BackButton.h \
+    ../Classes/Localization/CCLocalizedString.h
 
 
