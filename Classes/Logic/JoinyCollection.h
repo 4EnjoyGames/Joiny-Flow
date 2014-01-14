@@ -28,12 +28,13 @@ public:
     const JoinyLevel* getLevel(const JoinyLevelID id) const;
     const JoinyCollectionID getCollectionID() const;
     const std::string getCollectionName() const;
-    //ccColor3B getCollectionColor() const;
     const ccColor3B& getCollectionColor() const;
 
     void setCollectionName(const std::string name);
-    //void setCollectionColor(const Color color);
     void setCollectionColor(const ccColor3B color);
+
+    bool isOpenCollection() const;
+    void openCollection();
 private:
     JoinyLevel* getLevel(const JoinyLevelID id);
 
@@ -44,6 +45,7 @@ private:
     std::string _coll_name;
     //Color _coll_color;
     ccColor3B _coll_color;
+    bool _open;
     friend class LevelManager;
 };
 

@@ -2,7 +2,7 @@
 
 JoinyCollection::JoinyCollection()
     : _id(0), _levels(nullptr), _coll_name("no_name"),
-      _coll_color(ccc3(250,250,250))
+      _coll_color(ccc3(250,250,250)), _open(true)
 {
 }
 
@@ -35,12 +35,6 @@ const std::string JoinyCollection::getCollectionName() const
 {
     return _coll_name;
 }
-//ccColor3B JoinyCollection::getCollectionColor() const
-//{
-//    return ccc3(_coll_color.red(), _coll_color.green(), _coll_color.blue());
-
-//}
-
 const ccColor3B &JoinyCollection::getCollectionColor() const
 {
     return _coll_color;
@@ -49,12 +43,16 @@ void JoinyCollection::setCollectionName(const std::string name)
 {
     _coll_name = name;
 }
-
-//void JoinyCollection::setCollectionColor(const Color color)
-//{
-//    _coll_color = color;
-//}
 void JoinyCollection::setCollectionColor(const ccColor3B color)
 {
     _coll_color = color;
+}
+bool JoinyCollection::isOpenCollection() const
+{
+    return _open;
+}
+
+void JoinyCollection::openCollection()
+{
+    _open = true;
 }
