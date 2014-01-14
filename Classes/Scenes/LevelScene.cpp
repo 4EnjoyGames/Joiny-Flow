@@ -295,7 +295,14 @@ bool LevelScene::init()
     _flow_game->setPosition(ccp(ORIGIN.x,ORIGIN.y+VISIBLE_SIZE.height / 2));
     this->addChild(_flow_game);
 
-    _procc = 10;
+
+    //progress bar title
+    CCSprite* progress = CCSprite::create("level-menu/progress_bar_title.png");
+    progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -175/SCALE,
+                              ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
+    this->addChild(progress);
+
+    _procc = 0;
     _progress_timer = CCProgressTimer::create(CCSprite::create("level-menu/progress_bar.png") );
     if ( _progress_timer != NULL )
     {
