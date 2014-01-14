@@ -20,6 +20,8 @@ void GameInfo::setInfo()
     _colors.push_back(ccc3(64,255,68));
 
     _level_number = 150;
+
+    _close_color = ccc3(138,141,142);
 }
 
 GameInfo* GameInfo::getInstance( )
@@ -40,4 +42,8 @@ const std::vector<std::string>& GameInfo::getCollectionNames()
 const std::vector<ccColor3B>& GameInfo::getCollectionColors()
 {
     return _colors;
+}
+const ccColor3B& GameInfo::getCloseColor()
+{
+    return _close_color;
 }

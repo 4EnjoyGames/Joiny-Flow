@@ -17,7 +17,7 @@ public:
     }
 
 private:
-    BackButton back;
+    BackButton _back;
 
     void onCollectionSelect(CCObject* sender);
     AnimatedMenuItem* createCollectionItem(

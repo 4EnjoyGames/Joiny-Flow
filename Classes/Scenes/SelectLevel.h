@@ -21,7 +21,7 @@ public:
         keyBackClicked();
     }
 private:
-    BackButton back;
+    BackButton _back;
     void onLevelSelect(CCObject* pSender);
     virtual bool init();
 

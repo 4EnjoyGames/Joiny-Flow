@@ -74,7 +74,8 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     collection_name << collection->getCollectionName();
 
     ccColor3B label_color = collection->getCollectionColor();
-    static ccColor3B closeLevel(ccc3(138,141,142));
+
+    static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
     static ccColor3B working = closeLevel;
     if(collection->isOpenCollection())
         working = label_color;
@@ -114,8 +115,8 @@ bool SelectCollection::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
-    CCMenu* main_menu = CCMenu::create();
-    main_menu->setPosition(ccp(0,0));
+//    CCMenu* main_menu = CCMenu::create();
+//    main_menu->setPosition(ccp(0,0));
 
 
 //    //Load one piece
@@ -142,17 +143,8 @@ bool SelectCollection::init()
 
 
     //Back Button
-    CCMenu* menu = back.start(this, [this](){this->onButtonBackClicked(0);});
+    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
-
-
-    //coll button
-//    CCSize back_size = back_logo->getContentSize();
-//    CCSprite* coll_title = CCSprite::create("collection-menu/collections.png");
-//    coll_title->setPosition(ccp(ORIGIN.x + back_size.width + (VISIBLE_SIZE.width - back_size.width) * 0.5,
-//                                ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
-//    setAnchorPoint(ccp(0.5f, 1));
-//    this->addChild(coll_title);
 
 
     //To trigger back button
@@ -206,13 +198,8 @@ bool SelectCollection::init()
         collection_id_first++;
         working_y -= s.height + margin;
     }
-
-    //_buttons_menu->setAnchorPoint(ccp(0, 0));
-    //_buttons_menu->setPosition(origin.x, origin.y);
-    //this->addChild(_buttons_menu);
     newScrolling(_buttons_menu);
 
-    //this->addChild(main_menu);
     return true;
 }
 
@@ -226,9 +213,7 @@ void SelectCollection::keyBackClicked()
 
 void SelectCollection::doGoBack()
 {
-    //CCDirector::sharedDirector()->end();
     CCDirector::sharedDirector()->replaceScene(MainScene::scene());
-
 }
 
 void SelectCollection::doOpenCollection()

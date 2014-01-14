@@ -1,1 +1,8 @@
 Collection            = "Collection";
+Settings            = "Settings";
+Reset            = "Reset Progress";
+Restore            = "Restore Purchases";
+Developers            = "Developers";
+Exit            = "Leave the game?";
+Yes            = "Yes";
+No            = "No";

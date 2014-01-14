@@ -12,6 +12,8 @@ class GameInfo
        const std::vector<FlowPoint>& getFlowPoints();
        const std::vector<std::string>& getCollectionNames();
        const std::vector<ccColor3B>& getCollectionColors();
+
+       const ccColor3B& getCloseColor();
    private:
        GameInfo( );
        void setInfo();
@@ -24,5 +26,7 @@ class GameInfo
        std::vector<std::string> _coll_names;
        std::vector<ccColor3B> _colors;
        unsigned int _level_number;
+
+       ccColor3B _close_color;
 };
 #endif // GAMEINFO_H

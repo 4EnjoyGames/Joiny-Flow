@@ -1,4 +1,6 @@
 #include "SettingScene.h"
+#include "MainScene.h"
+#include "Localization/CCLocalizedString.h"
 
 SettingScene::SettingScene()
 {
@@ -11,6 +13,9 @@ CCScene* SettingScene::scene()
 
     // 'layer' is an autorelease object
     SettingScene *layer = SettingScene::create();
+    CCCallFunc* back = CCCallFunc::create(layer,
+                                          callfunc_selector(SettingScene::onKeyBackClicked));
+    BackgroundHolder::backgroundSwitchTo(scene,back);
 
     scene->addChild(layer);
     // return the scene
@@ -42,5 +47,43 @@ bool SettingScene::init()
     {
         return false;
     }
+    this->setKeypadEnabled(true);
+
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
+
+    //Back Button
+    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
+    this->addChild(menu);
+
+    CCLabelTTF * settings = CCLabelTTF::create( CCLocalizedString("Settings").c_str(),"fonts/Fredoka One.ttf",72);
+    settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                          ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
+    settings->setColor(ccc3(11,216,224));
+    this->addChild(settings);
+
+    CCSize size = settings->getContentSize();
+
+
     return true;
+}
+void SettingScene::doGoBack()
+{
+    CCDirector::sharedDirector()->replaceScene(MainScene::scene());
+}
+void SettingScene::keyBackClicked()
+{
+    hideEverything(
+                CCCallFunc::create(
+                    this,
+                    callfunc_selector(SettingScene::doGoBack)));
+}
+void SettingScene::hideEverything(cocos2d::CCCallFunc *callback)
+{
+    this->runAction(
+                CCSequence::create(
+                    CCDelayTime::create(0),
+                    callback,
+                    NULL));
 }

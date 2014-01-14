@@ -92,7 +92,7 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const Sp
 
     unsigned int stars = level->getStarsNumber(level->getHighScore());
     ccColor3B openLevel = _current_collection->getCollectionColor();
-    static ccColor3B closeLevel(ccc3(138,141,142));
+    static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
 
     static ccColor3B labelColor(ccc3(255,255,255));
 
@@ -146,7 +146,7 @@ bool SelectLevel::init()
 
 
     //Back Button
-    CCMenu* menu = back.start(this, [this](){this->onButtonBackClicked(0);});
+    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
     //To trigger back button
