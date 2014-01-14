@@ -7,7 +7,7 @@
 #include "Layers/PopUpWindow.h"
 #include "BackButton.h"
 
-class SelectLevel : public CCLayer//public cocos2d::CCLayer
+class SelectLevel : public CCLayerColor //CCLayer//public cocos2d::CCLayer
 {
 public:
 

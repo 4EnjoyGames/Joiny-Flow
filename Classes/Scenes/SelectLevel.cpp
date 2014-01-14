@@ -121,7 +121,11 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const Sp
 
 bool SelectLevel::init()
 {
-    if ( !CCLayer::init() )
+//    if ( !CCLayer::init() )
+//    {
+//        return false;
+//    }
+    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
         return false;
     }

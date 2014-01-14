@@ -34,10 +34,13 @@ SettingScene* SettingScene::create()
 
 bool SettingScene::init()
 {
-    if (!CCLayer::init() )
+//    if (!CCLayer::init() )
+//    {
+//        return false;
+//    }
+    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
         return false;
-
     }
     return true;
 }

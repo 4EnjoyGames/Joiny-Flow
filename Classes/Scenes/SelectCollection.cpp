@@ -99,15 +99,14 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 }
 bool SelectCollection::init()
 {
-    if (!CCLayer::init() )
-    {
-        return false;
-
-    }
-//    if (!CCLayerColor::initWithColor(ccc4(231, 232, 232, 255)))
+//    if (!CCLayer::init() )
 //    {
 //        return false;
 //    }
+    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
+    {
+        return false;
+    }
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
