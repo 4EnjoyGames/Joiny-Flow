@@ -91,12 +91,9 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const Sp
     level_number << level->getLevelId();
 
     unsigned int stars = level->getStarsNumber(level->getHighScore());
-    //static ccColor3B none(ccc3(255, 255, 255));
-    //static ccColor3B highscore(ccc3(65,255,28));
-    //static ccColor3B finished(ccc3(255,242,28));
-    Color color = _current_collection->getCollectionColor();
-    static ccColor3B openLevel(ccc3(color.red(),color.green(),color.blue()));
+    ccColor3B openLevel = _current_collection->getCollectionColor();
     static ccColor3B closeLevel(ccc3(138,141,142));
+
     static ccColor3B labelColor(ccc3(255,255,255));
 
     ccColor3B working = openLevel;
@@ -129,24 +126,13 @@ bool SelectLevel::init()
         return false;
     }
 
-
-    //To trigger back button
-    this->setKeypadEnabled(true);
-
-    //Get the size of the screen we can see
-//    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-
-//    //Get the screen start of cordinates
-//    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-//    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
-
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
     //create collection name label
-    Color color = _current_collection->getCollectionColor();
-    static ccColor3B openLevel(ccc3(color.red(),color.green(),color.blue()));
+    ccColor3B openLevel = _current_collection->getCollectionColor();
+
     const std::string coll_name = _current_collection->getCollectionName();
     CCLabelTTF * collections = CCLabelTTF::create( coll_name.c_str(),"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
@@ -159,6 +145,9 @@ bool SelectLevel::init()
     CCMenu* menu = back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
+    //To trigger back button
+    this->setKeypadEnabled(true);
+
 
     //Create menu with collections
     _col_spl = GraphicsManager::getLoaderFor(
@@ -168,12 +157,8 @@ bool SelectLevel::init()
     _buttons_menu = MenuSpriteBatch::create(_col_spl);
 
 
-    //float padding_left = 330/SCALE;
-    //unsigned int i = 0;
     unsigned int in_row = 5;
-
     CCSprite* image = _col_spl->loadSprite("level_button.png");
-
     CCSize s = image->getContentSize();
     image->removeFromParent();
 
@@ -209,10 +194,6 @@ bool SelectLevel::init()
         }
         working_y -= s.height + margin;
     }
-
-    //_buttons_menu->setAnchorPoint(ccp(0, 0));
-    //_buttons_menu->setPosition(origin.x, origin.y);
-    //this->addChild(_buttons_menu);
     newScrolling(_buttons_menu);
 
     return true;

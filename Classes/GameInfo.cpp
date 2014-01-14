@@ -15,6 +15,10 @@ void GameInfo::setInfo()
     _flow_points.push_back(FlowPoint(5,5));
     _flow_points.push_back(FlowPoint(6,6));
 
+    _colors.push_back(ccc3(248,105,159));
+    _colors.push_back(ccc3(100,243,248));
+    _colors.push_back(ccc3(64,255,68));
+
     _level_number = 150;
 }
 
@@ -32,4 +36,8 @@ const std::vector<FlowPoint>& GameInfo::getFlowPoints()
 const std::vector<std::string>& GameInfo::getCollectionNames()
 {
     return _coll_names;
+}
+const std::vector<ccColor3B>& GameInfo::getCollectionColors()
+{
+    return _colors;
 }

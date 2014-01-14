@@ -1,5 +1,6 @@
 #ifndef SELECTLEVEL_H
 #define SELECTLEVEL_H
+#include "Core/Screen.h"
 #include "cocos2d-A.h"
 #include "Logic/RW.h"
 #include <vector>

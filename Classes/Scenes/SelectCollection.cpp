@@ -74,10 +74,10 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     collection_name << collection->getCollectionName();
 
     //static ccColor3B working(ccc3(255,242,28));
-    Color label_color = collection->getCollectionColor();
+    ccColor3B label_color = collection->getCollectionColor();
 
     CCSprite* background = spl->loadSprite("collection_button.png");
-    background->setColor(ccc3(label_color.red(),label_color.green(),label_color.blue()));
+    background->setColor(label_color);
     AnimatedMenuItem* item = AnimatedMenuItem::create(
                     background,
                     this,
@@ -92,7 +92,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     label->setScale(scale);
 
 
-    label->setColor(ccc3(label_color.red(),label_color.green(),label_color.blue()));
+    label->setColor(label_color);
     //label->setColor(working);
 
     return item;
