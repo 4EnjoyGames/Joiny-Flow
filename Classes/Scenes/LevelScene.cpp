@@ -236,7 +236,7 @@ bool LevelScene::init()
     }
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-    //const float SCALE = Screen::getScaleFactor();
+    const float SCALE = Screen::getScaleFactor();
 
 
     this->setKeypadEnabled(true);
@@ -264,18 +264,25 @@ bool LevelScene::init()
     ss << "Highscore: " << _current_level->getHighScore() << std::endl;
 
 
+    //Back Button
+    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
+    this->addChild(menu);
 
-    CCLabelTTF* scores = CCLabelTTF::create(ss.str().c_str(), "Arial", 28);
-    scores->setAnchorPoint(ccp(1,1));
-    scores->setColor(ccc3(0,0,0));
-    scores->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width, ORIGIN.y+VISIBLE_SIZE.height));
-    this->addChild(scores);
+    CCSize back_size = _back.getBackSize();
 
-    _score_label = CCLabelTTF::create("0", "Arial", 80);
+//    CCLabelTTF* scores = CCLabelTTF::create(ss.str().c_str(), "fonts/Fredoka One.ttf", 28);
+//    scores->setAnchorPoint(ccp(1,1));
+//    scores->setColor(ccc3(0,0,0));
+//    scores->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width, ORIGIN.y+VISIBLE_SIZE.height));
+//    this->addChild(scores);
+
+    _score_label = CCLabelTTF::create("0", "fonts/Fredoka One.ttf", 70);
 
     _score_label->setAnchorPoint(ccp(0, 1));
-    _score_label->setPosition(ccp(ORIGIN.x, ORIGIN.y + VISIBLE_SIZE.height));
-    _score_label->setColor(ccc3(0,0,0));
+    _score_label->setPosition(ccp(ORIGIN.x + back_size.width + (VISIBLE_SIZE.width - back_size.width)*0.25 ,
+                                  ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
+    _score_label->setColor(GameInfo::getInstance()->getTitleColor());
+    _score_label->setAnchorPoint(ccp(0.5, 0.5));
     this->addChild(_score_label);
 
     _flow_game = FlowGame::create(table, FlowGame::DelegatePtr(new FlowDelegate(this)));
@@ -296,7 +303,8 @@ bool LevelScene::init()
         _progress_timer->setMidpoint(ccp(0, 0));
         _progress_timer->setBarChangeRate(ccp(1, 0));
         _progress_timer->setPercentage(_procc);
-        _progress_timer->setPosition(ccp(ORIGIN.x, ORIGIN.y));
+        _progress_timer->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -175/SCALE,
+                                         ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
 
     }
     addChild(_progress_timer);

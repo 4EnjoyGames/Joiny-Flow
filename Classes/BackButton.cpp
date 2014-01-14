@@ -35,10 +35,15 @@ CCMenu* BackButton::start(CCLayer *layer, functionPtr function)
 
     main_menu->addChild(back_button);
 
+    _size =  back_button->getContentSize();
     return main_menu;
 }
 void BackButton::doAction(CCObject* obj)
 {
     //_function;
     _function();
+}
+CCSize BackButton::getBackSize()
+{
+    return _size;
 }

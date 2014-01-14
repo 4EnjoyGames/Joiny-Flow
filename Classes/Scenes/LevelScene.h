@@ -6,6 +6,7 @@
 #include "Flow/FlowGame.h"
 #include "Flow/JoinyPair.h"
 #include "Logic/JoinyLevel.h"
+#include "BackButton.h"
 
 class LevelScene : public CCLayerColor //cocos2d::CCLayer
 {
@@ -23,7 +24,11 @@ private:
 
     //on back clicked
     void keyBackClicked();
-    //void keyMenuClicked();
+    void onButtonBackClicked(CCObject*)
+    {
+        keyBackClicked();
+    }
+
 
     void onScoreChanged(const FlowScore);
     void onWin();
@@ -41,6 +46,7 @@ private:
     CCProgressTimer* _progress_timer;
     float _procc;
 
+    BackButton _back;
 public:
     LevelScene(const JoinyLevel*);
 

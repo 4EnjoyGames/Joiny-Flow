@@ -22,6 +22,8 @@ void GameInfo::setInfo()
     _level_number = 150;
 
     _close_color = ccc3(138,141,142);
+
+    _title_color = ccc3(11,216,224);
 }
 
 GameInfo* GameInfo::getInstance( )
@@ -46,4 +48,8 @@ const std::vector<ccColor3B>& GameInfo::getCollectionColors()
 const ccColor3B& GameInfo::getCloseColor()
 {
     return _close_color;
+}
+const ccColor3B &GameInfo::getTitleColor()
+{
+    return _title_color;
 }

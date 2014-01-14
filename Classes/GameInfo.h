@@ -14,6 +14,7 @@ class GameInfo
        const std::vector<ccColor3B>& getCollectionColors();
 
        const ccColor3B& getCloseColor();
+       const ccColor3B& getTitleColor();
    private:
        GameInfo( );
        void setInfo();
@@ -28,5 +29,6 @@ class GameInfo
        unsigned int _level_number;
 
        ccColor3B _close_color;
+       ccColor3B _title_color;
 };
 #endif // GAMEINFO_H

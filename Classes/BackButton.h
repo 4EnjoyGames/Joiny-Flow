@@ -11,10 +11,12 @@ public:
     typedef std::function<void()> functionPtr;
     BackButton();
     CCMenu *start(CCLayer* layer, functionPtr function);
+    CCSize getBackSize();
 private:
     void doAction(CCObject* obj);
     functionPtr _function;
     CCLayer* _layer;
+    CCSize _size;
 };
 
 #endif // BACKBUTTON_H

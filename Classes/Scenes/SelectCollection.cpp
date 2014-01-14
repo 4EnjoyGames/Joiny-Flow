@@ -138,7 +138,7 @@ bool SelectCollection::init()
     CCLabelTTF * collections = CCLabelTTF::create( CCLocalizedString("Collection").c_str(),"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
-    collections->setColor(ccc3(11,216,224));
+    collections->setColor(GameInfo::getInstance()->getTitleColor());
     this->addChild(collections);
 
 
