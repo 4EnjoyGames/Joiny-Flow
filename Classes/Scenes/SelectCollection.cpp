@@ -73,7 +73,6 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     std::stringstream collection_name;
     collection_name << collection->getCollectionName();
 
-    //static ccColor3B working(ccc3(255,242,28));
     ccColor3B label_color = collection->getCollectionColor();
     static ccColor3B closeLevel(ccc3(138,141,142));
     static ccColor3B working = closeLevel;

@@ -39,30 +39,30 @@ void BackgroundHolder::do_backgroundSwitchTo(cocos2d::CCNode* node,
                                              cocos2d::CCCallFunc* back_button_callback,
                                              const bool play_music)
 {
-//    //turn on the audio if we just open the game
-//    if (play_music==true && _firstly==true)
-//    {
+    //turn on the audio if we just open the game
+    if (play_music==true && _firstly==true)
+    {
 
-//        MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
-//        _firstly=false;
-//    }
-//    else if (play_music==true && MusicSettings::isBackgrHolderMusic()==false)
-//    {
-//        //MusicSettings::turnOnMusic();
-//       // MusicSettings::isBackgrHolderMusic()==true;
-//        MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
-//    }
-//    else if (play_music==false)
-//    {
-//        //stop the background music slowly
-//        //const float delta=0.1f;
-////        while(CocosDenshion::SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume()!=0.0f)
-////        {
-////            float cur_volume = CocosDenshion::SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume();
-////            CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(cur_volume-delta);
-////        }
-//        MusicSettings::stopMusicForBackgrHolder();
-//    }
+        MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
+        _firstly=false;
+    }
+    else if (play_music==true && MusicSettings::isBackgrHolderMusic()==false)
+    {
+        //MusicSettings::turnOnMusic();
+       // MusicSettings::isBackgrHolderMusic()==true;
+        MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
+    }
+    else if (play_music==false)
+    {
+        //stop the background music slowly
+        //const float delta=0.1f;
+//        while(CocosDenshion::SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume()!=0.0f)
+//        {
+//            float cur_volume = CocosDenshion::SimpleAudioEngine::sharedEngine()->getBackgroundMusicVolume();
+//            CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(cur_volume-delta);
+//        }
+        MusicSettings::stopMusicForBackgrHolder();
+    }
 
     //If we has layer
     if(_background_layer)

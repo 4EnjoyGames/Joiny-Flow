@@ -19,7 +19,7 @@ CCScene* MainScene::scene()
     // add layer as a child to scene
     CCCallFunc* back = CCCallFunc::create(layer,
                                           callfunc_selector(MainScene::onKeyBackClicked));
-    BackgroundHolder::backgroundSwitchTo(scene,back);
+    BackgroundHolder::backgroundSwitchTo(scene,back,true);
     scene->addChild(layer);
 
     // return the scene

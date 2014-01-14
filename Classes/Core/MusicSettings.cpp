@@ -1,18 +1,18 @@
 #include "MusicSettings.h"
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-const char* MusicSettings::BACKGROUND_MUSIC = "music/math_is_fun.wav";
+const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.wav";
 #else
 #ifdef CC_WIN8_PHONE
-	const char* MusicSettings::BACKGROUND_MUSIC = "music/math_is_fun.wav";
+    const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.wav";
 #else
 	#ifdef CC_WIN8_METRO
-	const char* MusicSettings::BACKGROUND_MUSIC = "music/math_is_fun.mp3";
+    const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.mp3";
 #else
     #ifdef CC_TARGET_OS_IPHONE
-    const char* MusicSettings::BACKGROUND_MUSIC = "music/math_is_fun.mp3";
+    const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.mp3";
 	#else
-	const char* MusicSettings::BACKGROUND_MUSIC = "music/math_is_fun.ogg";
+    const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.ogg";
 	#endif
     #endif
 #endif
