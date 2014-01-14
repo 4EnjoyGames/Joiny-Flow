@@ -218,19 +218,25 @@ void LevelScene::doOpenNextLevel()
 // on "init" you need to initialize your instance
 bool LevelScene::init()
 {
-    //////////////////////////////
-    // 1. super init first
-    if ( !CCLayer::init() )
+//    if ( !CCLayer::init() )
+//    {
+//        return false;
+//    }
+
+    //Get the size of the screen we can see
+    //CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+
+    //Get the screen start of cordinates
+    //CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+   // float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
+
+    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
         return false;
     }
-
-    //Get the size of the screen we can see
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-
-    //Get the screen start of cordinates
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    //const float SCALE = Screen::getScaleFactor();
 
 
     this->setKeypadEnabled(true);
@@ -261,24 +267,39 @@ bool LevelScene::init()
 
     CCLabelTTF* scores = CCLabelTTF::create(ss.str().c_str(), "Arial", 28);
     scores->setAnchorPoint(ccp(1,1));
-    scores->setPosition(ccp(origin.x+visibleSize.width, origin.y+visibleSize.height));
+    scores->setColor(ccc3(0,0,0));
+    scores->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width, ORIGIN.y+VISIBLE_SIZE.height));
     this->addChild(scores);
 
     _score_label = CCLabelTTF::create("0", "Arial", 80);
 
     _score_label->setAnchorPoint(ccp(0, 1));
-    _score_label->setPosition(ccp(origin.x, origin.y + visibleSize.height));
+    _score_label->setPosition(ccp(ORIGIN.x, ORIGIN.y + VISIBLE_SIZE.height));
+    _score_label->setColor(ccc3(0,0,0));
     this->addChild(_score_label);
 
     _flow_game = FlowGame::create(table, FlowGame::DelegatePtr(new FlowDelegate(this)));
     CCSize render_size = _flow_game->getContentSize();
 
-    _flow_game->setScale(MIN(visibleSize.width / render_size.width,
-                         visibleSize.width / render_size.height));
+    _flow_game->setScale(MIN(VISIBLE_SIZE.width / render_size.width,
+                         VISIBLE_SIZE.width / render_size.height));
 
     _flow_game->setAnchorPoint(ccp(0, 0.5f));
-    _flow_game->setPosition(ccp(origin.x,origin.y+visibleSize.height / 2));
+    _flow_game->setPosition(ccp(ORIGIN.x,ORIGIN.y+VISIBLE_SIZE.height / 2));
     this->addChild(_flow_game);
+
+    _procc = 10;
+    _progress_timer = CCProgressTimer::create(CCSprite::create("level-menu/progress_bar.png") );
+    if ( _progress_timer != NULL )
+    {
+        _progress_timer->setType(kCCProgressTimerTypeBar);
+        _progress_timer->setMidpoint(ccp(0, 0));
+        _progress_timer->setBarChangeRate(ccp(1, 0));
+        _progress_timer->setPercentage(_procc);
+        _progress_timer->setPosition(ccp(ORIGIN.x, ORIGIN.y));
+
+    }
+    addChild(_progress_timer);
 
     return true;
 }
@@ -290,6 +311,12 @@ void LevelScene::onScoreChanged(const FlowScore s)
     _score_label->setString(ss.str().c_str());
 
     _last_score = s;
+
+    _procc = _procc + 10;
+    if ( _progress_timer != NULL )
+    {
+       _progress_timer->setPercentage(_procc);
+    }
 }
 
 void LevelScene::onWin()

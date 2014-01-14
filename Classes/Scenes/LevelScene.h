@@ -7,7 +7,7 @@
 #include "Flow/JoinyPair.h"
 #include "Logic/JoinyLevel.h"
 
-class LevelScene : public cocos2d::CCLayer
+class LevelScene : public CCLayerColor //cocos2d::CCLayer
 {
 private:
     class LevelEndPopUp;
@@ -37,6 +37,9 @@ private:
 
     const JoinyLevel* _current_level;
     const JoinyLevel* _next_level;
+
+    CCProgressTimer* _progress_timer;
+    float _procc;
 
 public:
     LevelScene(const JoinyLevel*);
