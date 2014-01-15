@@ -149,6 +149,7 @@ bool SelectLevel::init()
     CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
+
     //To trigger back button
     this->setKeypadEnabled(true);
 
@@ -229,7 +230,7 @@ void SelectLevel::newScrolling(MenuSpriteBatch* menu)
     }
     //Get the scroll area size
     float scroll_view_width = visibleSize.width - 50/scaled;
-    float scroll_view_height = visibleSize.height-250/scaled;
+    float scroll_view_height = visibleSize.height-320/scaled;
     CCSize scroll_view_size(scroll_view_width, scroll_view_height);
 
     //Create layer to fit all tiles

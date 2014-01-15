@@ -37,6 +37,11 @@ private:
     void doOpenNextLevel();
 
     FlowScore _last_score;
+    FlowScore _bronze;
+    FlowScore _silver;
+    FlowScore _gold;
+    FlowScore _max_score;
+
     JoinyInfo _current_info;
     FlowGame* _flow_game;
 

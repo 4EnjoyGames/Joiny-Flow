@@ -270,6 +270,11 @@ bool LevelScene::init()
 
     CCSize back_size = _back.getBackSize();
 
+    _bronze = _current_info.getBronze();
+    _silver = _current_info.getSilver();
+    _gold = _current_info.getGold();
+    _max_score = _gold + 100;
+
 //    CCLabelTTF* scores = CCLabelTTF::create(ss.str().c_str(), "fonts/Fredoka One.ttf", 28);
 //    scores->setAnchorPoint(ccp(1,1));
 //    scores->setColor(ccc3(0,0,0));
@@ -327,7 +332,7 @@ void LevelScene::onScoreChanged(const FlowScore s)
 
     _last_score = s;
 
-    _procc = _procc + 10;
+    _procc = static_cast<float>(_last_score*100)/_max_score;
     if ( _progress_timer != NULL )
     {
        _progress_timer->setPercentage(_procc);
