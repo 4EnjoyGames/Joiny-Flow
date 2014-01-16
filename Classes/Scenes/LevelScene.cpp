@@ -215,20 +215,12 @@ void LevelScene::doOpenNextLevel()
 
 }
 
-// on "init" you need to initialize your instance
 bool LevelScene::init()
 {
 //    if ( !CCLayer::init() )
 //    {
 //        return false;
 //    }
-
-    //Get the size of the screen we can see
-    //CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-
-    //Get the screen start of cordinates
-    //CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-   // float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
     if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
@@ -240,8 +232,6 @@ bool LevelScene::init()
 
 
     this->setKeypadEnabled(true);
-
-
 
     unsigned int N = _current_level->getBoardSize().x();
     FlowTable table(N,N);
@@ -257,11 +247,11 @@ bool LevelScene::init()
         }
     }
 
-    std::stringstream ss;
-    ss << "Bronze: " << task._info.getBronze() << std::endl;
-    ss << "Silver: " << task._info.getSilver() << std::endl;
-    ss << "Gold: " << task._info.getGold() << std::endl;
-    ss << "Highscore: " << _current_level->getHighScore() << std::endl;
+//    std::stringstream ss;
+//    ss << "Bronze: " << task._info.getBronze() << std::endl;
+//    ss << "Silver: " << task._info.getSilver() << std::endl;
+//    ss << "Gold: " << task._info.getGold() << std::endl;
+//    ss << "Highscore: " << _current_level->getHighScore() << std::endl;
 
 
     //Back Button
@@ -270,8 +260,8 @@ bool LevelScene::init()
 
     CCSize back_size = _back.getBackSize();
 
-    _bronze = _current_info.getBronze();
     _silver = _current_info.getSilver();
+    _bronze = _current_info.getBronze();
     _gold = _current_info.getGold();
     _max_score = _gold + 100;
 
@@ -303,9 +293,10 @@ bool LevelScene::init()
 
     //progress bar title
     CCSprite* progress = CCSprite::create("level-menu/progress_bar_title.png");
-    progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -175/SCALE,
+    progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -200/SCALE,
                               ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
     this->addChild(progress);
+
 
     _procc = 0;
     _progress_timer = CCProgressTimer::create(CCSprite::create("level-menu/progress_bar.png") );
@@ -315,11 +306,48 @@ bool LevelScene::init()
         _progress_timer->setMidpoint(ccp(0, 0));
         _progress_timer->setBarChangeRate(ccp(1, 0));
         _progress_timer->setPercentage(_procc);
-        _progress_timer->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -175/SCALE,
+        _progress_timer->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -200/SCALE,
                                          ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
 
     }
     addChild(_progress_timer);
+
+
+    ///////////////////////////////////////////////////////////////////
+    //Get the sprites loader
+    //stars
+    _spl = GraphicsManager::getLoaderFor(this,
+                                                      "level_stars.plist",
+                                                      "level_stars.png");
+    _spl->inject();
+
+
+    CCPoint bar_begin = ccp(progress->getPositionX() - progress->getContentSize().width*0.5,
+                            progress->getPositionY());
+    CCSize bar_size = progress->getContentSize();
+    //3-d
+    _bronze_star = _spl->loadSprite("black_star.png");
+    float bronze_proc = (static_cast<float>(_bronze*100)/_max_score)/100.0f;
+    _bronze_position = ccp(bar_begin.x + bar_size.width*bronze_proc,
+                           bar_begin.y - 30/SCALE);
+    _bronze_star->setPosition(_bronze_position);
+
+    //2-d
+    _silver_star = _spl->loadSprite("black_star.png");
+    float silver_proc = (static_cast<float>(_silver*100)/_max_score)/100.0f;
+    _silver_position = ccp(bar_begin.x + bar_size.width*silver_proc,
+                           bar_begin.y - 30/SCALE);
+    _silver_star->setPosition(_silver_position);
+
+
+    //1-st
+    _gold_star = _spl->loadSprite("black_star.png");
+    float gold_proc = (static_cast<float>(_gold*100)/_max_score)/100.0f;
+    _gold_position = ccp(bar_begin.x + bar_size.width*gold_proc,
+                         bar_begin.y - 30/SCALE);
+    _gold_star->setPosition(_gold_position);
+
+    ////////////////////////////////////////////////////////////////////
 
     return true;
 }
@@ -336,6 +364,38 @@ void LevelScene::onScoreChanged(const FlowScore s)
     if ( _progress_timer != NULL )
     {
        _progress_timer->setPercentage(_procc);
+    }
+
+    if(s>=_bronze)
+    {
+         _bronze_star = _spl->loadSprite("color_star.png");
+         _bronze_star->setPosition(_bronze_position);
+    }
+    if(s>=_silver)
+    {
+        _silver_star = _spl->loadSprite("color_star.png");
+        _silver_star->setPosition(_silver_position);
+    }
+    if(s>=_gold)
+    {
+        _gold_star = _spl->loadSprite("color_star.png");
+        _gold_star ->setPosition(_gold_position);
+    }
+
+    if(s<_bronze)
+    {
+        _bronze_star = _spl->loadSprite("black_star.png");
+        _bronze_star->setPosition(_bronze_position);
+    }
+    if(s<_silver)
+    {
+        _silver_star = _spl->loadSprite("black_star.png");
+        _silver_star->setPosition(_silver_position);
+    }
+    if(s<_gold)
+    {
+        _gold_star = _spl->loadSprite("black_star.png");
+        _gold_star ->setPosition(_gold_position);
     }
 }
 

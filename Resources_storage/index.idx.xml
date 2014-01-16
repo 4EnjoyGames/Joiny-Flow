@@ -7,6 +7,12 @@
 		<name>flow.png</name>
 	</file>
 	<file>
+		<name>level_stars.plist</name>
+	</file>
+	<file>
+		<name>level_stars.png</name>
+	</file>
+	<file>
 		<name>puzzle_5x5.ad</name>
 	</file>
 	<file>
@@ -29,12 +35,13 @@
 	</file>
 	
 	<file>
-		<name>collection_button.plist.xml</name>
+		<name>collection-menu/collection_button.plist.xml</name>
 	</file>
 	
 	<file>
-		<name>level_buttons.plist.xml</name>
+		<name>level-menu/level_buttons.plist.xml</name>
 	</file>
+	
 	<file>
 		<name>Localized_ua</name>
 	</file>

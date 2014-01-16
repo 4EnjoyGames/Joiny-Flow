@@ -158,6 +158,8 @@ bool SelectCollection::init()
                 "collection_button.png");
 
 
+
+
     _buttons_menu = MenuSpriteBatch::create(_col_spl);
 
 

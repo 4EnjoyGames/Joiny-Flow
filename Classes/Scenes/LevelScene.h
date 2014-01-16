@@ -52,6 +52,15 @@ private:
     float _procc;
 
     BackButton _back;
+
+    SpritesLoader _spl;
+
+    CCSprite* _bronze_star;
+    CCPoint _bronze_position;
+    CCSprite* _silver_star;
+    CCPoint _silver_position;
+    CCSprite* _gold_star;
+    CCPoint _gold_position;
 public:
     LevelScene(const JoinyLevel*);
 
