@@ -7,6 +7,7 @@ FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/Logic/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/Layers/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/Scenes/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/Flow/*.cpp)
+FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/Localization/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/StoreBridge/*.cpp)
 

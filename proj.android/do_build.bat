@@ -1,6 +1,4 @@
 @echo off
-set PHP_DIR=%~1
-set TEXTURE_PACKER_DIR=%~2
 set ANT_DIR=%~3
 set ANDROID_SDK_DIR=%~4
 set CYGWIN_DIR=%~5
@@ -14,8 +12,6 @@ set ANDROID_PROJ=%~dp0
 echo ===============================
 echo Building for Android
 echo ===============================
-echo PHP_DIR: %PHP_DIR%
-echo TEXTURE_PACKER_DIR: %TEXTURE_PACKER_DIR%
 echo ANT_DIR: %ANT_DIR%
 echo ANDROID_SDK_DIR: %ANDROID_SDK_DIR%
 echo CYGWIN_DIR: %CYGWIN_DIR%
@@ -24,7 +20,6 @@ echo BUILD_PROJECT: %BUILD_PROJECT%
 echo BUILD_MODE: %BUILD_MODE%
 echo.
 echo PROJECT_DIR: %ANDROID_PROJ%
-echo.
 echo.
 
 echo ===============================
@@ -35,13 +30,15 @@ set CHMOD="%CYGWIN_DIR%\chmod.exe"
 
 
 cd %ANDROID_PROJ%
-cd ..\ResourceCompiler
 
-call "%PHP_DIR%" ResourceCompiler.php "texture_packer=%TEXTURE_PACKER_DIR%;platform=android;project=%BUILD_PROJECT%;source=../Resources_storage;destination=../Resources;language=en,ru"
+call "..\build_resources.local.bat" %BUILD_PROJECT% android
+set ANDROID_PROJ=%~dp0
 
-echo Texture build finished
 cd %ANDROID_PROJ%
-cd ..\Resources
+echo Texture chmod start
+cd ..
+cd "Resources"
+
 %CHMOD% 0777 -R * 
 echo Texture chmoded
 
@@ -61,6 +58,7 @@ echo.
 echo ===============================
 echo Build Java part
 echo ===============================
-cd %ANDROID_PROJ%
+pwd
+echo "%ANT_DIR%\ant.bat"
 call "%ANT_DIR%\ant.bat" %BUILD_MODE% install -Dsdk.dir="%ANDROID_SDK_DIR%"
 echo Build finished
