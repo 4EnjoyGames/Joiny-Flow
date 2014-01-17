@@ -294,20 +294,32 @@ bool LevelScene::init()
     _flow_game->setPosition(ccp(ORIGIN.x,ORIGIN.y+VISIBLE_SIZE.height / 2));
     this->addChild(_flow_game);
 
-    //3 buttons
-    //previous level
 
+    /////////////////////////////////////////////////////////////////
+
+//    CCMenu* buttons_menu = CCMenu::create();
+//    //buttons_menu->setPosition(ORIGIN);
+//    //3 buttons
+//    //previous level
 //    SpritesLoader  _col_spl = GraphicsManager::getLoaderFor(
-//                0,
-//                "level_novigation.plist",
-//                "level_novigation.png");
+//                this,
+//                "level-menu/level_novigation.plist",
+//                "level-menu/level_novigation.png");
 //    _col_spl->inject();
-//    CCSprite* prev_level = _col_spl->loadSprite("prev_level.png");
+//    CCSprite* prev_level_logo = _col_spl->loadSprite("prev_level.png");
 //    AnimatedMenuItem* prev_level_button = AnimatedMenuItem::create(
-//                    prev_level,
+//                    prev_level_logo,
 //                    this,
 //                    menu_selector(LevelScene::onPreviousLevelClicked));
-//    this->addChild(prev_level_button);
+//    CCPoint position(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+//                     ORIGIN.y + VISIBLE_SIZE.height*0.5));
+
+//    prev_level_button->setPosition(position);
+//    prev_level_logo->setPosition(ccp(prev_level_logo->getContentSize().width/2,
+//                               prev_level_logo->getContentSize().height/2));
+
+//    buttons_menu->addChild(prev_level_button);
+
 
 
     //progress bar title
@@ -368,6 +380,7 @@ bool LevelScene::init()
 
     ////////////////////////////////////////////////////////////////////
 
+    //this->addChild(buttons_menu);
     return true;
 }
 

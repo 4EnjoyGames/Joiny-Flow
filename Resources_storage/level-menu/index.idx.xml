@@ -6,5 +6,13 @@
 	<file>
 		<name>progress_bar_title.png</name>
 	</file>
+	<file>
+		<name>level_novigation.plist</name>
+	</file>
+	<file>
+		<name>level_novigation.png</name>
+	</file>
+	
+	
 	
 </directory>
