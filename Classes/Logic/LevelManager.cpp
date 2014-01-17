@@ -61,14 +61,15 @@ void LevelManager::loadLevelsInfo()
 {
     GameInfo* info = GameInfo::getInstance();
 
+    std::vector<std::string> coll_files = info->getCollectionFiles();
     std::vector<std::string> coll_names = info->getCollectionNames();
     std::vector<ccColor3B> coll_colors  = info->getCollectionColors();
 
     std::vector<FlowPoint> flow_points = info->getFlowPoints();
 
-    for(unsigned int j=0; j<coll_names.size(); ++j)
+    for(unsigned int j=0; j<coll_files.size(); ++j)
     {
-        std::string file = coll_names[j];
+        std::string file = coll_files[j];
         std::stringstream ss;
         if(FileUtils::openPackageFile(file, ss))
         {
@@ -81,10 +82,7 @@ void LevelManager::loadLevelsInfo()
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
                         new JoinyCollection::LevelsVector(inp.size(),
                                                           JoinyLevel()));
-
-            std::string coll_name =  coll_names[j];
-            coll_name = coll_name.substr(0,coll_name.size()-3);
-            col->setCollectionName(coll_name);
+            col->setCollectionName(coll_names[j]);
             col->setCollectionColor(coll_colors[j]);
 
             for(unsigned int i=0; i<inp.size(); ++i)

@@ -10,8 +10,11 @@ class GameInfo
        static GameInfo* getInstance( );
 
        const std::vector<FlowPoint>& getFlowPoints();
-       const std::vector<std::string>& getCollectionNames();
+       const std::vector<std::string>& getCollectionFiles();
        const std::vector<ccColor3B>& getCollectionColors();
+
+       unsigned int getCollectionNumber();
+       const std::vector<std::string>& getCollectionNames();
 
        const ccColor3B& getCloseColor();
        const ccColor3B& getTitleColor();
@@ -23,8 +26,10 @@ class GameInfo
        void operator=(GameInfo const&); // don't implement
        static GameInfo* instance;
 
-       std::vector<FlowPoint> _flow_points;
+
        std::vector<std::string> _coll_names;
+       std::vector<FlowPoint> _flow_points;
+       std::vector<std::string> _coll_files;
        std::vector<ccColor3B> _colors;
        unsigned int _level_number;
 

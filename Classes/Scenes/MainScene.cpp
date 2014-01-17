@@ -64,7 +64,7 @@ bool MainScene::init()
     //game logo
     CCSprite* main_logo = CCSprite::create("main-menu/main-logo.png");
     main_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height*0.75));
+                          ORIGIN.y + VISIBLE_SIZE.height*0.80));
     this->addChild(main_logo);
     float logo_y_coordinate = main_logo->getPositionY();
 
@@ -82,7 +82,7 @@ bool MainScene::init()
     play_button->addChild(play_logo);
 
     CCPoint position(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                     logo_y_coordinate - 500/SCALE );
+                     logo_y_coordinate - 400/SCALE );
 
     play_button->setPosition(position);
     play_logo->setPosition(ccp(play_logo->getContentSize().width/2,
@@ -99,7 +99,7 @@ bool MainScene::init()
     settings_button->addChild(settings_logo);
 
     CCPoint position_settings(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                              logo_y_coordinate - 750/SCALE  );
+                              logo_y_coordinate - 650/SCALE  );
     settings_button->setPosition(position_settings);
     settings_logo->setPosition(ccp(settings_logo->getContentSize().width/2,
                                settings_logo->getContentSize().height/2));

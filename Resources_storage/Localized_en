@@ -6,3 +6,6 @@ Developers            = "Developers";
 Exit            = "Leave the game?";
 Yes            = "Yes";
 No            = "No";
+Col1            = "5x5 Easy";
+Col2            = "6x6 Easy";
+Col3            = "5x5 Difficult";
