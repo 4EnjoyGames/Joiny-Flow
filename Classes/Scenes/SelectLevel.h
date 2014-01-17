@@ -41,6 +41,9 @@ private:
     AnimatedMenuItem* createLevelItem(const JoinyLevel* level,
                                       const SpritesLoader& spl);
 
+    AnimatedMenuItem* createStars(AnimatedMenuItem* item,
+                                  const JoinyLevel* level);
+
 
 
     typedef std::map<AnimatedMenuItem*, const JoinyLevel*> ButtonsMap;
@@ -51,7 +54,7 @@ private:
 
     const JoinyCollection* _current_collection;
 
-
+    SpritesLoader _spl;
 };
 
 #endif // SELECTLEVEL_H

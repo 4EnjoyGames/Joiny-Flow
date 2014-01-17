@@ -83,20 +83,28 @@ void SelectLevel::onLevelSelect(CCObject* sender)
 
 
 
-AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const SpritesLoader& spl)
+AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
+                                               const SpritesLoader& spl)
 {
+
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
+
     float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
     std::stringstream level_number;
     level_number << level->getLevelId();
 
-    unsigned int stars = level->getStarsNumber(level->getHighScore());
+
+
     ccColor3B openLevel = _current_collection->getCollectionColor();
     static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
 
     static ccColor3B labelColor(ccc3(255,255,255));
 
     ccColor3B working = openLevel;
+    unsigned int stars = level->getStarsNumber(level->getHighScore());
     if(stars == 0)
         working = closeLevel;
 
@@ -115,6 +123,59 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level, const Sp
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
     label->setColor(labelColor);
+
+    return item;
+}
+AnimatedMenuItem* SelectLevel::createStars(AnimatedMenuItem* item,
+                              const JoinyLevel* level)
+{
+    unsigned int stars = level->getStarsNumber(level->getHighScore());
+    CCSprite* stars_spr = 0;
+    if(stars>=1)
+    {
+        if(stars==1)
+            stars_spr = _spl->loadSprite("stars_1.png");
+        else if(stars==2)
+            stars_spr = _spl->loadSprite("stars_2.png");
+        else
+            stars_spr = _spl->loadSprite("stars_3.png");
+    }
+    else
+        stars_spr = _spl->loadSprite("stars_none.png");
+
+
+//    CCSize star_size = stars_spr->getContentSize();
+//    CCSize button_size = background->getContentSize();
+
+//    float target_width = star_size.width;
+//    float target_height = star_size.height;
+
+//    float marks_zone_width = button_size.width * 0.725;
+//    float marks_zone_height = button_size.height * 0.25;
+//    float relative_y = button_size.height * 0.3;
+
+//    float stamps_scale = MIN(marks_zone_width/ target_width,
+//                             marks_zone_height / target_height);
+
+//    //float stamp_width = mark_size.width*stamps_scale;
+//    float stamp_height = star_size.height*stamps_scale;
+
+//    float y_anchor_point = -6.0f;// - (marks_zone_height/2 - relative_y) / stamp_height;
+//    float initial_x_anchor_point = -0.5f;// + (target_width - star_size.width) / 2 / star_size.width;
+
+
+    //stars_spr->setAnchorPoint(ccp(0.5, 0.5));
+//    stars_spr->setAnchorPoint(ccp(initial_x_anchor_point, y_anchor_point));
+//    //stars_spr->setPosition(item->getPosition());
+//    stars_spr->setPosition(ccp(background->getContentSize().width/2-3*scale,
+//                              background->getContentSize().height/2));
+//    stars_spr->setScale(scale);
+//    item->addNephew(stars_spr);
+
+    //stars_spr->setAnchorPoint(ccp(-1.0, -1.0));
+    stars_spr->setPosition(item->getPosition());
+    //stars_spr->setScale(scale);
+    item->addNephew(stars_spr);
 
     return item;
 }
@@ -161,6 +222,11 @@ bool SelectLevel::init()
                 "level_buttons.png");
     _buttons_menu = MenuSpriteBatch::create(_col_spl);
 
+    _spl = GraphicsManager::getLoaderFor(_buttons_menu,
+                                                      "save_stars.plist",
+                                                      "save_stars.png");
+    _spl->inject();
+
 
     unsigned int in_row = 5;
     CCSprite* image = _col_spl->loadSprite("level_button.png");
@@ -187,9 +253,12 @@ bool SelectLevel::init()
                 const JoinyLevel* l = _current_collection->getLevel(id);
 
                 AnimatedMenuItem* item = createLevelItem(l, _col_spl);
+
                 _buttons_menu->menu()->addChild(item, 100);
 
                 item->setPosition(ccp(working_x, working_y));
+
+                item = createStars(item,l);
 
                 _buttons_map[item] = l;
 

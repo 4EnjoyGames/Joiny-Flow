@@ -13,6 +13,13 @@
 		<name>level_stars.png</name>
 	</file>
 	<file>
+		<name>save_stars.plist</name>
+	</file>
+	<file>
+		<name>save_stars.png</name>
+	</file>
+	
+	<file>
 		<name>puzzle_5x5.ad</name>
 	</file>
 	<file>
