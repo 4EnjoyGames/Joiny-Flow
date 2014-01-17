@@ -7,54 +7,54 @@
             <key>stars_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,2},{150,80}}</string>
+                <string>{{2,2},{100,54}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{150,80}}</string>
+                <string>{{0,0},{100,54}}</string>
                 <key>sourceSize</key>
-                <string>{150,80}</string>
+                <string>{100,54}</string>
             </dict>
             <key>stars_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,84},{150,80}}</string>
+                <string>{{2,58},{100,54}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{150,80}}</string>
+                <string>{{0,0},{100,54}}</string>
                 <key>sourceSize</key>
-                <string>{150,80}</string>
+                <string>{100,54}</string>
             </dict>
             <key>stars_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,166},{150,80}}</string>
+                <string>{{2,114},{100,54}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{150,80}}</string>
+                <string>{{0,0},{100,54}}</string>
                 <key>sourceSize</key>
-                <string>{150,80}</string>
+                <string>{100,54}</string>
             </dict>
             <key>stars_none.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,248},{150,80}}</string>
+                <string>{{2,170},{100,54}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{150,80}}</string>
+                <string>{{0,0},{100,54}}</string>
                 <key>sourceSize</key>
-                <string>{150,80}</string>
+                <string>{100,54}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -64,9 +64,9 @@
             <key>realTextureFileName</key>
             <string>save_stars.png</string>
             <key>size</key>
-            <string>{256,512}</string>
+            <string>{128,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:11f3b0f72941b714babc16c663ec0d82$</string>
+            <string>$TexturePacker:SmartUpdate:d7ce76458123662c947aa4c77e135b88$</string>
             <key>textureFileName</key>
             <string>save_stars.png</string>
         </dict>

@@ -54,6 +54,7 @@ private:
 
     const JoinyCollection* _current_collection;
 
+    float _scale;
     SpritesLoader _spl;
 };
 

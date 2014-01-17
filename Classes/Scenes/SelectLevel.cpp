@@ -119,7 +119,10 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
     CCLabelTTF* label = CCLabelTTF::create(level_number.str().c_str(), "fonts/Fredoka One.ttf", 60/scaled);
     item->addChild(label);
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
-    label->setPosition(ccp(background->getContentSize().width/2-3*scale, background->getContentSize().height/2));
+    if(_scale==0)
+        _scale  = scale;
+    label->setPosition(ccp(background->getContentSize().width/2-3*SCALE,
+                           background->getContentSize().height/2 + 10/SCALE));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
     label->setColor(labelColor);
@@ -129,6 +132,7 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
 AnimatedMenuItem* SelectLevel::createStars(AnimatedMenuItem* item,
                               const JoinyLevel* level)
 {
+    const float SCALE = Screen::getScaleFactor();
     unsigned int stars = level->getStarsNumber(level->getHighScore());
     CCSprite* stars_spr = 0;
     if(stars>=1)
@@ -144,37 +148,10 @@ AnimatedMenuItem* SelectLevel::createStars(AnimatedMenuItem* item,
         stars_spr = _spl->loadSprite("stars_none.png");
 
 
-//    CCSize star_size = stars_spr->getContentSize();
-//    CCSize button_size = background->getContentSize();
-
-//    float target_width = star_size.width;
-//    float target_height = star_size.height;
-
-//    float marks_zone_width = button_size.width * 0.725;
-//    float marks_zone_height = button_size.height * 0.25;
-//    float relative_y = button_size.height * 0.3;
-
-//    float stamps_scale = MIN(marks_zone_width/ target_width,
-//                             marks_zone_height / target_height);
-
-//    //float stamp_width = mark_size.width*stamps_scale;
-//    float stamp_height = star_size.height*stamps_scale;
-
-//    float y_anchor_point = -6.0f;// - (marks_zone_height/2 - relative_y) / stamp_height;
-//    float initial_x_anchor_point = -0.5f;// + (target_width - star_size.width) / 2 / star_size.width;
-
-
-    //stars_spr->setAnchorPoint(ccp(0.5, 0.5));
-//    stars_spr->setAnchorPoint(ccp(initial_x_anchor_point, y_anchor_point));
-//    //stars_spr->setPosition(item->getPosition());
-//    stars_spr->setPosition(ccp(background->getContentSize().width/2-3*scale,
-//                              background->getContentSize().height/2));
-//    stars_spr->setScale(scale);
-//    item->addNephew(stars_spr);
-
-    //stars_spr->setAnchorPoint(ccp(-1.0, -1.0));
-    stars_spr->setPosition(item->getPosition());
-    //stars_spr->setScale(scale);
+    CCPoint position = item->getPosition();
+    stars_spr->setPosition(ccp(position.x,
+                               position.y - 40/SCALE));
+    stars_spr->setScale(_scale);
     item->addNephew(stars_spr);
 
     return item;
@@ -195,6 +172,8 @@ bool SelectLevel::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
+
+    _scale = 0;
     //create collection name label
     ccColor3B openLevel = _current_collection->getCollectionColor();
 
