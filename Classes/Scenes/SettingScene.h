@@ -36,6 +36,9 @@ private:
 
     const ccColor3B getSoundColor() const;
     const ccColor3B getMusicColor() const;
+
+    CCSprite* _music_logo;
+    CCSprite* _sound_logo;
 };
 
 #endif // SETTINGSCENE_H

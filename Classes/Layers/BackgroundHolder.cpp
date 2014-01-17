@@ -46,7 +46,7 @@ void BackgroundHolder::do_backgroundSwitchTo(cocos2d::CCNode* node,
         MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
         _firstly=false;
     }
-    else if (play_music==true && MusicSettings::isBackgrHolderMusic()==false)
+    else if (play_music==true && MusicSettings::isBackgrHolderMusic()==true)//false)
     {
         //MusicSettings::turnOnMusic();
        // MusicSettings::isBackgrHolderMusic()==true;

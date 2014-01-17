@@ -60,8 +60,8 @@ private:
     void do_turnOnMusic(void)
     {
         _music_on=true;
-        //CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
-                //("music/math_is_fun.ogg", true);
+//        CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
+//                ("music/silly_fun.ogg", true);
     }
     void do_turnOffMusic(void)
     {

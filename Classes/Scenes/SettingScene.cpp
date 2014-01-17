@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "Localization/CCLocalizedString.h"
 #include "GameInfo.h"
+#include "Core/MusicSettings.h"
 
 SettingScene::SettingScene()
 {
@@ -71,38 +72,38 @@ bool SettingScene::init()
 
     ///////////////////////////////////////////////////////////////////
     //Music Button
-    CCSprite* music_logo = CCSprite::create("settings-menu/music.png");
+    _music_logo = CCSprite::create("settings-menu/music.png");
 
     AnimatedMenuItem* music_button = AnimatedMenuItem::create(
-                music_logo, this, menu_selector(SettingScene::onMusicClicked));
+                _music_logo, this, menu_selector(SettingScene::onMusicClicked));
 
-    music_button->addChild(music_logo);
+    music_button->addChild(_music_logo);
 
     CCPoint position_music(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.35,
                                   ORIGIN.y + VISIBLE_SIZE.height - 300/SCALE));
     music_button->setPosition(position_music);
-    music_logo->setPosition(ccp(music_logo->getContentSize().width/2,
-                            music_logo->getContentSize().height/2));
-    music_logo->setColor(getMusicColor());
+    _music_logo->setPosition(ccp(_music_logo->getContentSize().width/2,
+                            _music_logo->getContentSize().height/2));
+    _music_logo->setColor(getMusicColor());
 
     main_menu->addChild(music_button);
 
     //////////////////////////////////////////////////////////////////
 
     //Sound Button
-    CCSprite* sound_logo = CCSprite::create("settings-menu/sound.png");
+    _sound_logo = CCSprite::create("settings-menu/sound.png");
 
     AnimatedMenuItem* sound_button = AnimatedMenuItem::create(
-                sound_logo, this, menu_selector(SettingScene::onSoundClicked));
+                _sound_logo, this, menu_selector(SettingScene::onSoundClicked));
 
-    sound_button->addChild(sound_logo);
+    sound_button->addChild(_sound_logo);
 
     CCPoint position_sound(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.65,
                                   ORIGIN.y + VISIBLE_SIZE.height - 300/SCALE));
     sound_button->setPosition(position_sound);
-    sound_logo->setPosition(ccp(sound_logo->getContentSize().width/2,
-                            sound_logo->getContentSize().height/2));
-    sound_logo->setColor(getSoundColor());
+    _sound_logo->setPosition(ccp(_sound_logo->getContentSize().width/2,
+                            _sound_logo->getContentSize().height/2));
+    _sound_logo->setColor(getSoundColor());
 
     main_menu->addChild(sound_button);
 
@@ -206,11 +207,29 @@ void SettingScene::hideEverything(cocos2d::CCCallFunc *callback)
 }
 void SettingScene::onMusicClicked(CCObject*)
 {
+    if (MusicSettings::isMusicOn())
+    {
+        MusicSettings::turnOffMusic();
+    }
+    else
+    {
+        MusicSettings::turnOnMusic();
+    }
 
+    _music_logo->setColor(getMusicColor());
 }
 void SettingScene::onSoundClicked(CCObject*)
 {
+    if (MusicSettings::isSoundEffectOn())
+    {
+        MusicSettings::turnOffSoundEffect();
+    }
+    else
+    {
+        MusicSettings::turnOnSoundEffect();
+    }
 
+    _sound_logo->setColor(getSoundColor());
 }
 void SettingScene::onResetClicked(CCObject*)
 {
@@ -227,9 +246,15 @@ void SettingScene::onDevelopersClicked(CCObject*)
 
 const ccColor3B SettingScene::getSoundColor() const
 {
-    return GameInfo::getInstance()->getPositiveColor();
+    if (MusicSettings::isSoundEffectOn())
+        return GameInfo::getInstance()->getPositiveColor();
+    else
+        return GameInfo::getInstance()->getNegativeColor();
 }
 const ccColor3B SettingScene::getMusicColor() const
 {
-    return GameInfo::getInstance()->getPositiveColor();
+    if(MusicSettings::isMusicOn())
+        return GameInfo::getInstance()->getPositiveColor();
+    else
+        return GameInfo::getInstance()->getNegativeColor();
 }
