@@ -18,6 +18,10 @@ class GameInfo
 
        const ccColor3B& getCloseColor();
        const ccColor3B& getTitleColor();
+
+       const ccColor3B& getNegativeColor();
+       const ccColor3B& getPositiveColor();
+
    private:
        GameInfo( );
        void setInfo();
@@ -35,5 +39,8 @@ class GameInfo
 
        ccColor3B _close_color;
        ccColor3B _title_color;
+
+       ccColor3B _negative_color;
+       ccColor3B _positive_color;
 };
 #endif // GAMEINFO_H

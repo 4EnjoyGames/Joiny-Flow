@@ -26,6 +26,9 @@ void GameInfo::setInfo()
     _close_color = ccc3(138,141,142);
 
     _title_color = ccc3(11,216,224);
+
+    _negative_color = ccc3(255,0,0);
+    _positive_color = ccc3(0,255,0);
 }
 
 GameInfo* GameInfo::getInstance( )
@@ -76,4 +79,13 @@ const ccColor3B& GameInfo::getCloseColor()
 const ccColor3B &GameInfo::getTitleColor()
 {
     return _title_color;
+}
+const ccColor3B& GameInfo::getNegativeColor()
+{
+    return _negative_color;
+}
+
+const ccColor3B& GameInfo::getPositiveColor()
+{
+    return _positive_color;
 }

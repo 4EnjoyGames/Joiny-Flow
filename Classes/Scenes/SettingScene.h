@@ -27,6 +27,15 @@ private:
     }
     void doGoBack();
     void hideEverything(cocos2d::CCCallFunc *callback);
+
+    void onMusicClicked(CCObject*);
+    void onSoundClicked(CCObject*);
+    void onResetClicked(CCObject*);
+    void onRestorClicked(CCObject*);
+    void onDevelopersClicked(CCObject*);
+
+    const ccColor3B getSoundColor() const;
+    const ccColor3B getMusicColor() const;
 };
 
 #endif // SETTINGSCENE_H
