@@ -29,16 +29,13 @@ CCScene* Loading::scene()
 
 void Loading::drawEverything(float)
 {
-    //Get the size of the screen we can see
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    //Get the screen start of cordinates
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
-    CCLabelTTF* loading = CCLabelTTF::create("Loading...", "Arial", 150);
-    this->addChild(loading);
+    CCSprite* logo = CCSprite::create("x4Enjoy.png");
+    this->addChild(logo);
 
-    loading->setPosition(ccp(origin.x + visibleSize.width/2,
+    logo->setPosition(ccp(origin.x + visibleSize.width/2,
                              origin.y + visibleSize.height/2));
 
 #ifdef CC_WIN8_METRO
@@ -62,8 +59,7 @@ void Loading::hideLogo()
 
 void Loading::openMenu()
 {
-    CCDirector::sharedDirector()->replaceScene(MainScene::scene());
-    //CCDirector::sharedDirector()->replaceScene(SelectLevel::scene(RW::getLevelManager().getCollection(1)));
+    CCDirector::sharedDirector()->replaceScene(MainScene::scene());   
 }
 
 void Loading::loadingCallBack(CCObject *)
@@ -292,7 +288,7 @@ void Loading::loadAllAsync(float)
 
 bool Loading::init()
 {
-    if ( !CCLayer::init() )
+    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
         return false;
     }

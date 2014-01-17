@@ -214,6 +214,10 @@ void LevelScene::doOpenNextLevel()
     CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_next_level));
 
 }
+void LevelScene::onPreviousLevelClicked(CCObject*)
+{
+
+}
 
 bool LevelScene::init()
 {
@@ -289,6 +293,21 @@ bool LevelScene::init()
     _flow_game->setAnchorPoint(ccp(0, 0.5f));
     _flow_game->setPosition(ccp(ORIGIN.x,ORIGIN.y+VISIBLE_SIZE.height / 2));
     this->addChild(_flow_game);
+
+    //3 buttons
+    //previous level
+
+//    SpritesLoader  _col_spl = GraphicsManager::getLoaderFor(
+//                0,
+//                "level_novigation.plist",
+//                "level_novigation.png");
+//    _col_spl->inject();
+//    CCSprite* prev_level = _col_spl->loadSprite("prev_level.png");
+//    AnimatedMenuItem* prev_level_button = AnimatedMenuItem::create(
+//                    prev_level,
+//                    this,
+//                    menu_selector(LevelScene::onPreviousLevelClicked));
+//    this->addChild(prev_level_button);
 
 
     //progress bar title

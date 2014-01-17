@@ -36,6 +36,8 @@ private:
     void doGoToCollection();
     void doOpenNextLevel();
 
+    void onPreviousLevelClicked(CCObject*);
+
     FlowScore _last_score;
     FlowScore _bronze;
     FlowScore _silver;

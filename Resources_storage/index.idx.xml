@@ -18,6 +18,10 @@
 	<file>
 		<name>save_stars.png</name>
 	</file>
+	<file>
+		<name>x4Enjoy.png</name>
+	</file>
+	
 	
 	<file>
 		<name>puzzle_5x5.ad</name>
@@ -48,6 +52,7 @@
 	<file>
 		<name>level-menu/level_buttons.plist.xml</name>
 	</file>
+	
 	
 	<file>
 		<name>Localized_ua</name>

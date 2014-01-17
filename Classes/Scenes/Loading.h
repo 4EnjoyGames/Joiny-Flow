@@ -4,7 +4,7 @@
 #include <queue>
 #include <string>
 //#include "../Core/CCMutex.h"
-class Loading : public CCLayer
+class Loading : public CCLayerColor
 {
 private:
     static const unsigned int SPLASH_SCREEN_TIME = 1;
