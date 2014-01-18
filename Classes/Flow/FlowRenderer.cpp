@@ -135,7 +135,7 @@ FlowRenderer::ColorVec FlowRenderer::getDefaultColors()
 //    v[11] = ccc3(1,10,131); //Very dark blue
 
     v[0] = ccc3(255, 44, 109); //Red
-    v[1] = ccc3(44, 248, 55); //Blue
+    v[1] = ccc3(44, 159, 248); //Blue
     v[2] = ccc3(59,255,44); //Green
     v[3] = ccc3(255,248,44); //Yellow
     v[4] = ccc3(255,54,44); //Pink

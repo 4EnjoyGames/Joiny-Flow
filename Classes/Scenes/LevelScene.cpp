@@ -298,16 +298,15 @@ bool LevelScene::init()
 
     /////////////////////////////////////////////////////////////////
 
-    CCMenu* buttons_menu = CCMenu::create();
+    SpritesLoader  buttons_spl = GraphicsManager::getLoaderFor(
+                0,
+                "level-menu/level_novigation.plist",
+                "level-menu/level_novigation.png");
+
+    MenuSpriteBatch* buttons_menu = MenuSpriteBatch::create(buttons_spl);
     buttons_menu->setPosition(ORIGIN);
     //3 buttons
     //previous level
-
-    SpritesLoader  buttons_spl = GraphicsManager::getLoaderFor(
-                this,
-                "level-menu/level_novigation.plist",
-                "level-menu/level_novigation.png");
-    buttons_spl->inject();
 
     CCSprite* prev_level_logo = buttons_spl->loadSprite("prev_level.png");
     AnimatedMenuItem* prev_level_button = AnimatedMenuItem::create(
@@ -315,18 +314,12 @@ bool LevelScene::init()
                     this,
                     menu_selector(LevelScene::onPreviousLevelClicked));
 
-
-    //prev_level_button->addChild(prev_level_logo);
-
-    prev_level_button->setPosition(ccp(500,500));
-    prev_level_logo->setPosition(ccp(prev_level_logo->getContentSize().width/2,
-                                     prev_level_logo->getContentSize().height/2));
-
-    buttons_menu->addChild(prev_level_button);
+    prev_level_button->setPosition(ccp(ORIGIN.x+100,ORIGIN.y+100));
+    buttons_menu->menu()->addChild(prev_level_button);
     this->addChild(buttons_menu);
-    //this->addChild(prev_level_button);
 
 
+    //////////////////////////////////////////////////////////////////////////
 
     //progress bar title
     CCSprite* progress = CCSprite::create("level-menu/progress_bar_title.png");
