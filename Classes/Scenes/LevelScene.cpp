@@ -239,6 +239,10 @@ void LevelScene::onNextLevelClicked(CCObject*)
 {
     onNextLevel();
 }
+void LevelScene::onReloadLevelClicked(CCObject*)
+{
+
+}
 
 bool LevelScene::init()
 {
@@ -337,6 +341,17 @@ bool LevelScene::init()
     prev_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 - 100/SCALE,
                                        ORIGIN.y + 300/SCALE));
     buttons_menu->menu()->addChild(prev_level_button);
+
+    //reload
+    CCSprite* reload_level_logo = buttons_spl->loadSprite("reload_level.png");
+    AnimatedMenuItem* reload_level_button = AnimatedMenuItem::create(
+                    reload_level_logo,
+                    this,
+                    menu_selector(LevelScene::onReloadLevelClicked));
+
+    reload_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 ,
+                                       ORIGIN.y + 300/SCALE));
+    buttons_menu->menu()->addChild(reload_level_button);
 
 
     //next level
