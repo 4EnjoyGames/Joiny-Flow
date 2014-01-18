@@ -28,6 +28,8 @@ public:
 
     FlowGame(const FlowTable& table, DelegatePtr delegate);
     static FlowGame* create(const FlowTable& table, DelegatePtr delegate);
+    void cleanTheTrace();
+
 private:
     FlowRenderer* _renderer;
     const FlowTable* _table;
@@ -51,10 +53,10 @@ private:
     void disconnectPoints(FlowPointState& a, FlowPointState& b);
     void updateHighlighted();
     void removeHighlight(FlowPointState &st);
-    void restoreTraces();
+
     bool checkWinCondition();
     void updateActiveCircle(cocos2d::CCPoint p);
-
+    void restoreTraces();
 
     FlowPoint touchToCellCordinates(cocos2d::CCPoint p);
     cocos2d::CCPoint touchToLocalCords(cocos2d::CCTouch* touch);

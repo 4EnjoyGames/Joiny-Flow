@@ -241,7 +241,7 @@ void LevelScene::onNextLevelClicked(CCObject*)
 }
 void LevelScene::onReloadLevelClicked(CCObject*)
 {
-
+    _flow_game->cleanTheTrace();
 }
 
 bool LevelScene::init()

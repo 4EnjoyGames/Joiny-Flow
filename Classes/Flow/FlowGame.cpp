@@ -534,6 +534,11 @@ bool FlowGame::checkWinCondition()
 
     return win;
 }
+void FlowGame::cleanTheTrace()
+{
+
+}
+
 void FlowGame::traceDebug(std::ostream& ss, const Traces& tr) const
 {
     //    for(unsigned int c=0; c<_table->getColorsNumber(); ++c)
