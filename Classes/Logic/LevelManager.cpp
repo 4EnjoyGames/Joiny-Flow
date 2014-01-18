@@ -45,6 +45,17 @@ const JoinyLevel* LevelManager::getNextLevel(const JoinyLevel* level) const
     return nullptr;
 }
 
+const JoinyLevel* LevelManager::getPreviousLevel(const JoinyLevel* level) const
+{
+    const JoinyCollection* col = level->getCollection();
+    JoinyLevelID id = level->getLevelId()-1;
+    if(level->getLevelId()>1)
+    {
+        return col->getLevel(id);
+    }
+    return nullptr;
+}
+
 void LevelManager::onLevelFinished(const JoinyLevel* level, const Score score)
 {
     if(level->getHighScore() < score)

@@ -35,8 +35,10 @@ private:
 
     void doGoToCollection();
     void doOpenNextLevel();
+    void doOpenPreviousLevel();
 
     void onPreviousLevelClicked(CCObject*);
+    void onNextLevelClicked(CCObject*);
 
     FlowScore _last_score;
     FlowScore _bronze;
@@ -49,6 +51,7 @@ private:
 
     const JoinyLevel* _current_level;
     const JoinyLevel* _next_level;
+    const JoinyLevel* _previous_level;
 
     CCProgressTimer* _progress_timer;
     float _procc;

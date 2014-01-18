@@ -214,9 +214,30 @@ void LevelScene::doOpenNextLevel()
     CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_next_level));
 
 }
+void LevelScene::doOpenPreviousLevel()
+{
+    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_previous_level));
+
+}
 void LevelScene::onPreviousLevelClicked(CCObject*)
 {
+    const JoinyLevel* previous_level = RW::getLevelManager().getPreviousLevel(_current_level);
+    if(previous_level != nullptr)
+    {
+        _previous_level = previous_level;
+        this->hideEverything(CCCallFunc::create(
+                                 this, callfunc_selector(LevelScene::doOpenPreviousLevel)));
+    }
+    else
+    {
+        this->hideEverything(CCCallFunc::create(
+                                 this, callfunc_selector(LevelScene::doGoToCollection)));
 
+    }
+}
+void LevelScene::onNextLevelClicked(CCObject*)
+{
+    onNextLevel();
 }
 
 bool LevelScene::init()
@@ -305,17 +326,31 @@ bool LevelScene::init()
 
     MenuSpriteBatch* buttons_menu = MenuSpriteBatch::create(buttons_spl);
     buttons_menu->setPosition(ORIGIN);
-    //3 buttons
-    //previous level
 
+    //previous level
     CCSprite* prev_level_logo = buttons_spl->loadSprite("prev_level.png");
     AnimatedMenuItem* prev_level_button = AnimatedMenuItem::create(
                     prev_level_logo,
                     this,
                     menu_selector(LevelScene::onPreviousLevelClicked));
 
-    prev_level_button->setPosition(ccp(ORIGIN.x+100,ORIGIN.y+100));
+    prev_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 - 100/SCALE,
+                                       ORIGIN.y + 300/SCALE));
     buttons_menu->menu()->addChild(prev_level_button);
+
+
+    //next level
+    CCSprite* next_level_logo = buttons_spl->loadSprite("next_level.png");
+    AnimatedMenuItem* next_level_button = AnimatedMenuItem::create(
+                    next_level_logo,
+                    this,
+                    menu_selector(LevelScene::onNextLevelClicked));
+
+    next_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
+                                       ORIGIN.y + 300/SCALE));
+    buttons_menu->menu()->addChild(next_level_button);
+
+
     this->addChild(buttons_menu);
 
 
