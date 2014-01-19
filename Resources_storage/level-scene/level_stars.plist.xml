@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>level_stars.png</texture>
+	<sheet>level_stars.plist</sheet>
+	
+	<image>black_star.png</image>
+	<image>color_star.png</image>
+</spritesheet>

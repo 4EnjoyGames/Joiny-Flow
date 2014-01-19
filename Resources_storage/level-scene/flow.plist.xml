@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>flow.png</texture>
+	<sheet>flow.plist</sheet>
+	
+	<image>background.png</image>
+	<image>border.png</image>
+	<image>circle.png</image>
+	<image>connection.png</image>
+</spritesheet>

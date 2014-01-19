@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>level_novigation.png</texture>
+	<sheet>level_novigation.plist</sheet>
+	
+	<image>next_level.png</image>
+	<image>prev_level.png</image>
+	<image>reload_level.png</image>
+</spritesheet>
