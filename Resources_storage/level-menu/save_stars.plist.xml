@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>save_stars.png</texture>
+	<sheet>save_stars.plist</sheet>
+	
+	<image>stars_1.png</image>
+	<image>stars_2.png</image>
+	<image>stars_3.png</image>
+	<image>stars_none.png</image>
+</spritesheet>

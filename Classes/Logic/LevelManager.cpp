@@ -115,6 +115,8 @@ void LevelManager::saveGame()
     std::stringstream ss(std::ios::out | std::ios::binary);
     OutputBinaryStream os(ss,BinaryStream::MaxProtocolVersion);
 
+    os << uint32_t(_collections.size());
+
     for(auto& i : _collections)
     {
         CollectionPtr col = i.second;
@@ -138,30 +140,36 @@ void LevelManager::loadGame()
         std::ifstream iss(_save_path, std::ios::in | std::ios::binary);
         InputBinaryStream is(iss);
 
-        uint32_t col_id=0;
-        uint32_t levels_num=0;
-        is >> col_id >> levels_num;
+        uint32_t collections_number = 0;
+        is >> collections_number;
 
-        CollectionMap::iterator it = _collections.find(col_id);
-        if(it == _collections.end())
-            return;
-        CollectionPtr col = _collections[col_id];
-
-        if(col->getLevelsNumber() != levels_num)
-            return;
-
-        for(unsigned int i=0; i<levels_num; ++i)
+        for(uint32_t i = 0; i<collections_number; ++i)
         {
-            uint32_t level_id=0;
-            uint32_t highscore=0;
+            uint32_t col_id=0;
+            uint32_t levels_num=0;
+            is >> col_id >> levels_num;
 
-            is >> level_id >> highscore;
-            if(level_id > levels_num)
+            CollectionMap::iterator it = _collections.find(col_id);
+            if(it == _collections.end())
+                return;
+            CollectionPtr col = _collections[col_id];
+
+            if(col->getLevelsNumber() != levels_num)
                 return;
 
-            JoinyLevel* level = col->getLevel(level_id);
-            level->_highscore = highscore;
+            for(unsigned int i=0; i<levels_num; ++i)
+            {
+                uint32_t level_id=0;
+                uint32_t highscore=0;
 
+                is >> level_id >> highscore;
+                if(level_id > levels_num)
+                    return;
+
+                JoinyLevel* level = col->getLevel(level_id);
+                level->_highscore = highscore;
+
+            }
         }
 
     }
