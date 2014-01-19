@@ -33,6 +33,7 @@ private:
     void onScoreChanged(const FlowScore);
     void onWin();
 
+    void doReloadLevel();
     void doGoToCollection();
     void doOpenNextLevel();
     void doOpenPreviousLevel();

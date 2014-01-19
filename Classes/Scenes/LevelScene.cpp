@@ -79,8 +79,8 @@ private:
 
 
         SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
-                                                               Language::localizeFileName("level_end_buttons.plist").c_str(),
-                                                               Language::localizeFileName("level_end_buttons.png").c_str());
+                                                               Language::localizeFileName("level_end/level_end_buttons.plist").c_str(),
+                                                               Language::localizeFileName("level_end/level_end_buttons.png").c_str());
         MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
         menu->setPosition(ccp(0,0));
         menu->setAnchorPoint(ccp(0,0));
@@ -203,6 +203,11 @@ void LevelScene::onNextLevel()
 
     }
 }
+void LevelScene::doReloadLevel()
+{
+    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_current_level));
+
+}
 
 void LevelScene::doGoToCollection()
 {
@@ -241,7 +246,9 @@ void LevelScene::onNextLevelClicked(CCObject*)
 }
 void LevelScene::onReloadLevelClicked(CCObject*)
 {
-    _flow_game->cleanTheTrace();
+    this->hideEverything(CCCallFunc::create(
+                             this, callfunc_selector(LevelScene::doReloadLevel)));
+
 }
 
 bool LevelScene::init()
@@ -325,8 +332,8 @@ bool LevelScene::init()
 
     SpritesLoader  buttons_spl = GraphicsManager::getLoaderFor(
                 0,
-                "level-menu/level_novigation.plist",
-                "level-menu/level_novigation.png");
+                "level-scene/level_novigation.plist",
+                "level-scene/level_novigation.png");
 
     MenuSpriteBatch* buttons_menu = MenuSpriteBatch::create(buttons_spl);
     buttons_menu->setPosition(ORIGIN);
@@ -372,14 +379,14 @@ bool LevelScene::init()
     //////////////////////////////////////////////////////////////////////////
 
     //progress bar title
-    CCSprite* progress = CCSprite::create("level-menu/progress_bar_title.png");
+    CCSprite* progress = CCSprite::create("level-scene/progress_bar_title.png");
     progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -200/SCALE,
                               ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
     this->addChild(progress);
 
 
     _procc = 0;
-    _progress_timer = CCProgressTimer::create(CCSprite::create("level-menu/progress_bar.png") );
+    _progress_timer = CCProgressTimer::create(CCSprite::create("level-scene/progress_bar.png") );
     if ( _progress_timer != NULL )
     {
         _progress_timer->setType(kCCProgressTimerTypeBar);
@@ -397,8 +404,8 @@ bool LevelScene::init()
     //Get the sprites loader
     //stars
     _spl = GraphicsManager::getLoaderFor(this,
-                                                      "level_stars.plist",
-                                                      "level_stars.png");
+                                                      "level-scene/level_stars.plist",
+                                                      "level-scene/level_stars.png");
     _spl->inject();
 
 

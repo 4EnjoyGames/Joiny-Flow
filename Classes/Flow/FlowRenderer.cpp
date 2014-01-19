@@ -7,8 +7,8 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
 {
     //Get the sprites loader
     _spl = GraphicsManager::getLoaderFor(this,
-                                                      "flow.plist",
-                                                      "flow.png");
+                                                      "level-scene/flow.plist",
+                                                      "level-scene/flow.png");
     _spl->inject();
 
     CCSprite* test_texture = _spl->loadSprite("background.png");

@@ -154,8 +154,8 @@ bool SelectCollection::init()
     //Create menu with collections
     _col_spl = GraphicsManager::getLoaderFor(
                 0,
-                "collection_button.plist",
-                "collection_button.png");
+                "collection-menu/collection_button.plist",
+                "collection-menu/collection_button.png");
 
 
 

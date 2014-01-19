@@ -197,13 +197,13 @@ bool SelectLevel::init()
     //Create menu with collections
     _col_spl = GraphicsManager::getLoaderFor(
                 0,
-                "level_buttons.plist",
-                "level_buttons.png");
+                "level-menu/level_buttons.plist",
+                "level-menu/level_buttons.png");
     _buttons_menu = MenuSpriteBatch::create(_col_spl);
 
     _spl = GraphicsManager::getLoaderFor(_buttons_menu,
-                                                      "save_stars.plist",
-                                                      "save_stars.png");
+                                                      "level-menu/save_stars.plist",
+                                                      "level-menu/save_stars.png");
     _spl->inject();
 
 

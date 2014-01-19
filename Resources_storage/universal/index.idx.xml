@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <directory>
 	<file>
-		<name>save_stars.plist.xml</name>
+		<name>back_button.png</name>
 	</file>
 	<file>
-		<name>level_buttons.plist.xml</name>
+		<name>game_background.png</name>
 	</file>
-	
-	
-	
 </directory>

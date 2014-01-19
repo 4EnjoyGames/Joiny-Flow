@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<directory>
+	<file>
+		<name>flow.plist</name>
+	</file>
+	<file>
+		<name>flow.png</name>
+	</file>
+	<file>
+		<name>progress_bar.png</name>
+	</file>
+	<file>
+		<name>progress_bar_title.png</name>
+	</file>
+	<file>
+		<name>level_novigation.plist</name>
+	</file>
+	<file>
+		<name>level_novigation.png</name>
+	</file>
+	<file>
+		<name>level_stars.plist</name>
+	</file>
+	<file>
+		<name>level_stars.png</name>
+	</file>
+	
+	
+</directory>

@@ -16,10 +16,9 @@ CCMenu* BackButton::start(CCLayer *layer, functionPtr function)
     const float SCALE = Screen::getScaleFactor();
 
     //Back Button
-    CCSprite* back_logo = CCSprite::create("back_button.png");
+    CCSprite* back_logo = CCSprite::create("universal/back_button.png");
     AnimatedMenuItem* back_button= AnimatedMenuItem::create(
                 back_logo, this, menu_selector(BackButton::doAction));
-    back_logo = CCSprite::create("back_button.png");
 
     CCPoint position_bb(ORIGIN.x + 120/SCALE,
                         ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE);
