@@ -114,18 +114,18 @@ int main()
 {
     srand(time(0));
 
-    unsigned int arr_size = 2;
-    unsigned int min_joiny = 5;
-    std::vector<unsigned int> w_h_array;
-    std::vector<string> collection_names;
-    for (unsigned int i=0; i<arr_size; ++i)
-    {
-        collection_names[i] = min_joiny + 'x' + min_joiny;
+//    unsigned int arr_size = 2;
+    unsigned int joiny_size = 5;
+//    std::vector<unsigned int> w_h_array;
+//    std::vector<string> collection_names;
+//    for (unsigned int i=0; i<arr_size; ++i)
+//    {
+//        collection_names[i] = min_joiny + 'x' + min_joiny;
 
-        w_h_array.push_back(min_joiny);
-        ++min_joiny;
+//        w_h_array.push_back(min_joiny);
+//        ++min_joiny;
 
-    }
+//    }
     //unsigned int width = w_h_array[0];
     //unsigned int height = w_h_array[0];
 
@@ -143,77 +143,70 @@ int main()
     unsigned int max = 4;
     unsigned int min = 3;
 
-    for(unsigned int j=0; j<w_h_array.size(); ++j)
+    generated = 0;
+    good = 0;
+
+    std::set<JoinyPuzzle> good_tasks;
+
+    while(good_tasks.size() < N)
     {
-        generated = 0;
-        good = 0;
 
-        std::set<JoinyPuzzle> good_tasks;
-
-        while(good_tasks.size() < N)
+        FlowTask t = generate(joiny_size,joiny_size);
+        if(isGooTask(t, N))
         {
+            const unsigned int colors = min + (rand() % (unsigned int)(max - min + 1));
+                    //rand()%(t.size()-1 / 2) + 1;
+            JoinyTask task = flowToJoiny(t, colors);
+            JoinyInfo info_old = solveJoiny(task, joiny_size, joiny_size);
 
-            if(j==1 && good_tasks.size()>=45)
+            JoinyTask task_origin = flowToJoinyStaightforward(t);
+            JoinyInfo info_origin = solveJoiny(task_origin,
+                                               joiny_size,
+                                               joiny_size);
+
+            JoinyInfo info = mergeInfo(info_old, info_origin);
+
+            if(info.getGold() > 100000)
             {
-                int a=2;
-                a++;
+                std::cout << "Bug!!" << endl;
             }
-
-            FlowTask t = generate(w_h_array[j],w_h_array[j]);
-            if(isGooTask(t, N))
+            else if(isGoodJoiny(task, info))
             {
-                const unsigned int colors = min + (rand() % (unsigned int)(max - min + 1));
-                        //rand()%(t.size()-1 / 2) + 1;
-                JoinyTask task = flowToJoiny(t, colors);
-                JoinyInfo info_old = solveJoiny(task, w_h_array[j], w_h_array[j]);
 
-                JoinyTask task_origin = flowToJoinyStaightforward(t);
-                JoinyInfo info_origin = solveJoiny(task_origin, w_h_array[j], w_h_array[j]);
+                std::sort(task.begin(), task.end());
 
-                JoinyInfo info = mergeInfo(info_old, info_origin);
-
-                if(info.getGold() > 100000)
-                {
-                    std::cout << "Bug!!" << endl;
-                }
-                else if(isGoodJoiny(task, info))
-                {
-
-                    std::sort(task.begin(), task.end());
-
-                    JoinyPuzzle puzzle(task, info);
-                    //unsigned int good_size = good_tasks.size();
-                    good_tasks.insert(puzzle);
-                    good++;
+                JoinyPuzzle puzzle(task, info);
+                good_tasks.insert(puzzle);
+                good++;
 
 
-                }
             }
-            generated++;
-            if(generated % 10 == 0)
-                tabulate(generated, good, good_tasks.size());
         }
-
-        tabulate(generated, good, good_tasks.size());
-
-        for(ColorsMap::iterator it = colors.begin(); it!= colors.end(); ++it)
-        {
-            if(it->second != 0)
-                cout << "Colors " << it->first << ": " << it->second << endl;
-        }
-
-        std::vector<JoinyPuzzle> res(good_tasks.begin(), good_tasks.end());
-        std::random_shuffle(res.begin(), res.end());
-
-        std::stringstream fname;
-        fname << "puzzle_" << w_h_array[j] << "x" << w_h_array[j] << ".ad";
-
-        std::ofstream file;
-        file.open(fname.str().c_str(), ios::out | ios::binary);
-        OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
-
-        os << res;
+        generated++;
+        if(generated % 10 == 0)
+            tabulate(generated, good, good_tasks.size());
     }
+
+    tabulate(generated, good, good_tasks.size());
+
+    for(ColorsMap::iterator it = colors.begin(); it!= colors.end(); ++it)
+    {
+        if(it->second != 0)
+            cout << "Colors " << it->first << ": " << it->second << endl;
+    }
+
+    std::vector<JoinyPuzzle> res(good_tasks.begin(), good_tasks.end());
+    std::random_shuffle(res.begin(), res.end());
+
+    std::stringstream fname;
+    fname << "puzzle_" << joiny_size << "x" << joiny_size << ".ad";
+
+    std::ofstream file;
+    file.open(fname.str().c_str(), ios::out | ios::binary);
+    OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
+
+    os << res;
+
     //tabulate(generated, good, good_tasks.size());
 
 //    for(ColorsMap::iterator it = colors.begin(); it!= colors.end(); ++it)

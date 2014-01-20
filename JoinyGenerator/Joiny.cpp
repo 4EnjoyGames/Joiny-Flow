@@ -391,12 +391,43 @@ JoinyTask flowToJoinyStaightforward(const FlowTask& task)
     return res;
 }
 
+const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap)
+{
+    // 5 -1
+    //6 -0
+    //7 -0
+    //8 -1
+    //int min_rand = mymap.begin()->second;
+    std::map<unsigned int,unsigned int>::iterator min_it = mymap.begin();
+
+    for (std::map<unsigned int,unsigned int>::iterator it = mymap.begin();
+         it != mymap.end();
+         ++it)
+    {
+        if(min_it->second > it->second)
+            min_it = it;
+
+    }
+
+    min_it->second = ++ (min_it->second);
+
+    return min_it->first;
+}
+
 JoinyTask flowToJoiny(const FlowTask& task, const unsigned int colors)
 {
+    std::map<unsigned int,unsigned int> mymap;
+    for (unsigned int j=0; j<colors; ++j)
+    {
+        mymap.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+
+
     JoinyTask res;
     for(unsigned int i=0; i<task.size(); ++i)
     {
-        unsigned int color = rand() % colors;
+        //unsigned int color = rand() % colors;
+        unsigned int color = getColor(mymap);
         res.push_back(JoinyPair(task[i], color));
     }
     return res;

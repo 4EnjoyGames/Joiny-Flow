@@ -23,7 +23,7 @@ void GameInfo::setInfo()
 
     _level_number = 150;
 
-    _close_color = ccc3(138,141,142);
+    _close_color = ccc3(170,170,170);
 
     _title_color = ccc3(11,216,224);
 

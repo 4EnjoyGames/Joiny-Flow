@@ -86,16 +86,8 @@ void SelectLevel::onLevelSelect(CCObject* sender)
 AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                                                const SpritesLoader& spl)
 {
-
-    const CCPoint ORIGIN = Screen::getOrigin();
-    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
-
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
-
-    std::stringstream level_number;
-    level_number << level->getLevelId();
-
+    JoinyLevelID joiny_level_id = level->getLevelId();
 
 
     ccColor3B openLevel = _current_collection->getCollectionColor();
@@ -116,7 +108,9 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                     this,
                     menu_selector(SelectLevel::onLevelSelect));
 
-    CCLabelTTF* label = CCLabelTTF::create(level_number.str().c_str(), "fonts/Fredoka One.ttf", 60/scaled);
+    CCLabelTTF* label = CCLabelTTF::create(std::to_string(joiny_level_id).c_str(),
+                                           "fonts/Fredoka One.ttf",
+                                           60/SCALE);
     item->addChild(label);
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
     if(_scale==0)
