@@ -253,7 +253,7 @@ void FlowRenderer::createBackground()
             }
 
 
-            if(y!=height-1)
+            if(x!=height-1)
             {
                 CCSprite* border_right = _spl->loadSprite("border_normal.png");
                 border_right->setRotation(90.0f);
