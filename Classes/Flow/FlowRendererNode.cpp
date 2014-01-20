@@ -73,6 +73,7 @@ void FlowRendererNode::createCircle()
 {
     if(_circle_sprite == 0)
     {
+
         _circle_sprite = _parent->createSprite("circle.png");
         _circle_sprite->setPosition(_parent->getNodePosition(_point->getCordinates()));
         _circle_sprite->setColor(_parent->getRenderColor(_point->getLineColor()));

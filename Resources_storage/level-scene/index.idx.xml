@@ -17,6 +17,10 @@
 	<file>
 		<name>flow.plist.xml</name>
 	</file>
+	<file>
+		<name>flow2.plist.xml</name>
+	</file>
+	
 	
 	
 </directory>

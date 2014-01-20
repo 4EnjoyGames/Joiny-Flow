@@ -319,11 +319,11 @@ bool LevelScene::init()
     _flow_game = FlowGame::create(table, FlowGame::DelegatePtr(new FlowDelegate(this)));
     CCSize render_size = _flow_game->getContentSize();
 
-    _flow_game->setScale(MIN(VISIBLE_SIZE.width / render_size.width,
-                         VISIBLE_SIZE.width / render_size.height));
+    _flow_game->setScale(MIN(VISIBLE_SIZE.width / (render_size.width),
+                         VISIBLE_SIZE.width / (render_size.height+60/SCALE) ));
 
     _flow_game->setAnchorPoint(ccp(0, 0.5f));
-    _flow_game->setPosition(ccp(ORIGIN.x,
+    _flow_game->setPosition(ccp(ORIGIN.x + 20/SCALE,
                                 ORIGIN.y + VISIBLE_SIZE.height*0.57));
     this->addChild(_flow_game);
 
