@@ -179,7 +179,7 @@ void Loading::addAll()
 //    addSpriteToLoad(Language::localizeFileName("stop_level/stop_level_menu.png").c_str());
 //    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
 	
-
+    RW::getLevelManager().loadSettings();
     addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
 

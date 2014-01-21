@@ -3,6 +3,7 @@
 #include "Localization/CCLocalizedString.h"
 #include "GameInfo.h"
 #include "Core/MusicSettings.h"
+#include "Logic/RW.h"
 
 SettingScene::SettingScene()
 {
@@ -217,6 +218,10 @@ void SettingScene::onMusicClicked(CCObject*)
     }
 
     _music_logo->setColor(getMusicColor());
+
+
+    RW::getLevelManager().saveSettings();
+
 }
 void SettingScene::onSoundClicked(CCObject*)
 {
@@ -230,6 +235,8 @@ void SettingScene::onSoundClicked(CCObject*)
     }
 
     _sound_logo->setColor(getSoundColor());
+
+    RW::getLevelManager().saveSettings();
 }
 void SettingScene::onResetClicked(CCObject*)
 {

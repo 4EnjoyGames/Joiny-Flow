@@ -16,6 +16,10 @@ public:
     const JoinyLevel* getPreviousLevel(const JoinyLevel* level) const;
 
     void onLevelFinished(const JoinyLevel* level, const Score score);
+
+
+    void loadSettings();
+    void saveSettings();
 private:
     LevelManager();
     void onInit();
@@ -29,8 +33,8 @@ private:
     void loadGame();
 
 
-
     std::string _save_path;
+    std::string _settings_path;
 
     typedef std::map<JoinyLevelID, CollectionPtr> CollectionMap;
 

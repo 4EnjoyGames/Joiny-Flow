@@ -1,8 +1,10 @@
 #include "LevelManager.h"
+#include "Core/MusicSettings.h"
 #include "Core/FileUtils.h"
 #include <fstream>
 LevelManager::LevelManager()
-    : _save_path(FileUtils::getStorageFilePath("save.ad"))
+    : _save_path(FileUtils::getStorageFilePath("save.ad")),
+      _settings_path(FileUtils::getStorageFilePath("settings.ad"))
 {
 }
 
@@ -108,6 +110,49 @@ void LevelManager::loadLevelsInfo()
             _collections[col->_id] = col;
         }
     }
+}
+void LevelManager::saveSettings()
+{
+    std::stringstream ss(std::ios::out | std::ios::binary);
+    OutputBinaryStream os(ss,BinaryStream::MaxProtocolVersion);
+
+    os << uint32_t(static_cast<uint32_t>(MusicSettings::isSoundEffectOn()));
+    os << uint32_t(static_cast<uint32_t>(MusicSettings::isMusicOn()));
+
+    std::ofstream oss(_settings_path, std::ios::out | std::ios::binary);
+    oss.write(ss.str().c_str(), ss.str().length());
+}
+void LevelManager::loadSettings()
+{
+    if(FileUtils::isFileExists(_settings_path))
+    {
+        std::ifstream iss(_settings_path, std::ios::in | std::ios::binary);
+        InputBinaryStream is(iss);
+
+        uint32_t sound_effect = 0;
+        uint32_t music_effect = 0;
+        is >> sound_effect;
+        is >> music_effect;
+
+        if(sound_effect == 0)
+        {
+            MusicSettings::turnOffSoundEffect();
+        }
+        else
+        {
+            MusicSettings::turnOnSoundEffect();
+        }
+
+        if(music_effect == 0)
+        {
+            MusicSettings::turnOffMusic();
+        }
+        else
+        {
+            MusicSettings::turnOnMusic();
+        }
+    }
+
 }
 
 void LevelManager::saveGame()
