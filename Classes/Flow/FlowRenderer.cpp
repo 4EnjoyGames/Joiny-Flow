@@ -1,4 +1,5 @@
 #include "FlowRenderer.h"
+#include "Core/Screen.h"
 using namespace cocos2d;
 
 FlowRenderer::FlowRenderer(const FlowTable& table)
@@ -63,6 +64,8 @@ const cocos2d::CCPoint FlowRenderer::getNodePosition(const FlowPoint& pos)
     float half = _textures_size / 2;
     return CCPoint(half + _textures_size * pos.x(),
                    half + _textures_size * pos.y());
+//    return CCPoint( _textures_size * pos.x(),
+//                    _textures_size * pos.y());
 }
 
 //void FlowRenderer::drawBorder(CCSprite* img,
@@ -207,69 +210,123 @@ const cocos2d::CCPoint FlowRenderer::getNodePosition(const FlowPoint& pos)
 
 void FlowRenderer::createBackground()
 {
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
+
     unsigned int width = _table.getWidth();
     unsigned int height = _table.getHeight();
-    for(unsigned int x=0; x<width; ++x)
+
+    CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
+    tablo->setPosition(ORIGIN);
+
+    CCSize tablo_size = tablo->getContentSize();
+    CCRenderTexture* render = CCRenderTexture::create(900,
+                                                      900,
+                                                      kTexture2DPixelFormat_RGBA8888);
+
+    render->beginWithClear(0,0,0,0);
+
+    CCSprite* line = CCSprite::create("level-scene/line.png");
+    float cell_width = tablo_size.width / width;
+
+    float curr_width = cell_width;
+    for(unsigned int y=1; y<width+1; ++y)
     {
-        for(unsigned int y=0; y<height; ++y)
-        {
-            CCSprite* border = nullptr;
+            line->setPosition(this->getNodePosition(FlowPoint(0,y)));
+            curr_width+=cell_width;
+            line->visit();
 
-            if(y==0 && x==0)
-            {
-                border = _spl->loadSprite("border_angle.png");
-                border->setRotation(270.0f);
-            }
-            else if(y==0 && x==width-1)
-            {
-                border = _spl->loadSprite("border_angle.png");
-                border->setRotation(180.0f);
-            }
-            else if(x==0 && y==height-1)
-            {
-                border = _spl->loadSprite("border_angle.png");
-            }
-            else if(x==width-1 && y==height-1)
-            {
-                border = _spl->loadSprite("border_angle.png");
-                border->setRotation(90.0f);
-            }
-            else if(y==0 ||x==0 || y==0 || x==width-1 || y==height-1)
-            {
-                border = _spl->loadSprite("border_double.png");
-                if(y==0)
-                {
-                    border->setRotation(180.0f);
-                }
-                else if(x==0)
-                {
-                    border->setRotation(270.0f);
-                }
-                else if(x==width-1)
-                {
-                    border->setRotation(90.0f);
-                }
-
-            }
-
-
-            if(x!=height-1)
-            {
-                CCSprite* border_right = _spl->loadSprite("border_normal.png");
-                border_right->setRotation(90.0f);
-                border_right->setPosition(this->getNodePosition(FlowPoint(x, y)));
-            }
-            if(y!=height-1)
-            {
-                CCSprite* border_upper = _spl->loadSprite("border_normal.png");
-                //border_right->setRotation(90.0f);
-                border_upper->setPosition(this->getNodePosition(FlowPoint(x, y)));
-            }
-
-            if(border!=nullptr)
-                border->setPosition(this->getNodePosition(FlowPoint(x, y)));
-        }
     }
+    for(unsigned int x=1; x<width+1; ++x)
+    {
+            line->setPosition(this->getNodePosition(FlowPoint(x,0)));
+            line->setRotation(90.0f);
+            curr_width+=cell_width;
+            line->visit();
+
+    }
+
+
+
+    //tablo->setPosition(ccp(0,0));
+    tablo->visit();
+
+    //Finish rendering
+    render->end();
+
+    //Create sprite with drawing result
+    CCSprite* res = CCSprite::createWithTexture(render->getSprite()->getTexture());
+    //res->setFlipY(true);
+    res->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
+                         ORIGIN.y + VISIBLE_SIZE.height/2 - 50/SCALE));
+    this->addChild(res);
+
+
+
+
+
+//    for(unsigned int x=0; x<width; ++x)
+//    {
+//        for(unsigned int y=0; y<height; ++y)
+//        {
+//            CCSprite* border = nullptr;
+
+//            if(y==0 && x==0)
+//            {
+//                border = _spl->loadSprite("border_angle.png");
+//                border->setRotation(270.0f);
+//            }
+//            else if(y==0 && x==width-1)
+//            {
+//                border = _spl->loadSprite("border_angle.png");
+//                border->setRotation(180.0f);
+//            }
+//            else if(x==0 && y==height-1)
+//            {
+//                border = _spl->loadSprite("border_angle.png");
+//            }
+//            else if(x==width-1 && y==height-1)
+//            {
+//                border = _spl->loadSprite("border_angle.png");
+//                border->setRotation(90.0f);
+//            }
+//            else if(y==0 ||x==0 || y==0 || x==width-1 || y==height-1)
+//            {
+//                border = _spl->loadSprite("border_double.png");
+//                if(y==0)
+//                {
+//                    border->setRotation(180.0f);
+//                }
+//                else if(x==0)
+//                {
+//                    border->setRotation(270.0f);
+//                }
+//                else if(x==width-1)
+//                {
+//                    border->setRotation(90.0f);
+//                }
+
+//            }
+
+
+//            if(x!=height-1)
+//            {
+//                CCSprite* border_right = _spl->loadSprite("border_normal.png");
+//                border_right->setRotation(90.0f);
+//                border_right->setPosition(this->getNodePosition(FlowPoint(x, y)));
+//            }
+//            if(y!=height-1)
+//            {
+//                CCSprite* border_upper = _spl->loadSprite("border_normal.png");
+//                //border_right->setRotation(90.0f);
+//                border_upper->setPosition(this->getNodePosition(FlowPoint(x, y)));
+//            }
+
+//            if(border!=nullptr)
+//                border->setPosition(this->getNodePosition(FlowPoint(x, y)));
+//        }
+//    }
 }
 
 void FlowRenderer::createNodes()

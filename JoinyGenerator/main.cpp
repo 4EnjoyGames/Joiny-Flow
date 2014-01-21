@@ -43,8 +43,16 @@ bool operator<(const JoinyPair& a, const JoinyPair& b)
 bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info)
 {
     //TODO: create constrains
-    return info.getBronze() != info.getSilver() && info.getSilver() != info.getGold();
-    return true;
+    Score precision = info.getGold()/10;
+    if(info.getBronze() + precision <= info.getSilver() &&
+            info.getSilver() <= info.getGold())
+    {
+        return true;
+    }
+    else
+        return false;
+    //return info.getBronze() != info.getSilver() && info.getSilver() != info.getGold();
+    //return true;
 }
 
 bool isGooTask(const FlowTask& task, unsigned int N)
