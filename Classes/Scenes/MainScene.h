@@ -2,8 +2,9 @@
 #define MAINSCENE_H
 #include "cocos2d-A.h"
 #include "Layers/PopUpWindow.h"
+#include "Core/DrawLayer.h"
 
-class MainScene: public CCLayerColor //CCLayer
+class MainScene: public DrawLayer //CCLayerColor //CCLayer
 {
 public:
     MainScene();

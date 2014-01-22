@@ -116,8 +116,17 @@ void LevelManager::saveSettings()
     std::stringstream ss(std::ios::out | std::ios::binary);
     OutputBinaryStream os(ss,BinaryStream::MaxProtocolVersion);
 
-    os << uint32_t(static_cast<uint32_t>(MusicSettings::isSoundEffectOn()));
-    os << uint32_t(static_cast<uint32_t>(MusicSettings::isMusicOn()));
+    bool sound = MusicSettings::isSoundEffectOn();
+    if(sound)
+        os << uint16_t(1);
+    else
+        os << uint16_t(0);
+
+    bool music = MusicSettings::isMusicOn();
+    if(music)
+        os << uint16_t(1);
+    else
+        os << uint16_t(0);
 
     std::ofstream oss(_settings_path, std::ios::out | std::ios::binary);
     oss.write(ss.str().c_str(), ss.str().length());
@@ -129,8 +138,8 @@ void LevelManager::loadSettings()
         std::ifstream iss(_settings_path, std::ios::in | std::ios::binary);
         InputBinaryStream is(iss);
 
-        uint32_t sound_effect = 0;
-        uint32_t music_effect = 0;
+        uint16_t sound_effect = 0;
+        uint16_t music_effect = 0;
         is >> sound_effect;
         is >> music_effect;
 
