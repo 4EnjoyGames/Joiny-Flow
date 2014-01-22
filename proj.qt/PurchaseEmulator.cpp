@@ -64,3 +64,14 @@ void Notification::notify(const Type t)
     cocos2d::CCLog("Notification ID %d", t);
 
 }
+#define AD_ADS_NOSIZE
+#include <ADLib/Device/ADAds_NoAds.cpp>
+cocos2d::CCSize ADAds::Platform::getBannerSize(const BannerType& type)
+{
+    cocos2d::CCSize base (468, 60);
+    if(type == "BANNER")
+        base = cocos2d::CCSize(320, 50);
+
+    float density = 1;
+    return cocos2d::CCSize(base.width*density, base.height*density);
+}

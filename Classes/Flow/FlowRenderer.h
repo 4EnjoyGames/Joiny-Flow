@@ -44,7 +44,8 @@ private:
 
     cocos2d::CCSprite* _active_circle;
 
-    SpritesLoader _spl;
+    SpritesLoader _spl_layer0;
+    SpritesLoader _spl_layer1;
     //SpritesLoader _spl2;
     //unsigned int _probe_size;
 

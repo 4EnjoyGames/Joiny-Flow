@@ -9,6 +9,8 @@ INCLUDEPATH += ../../../cocos2dx \
     ../Classes \
     ../../../CocosDenshion/include
 
+include(../libraries/ADLib/ADLib.pri)
+
 #DEFINES +=NDEBUG
 CONFIG(debug, debug|release) {
     LIBS += -L../../../../Debug.win32/ -lglew32
@@ -69,7 +71,8 @@ SOURCES += main.cpp \
     ../Classes/Scenes/SettingScene.cpp \
     ../Classes/GameInfo.cpp \
     ../Classes/BackButton.cpp \
-    ../Classes/Localization/CCLocalizedString.cpp
+    ../Classes/Localization/CCLocalizedString.cpp \
+    ../Classes/Core/DrawLayer.cpp
 
 HEADERS += \
     ../Classes/AppMacros.h \
@@ -118,6 +121,7 @@ HEADERS += \
     ../Classes/Scenes/SettingScene.h \
     ../Classes/GameInfo.h \
     ../Classes/BackButton.h \
-    ../Classes/Localization/CCLocalizedString.h
+    ../Classes/Localization/CCLocalizedString.h \
+    ../Classes/Core/DrawLayer.h
 
 

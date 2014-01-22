@@ -7,10 +7,14 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
       _active_circle(0)
 {
     //Get the sprites loader
-    _spl = GraphicsManager::getLoaderFor(this,
+    _spl_layer0 = GraphicsManager::getLoaderFor(this,
                                                       "level-scene/flow.plist",
                                                       "level-scene/flow.png");
-    _spl->inject();
+    _spl_layer0->inject();
+
+    _spl_layer1 = GraphicsManager::getLoaderFor(this,
+                                                "level-scene/flow.plist",
+                                                "level-scene/flow.png");
 
    // _spl2 = GraphicsManager::getLoaderFor(this,
      //                                                  "level-scene/flow2.plist",
@@ -25,7 +29,7 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
      //this->setContentSize(CCSize(_probe_size * table.getWidth(),
      //                            _probe_size * table.getHeight()));
 
-    CCSprite* test_texture = _spl->loadSprite("background.png");
+    CCSprite* test_texture = _spl_layer0->loadSprite("background.png");
     _textures_size = test_texture->getContentSize().width;
     test_texture->removeFromParent();
 
@@ -35,10 +39,13 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
 
 
     createNodes();
-    createBackground();
+
     //drawTable();
 
     initNodes();
+    createBackground();
+
+    _spl_layer1->inject();
 
 }
 
@@ -210,19 +217,19 @@ const cocos2d::CCPoint FlowRenderer::getNodePosition(const FlowPoint& pos)
 
 void FlowRenderer::createBackground()
 {
-    const CCPoint ORIGIN = Screen::getOrigin();
-    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-    const float SCALE = Screen::getScaleFactor();
+    //const CCPoint ORIGIN = Screen::getOrigin();
+    //const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    //const float SCALE = Screen::getScaleFactor();
 
     unsigned int width = _table.getWidth();
     unsigned int height = _table.getHeight();
 
     CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
-    tablo->setPosition(ORIGIN);
+    //tablo->setPosition(ORIGIN);
 
     CCSize tablo_size = tablo->getContentSize();
-    CCRenderTexture* render = CCRenderTexture::create(900,
-                                                      900,
+    CCRenderTexture* render = CCRenderTexture::create(tablo_size.width,
+                                                      tablo_size.height,
                                                       kTexture2DPixelFormat_RGBA8888);
 
     render->beginWithClear(0,0,0,0);
@@ -230,27 +237,55 @@ void FlowRenderer::createBackground()
     CCSprite* line = CCSprite::create("level-scene/line.png");
     float cell_width = tablo_size.width / width;
 
-    float curr_width = cell_width;
-    for(unsigned int y=1; y<width+1; ++y)
+    line->setPositionX(0);
+
+    for(unsigned int y=0; y<=width; ++y)
     {
-            line->setPosition(this->getNodePosition(FlowPoint(0,y)));
-            curr_width+=cell_width;
-            line->visit();
+        float anchor = 0.5f;
 
+        if(y == 0)
+            anchor = 0;
+        else if(y == width)
+            anchor = 1;
+
+        line->setAnchorPoint(ccp(0,anchor));
+
+        line->setPositionY(y*cell_width);
+        line->visit();
     }
-    for(unsigned int x=1; x<width+1; ++x)
+
+    line = CCSprite::create("level-scene/line_v.png");
+    line->setPositionY(0);
+
+
+    for(unsigned int y=0; y<=height; ++y)
     {
-            line->setPosition(this->getNodePosition(FlowPoint(x,0)));
-            line->setRotation(90.0f);
-            curr_width+=cell_width;
-            line->visit();
+        float anchor = 0.5f;
 
+        if(y == 0)
+            anchor = 0;
+        else if(y == height)
+            anchor = 1;
+
+        line->setAnchorPoint(ccp(anchor,0));
+
+        line->setPositionX(y*cell_width);
+        line->visit();
     }
+//    for(unsigned int x=1; x<width+1; ++x)
+//    {
+//            line->setPosition(this->getNodePosition(FlowPoint(x,0)));
+//            line->setRotation(90.0f);
+//            curr_width+=cell_width;
+//            line->visit();
+
+//    }
 
 
 
-    //tablo->setPosition(ccp(0,0));
-    tablo->visit();
+    tablo->setPosition(ccp(0,0));
+    tablo->setAnchorPoint(ccp(0,0));
+    //tablo->visit();
 
     //Finish rendering
     render->end();
@@ -258,8 +293,11 @@ void FlowRenderer::createBackground()
     //Create sprite with drawing result
     CCSprite* res = CCSprite::createWithTexture(render->getSprite()->getTexture());
     //res->setFlipY(true);
-    res->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
-                         ORIGIN.y + VISIBLE_SIZE.height/2 - 50/SCALE));
+    //res->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
+    //                     ORIGIN.y + VISIBLE_SIZE.height/2 - 50/SCALE));
+    res->setAnchorPoint(ccp(0,0));
+    res->setPosition(ccp(0,0));
+    res->setScale(this->getContentSize().width / tablo_size.width);
     this->addChild(res);
 
 
@@ -343,9 +381,9 @@ void FlowRenderer::createNodes()
             FlowPointState* state = &_table(x, y);
             node.setPointState(state);
 
-            CCSprite* highlight = _spl->loadSprite("background.png");
+            CCSprite* highlight = _spl_layer0->loadSprite("background.png");
             //CCSprite* highlight = _spl2->loadSprite("cell_active.png");
-            highlight->setOpacity(80);
+            highlight->setOpacity(50);
             highlight->setPosition(this->getNodePosition(FlowPoint(x, y)));
 
             node.setHighlightSprite(highlight);
@@ -369,7 +407,7 @@ void FlowRenderer::initNodes()
 
 cocos2d::CCSprite* FlowRenderer::createSprite(const char* name)
 {
-    return _spl->loadSprite(name);
+    return _spl_layer1->loadSprite(name);
 }
 
 FlowRenderer* FlowRenderer::create(const FlowTable& t)

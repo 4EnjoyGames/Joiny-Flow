@@ -1,0 +1,3 @@
+[submodule "libraries/ADLib"]
+	path = libraries/ADLib
+	url = git@github.com:seagullua/ADLib.git

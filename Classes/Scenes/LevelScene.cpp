@@ -10,7 +10,7 @@ USING_NS_CC;
 #include "Flow/JoinyPair.h"
 #include "Scenes/SelectLevel.h"
 #include <algorithm>
-
+#include <ADLib/Device/ADAds.h>
 class LevelScene::LevelEndPopUp : public PopUpWindow::Content
 {
 
@@ -189,6 +189,12 @@ private:
 
 void LevelScene::onNextLevel()
 {
+    if(ADAds::getInstance().getInterstialTimesShowed() < 5)
+    {
+        ADAds::getInstance().showInterstitial();
+        ADAds::getInstance().prepareInterstitial();
+    }
+
     const JoinyLevel* next_level = RW::getLevelManager().getNextLevel(_current_level);
     if(next_level != nullptr)
     {

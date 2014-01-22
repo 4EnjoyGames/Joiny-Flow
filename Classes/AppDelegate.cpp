@@ -9,7 +9,7 @@
 #include "Logic/Language.h"
 #include "Scenes/Loading.h"
 #include "Core/Screen.h"
-
+#include <ADLib/Device/ADAds.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -125,6 +125,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     pDirector->runWithScene(pScene);
+
+    ADAds& manager = ADAds::getInstance();
+
+    std::string pid = "ca-app-pub-1097233306002326/3272087699";
+    manager.registerBannerType("BANNER", pid);
+    manager.registerBannerType("IAB_BANNER", pid);
+
+    std::string pid_inter = "ca-app-pub-1097233306002326/5031020099";
+    manager.registerInterstitialType(pid_inter);
+
+    manager.addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
+    manager.addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
+    manager.addTestDevice("C31238A94F2B52E9F4B77E58270A3943"); //Tonya
 
     return true;
 }

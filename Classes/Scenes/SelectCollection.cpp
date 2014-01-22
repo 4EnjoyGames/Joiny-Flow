@@ -5,7 +5,7 @@
 #include "Scenes/MainScene.h"
 #include "BackButton.h"
 #include "Localization/CCLocalizedString.h"
-
+#include <ADLib/Device/ADAds.h>
 
 SelectCollection::SelectCollection()
 {
@@ -83,9 +83,9 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     CCSprite* background = spl->loadSprite("collection_button.png");
     background->setColor(working);
     AnimatedMenuItem* item = AnimatedMenuItem::create(
-                    background,
-                    this,
-                    menu_selector(SelectCollection::onCollectionSelect));
+                background,
+                this,
+                menu_selector(SelectCollection::onCollectionSelect));
 
     CCLabelTTF* label = CCLabelTTF::create(collection_name.str().c_str(), "fonts/Fredoka One.ttf", 60/scaled);
     item->addChild(label);
@@ -103,10 +103,10 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 }
 bool SelectCollection::init()
 {
-//    if (!CCLayer::init() )
-//    {
-//        return false;
-//    }
+    //    if (!CCLayer::init() )
+    //    {
+    //        return false;
+    //    }
     if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
         return false;
@@ -115,29 +115,29 @@ bool SelectCollection::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
-//    CCMenu* main_menu = CCMenu::create();
-//    main_menu->setPosition(ccp(0,0));
+    //    CCMenu* main_menu = CCMenu::create();
+    //    main_menu->setPosition(ccp(0,0));
 
 
-//    //Load one piece
-//    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
+    //    //Load one piece
+    //    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
 
-//    //Take the texture from sprite
-//    CCTexture2D *texture = sp_noise->getTexture();
+    //    //Take the texture from sprite
+    //    CCTexture2D *texture = sp_noise->getTexture();
 
-//    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
-//    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-//    texture->setTexParameters(&params);
+    //    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
+    //    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
+    //    texture->setTexParameters(&params);
 
-//    //Final sprite
-//    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
-//    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-//                           ORIGIN.y + VISIBLE_SIZE.height/2));
-//    this->addChild(noise);
+    //    //Final sprite
+    //    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
+    //    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
+    //                           ORIGIN.y + VISIBLE_SIZE.height/2));
+    //    this->addChild(noise);
 
     CCLabelTTF * collections = CCLabelTTF::create( CCLocalizedString("Collection").c_str(),"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
+                                 ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
     collections->setColor(GameInfo::getInstance()->getTitleColor());
     this->addChild(collections);
 
@@ -202,6 +202,18 @@ bool SelectCollection::init()
     }
     newScrolling(_buttons_menu);
 
+
+    ADAds::Banner* banner = ADAds::getInstance().getBanner(
+                CCSize(VISIBLE_SIZE.width - 10 / SCALE,
+                       300 / SCALE));
+
+    if(banner)
+    {
+        banner->setAnchorPoint(ccp(0.5f, 0));
+        banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
+                                ORIGIN.y + 30/SCALE));
+        this->addChild(banner);
+    }
     return true;
 }
 
@@ -282,7 +294,7 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
 
     _collections_scroll_view->setPosition(collections_target_position);
     //CCRect eat_zone(origin.x,origin.y, visibleSize.width, _collections_scroll_view->getPositionY() + scroll_view_height);
-        CCRect eat_zone(origin.x,origin.y, 0, 0);
+    CCRect eat_zone(origin.x,origin.y, 0, 0);
     _collections_scroll_view->setTouchEatZone(eat_zone);
     _collections_scroll_view->updateInset();
     _collections_scroll_view->setDirection(kCCScrollViewDirectionVertical);
@@ -293,7 +305,7 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     _collections_scroll_view->addChild(menu);
     _collections_scroll_view->setMenu(menu->menu());
 
-   // this->addChild(menu);
+    // this->addChild(menu);
     menu->setAnchorPoint(ccp(0,0));
     menu->setPosition(ccp(0,
                           0));
