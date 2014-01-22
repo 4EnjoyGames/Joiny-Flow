@@ -45,6 +45,8 @@ MainScene* MainScene::create()
 }
 bool MainScene::init()
 {
+    if(!DrawLayer::init())
+        return false;
 //    if (!CCLayer::init() )
 //    {
 //        return false;
@@ -66,7 +68,7 @@ bool MainScene::init()
     main_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height*0.80));
     //this->addChild(main_logo);
-    DrawLayer::addChild(main_logo);
+    this->addChild(main_logo);
     float logo_y_coordinate = main_logo->getPositionY();
 
     CCMenu* main_menu = CCMenu::create();
@@ -108,8 +110,7 @@ bool MainScene::init()
     main_menu->addChild(settings_button);
 
 
-    //this->addChild(main_menu);
-    DrawLayer::addChild(main_menu);
+    this->addChild(main_menu);
     return true;
 }
 

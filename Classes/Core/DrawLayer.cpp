@@ -3,19 +3,30 @@
 
 
 DrawLayer::DrawLayer()
+    : _render(nullptr),
+      _sprite(nullptr),
+      _background(nullptr),
+      _main_node(nullptr)
 {
-    //const CCPoint ORIGIN = Screen::getOrigin();
+
+}
+bool DrawLayer::init()
+{
+    if(!CCLayer::init())
+        return false;
+
+    const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     //const float SCALE = Screen::getScaleFactor();
 
 
     _background = CCSprite::create("universal/game_background.png");
 
-
     _main_node = CCNode::create();
     _main_node->retain();
     _main_node->setContentSize(VISIBLE_SIZE);
 
+    //CCLayer::addChild(_main_node);
     this->scheduleUpdate();
     //CCScheduler::scheduleUpdateForTarget(this,1,false);
     //CCScheduler::scheduleSelector(schedule_selector(DrawLayer::update), this, 0.5f, false);
@@ -28,7 +39,7 @@ DrawLayer::DrawLayer()
 //    this,0,false);
 
     CCSize win_size = Screen::getRealSize();
-    _render = CCRenderTexture::create(win_size.width,
+    _render = CCRenderTexture::createNoScale(win_size.width,
                                       win_size.height,
                                       kTexture2DPixelFormat_RGBA8888);
 
@@ -51,20 +62,36 @@ DrawLayer::DrawLayer()
                                                              win_size.height));
 
 
-    ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
-    noise->setBlendFunc(function);
+    //ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
+    //noise->setBlendFunc(function);
     noise->setAnchorPoint(ccp(0,0));
     noise->setPosition(ccp(0,0));
-    CCLayer::addChild(noise);
+    CCLayer::addChild(noise, 0, 0);
+
+    _sprite = CCSprite::createWithTexture(_render->getSprite()->getTexture());
+    ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
+    _sprite->setBlendFunc(function);
+    _sprite->setAnchorPoint(ccp(0,0));
+    _sprite->setPosition(ORIGIN);
+    _sprite->setFlipY(true);
+    CCLayer::addChild(_sprite, 0, 0);
+
+    CCLayer::addChild(_main_node, 0, 0);
+    return true;
 }
+
 DrawLayer::~DrawLayer()
 {
-    _main_node->release();
-    _render->release();
+    if(_main_node)
+        _main_node->release();
+    if(_render)
+        _render->release();
 }
 
 void DrawLayer::update(float a)
 {
+    _main_node->update(a);
+    CCLayer::update(a);
     _render->beginWithClear(1,1,1,1);
     _main_node->visit();
     _render->end();
