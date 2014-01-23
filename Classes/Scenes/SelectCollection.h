@@ -4,7 +4,8 @@
 #include "Core/Screen.h"
 #include "Logic/JoinyCollection.h"
 #include "BackButton.h"
-class SelectCollection: public  CCLayerColor//CCLayer
+#include "Core/DrawLayer.h"
+class SelectCollection: public  DrawLayer//CCLayer
 {
 public:
     SelectCollection();

@@ -288,7 +288,7 @@ void Loading::loadAllAsync(float)
 
 bool Loading::init()
 {
-    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
+    if (!DrawLayer::init())
     {
         return false;
     }
@@ -302,7 +302,7 @@ bool Loading::init()
 #else
 	drawEverything(0);
 	initRW();
-    this->getScheduler()->scheduleSelector(SEL_SCHEDULE(&Loading::loadAllAsync), this, 0, 0, 0, false);
+    this->getScheduler()->scheduleSelector(SEL_SCHEDULE(&Loading::loadAllAsync), this, 0.1, 0, 0, false);
 #endif
     return true;
 }

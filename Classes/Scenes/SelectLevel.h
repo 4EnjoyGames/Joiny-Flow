@@ -6,8 +6,8 @@
 #include <vector>
 #include "Layers/PopUpWindow.h"
 #include "BackButton.h"
-
-class SelectLevel : public CCLayerColor //CCLayer//public cocos2d::CCLayer
+#include "Core/DrawLayer.h"
+class SelectLevel : public DrawLayer //CCLayer//public cocos2d::CCLayer
 {
 public:
 

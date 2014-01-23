@@ -3,8 +3,8 @@
 #include "cocos2d-A.h"
 #include "Core/Screen.h"
 #include "BackButton.h"
-
-class SettingScene: public CCLayerColor //CCLayer
+#include "Core/DrawLayer.h"
+class SettingScene: public DrawLayer //CCLayer
 {
 public:
     SettingScene();

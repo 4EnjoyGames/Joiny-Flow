@@ -7,8 +7,8 @@
 #include "Flow/JoinyPair.h"
 #include "Logic/JoinyLevel.h"
 #include "BackButton.h"
-
-class LevelScene : public CCLayerColor //cocos2d::CCLayer
+#include "Core/DrawLayer.h"
+class LevelScene : public DrawLayer //cocos2d::CCLayer
 {
 private:
     class LevelEndPopUp;

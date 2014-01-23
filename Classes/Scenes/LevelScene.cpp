@@ -264,7 +264,7 @@ bool LevelScene::init()
 //        return false;
 //    }
 
-    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
+    if (!DrawLayer::init())
     {
         return false;
     }
