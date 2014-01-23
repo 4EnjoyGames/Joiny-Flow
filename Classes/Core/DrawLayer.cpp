@@ -84,6 +84,11 @@ bool DrawLayer::init()
     CCLayer::addChild(_sprite, 0, 0);
 
     CCLayer::addChild(_main_node, 0, NO_DRAW);
+
+    _transform = CCNode::create();
+    _transform->setPosition(_neg_origin);
+    _transform->setScale(_real_scale);
+    _transform->retain();
     return true;
 }
 
@@ -155,19 +160,19 @@ void DrawLayer::update(float a)
     _render->beginWithClear(1,1,1,1);
 
     //this->visit();
-    //kmGLPushMatrix();
-    //this->transform();
-    _main_node->setScale(_real_scale);
+    kmGLPushMatrix();
+    _transform->transform();
+    //_main_node->setScale(_real_scale);
     //_main_node->setOpacity(255);
     //_main_node->setAnchorPoint(ccp(0.5,0.5));
-    _main_node->setPosition(_neg_origin*1);
+    //_main_node->setPosition(_neg_origin*1);
     _main_node->visit();
-    _main_node->setScale(1.0f);
-    _main_node->setPosition(CCPointZero);
+    //_main_node->setScale(1.0f);
+    //_main_node->setPosition(CCPointZero);
 
     //_main_node->setOpacity(80);
     //_main_node->setAnchorPoint(ccp(0,0));
-    //kmGLPopMatrix();
+    kmGLPopMatrix();
 
     _render->end();
 }

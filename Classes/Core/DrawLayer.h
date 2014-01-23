@@ -23,6 +23,7 @@ private:
     CCSprite* _background;
 
     CCNodeRGBA* _main_node;
+    CCNode* _transform;
 };
 
 #endif // DRAWLAYER_H
