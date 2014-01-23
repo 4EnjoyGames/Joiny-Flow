@@ -16,13 +16,14 @@ public:
     void visit();
 private:
     static const int NO_DRAW = 911;
-    float _real_scale;
-    CCPoint _neg_origin;
-    CCRenderTexture* _render;
-    CCSprite* _sprite;
-    CCSprite* _background;
+
+    static CCRenderTexture* _render;
+    static CCSprite* _sprite;
+    static CCSprite* _background;
+    static CCNode* _transform;
 
     CCNodeRGBA* _main_node;
+
 };
 
 #endif // DRAWLAYER_H

@@ -501,37 +501,18 @@ void CCScrollView::beforeDraw()
     {
 		// TODO: This scrollview should respect parents' positions
 		CCPoint screenPos = this->getParent()->convertToWorldSpace(this->getPosition());
-#ifndef CC_WIN8_METRO
         glEnable(GL_SCISSOR_TEST);
         float s = this->getScale();
 
 //        CCDirector *director = CCDirector::sharedDirector();
 //        s *= director->getContentScaleFactor();
-        CCEGLView::sharedOpenGLView()->setScissorInPoints(screenPos.x*s, screenPos.y*s, m_tViewSize.width*s, m_tViewSize.height*s);
-        //glScissor((GLint)screenPos.x, (GLint)screenPos.y, (GLsizei)(m_tViewSize.width*s), (GLsizei)(m_tViewSize.height*s));
-#else
-		//DirectX impl
-		ID3D11DeviceContext* cd3d = CCEGLView::sharedOpenGLView()->GetDeviceContext();
-		ID3D11Device* d3d = CCEGLView::sharedOpenGLView()->GetDevice();
-		// variables to hold the current rasterizer state and its description
-		  ID3D11RasterizerState * rState=0 ;
-		  D3D11_RASTERIZER_DESC rDesc ;
+        float x = CCEGLView::sharedOpenGLView()->getScaleX();
+        float y = CCEGLView::sharedOpenGLView()->getScaleY();
+        CCPoint origin = CCEGLView::sharedOpenGLView()->getViewPortRect().origin;
+        //CCEGLView::sharedOpenGLView()->setScissorInPoints(screenPos.x*s, screenPos.y*s, m_tViewSize.width*s, m_tViewSize.height*s);
+        glScissor((GLint)(screenPos.x*x + origin.x), (GLint)(screenPos.y*y + origin.y),
+                  (GLsizei)(m_tViewSize.width*s*x), (GLsizei)(m_tViewSize.height*s*y));
 
-		  // cd3d is the ID3D11DeviceContext  
-		  cd3d->RSGetState( &rState ) ; // retrieve the current state
-		  rState->GetDesc( &rDesc ) ;    // get the desc of the state
-		  rDesc.ScissorEnable = TRUE ; // change the ONE setting
-
-		  // create a whole new rasterizer state
-		  // d3d is the ID3D11Device
-		  d3d->CreateRasterizerState( &rDesc, &rState ) ;
-
-		  cd3d->RSSetState( rState );    // set the new rasterizer state
-
-		  float s = this->getScale();
-		  CCEGLView::sharedOpenGLView()->setScissorInPoints(screenPos.x*s, screenPos.y*s, m_tViewSize.width*s, m_tViewSize.height*s);
-        
-#endif
     }
 }
 
@@ -577,7 +558,7 @@ void CCScrollView::visit()
     {
 		return;
     }
-#ifndef CC_WIN8_METRO
+
 	kmGLPushMatrix();
 	
     if (m_pGrid && m_pGrid->isActive())
@@ -585,9 +566,7 @@ void CCScrollView::visit()
         m_pGrid->beforeDraw();
         this->transformAncestors();
     }
-#else
-	CCEGLView::sharedOpenGLView()->D3DPushMatrix();
-#endif
+
 	this->transform();
     this->beforeDraw();
 
@@ -627,16 +606,14 @@ void CCScrollView::visit()
     }
 
     this->afterDraw();
-#ifndef CC_WIN8_METRO
+
 	if ( m_pGrid && m_pGrid->isActive())
     {
 		m_pGrid->afterDraw(this);
     }
 
 	kmGLPopMatrix();
-#else
-	CCEGLView::sharedOpenGLView()->D3DPopMatrix();
-#endif
+
 }
 
 bool CCScrollView::ccTouchBegan(CCTouch* touch, CCEvent* ev)
