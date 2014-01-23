@@ -84,7 +84,7 @@ bool MainScene::init()
 
     play_button->addChild(play_logo);
 
-    CCPoint position(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+    CCPoint position(VISIBLE_SIZE.width*0.5,
                      logo_y_coordinate - 400/SCALE );
 
     play_button->setPosition(position);
@@ -101,7 +101,7 @@ bool MainScene::init()
 
     settings_button->addChild(settings_logo);
 
-    CCPoint position_settings(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+    CCPoint position_settings(VISIBLE_SIZE.width*0.5,
                               logo_y_coordinate - 650/SCALE  );
     settings_button->setPosition(position_settings);
     settings_logo->setPosition(ccp(settings_logo->getContentSize().width/2,

@@ -80,8 +80,8 @@ bool SettingScene::init()
 
     music_button->addChild(_music_logo);
 
-    CCPoint position_music(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.35,
-                                  ORIGIN.y + VISIBLE_SIZE.height - 300/SCALE));
+    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35,
+                                  VISIBLE_SIZE.height - 300/SCALE));
     music_button->setPosition(position_music);
     _music_logo->setPosition(ccp(_music_logo->getContentSize().width/2,
                             _music_logo->getContentSize().height/2));
@@ -99,8 +99,8 @@ bool SettingScene::init()
 
     sound_button->addChild(_sound_logo);
 
-    CCPoint position_sound(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.65,
-                                  ORIGIN.y + VISIBLE_SIZE.height - 300/SCALE));
+    CCPoint position_sound(ccp(VISIBLE_SIZE.width*0.65,
+                                  VISIBLE_SIZE.height - 300/SCALE));
     sound_button->setPosition(position_sound);
     _sound_logo->setPosition(ccp(_sound_logo->getContentSize().width/2,
                             _sound_logo->getContentSize().height/2));
@@ -116,8 +116,8 @@ bool SettingScene::init()
 
     reset_button->addChild(reset_logo);
 
-    CCPoint position_reset(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                  ORIGIN.y + VISIBLE_SIZE.height - 520/SCALE));
+    CCPoint position_reset(ccp(VISIBLE_SIZE.width*0.5,
+                                  VISIBLE_SIZE.height - 520/SCALE));
     reset_button->setPosition(position_reset);
     reset_logo->setPosition(ccp(reset_logo->getContentSize().width/2,
                                reset_logo->getContentSize().height/2));
@@ -141,8 +141,8 @@ bool SettingScene::init()
 
     restor_button->addChild(restor_logo);
 
-    CCPoint position_restor(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                  ORIGIN.y + VISIBLE_SIZE.height - 620/SCALE));
+    CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,
+                                  VISIBLE_SIZE.height - 620/SCALE));
     restor_button->setPosition(position_restor);
     restor_logo->setPosition(ccp(restor_logo->getContentSize().width/2,
                                restor_logo->getContentSize().height/2));
@@ -166,8 +166,8 @@ bool SettingScene::init()
 
     dev_button->addChild(dev_logo);
 
-    CCPoint position_dev(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                  ORIGIN.y + VISIBLE_SIZE.height - 720/SCALE));
+    CCPoint position_dev(ccp(VISIBLE_SIZE.width*0.5,
+                                  VISIBLE_SIZE.height - 720/SCALE));
     dev_button->setPosition(position_dev);
     dev_logo->setPosition(ccp(dev_logo->getContentSize().width/2,
                                dev_logo->getContentSize().height/2));

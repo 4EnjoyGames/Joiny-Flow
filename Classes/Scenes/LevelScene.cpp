@@ -357,8 +357,8 @@ bool LevelScene::init()
                     this,
                     menu_selector(LevelScene::onPreviousLevelClicked));
 
-    prev_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 - 100/SCALE,
-                                       ORIGIN.y + 175/SCALE));
+    prev_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 - 100/SCALE,
+                                       175/SCALE));
     buttons_menu->menu()->addChild(prev_level_button);
 
     //reload
@@ -368,8 +368,8 @@ bool LevelScene::init()
                     this,
                     menu_selector(LevelScene::onReloadLevelClicked));
 
-    reload_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 ,
-                                       ORIGIN.y + 175/SCALE));
+    reload_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 ,
+                                       175/SCALE));
     buttons_menu->menu()->addChild(reload_level_button);
 
 
@@ -380,8 +380,8 @@ bool LevelScene::init()
                     this,
                     menu_selector(LevelScene::onNextLevelClicked));
 
-    next_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
-                                       ORIGIN.y + 175/SCALE));
+    next_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 100/SCALE,
+                                       175/SCALE));
     buttons_menu->menu()->addChild(next_level_button);
 
 
