@@ -336,6 +336,12 @@ bool LevelScene::init()
 
     /////////////////////////////////////////////////////////////////
 
+    CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
+    //tablo->setPosition(ORIGIN);
+
+    CCSize tablo_size = tablo->getContentSize();
+    tablo->removeFromParentAndCleanup(true);
+
     SpritesLoader  buttons_spl = GraphicsManager::getLoaderFor(
                 0,
                 "level-scene/level_novigation.plist",
@@ -352,7 +358,7 @@ bool LevelScene::init()
                     menu_selector(LevelScene::onPreviousLevelClicked));
 
     prev_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 - 100/SCALE,
-                                       ORIGIN.y + 300/SCALE));
+                                       ORIGIN.y + 175/SCALE));
     buttons_menu->menu()->addChild(prev_level_button);
 
     //reload
@@ -363,7 +369,7 @@ bool LevelScene::init()
                     menu_selector(LevelScene::onReloadLevelClicked));
 
     reload_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 ,
-                                       ORIGIN.y + 300/SCALE));
+                                       ORIGIN.y + 175/SCALE));
     buttons_menu->menu()->addChild(reload_level_button);
 
 
@@ -375,7 +381,7 @@ bool LevelScene::init()
                     menu_selector(LevelScene::onNextLevelClicked));
 
     next_level_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
-                                       ORIGIN.y + 300/SCALE));
+                                       ORIGIN.y + 175/SCALE));
     buttons_menu->menu()->addChild(next_level_button);
 
 

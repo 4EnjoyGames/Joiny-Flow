@@ -117,7 +117,7 @@ bool SettingScene::init()
     reset_button->addChild(reset_logo);
 
     CCPoint position_reset(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                  ORIGIN.y + VISIBLE_SIZE.height - 500/SCALE));
+                                  ORIGIN.y + VISIBLE_SIZE.height - 520/SCALE));
     reset_button->setPosition(position_reset);
     reset_logo->setPosition(ccp(reset_logo->getContentSize().width/2,
                                reset_logo->getContentSize().height/2));
