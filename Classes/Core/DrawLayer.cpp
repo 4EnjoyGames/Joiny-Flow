@@ -3,92 +3,89 @@
 
 
 DrawLayer::DrawLayer()
-    : _render(nullptr),
-      _sprite(nullptr),
-      _background(nullptr),
-      _main_node(nullptr)
+    : _main_node(nullptr)
 {
 
 }
+
+CCRenderTexture* DrawLayer::_render = nullptr;
+CCSprite* DrawLayer::_sprite = nullptr;
+CCSprite* DrawLayer::_background = nullptr;
+CCNode* DrawLayer::_transform = nullptr;
+
 bool DrawLayer::init()
 {
     if(!CCLayer::init())
         return false;
 
-    const CCPoint ORIGIN = Screen::getOrigin();
-    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-    const float SCALE = Screen::getScaleFactor();
+    if(_render == nullptr)
+    {
+        const CCPoint ORIGIN = Screen::getOrigin();
+        const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+        const float SCALE = Screen::getScaleFactor();
+
+        //Init global rendering
+        CCSize win_size = Screen::getRealSize();
+
+        //Create sprite for background
+        CCSprite* background_piece = CCSprite::create("universal/game_background.png");
+        CCTexture2D *texture = background_piece->getTexture();
+        ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
+        texture->setTexParameters(&params);
+
+        _background = CCSprite::createWithTexture(texture,
+                                                      CCRectMake(0,
+                                                                 0,
+                                                                 win_size.width,
+                                                                 win_size.height));
 
 
-    _background = CCSprite::create("universal/game_background.png");
+        _background->setAnchorPoint(ccp(0,0));
+        _background->setPosition(ORIGIN);
+        _background->setScale(VISIBLE_SIZE.width/win_size.width);
+        _background->retain();
+
+        //Prepare render node
+        _render = CCRenderTexture::createNoScale(win_size.width,
+                                                 win_size.height,
+                                                 kTexture2DPixelFormat_RGBA8888);
+        _render->retain();
+
+        float _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE;
+        CCPoint _neg_origin = ORIGIN * -_real_scale;
+
+        //Prepare transform for rendering
+        _transform = CCNode::create();
+        _transform->setPosition(_neg_origin);
+        _transform->setScale(_real_scale);
+        _transform->retain();
+
+
+        //Create display sprite
+        _sprite = CCSprite::createWithTexture(_render->getSprite()->getTexture());
+        ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
+        _sprite->setBlendFunc(function);
+        _sprite->setAnchorPoint(ccp(0,0));
+        _sprite->setPosition(ORIGIN);
+        _sprite->setFlipY(true);
+        _sprite->setScale(1.0/_real_scale);
+        _sprite->retain();
+    }
+
 
     _main_node = CCNodeRGBA::create();
-    _main_node->retain();
-    _main_node->setContentSize(VISIBLE_SIZE);
 
-
-    //CCLayer::addChild(_main_node);
     this->scheduleUpdate();
-    //CCScheduler::scheduleUpdateForTarget(this,1,false);
-    //CCScheduler::scheduleSelector(schedule_selector(DrawLayer::update), this, 0.5f, false);
-    //CCScheduler.scheduleUpdateForTarget(this,1,false);
-//    CCDirector* pDirector = CCDirector::sharedDirector();
-//    CCScheduler *scheduler = pDirector->getScheduler();
 
-//    scheduler->scheduleSelector(
-//    schedule_selector(DrawLayer::update),
-//    this,0,false);
+    if(_background->getParent())
+        _background->removeFromParent();
+    if(_sprite->getParent())
+        _sprite->removeFromParent();
 
-    CCSize win_size = Screen::getRealSize();
-    _render = CCRenderTexture::createNoScale(win_size.width,
-                                      win_size.height,
-                                      kTexture2DPixelFormat_RGBA8888);
-
-    _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE;
-
-    _render->retain();
-
-    CCTexture2D *texture = _background->getTexture();
-    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-    texture->setTexParameters(&params);
-
-    //float add_scale = (float)_stripes_texture_size / _base_stripes_texture_size;
-    //if(add_scale < 1)
-    //    add_scale = 1;
-
-    //size.width/add_scale
-    //size.height/add_scale
-    CCSprite *noise = CCSprite::createWithTexture(texture,
-                                                  CCRectMake(0,
-                                                             0,
-                                                             win_size.width,
-                                                             win_size.height));
-
-
-    //ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
-    //noise->setBlendFunc(function);
-    noise->setAnchorPoint(ccp(0,0));
-    noise->setPosition(ORIGIN);
-    noise->setScale(VISIBLE_SIZE.width/win_size.width);
-    CCLayer::addChild(noise, 0, 0);
-
-    _neg_origin = ORIGIN * -_real_scale;
-
-    _sprite = CCSprite::createWithTexture(_render->getSprite()->getTexture());
-    ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
-    _sprite->setBlendFunc(function);
-    _sprite->setAnchorPoint(ccp(0,0));
-    _sprite->setPosition(ORIGIN);
-    _sprite->setFlipY(true);
-    _sprite->setScale(1.0/_real_scale);
+    CCLayer::addChild(_background, 0, 0);
     CCLayer::addChild(_sprite, 0, 0);
-
     CCLayer::addChild(_main_node, 0, NO_DRAW);
 
-    _transform = CCNode::create();
-    _transform->setPosition(_neg_origin);
-    _transform->setScale(_real_scale);
-    _transform->retain();
     return true;
 }
 
@@ -101,10 +98,10 @@ void DrawLayer::visit()
     }
     kmGLPushMatrix();
 
-     if (m_pGrid && m_pGrid->isActive())
-     {
-         m_pGrid->beforeDraw();
-     }
+    if (m_pGrid && m_pGrid->isActive())
+    {
+        m_pGrid->beforeDraw();
+    }
 
     this->transform();
 
@@ -137,9 +134,9 @@ void DrawLayer::visit()
     // reset for next frame
     m_uOrderOfArrival = 0;
 
-     if (m_pGrid && m_pGrid->isActive())
-     {
-         m_pGrid->afterDraw(this);
+    if (m_pGrid && m_pGrid->isActive())
+    {
+        m_pGrid->afterDraw(this);
     }
 
     kmGLPopMatrix();
@@ -147,31 +144,17 @@ void DrawLayer::visit()
 
 DrawLayer::~DrawLayer()
 {
-    if(_main_node)
-        _main_node->release();
-    if(_render)
-        _render->release();
 }
 
 void DrawLayer::update(float a)
 {
-    _main_node->update(a);
-    CCLayer::update(a);
     _render->beginWithClear(1,1,1,1);
 
-    //this->visit();
     kmGLPushMatrix();
+    //Take transformation from dummy node
     _transform->transform();
-    //_main_node->setScale(_real_scale);
-    //_main_node->setOpacity(255);
-    //_main_node->setAnchorPoint(ccp(0.5,0.5));
-    //_main_node->setPosition(_neg_origin*1);
+    //Visit node with main content
     _main_node->visit();
-    //_main_node->setScale(1.0f);
-    //_main_node->setPosition(CCPointZero);
-
-    //_main_node->setOpacity(80);
-    //_main_node->setAnchorPoint(ccp(0,0));
     kmGLPopMatrix();
 
     _render->end();
