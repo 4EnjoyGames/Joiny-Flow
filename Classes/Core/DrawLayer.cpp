@@ -44,7 +44,7 @@ bool DrawLayer::init()
                                       win_size.height,
                                       kTexture2DPixelFormat_RGBA8888);
 
-    _real_scale = win_size.width/VISIBLE_SIZE.width;
+    _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE;
 
     _render->retain();
 
@@ -80,7 +80,7 @@ bool DrawLayer::init()
     _sprite->setAnchorPoint(ccp(0,0));
     _sprite->setPosition(ORIGIN);
     _sprite->setFlipY(true);
-    _sprite->setScale(VISIBLE_SIZE.width/win_size.width);
+    _sprite->setScale(1.0/_real_scale);
     CCLayer::addChild(_sprite, 0, 0);
 
     CCLayer::addChild(_main_node, 0, NO_DRAW);
