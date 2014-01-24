@@ -163,8 +163,6 @@ int main()
         if(isGooTask(t, N))
         {
             unsigned int colors = max;
-            //const unsigned int colors = min + (rand() % (unsigned int)(max - min + 1));
-
             //random
             if(t.size() == 2)
                 colors = 2;
@@ -176,7 +174,9 @@ int main()
             }
 
             JoinyTask task = flowToJoiny(t, colors);
-            JoinyInfo info_old = solveJoiny(task, joiny_size, joiny_size);
+            JoinyInfo info_old = solveJoiny(task,
+                                            joiny_size,
+                                            joiny_size);
 
             JoinyTask task_origin = flowToJoinyStaightforward(t);
             JoinyInfo info_origin = solveJoiny(task_origin,

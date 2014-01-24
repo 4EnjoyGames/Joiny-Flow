@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
+#include <algorithm>
 using namespace std;
 
 bool FLAGS_color = false;
@@ -415,21 +416,30 @@ const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap)
     return min_it->first;
 }
 
-JoinyTask flowToJoiny(const FlowTask& task, const unsigned int colors)
+JoinyTask flowToJoiny(const FlowTask& task_2, const unsigned int colors)
 {
+    assert(colors <= task_2.size());
 //    std::map<unsigned int,unsigned int> mymap;
 //    for (unsigned int j=0; j<colors; ++j)
 //    {
 //        mymap.insert ( std::pair<unsigned int,unsigned int>(j,0) );
 //    }
-    std::map<unsigned int,unsigned int> map = getColorScheme(colors);
+    Palete palete = getColorScheme(colors);
+
+    FlowTask task = task_2;
+    std::random_shuffle(task.begin(), task.end());
 
     JoinyTask res;
-    for(unsigned int i=0; i<task.size(); ++i)
+    for(unsigned int i=0; i<colors; ++i)
+    {
+        res.push_back(JoinyPair(task[i], palete[i]));
+    }
+
+    for(unsigned int i=colors; i<task.size(); ++i)
     {
         //unsigned int color = rand() % colors;
-        unsigned int color = getColor(map);
-        res.push_back(JoinyPair(task[i], color));
+        unsigned int color = rand() % palete.size();
+        res.push_back(JoinyPair(task[i], palete[color]));
     }
     return res;
 }
@@ -503,64 +513,56 @@ JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsi
     }
     return JoinyInfo(0,0,0);
 }
+//typedef unsigned int Color;
 
+static AllPaletes _paletes;
+
+void palete2(unsigned int c1, unsigned int c2)
+{
+    Palete p;
+    p.push_back(c1);
+    p.push_back(c2);
+    _paletes[2].push_back(p);
+}
+
+void palete3(unsigned int c1, unsigned int c2, unsigned int c3)
+{
+    Palete p;
+    p.push_back(c1);
+    p.push_back(c2);
+    p.push_back(c3);
+    _paletes[3].push_back(p);
+}
+void palete4(unsigned int c1, unsigned int c2,
+             unsigned int c3, unsigned int c4)
+{
+    Palete p;
+    p.push_back(c1);
+    p.push_back(c2);
+    p.push_back(c3);
+    p.push_back(c4);
+    _paletes[4].push_back(p);
+}
 void JoinyColorSchemeInit()
 {
-    for (unsigned int j=0; j<5; ++j)
-    {
-        _map5_1.insert ( std::pair<unsigned int,unsigned int>(j,0) );
-    }
+    palete2(6,7);
 
+    palete3(0,1,2);
+    palete3(3,4,5);
 
-    for (unsigned int j=8; j<12; ++j)
-    {
-        _map4_1.insert ( std::pair<unsigned int,unsigned int>(j,0) );
-    }
-    for (unsigned int j=8; j<12; ++j)
-    {
-        _map4_2.insert ( std::pair<unsigned int,unsigned int>(j,0) );
-    }
-
-
-    for (unsigned int j=0; j<3; ++j)
-    {
-        _map3_1.insert ( std::pair<unsigned int,unsigned int>(j,0) );
-    }
-    for (unsigned int j=3; j<6; ++j)
-    {
-        _map3_2.insert ( std::pair<unsigned int,unsigned int>(j,0) );
-    }
-
-
-    for(unsigned int j=6; j<8; ++j)
-    {
-        _map2_1.insert( std::pair<unsigned int,unsigned int>(j,0) );
-    }
+    palete4(8,9,10,11);
 }
-std::map<unsigned int,unsigned int> getColorScheme(unsigned int color_num)
+const Palete &getColorScheme(unsigned int color_num)
 {
-    JoinyColorSchemeInit();
+    static bool init = false;
 
-    if(color_num == 5)
+    if(!init)
     {
-        return _map5_1;
+        JoinyColorSchemeInit();
+        init = true;
     }
-    else if(color_num == 4)
-    {
-        unsigned int color = rand() % 2;
-        if(color == 0)
-            return _map4_1;
-        else
-            return _map4_2;
-    }
-    else if(color_num == 3)
-    {
-        unsigned int color = rand() % 2;
-        if(color == 0)
-            return _map3_1;
-        else
-            return _map3_2;
-    }
-    else if(color_num == 2)
-        return _map2_1;
+
+
+    auto& paletes = _paletes[color_num];
+    return paletes[rand() % paletes.size()];
 }
