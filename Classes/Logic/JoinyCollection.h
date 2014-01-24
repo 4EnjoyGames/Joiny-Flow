@@ -25,6 +25,8 @@ class JoinyCollection
 {
 public:
     const unsigned int getLevelsNumber() const;
+    const unsigned int getCompletedLevelsNumber() const;
+
     const JoinyLevel* getLevel(const JoinyLevelID id) const;
     const JoinyCollectionID getCollectionID() const;
     const std::string getCollectionName() const;

@@ -19,6 +19,7 @@ public:
     const JoinyCollection* getCollection() const;
     const Score getHighScore() const;
     const StarsNumber getHighStar() const;
+    bool  isCompleted() const;
 private:
     JoinyLevel();
     friend class LevelManager;

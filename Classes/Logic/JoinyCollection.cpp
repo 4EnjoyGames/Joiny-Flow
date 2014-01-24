@@ -11,6 +11,19 @@ const unsigned int JoinyCollection::getLevelsNumber() const
     return _levels->size();
 }
 
+const unsigned int JoinyCollection::getCompletedLevelsNumber() const
+{
+    unsigned int result = 0;
+    unsigned int l_num = getLevelsNumber()+1;
+    for(unsigned int i=1; i<l_num; ++i)
+    {
+        bool compl = getLevel(i)->isCompleted();
+
+        if(compl)
+            result+=1;
+    }
+    return result;
+}
 const JoinyLevel* JoinyCollection::getLevel(const JoinyLevelID id) const
 {
     const JoinyLevel* res = 0;
@@ -43,6 +56,12 @@ const StarsNumber JoinyCollection::getStarSum() const
 
 const StarsNumber JoinyCollection::getMinStarsNumber() const
 {
+    static bool called = false;
+    if(!called)
+    {
+        getStarSum();
+        called = true;
+    }
     return _min_star_number;
 }
 const JoinyCollectionID JoinyCollection::getCollectionID() const

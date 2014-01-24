@@ -91,10 +91,10 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
                 this,
                 menu_selector(SelectCollection::onCollectionSelect));
 
-    unsigned int l_num = RW::getLevelManager().getCollectionMaxStars(collection);
+    unsigned int l_num = collection->getLevelsNumber();
     std::string l_num_str = std::to_string(l_num);
 
-    unsigned int l_curr = RW::getLevelManager().getCollectionCurrStars(collection);
+    unsigned int l_curr = collection->getCompletedLevelsNumber();
     std::string l_curr_str = std::to_string(l_curr);
 
 
