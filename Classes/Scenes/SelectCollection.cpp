@@ -174,8 +174,8 @@ bool SelectCollection::init()
     float margin = s.width * 0.15f;
     float width = s.width*in_row + margin*(in_row - 1);
 
-    unsigned int rows = 2;
-    float height = rows * s.height + margin*(rows - 1);;
+    unsigned int rows = GameInfo::getInstance()->getCollectionNumber();
+    float height = rows * s.height + margin*(rows - 1);
 
     _buttons_menu->setContentSize(CCSize(width+margin*2, height+margin*2));
 
@@ -270,7 +270,8 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     }
     //Get the scroll area size
     float scroll_view_width = visibleSize.width - 50/scaled;
-    float scroll_view_height = visibleSize.height-250/scaled;
+    //250
+    float scroll_view_height = visibleSize.height-200/scaled;
     CCSize scroll_view_size(scroll_view_width, scroll_view_height);
 
     //Create layer to fit all tiles

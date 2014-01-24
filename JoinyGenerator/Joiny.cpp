@@ -12,6 +12,7 @@ using namespace std;
 
 bool FLAGS_color = false;
 
+
 class NumberLink {
 public:
     // The type of the number written in a cell
@@ -416,18 +417,18 @@ const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap)
 
 JoinyTask flowToJoiny(const FlowTask& task, const unsigned int colors)
 {
-    std::map<unsigned int,unsigned int> mymap;
-    for (unsigned int j=0; j<colors; ++j)
-    {
-        mymap.insert ( std::pair<unsigned int,unsigned int>(j,0) );
-    }
-
+//    std::map<unsigned int,unsigned int> mymap;
+//    for (unsigned int j=0; j<colors; ++j)
+//    {
+//        mymap.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+//    }
+    std::map<unsigned int,unsigned int> map = getColorScheme(colors);
 
     JoinyTask res;
     for(unsigned int i=0; i<task.size(); ++i)
     {
         //unsigned int color = rand() % colors;
-        unsigned int color = getColor(mymap);
+        unsigned int color = getColor(map);
         res.push_back(JoinyPair(task[i], color));
     }
     return res;
@@ -501,4 +502,65 @@ JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsi
 
     }
     return JoinyInfo(0,0,0);
+}
+
+void JoinyColorSchemeInit()
+{
+    for (unsigned int j=0; j<5; ++j)
+    {
+        _map5_1.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+
+
+    for (unsigned int j=8; j<12; ++j)
+    {
+        _map4_1.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+    for (unsigned int j=8; j<12; ++j)
+    {
+        _map4_2.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+
+
+    for (unsigned int j=0; j<3; ++j)
+    {
+        _map3_1.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+    for (unsigned int j=3; j<6; ++j)
+    {
+        _map3_2.insert ( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+
+
+    for(unsigned int j=6; j<8; ++j)
+    {
+        _map2_1.insert( std::pair<unsigned int,unsigned int>(j,0) );
+    }
+}
+std::map<unsigned int,unsigned int> getColorScheme(unsigned int color_num)
+{
+    JoinyColorSchemeInit();
+
+    if(color_num == 5)
+    {
+        return _map5_1;
+    }
+    else if(color_num == 4)
+    {
+        unsigned int color = rand() % 2;
+        if(color == 0)
+            return _map4_1;
+        else
+            return _map4_2;
+    }
+    else if(color_num == 3)
+    {
+        unsigned int color = rand() % 2;
+        if(color == 0)
+            return _map3_1;
+        else
+            return _map3_2;
+    }
+    else if(color_num == 2)
+        return _map2_1;
 }

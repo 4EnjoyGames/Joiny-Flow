@@ -1,6 +1,6 @@
 #ifndef FLOWCOLOR_H
 #define FLOWCOLOR_H
 
-typedef unsigned int FlowColor;
+typedef int FlowColor;
 
 #endif // FLOWCOLOR_H

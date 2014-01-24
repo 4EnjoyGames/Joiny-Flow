@@ -5,10 +5,13 @@
 	</file>
 	
 	<file>
-		<name>puzzle_5x5.ad</name>
+		<name>puzzle_5x5_1.ad</name>
 	</file>
 	<file>
-		<name>puzzle_6x6.ad</name>
+		<name>puzzle_5x5_2.ad</name>
+	</file>
+	<file>
+		<name>puzzle_6x6_1.ad</name>
 	</file>
 
 	

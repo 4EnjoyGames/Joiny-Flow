@@ -4,7 +4,7 @@ using namespace cocos2d;
 FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
     : _renderer(FlowRenderer::create(table)), _table(0), _is_touch_active(false),
       _active_touch_id(-1), _active_traces(), _submitted_traces(),
-      _working_color(table.getColorsNumber()), _finish_lock(false), _delegate(delegate),
+      _working_color(-1), _finish_lock(false), _delegate(delegate),
       _last_point(0,0), _working_trace_id(0,0), _score(0)
 {
     _table = &_renderer->getTable();
@@ -122,7 +122,7 @@ bool FlowGame::touchStart(const FlowPoint& p)
     FlowColor color = getPointColor(p);
     FlowPointState st = _table->get(p);
 
-    if(color < _table->getColorsNumber())
+    if(color >= 0)
     {
         //The point should be initial or a part of other line
         //if(st.getNodeType() == FlowPointState::Circle ||
@@ -446,7 +446,7 @@ void FlowGame::restoreTraces()
 
 FlowColor FlowGame::getPointColor(const FlowPoint& p)
 {
-    FlowColor color = _table->getColorsNumber();
+    FlowColor color = -1;
 
     const FlowPointState& state = _table->get(p);
     if(state.getNodeType() == FlowPointState::Circle)

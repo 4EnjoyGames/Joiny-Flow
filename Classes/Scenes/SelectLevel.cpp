@@ -6,6 +6,7 @@
 #include "Scenes/LevelScene.h"
 #include "Scenes/SelectCollection.h"
 #include "Localization/CCLocalizedString.h"
+#include "ADLib/Device/ADAds.h"
 
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
@@ -242,6 +243,19 @@ bool SelectLevel::init()
         working_y -= s.height + margin;
     }
     newScrolling(_buttons_menu);
+
+
+    ADAds::Banner* banner = ADAds::getInstance().getBanner(
+                CCSize(VISIBLE_SIZE.width - 10 / SCALE,
+                       300 / SCALE));
+
+    if(banner)
+    {
+        banner->setAnchorPoint(ccp(0.5f, 0));
+        banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
+                                ORIGIN.y + 30/SCALE));
+        this->addChild(banner);
+    }
 
     return true;
 }

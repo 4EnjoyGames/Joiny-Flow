@@ -11,9 +11,11 @@ GameInfo::GameInfo()
 
 void GameInfo::setInfo()
 {
-    _coll_files.push_back("puzzle_5x5.ad");
-    _coll_files.push_back("puzzle_6x6.ad");
+    _coll_files.push_back("puzzle_5x5_1.ad");
+    _coll_files.push_back("puzzle_5x5_2.ad");
+    _coll_files.push_back("puzzle_6x6_1.ad");
 
+    _flow_points.push_back(FlowPoint(5,5));
     _flow_points.push_back(FlowPoint(5,5));
     _flow_points.push_back(FlowPoint(6,6));
 
@@ -27,7 +29,7 @@ void GameInfo::setInfo()
 
     _title_color = ccc3(11,216,224);
 
-    _negative_color = ccc3(255,0,0);
+    _negative_color = ccc3(255,30,99);
     _positive_color = ccc3(0,255,0);
 }
 
