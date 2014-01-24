@@ -23,7 +23,7 @@ void GameInfo::setInfo()
     _colors.push_back(ccc3(100,243,248));
     _colors.push_back(ccc3(64,255,68));
 
-    _level_number = 150;
+    _level_number = 100;
 
     _close_color = ccc3(170,170,170);
 
@@ -96,3 +96,4 @@ const ccColor3B& GameInfo::getPositiveColor()
 {
     return _positive_color;
 }
+

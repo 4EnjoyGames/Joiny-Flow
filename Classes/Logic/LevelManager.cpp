@@ -229,3 +229,15 @@ void LevelManager::loadGame()
     }
 
 }
+unsigned int LevelManager::getCollectionMaxStars(const JoinyCollection* coll)
+{
+    return coll->getLevelsNumber()*3;
+}
+unsigned int LevelManager::getCollectionCurrStars(const JoinyCollection *coll)
+{
+    return coll->getStarSum();
+}
+unsigned int LevelManager::getCollectionMinStars(const JoinyCollection *coll)
+{
+    return coll->getMinStarsNumber();
+}

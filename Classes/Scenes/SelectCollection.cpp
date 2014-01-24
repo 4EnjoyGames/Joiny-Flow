@@ -67,11 +67,15 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 {
     float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
-    std::stringstream collection_number;
-    collection_number << collection->getCollectionID();
+//    std::stringstream collection_number;
+//    collection_number << collection->getCollectionID();
 
-    std::stringstream collection_name;
-    collection_name << collection->getCollectionName();
+//    std::stringstream collection_name;
+//    collection_name << collection->getCollectionName();
+
+    //std::string collection_number = collection->getCollectionID();
+
+    std::string collection_name = collection->getCollectionName();
 
     ccColor3B label_color = collection->getCollectionColor();
 
@@ -87,7 +91,17 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
                 this,
                 menu_selector(SelectCollection::onCollectionSelect));
 
-    CCLabelTTF* label = CCLabelTTF::create(collection_name.str().c_str(), "fonts/Fredoka One.ttf", 60/scaled);
+    unsigned int l_num = RW::getLevelManager().getCollectionMaxStars(collection);
+    std::string l_num_str = std::to_string(l_num);
+
+    unsigned int l_curr = RW::getLevelManager().getCollectionCurrStars(collection);
+    std::string l_curr_str = std::to_string(l_curr);
+
+
+    std::string label_text = collection_name + "  "+ l_curr_str + '/'  + l_num_str ;
+    CCLabelTTF* label = CCLabelTTF::create(label_text.c_str(),
+                                           "fonts/Fredoka One.ttf",
+                                           60/scaled);
     item->addChild(label);
 
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);

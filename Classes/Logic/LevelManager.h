@@ -20,6 +20,11 @@ public:
 
     void loadSettings();
     void saveSettings();
+
+    unsigned int getCollectionMaxStars(const JoinyCollection *coll);
+    unsigned int getCollectionCurrStars(const JoinyCollection *coll);
+    unsigned int getCollectionMinStars(const JoinyCollection *coll);
+
 private:
     LevelManager();
     void onInit();

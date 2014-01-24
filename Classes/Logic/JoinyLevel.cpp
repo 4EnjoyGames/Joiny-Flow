@@ -10,7 +10,10 @@ const Score JoinyLevel::getHighScore() const
 {
     return _highscore;
 }
-
+const StarsNumber JoinyLevel::getHighStar() const
+{
+    return getStarsNumber(getHighScore());
+}
 const JoinyPuzzle& JoinyLevel::getPuzzle() const
 {
     return _puzzle;

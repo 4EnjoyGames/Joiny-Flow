@@ -2,7 +2,7 @@
 
 JoinyCollection::JoinyCollection()
     : _id(0), _levels(nullptr), _coll_name("no_name"),
-      _coll_color(ccc3(250,250,250)), _open(true)
+      _coll_color(ccc3(250,250,250)), _open(true), _min_star_number(0)
 {
 }
 
@@ -26,7 +26,25 @@ JoinyLevel* JoinyCollection::getLevel(const JoinyLevelID id)
         res = &_levels->at(id - 1);
     return res;
 }
+const StarsNumber JoinyCollection::getStarSum() const
+{
+    StarsNumber result = 0;
+    unsigned int l_num = getLevelsNumber()+1;
+    for(unsigned int i=1; i<l_num; ++i)
+    {
+        StarsNumber stars = getLevel(i)->getHighStar();
 
+        if(stars <= _min_star_number)
+            _min_star_number = stars;
+        result+=stars;
+    }
+    return result;
+}
+
+const StarsNumber JoinyCollection::getMinStarsNumber() const
+{
+    return _min_star_number;
+}
 const JoinyCollectionID JoinyCollection::getCollectionID() const
 {
     return _id;

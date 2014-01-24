@@ -30,6 +30,9 @@ public:
     const std::string getCollectionName() const;
     const ccColor3B& getCollectionColor() const;
 
+    const StarsNumber getStarSum() const;
+    const StarsNumber getMinStarsNumber() const;
+
     void setCollectionName(const std::string name);
     void setCollectionColor(const ccColor3B color);
 
@@ -46,6 +49,8 @@ private:
     //Color _coll_color;
     ccColor3B _coll_color;
     bool _open;
+
+    mutable StarsNumber _min_star_number;
     friend class LevelManager;
 };
 
