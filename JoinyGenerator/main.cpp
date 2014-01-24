@@ -121,21 +121,7 @@ JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
 int main()
 {
     srand(time(0));
-
-//    unsigned int arr_size = 2;
     unsigned int joiny_size = 5;
-//    std::vector<unsigned int> w_h_array;
-//    std::vector<string> collection_names;
-//    for (unsigned int i=0; i<arr_size; ++i)
-//    {
-//        collection_names[i] = min_joiny + 'x' + min_joiny;
-
-//        w_h_array.push_back(min_joiny);
-//        ++min_joiny;
-
-//    }
-    //unsigned int width = w_h_array[0];
-    //unsigned int height = w_h_array[0];
 
     unsigned int N = 100;
     unsigned int generated = 0;
@@ -156,6 +142,8 @@ int main()
 
     std::set<JoinyPuzzle> good_tasks;
 
+    Palete past;
+    Palete curr;
     while(good_tasks.size() < N)
     {
 
@@ -174,6 +162,9 @@ int main()
             }
 
             JoinyTask task = flowToJoiny(t, colors);
+            past = curr;
+            curr = getCurrPalete();
+
             JoinyInfo info_old = solveJoiny(task,
                                             joiny_size,
                                             joiny_size);
@@ -193,6 +184,11 @@ int main()
             {
 
                 std::sort(task.begin(), task.end());
+
+                if(curr == past)
+                {
+                    int a=0;
+                }
 
                 JoinyPuzzle puzzle(task, info);
                 good_tasks.insert(puzzle);

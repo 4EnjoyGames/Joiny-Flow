@@ -425,6 +425,7 @@ JoinyTask flowToJoiny(const FlowTask& task_2, const unsigned int colors)
 //        mymap.insert ( std::pair<unsigned int,unsigned int>(j,0) );
 //    }
     Palete palete = getColorScheme(colors);
+    _curr_palete = palete;
 
     FlowTask task = task_2;
     std::random_shuffle(task.begin(), task.end());
@@ -565,4 +566,28 @@ const Palete &getColorScheme(unsigned int color_num)
 
     auto& paletes = _paletes[color_num];
     return paletes[rand() % paletes.size()];
+}
+const Palete& getCurrPalete()
+{
+    return _curr_palete;
+}
+bool operator==(const Palete& p1, const Palete& p2)
+{
+    bool res = true;
+
+    if (p1.size()!=p2.size())
+        res = false;
+    else
+    {
+        for(unsigned int i=0; i<p1.size(); ++i)
+        {
+            if(p1[i]!=p2[i])
+            {
+                res = false;
+                break;
+            }
+        }
+    }
+
+    return res;
 }

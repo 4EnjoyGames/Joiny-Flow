@@ -60,14 +60,19 @@ const std::vector<std::string>& GameInfo::getCollectionNames()
 {
     if(_coll_names.size()==0)
     {
-        std::string base = "Col";
+        //std::string base = "Col";
 
+        std::vector<FlowPoint> flow_points = getFlowPoints();
         unsigned int coll_num = getCollectionNumber()+1;
         for (unsigned int i=1; i<coll_num; ++i)
         {
-            std::string int_converted = std::to_string(i);
-            std::string coll_name = base + int_converted;
-            std::string curr_coll = CCLocalizedString(coll_name.c_str());
+            //std::string int_converted = std::to_string(i);
+            //std::string coll_name = base + int_converted;
+            //std::string curr_coll = CCLocalizedString(coll_name.c_str());
+
+            std::string x = std::to_string(flow_points[i-1].x());
+            std::string y = std::to_string(flow_points[i-1].y());
+            std::string curr_coll = x + 'x' + y;
             _coll_names.push_back(curr_coll);
         }
     }

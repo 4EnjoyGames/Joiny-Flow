@@ -450,17 +450,17 @@ bool LevelScene::init()
     ////////////////////////////////////////////////////////////////////
 
 
-//    ADAds::Banner* banner = ADAds::getInstance().getBanner(
-//                CCSize(VISIBLE_SIZE.width - 10 / SCALE,
-//                       300 / SCALE));
+    ADAds::Banner* banner = ADAds::getInstance().getBanner(
+                CCSize(VISIBLE_SIZE.width - 10 / SCALE,
+                       300 / SCALE));
 
-//    if(banner)
-//    {
-//        banner->setAnchorPoint(ccp(0.5f, 0));
-//        banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
-//                                ORIGIN.y + 30/SCALE));
-//        this->addChild(banner);
-//    }
+    if(banner)
+    {
+        banner->setAnchorPoint(ccp(0.5f, 0));
+        banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
+                                ORIGIN.y + 30/SCALE));
+        this->addChild(banner);
+    }
 
     return true;
 }
