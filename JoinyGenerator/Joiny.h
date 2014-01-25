@@ -4,13 +4,25 @@
 #include "Binary.h"
 
 #include "Flow/JoinyPair.h"
-const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap);
-JoinyTask flowToJoiny(const FlowTask& task, const unsigned int colors);
-JoinyTask flowToJoinyStaightforward(const FlowTask& task);
-JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsigned int height);
 
 typedef std::vector<unsigned int> Palete;
 typedef std::map<unsigned int, std::vector<Palete> > AllPaletes;
+
+
+const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap);
+JoinyTask flowToJoiny(const FlowTask& task,
+                      const unsigned int colors);
+JoinyTask flowToJoinyStaightforward(const FlowTask& task);
+JoinyInfo solveJoiny(const JoinyTask& task,
+                     const unsigned int width,
+                     const unsigned int height);
+
+JoinyTask relocorJoiny(const JoinyTask &joiny_task,
+                       const Palete &bad_palete);
+
+const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete);
+
+
 static Palete _curr_palete;
 bool operator==(const Palete& p1, const Palete& p2);
 const Palete& getCurrPalete();

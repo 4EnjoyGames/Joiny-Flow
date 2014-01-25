@@ -415,6 +415,31 @@ const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap)
 
     return min_it->first;
 }
+JoinyTask relocorJoiny(const JoinyTask& joiny_task,
+                       const Palete& bad_palete)
+{
+    //select new palete
+    Palete palete = getColorSchemeExceptBadPalete(bad_palete);
+
+
+    JoinyTask result;
+    for(unsigned int i=0; i<joiny_task.size(); ++i)
+    {
+        unsigned int old_color = joiny_task[i].getColor();
+        unsigned int new_color = old_color;
+
+        for(unsigned int j=0; j<bad_palete.size(); ++j)
+        {
+            if (old_color == bad_palete[j])
+            {
+                new_color = palete[j];
+                break;
+            }
+        }
+        result.push_back(JoinyPair(joiny_task[i].getPoints(), new_color));
+    }
+    return result;
+}
 
 JoinyTask flowToJoiny(const FlowTask& task_2, const unsigned int colors)
 {
@@ -547,12 +572,34 @@ void palete4(unsigned int c1, unsigned int c2,
 void JoinyColorSchemeInit()
 {
     palete2(6,7);
+    palete2(1,2);
 
     palete3(0,1,2);
     palete3(3,4,5);
 
     palete4(8,9,10,11);
+    palete4(7,8,9,10);
 }
+const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
+{
+    static bool init = false;
+
+    if(!init)
+    {
+        JoinyColorSchemeInit();
+        init = true;
+    }
+
+
+    auto& paletes = _paletes[bad_palete.size()];
+    for(unsigned int i=0; i<paletes.size(); ++i)
+    {
+        if(paletes[i]!=bad_palete)
+            return paletes[i];
+    }
+
+}
+
 const Palete &getColorScheme(unsigned int color_num)
 {
     static bool init = false;

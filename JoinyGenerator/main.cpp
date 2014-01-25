@@ -162,8 +162,7 @@ int main()
             }
 
             JoinyTask task = flowToJoiny(t, colors);
-            past = curr;
-            curr = getCurrPalete();
+
 
             JoinyInfo info_old = solveJoiny(task,
                                             joiny_size,
@@ -182,14 +181,19 @@ int main()
             }
             else if(isGoodJoiny(task, info))
             {
+                past = curr;
+                curr = getCurrPalete();
 
-                std::sort(task.begin(), task.end());
+
 
                 if(curr == past)
                 {
-                    int a=0;
+                    //choose new palete except curr palete
+                    //recolor JoinyTask
+                    task = relocorJoiny(task,curr);
                 }
 
+                std::sort(task.begin(), task.end());
                 JoinyPuzzle puzzle(task, info);
                 good_tasks.insert(puzzle);
                 good++;

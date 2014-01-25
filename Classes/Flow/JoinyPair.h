@@ -19,6 +19,11 @@ public:
     {
         return _color;
     }
+    void setColor(unsigned int color)
+    {
+        _color = color;
+    }
+
 private:
     FlowStartEnd _points;
     unsigned int _color;
