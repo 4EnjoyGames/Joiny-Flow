@@ -184,6 +184,26 @@ bool SettingScene::init()
     main_menu->addChild(dev_button);
 
 
+
+    ////////////////////////////////////////////////////////////////////
+
+    CCSprite* x4enjoy_logo = CCSprite::create("x4Enjoy.png");
+    AnimatedMenuItem* x4enjoy_button = AnimatedMenuItem::create(
+                x4enjoy_logo, this, menu_selector(SettingScene::onx4EnjoyClicked));
+
+    x4enjoy_button->addChild(x4enjoy_logo);
+
+    CCPoint position_x4enjoy(VISIBLE_SIZE.width*0.5,
+                              200/SCALE);
+    x4enjoy_button->setPosition(position_x4enjoy);
+    x4enjoy_button->setBaseScale(dev_logo->getContentSize().width/x4enjoy_button->getContentSize().width);
+    x4enjoy_logo->setPosition(ccp(x4enjoy_logo->getContentSize().width/2,
+                               x4enjoy_logo->getContentSize().height/2));
+
+    main_menu->addChild(x4enjoy_button);
+
+
+
     this->addChild(main_menu);
     return true;
 }
@@ -249,6 +269,10 @@ void SettingScene::onRestorClicked(CCObject*)
 void SettingScene::onDevelopersClicked(CCObject*)
 {
     CCLog("onDevelopersClicked!!");
+}
+void SettingScene::onx4EnjoyClicked(CCObject*)
+{
+    CCLog("onx4EnjoyClicked!!");
 }
 
 const ccColor3B SettingScene::getSoundColor() const

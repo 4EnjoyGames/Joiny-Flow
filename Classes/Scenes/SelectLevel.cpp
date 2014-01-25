@@ -244,19 +244,6 @@ bool SelectLevel::init()
     }
     newScrolling(_buttons_menu);
 
-
-    ADAds::Banner* banner = ADAds::getInstance().getBanner(
-                CCSize(VISIBLE_SIZE.width - 10 / SCALE,
-                       300 / SCALE));
-
-    if(banner)
-    {
-        banner->setAnchorPoint(ccp(0.5f, 0));
-        banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
-                                ORIGIN.y + 30/SCALE));
-        this->addChild(banner);
-    }
-
     return true;
 }
 
@@ -268,11 +255,14 @@ void SelectLevel::doOpenLevel()
 void SelectLevel::newScrolling(MenuSpriteBatch* menu)
 {
     //Get the size of the screen we can see
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
+    CCSize visibleSize = Screen::getVisibleSize();
+    float scaled = Screen::getScaleFactor();
 
     //Get the screen start of cordinates
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+    CCPoint origin = Screen::getOrigin();
+
+    const float TOP_MARGIN = 140/scaled;
+    const float BOTTOM_MARGIN = 30/scaled;
 
     float menu_left_padding = 0;
     float min_height = 1000/scaled;
@@ -285,8 +275,8 @@ void SelectLevel::newScrolling(MenuSpriteBatch* menu)
         menu_left_padding = (min_height - menu_size.height) / 2;
     }
     //Get the scroll area size
-    float scroll_view_width = visibleSize.width - 50/scaled;
-    float scroll_view_height = visibleSize.height-320/scaled;
+    float scroll_view_width = visibleSize.width - TOP_MARGIN * 0.2;
+    float scroll_view_height = visibleSize.height-TOP_MARGIN - BOTTOM_MARGIN;
     CCSize scroll_view_size(scroll_view_width, scroll_view_height);
 
     //Create layer to fit all tiles
@@ -300,16 +290,17 @@ void SelectLevel::newScrolling(MenuSpriteBatch* menu)
 
 
     CCPoint collections_target_position(
-                origin.x + visibleSize.width/2 -
-                scroll_view_size.width/2,
-                origin.y + visibleSize.height/2 -
-                scroll_view_size.height/2);
+                origin.x + visibleSize.width/2 - scroll_view_size.width/2,
+                origin.y + BOTTOM_MARGIN);
 
     float scale = scroll_view_width/menu_size.width;
     layer->setScale(scale);
 
     _collections_scroll_view->setPosition(collections_target_position);
-    CCRect eat_zone(origin.x,origin.y, visibleSize.width, _collections_scroll_view->getPositionY() + scroll_view_height);
+    _collections_scroll_view->setAnchorPoint(ccp(0.5, 0));
+    CCRect eat_zone(origin.x,origin.y,
+                    visibleSize.width,
+                    visibleSize.height);
     _collections_scroll_view->setTouchEatZone(eat_zone);
     _collections_scroll_view->updateInset();
     _collections_scroll_view->setDirection(kCCScrollViewDirectionVertical);

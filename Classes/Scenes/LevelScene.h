@@ -68,6 +68,8 @@ private:
     CCPoint _silver_position;
     CCSprite* _gold_star;
     CCPoint _gold_position;
+
+    MenuSpriteBatch* _buttons_menu;
 public:
     LevelScene(const JoinyLevel*);
 

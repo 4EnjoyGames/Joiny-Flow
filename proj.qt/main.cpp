@@ -63,7 +63,7 @@ int CALLBACK WinMain(
     //assert(false);
 #endif
     bool portrait_mode = true;
-    Mode open_in_mode = Galaxy_Ace2;
+    Mode open_in_mode = IPad2;
 
 
     int swidth = 0;

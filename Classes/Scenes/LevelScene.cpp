@@ -324,43 +324,49 @@ bool LevelScene::init()
     this->addChild(_score_label);
 
     _flow_game = FlowGame::create(table, FlowGame::DelegatePtr(new FlowDelegate(this)));
-    CCSize render_size = _flow_game->getContentSize();
+    //CCSize render_size = _flow_game->getContentSize();
 
-    _flow_game->setScale(MIN(VISIBLE_SIZE.width / (render_size.width),
-                         VISIBLE_SIZE.width / (render_size.height+60/SCALE) ));
-
-    _flow_game->setAnchorPoint(ccp(0, 0.5f));
-    _flow_game->setPosition(ccp(ORIGIN.x + 20/SCALE,
-                                ORIGIN.y + VISIBLE_SIZE.height*0.57));
+//    _flow_game->setScale(MIN(VISIBLE_SIZE.width / (render_size.width),
+//                         VISIBLE_SIZE.width / (render_size.height+60/SCALE) ));
+//    //_flow_game->setScale(0.3f);
+    //_flow_game->setAnchorPoint(ccp(0, 0.5f));
+//    _flow_game->setPosition(ccp(ORIGIN.x + 20/SCALE,
+//                                ORIGIN.y + VISIBLE_SIZE.height*0.57));
     this->addChild(_flow_game);
 
 
     /////////////////////////////////////////////////////////////////
 
-    CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
-    //tablo->setPosition(ORIGIN);
+//    CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
+//    //tablo->setPosition(ORIGIN);
 
-    CCSize tablo_size = tablo->getContentSize();
-    tablo->removeFromParentAndCleanup(true);
+//    CCSize tablo_size = tablo->getContentSize();
+//    tablo->removeFromParentAndCleanup(true);
 
     SpritesLoader  buttons_spl = GraphicsManager::getLoaderFor(
                 0,
                 "level-scene/level_novigation.plist",
                 "level-scene/level_novigation.png");
 
-    MenuSpriteBatch* buttons_menu = MenuSpriteBatch::create(buttons_spl);
-    buttons_menu->setPosition(ORIGIN);
+    _buttons_menu = MenuSpriteBatch::create(buttons_spl);
+    _buttons_menu->setPosition(ORIGIN);
 
     //previous level
     CCSprite* prev_level_logo = buttons_spl->loadSprite("prev_level.png");
+
+    float menu_height = prev_level_logo->getContentSize().height * 1.2f;
+
+    _buttons_menu->setContentSize(CCSize(VISIBLE_SIZE.width,
+                                         menu_height));
+
     AnimatedMenuItem* prev_level_button = AnimatedMenuItem::create(
                     prev_level_logo,
                     this,
                     menu_selector(LevelScene::onPreviousLevelClicked));
 
     prev_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 - 100/SCALE,
-                                       260/SCALE));
-    buttons_menu->menu()->addChild(prev_level_button);
+                                       menu_height/2));
+    _buttons_menu->menu()->addChild(prev_level_button);
 
     //reload
     CCSprite* reload_level_logo = buttons_spl->loadSprite("reload_level.png");
@@ -370,8 +376,8 @@ bool LevelScene::init()
                     menu_selector(LevelScene::onReloadLevelClicked));
 
     reload_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 ,
-                                       260/SCALE));
-    buttons_menu->menu()->addChild(reload_level_button);
+                                       menu_height/2));
+    _buttons_menu->menu()->addChild(reload_level_button);
 
 
     //next level
@@ -382,11 +388,11 @@ bool LevelScene::init()
                     menu_selector(LevelScene::onNextLevelClicked));
 
     next_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 100/SCALE,
-                                       260/SCALE));
-    buttons_menu->menu()->addChild(next_level_button);
+                                       menu_height/2));
+    _buttons_menu->menu()->addChild(next_level_button);
 
 
-    this->addChild(buttons_menu);
+    this->addChild(_buttons_menu);
 
 
     //////////////////////////////////////////////////////////////////////////
@@ -449,18 +455,51 @@ bool LevelScene::init()
 
     ////////////////////////////////////////////////////////////////////
 
+    const float TOP_MARGIN = 120/SCALE;
 
-    ADAds::Banner* banner = ADAds::getInstance().getBanner(
-                CCSize(VISIBLE_SIZE.width - 10 / SCALE,
-                       300 / SCALE));
+    float main_zone_height = VISIBLE_SIZE.height - TOP_MARGIN*2 - menu_height;
 
+    if(main_zone_height > VISIBLE_SIZE.width)
+        main_zone_height = VISIBLE_SIZE.width;
+
+    float banner_zone_height = VISIBLE_SIZE.height - TOP_MARGIN -
+            menu_height - main_zone_height;
+
+    const float BANNER_MARGIN = 10/SCALE;
+    CCSize banner_zone(VISIBLE_SIZE.width - BANNER_MARGIN*2,
+                       banner_zone_height - BANNER_MARGIN);
+
+
+    ADAds::Banner* banner = ADAds::getInstance().getBanner(banner_zone);
+
+    banner_zone_height = 0;
     if(banner)
     {
         banner->setAnchorPoint(ccp(0.5f, 0));
         banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
-                                ORIGIN.y + 30/SCALE));
+                                ORIGIN.y + BANNER_MARGIN));
+        banner_zone_height = banner->getContentSize().height + BANNER_MARGIN;
         this->addChild(banner);
     }
+
+    main_zone_height = VISIBLE_SIZE.height - TOP_MARGIN - banner_zone_height - menu_height;
+    if(main_zone_height > VISIBLE_SIZE.width)
+        main_zone_height = VISIBLE_SIZE.width;
+
+    float main_node_size = main_zone_height - BANNER_MARGIN*2;
+
+    float main_node_margin = (VISIBLE_SIZE.height - TOP_MARGIN -
+            banner_zone_height - menu_height - main_zone_height)/3;
+
+    _buttons_menu->setPositionY(ORIGIN.y + banner_zone_height + main_node_margin);
+
+
+    float main_node_scale = main_node_size /
+            _flow_game->getContentSize().height;
+    _flow_game->setScale(main_node_scale);
+    _flow_game->setAnchorPoint(ccp(0.5, 0));
+    _flow_game->setPositionX(ORIGIN.x + VISIBLE_SIZE.width/2);
+    _flow_game->setPositionY(_buttons_menu->getPositionY() + menu_height + main_node_margin);
 
     return true;
 }
