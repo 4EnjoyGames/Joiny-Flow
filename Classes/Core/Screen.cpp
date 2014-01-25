@@ -19,6 +19,10 @@ cocos2d::CCSize Screen::getRealSize()
 {
     return cocos2d::CCEGLView::sharedOpenGLView()->getFrameSize();
 }
+float Screen::getDesignResourceScale()
+{
+    return 1.0f / _design_scale;
+}
 
 void Screen::setDesignScale(float scale)
 {

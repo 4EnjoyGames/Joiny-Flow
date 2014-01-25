@@ -92,10 +92,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     std::string resource_directory = "images-normal";
     float resource_scale = 1;
 
-    if(frameSize.width < 500)
+    if(frameSize.height < 500)
     {
         resource_directory = "images-small";
-        resource_scale = 0.375;
+        resource_scale = 0.5;
     }
 
     std::vector<std::string> searchPath;

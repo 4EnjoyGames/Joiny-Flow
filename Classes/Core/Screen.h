@@ -10,6 +10,7 @@ public:
     static cocos2d::CCSize getVisibleSize();
     static cocos2d::CCSize getRealSize();
     static void setDesignScale(float scale);
+    static float getDesignResourceScale();
 private:
     static float _design_scale;
 };

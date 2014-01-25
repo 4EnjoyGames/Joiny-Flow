@@ -187,7 +187,7 @@ bool SettingScene::init()
 
     ////////////////////////////////////////////////////////////////////
 
-    CCSprite* x4enjoy_logo = CCSprite::create("x4Enjoy.png");
+    CCSprite* x4enjoy_logo = CCSprite::create("universal/x4Enjoy.png");
     AnimatedMenuItem* x4enjoy_button = AnimatedMenuItem::create(
                 x4enjoy_logo, this, menu_selector(SettingScene::onx4EnjoyClicked));
 

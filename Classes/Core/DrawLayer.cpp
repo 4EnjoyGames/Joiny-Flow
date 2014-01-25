@@ -33,25 +33,27 @@ bool DrawLayer::init()
         ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
         texture->setTexParameters(&params);
 
+        const float DESIGN_SCALE = Screen::getDesignResourceScale();
+
         _background = CCSprite::createWithTexture(texture,
                                                       CCRectMake(0,
                                                                  0,
-                                                                 win_size.width,
-                                                                 win_size.height));
+                                                                 win_size.width/DESIGN_SCALE,
+                                                                 win_size.height/DESIGN_SCALE));
 
 
         _background->setAnchorPoint(ccp(0,0));
         _background->setPosition(ORIGIN);
-        _background->setScale(VISIBLE_SIZE.width/win_size.width);
+        _background->setScale(VISIBLE_SIZE.width/win_size.width*DESIGN_SCALE);
         _background->retain();
 
         //Prepare render node
-        _render = CCRenderTexture::createNoScale(win_size.width,
-                                                 win_size.height,
+        _render = CCRenderTexture::createNoScale(win_size.width/DESIGN_SCALE,
+                                                 win_size.height/DESIGN_SCALE,
                                                  kTexture2DPixelFormat_RGBA8888);
         _render->retain();
 
-        float _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE;
+        float _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE/DESIGN_SCALE;
         CCPoint _neg_origin = ORIGIN * -_real_scale;
 
         //Prepare transform for rendering
