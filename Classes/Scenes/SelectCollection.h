@@ -19,7 +19,7 @@ public:
 
 private:
     BackButton _back;
-
+    CCMenu* _back_menu;
     void onCollectionSelect(CCObject* sender);
     AnimatedMenuItem* createCollectionItem(
             const JoinyCollection* collection, const SpritesLoader& spl);

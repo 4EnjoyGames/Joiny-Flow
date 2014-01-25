@@ -25,7 +25,7 @@
 
 #ifndef __CCSCROLLVIEW_H__
 #define __CCSCROLLVIEW_H__
-
+#include <vector>
 #include "layers_scenes_transitions_nodes/CCLayer.h"
 namespace cocos2d
 {
@@ -114,6 +114,7 @@ public:
         _touch_eat_zone = eat;
     }
 
+    void addHighPriorityTouchListener(CCTouchDelegate*);
     /**
      * Sets a new content offset. It ignores max/min offset. It just sets what's given. (just like UIKit's UIScrollView)
      *
@@ -351,6 +352,8 @@ protected:
     CCPoint pressPoint;
     CCRect _touch_eat_zone;
     CCMenu* _menu;
+    std::vector<CCTouchDelegate*> _high_priority_touch_listeners;
+    std::map<CCTouch*, CCTouchDelegate*> _high_priority_tracking;
 };
 
 // end of GUI group

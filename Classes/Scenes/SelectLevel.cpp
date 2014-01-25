@@ -181,8 +181,8 @@ bool SelectLevel::init()
 
 
     //Back Button
-    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
-    this->addChild(menu);
+    _back_menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
+    this->addChild(_back_menu);
 
 
     //To trigger back button
@@ -305,6 +305,7 @@ void SelectLevel::newScrolling(MenuSpriteBatch* menu)
     _collections_scroll_view->updateInset();
     _collections_scroll_view->setDirection(kCCScrollViewDirectionVertical);
     _collections_scroll_view->setContentOffset(_collections_scroll_view->minContainerOffset());
+    _collections_scroll_view->addHighPriorityTouchListener(_back_menu);
     this->addChild(_collections_scroll_view);
 
     //Add our tiles to scroll area

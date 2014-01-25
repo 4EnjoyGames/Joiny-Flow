@@ -22,6 +22,7 @@ public:
     }
 private:
     BackButton _back;
+    CCMenu* _back_menu;
     void onLevelSelect(CCObject* pSender);
     virtual bool init();
 

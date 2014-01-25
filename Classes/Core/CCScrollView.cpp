@@ -615,6 +615,10 @@ void CCScrollView::visit()
 	kmGLPopMatrix();
 
 }
+void CCScrollView::addHighPriorityTouchListener(CCTouchDelegate* d)
+{
+    _high_priority_touch_listeners.push_back(d);
+}
 
 bool CCScrollView::ccTouchBegan(CCTouch* touch, CCEvent* ev)
 {
@@ -626,6 +630,16 @@ bool CCScrollView::ccTouchBegan(CCTouch* touch, CCEvent* ev)
     CCRect frame;
     CCPoint frameOriginal = this->getParent()->convertToWorldSpace(this->getPosition());
     frame = CCRectMake(frameOriginal.x, frameOriginal.y, m_tViewSize.width, m_tViewSize.height);
+
+    for(CCTouchDelegate* delegate : _high_priority_touch_listeners)
+    {
+        bool res = delegate->ccTouchBegan(touch, ev);
+        if(res)
+        {
+            _high_priority_tracking[touch] = delegate;
+            return true;
+        }
+    }
 
     //dispatcher does not know about clipping. reject touches outside visible bounds.
     CCPoint global_point = m_pContainer->convertToWorldSpace(m_pContainer->convertTouchToNodeSpace(touch));
@@ -680,6 +694,13 @@ void CCScrollView::ccTouchMoved(CCTouch* touch, CCEvent* ev)
     {
         return;
     }
+
+    auto high_priority = _high_priority_tracking.find(touch);
+    if(high_priority != _high_priority_tracking.end())
+    {
+        high_priority->second->ccTouchMoved(touch, ev);
+    }
+
     if(_menu && m_pRedirectToMenu->containsObject(touch))
     {
         _menu->ccTouchMoved(touch, ev);
@@ -737,6 +758,8 @@ void CCScrollView::ccTouchMoved(CCTouch* touch, CCEvent* ev)
             this->setZoomScale(this->getZoomScale()*len/m_fTouchLength);
         }
     }
+
+
 }
 
 void CCScrollView::ccTouchEnded(CCTouch* touch, CCEvent* ev)
@@ -745,6 +768,14 @@ void CCScrollView::ccTouchEnded(CCTouch* touch, CCEvent* ev)
     {
         return;
     }
+
+    auto high_priority = _high_priority_tracking.find(touch);
+    if(high_priority != _high_priority_tracking.end())
+    {
+        high_priority->second->ccTouchEnded(touch, ev);
+        _high_priority_tracking.erase(high_priority);
+    }
+
     if (m_pTouches->containsObject(touch))
     {
         if (m_pTouches->count() == 1 && m_bTouchMoved)
@@ -787,6 +818,13 @@ void CCScrollView::ccTouchCancelled(CCTouch* touch, CCEvent* ev)
     {
         return;
     }
+    auto high_priority = _high_priority_tracking.find(touch);
+    if(high_priority != _high_priority_tracking.end())
+    {
+        high_priority->second->ccTouchCancelled(touch, ev);
+        _high_priority_tracking.erase(high_priority);
+    }
+
     if(_menu && m_pRedirectToMenu->containsObject(touch))
     {
         _menu->ccTouchMoved(touch, ev);

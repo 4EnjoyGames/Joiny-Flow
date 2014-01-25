@@ -157,8 +157,8 @@ bool SelectCollection::init()
 
 
     //Back Button
-    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
-    this->addChild(menu);
+    _back_menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
+    this->addChild(_back_menu);
 
 
     //To trigger back button
@@ -186,6 +186,7 @@ bool SelectCollection::init()
     image->removeFromParent();
 
     float margin = s.width * 0.15f;
+    float margin_vertical = s.width * 0.05f;
     float width = s.width*in_row + margin*(in_row - 1);
 
     unsigned int rows = GameInfo::getInstance()->getCollectionNumber();
@@ -212,7 +213,7 @@ bool SelectCollection::init()
 
         working_x += s.width + margin;
         collection_id_first++;
-        working_y -= s.height + margin;
+        working_y -= s.height + margin_vertical;
     }
     newScrolling(_buttons_menu);
 
@@ -254,11 +255,15 @@ void SelectCollection::buildCollectionTiles()
 void SelectCollection::newScrolling(MenuSpriteBatch* menu)
 {
     //Get the size of the screen we can see
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
+    CCSize visibleSize = Screen::getVisibleSize();
+    float scaled = Screen::getScaleFactor();
 
     //Get the screen start of cordinates
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+    CCPoint origin = Screen::getOrigin();
+
+    const float TOP_MARGIN = 140/scaled;
+    const float BOTTOM_MARGIN = 30/scaled;
+
 
     float menu_left_padding = 0;
     float min_height = 1000/scaled;
@@ -271,9 +276,9 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
         menu_left_padding = (min_height - menu_size.height) / 2;
     }
     //Get the scroll area size
-    float scroll_view_width = visibleSize.width - 50/scaled;
-    //250
-    float scroll_view_height = visibleSize.height-200/scaled;
+    float scroll_view_width = visibleSize.width - TOP_MARGIN * 0.2;
+    float scroll_view_height = visibleSize.height-TOP_MARGIN - BOTTOM_MARGIN;
+
     CCSize scroll_view_size(scroll_view_width, scroll_view_height);
 
     //Create layer to fit all tiles
@@ -287,17 +292,19 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
 
 
     CCPoint collections_target_position(
-                origin.x + visibleSize.width/2 -
-                scroll_view_size.width/2,
-                origin.y + visibleSize.height/2 -
-                scroll_view_size.height/2);
+                origin.x + visibleSize.width/2 - scroll_view_size.width/2,
+                origin.y + BOTTOM_MARGIN);
+
 
     float scale = scroll_view_width/menu_size.width;
     layer->setScale(scale);
 
     _collections_scroll_view->setPosition(collections_target_position);
+    _collections_scroll_view->setAnchorPoint(ccp(0.5, 0));
     //CCRect eat_zone(origin.x,origin.y, visibleSize.width, _collections_scroll_view->getPositionY() + scroll_view_height);
-    CCRect eat_zone(origin.x,origin.y, 0, 0);
+    CCRect eat_zone(origin.x,origin.y,
+                    visibleSize.width,
+                    visibleSize.height);
     _collections_scroll_view->setTouchEatZone(eat_zone);
     _collections_scroll_view->updateInset();
     _collections_scroll_view->setDirection(kCCScrollViewDirectionVertical);
@@ -307,7 +314,7 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     //Add our tiles to scroll area
     _collections_scroll_view->addChild(menu);
     _collections_scroll_view->setMenu(menu->menu());
-
+    _collections_scroll_view->addHighPriorityTouchListener(_back_menu);
     // this->addChild(menu);
     menu->setAnchorPoint(ccp(0,0));
     menu->setPosition(ccp(0,
