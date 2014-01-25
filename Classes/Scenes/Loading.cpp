@@ -32,7 +32,7 @@ void Loading::drawEverything(float)
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
-    CCSprite* logo = CCSprite::create("x4Enjoy.png");
+    CCSprite* logo = CCSprite::create("universal/x4Enjoy.png");
     this->addChild(logo);
 
     logo->setPosition(ccp(origin.x + visibleSize.width/2,

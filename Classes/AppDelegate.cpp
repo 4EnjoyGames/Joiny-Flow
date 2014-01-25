@@ -89,28 +89,29 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // if the frame's height is larger than the height of medium resource size, select large resource.
     //CCFileUtils::sharedFileUtils()->setResourceDirectory(mediumResource.directory);
 
-    std::vector<std::string> searchPath;
-    searchPath.push_back(mediumResource.directory);
+    std::string resource_directory = "images-normal";
+    float resource_scale = 1;
 
+    if(frameSize.width < 500)
+    {
+        resource_directory = "images-small";
+        resource_scale = 0.375;
+    }
+
+    std::vector<std::string> searchPath;
+    searchPath.push_back(resource_directory);
+
+    Screen::setDesignScale(resource_scale);
     CCFileUtils::sharedFileUtils()->setSearchPaths(searchPath);
-    pDirector->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height/width_change, mediumResource.size.width/designResolutionSize.width/width_change));
-    /*if (frameSize.height > mediumResource.size.height)
-    {
-        CCFileUtils::sharedFileUtils()->setResourceDirectory(largeResource.directory);
-        pDirector->setContentScaleFactor(MIN(largeResource.size.height/designResolutionSize.height, largeResource.size.width/designResolutionSize.width));
-    }
-    // if the frame's height is larger than the height of small resource size, select medium resource.
-    else if (frameSize.height > smallResource.size.height)
-    {
-        CCFileUtils::sharedFileUtils()->setResourceDirectory(mediumResource.directory);
-        pDirector->setContentScaleFactor(MIN(mediumResource.size.height/designResolutionSize.height, mediumResource.size.width/designResolutionSize.width));
-    }
-    // if the frame's height is smaller than the height of medium resource size, select small resource.
-    else
-    {
-        CCFileUtils::sharedFileUtils()->setResourceDirectory(smallResource.directory);
-        pDirector->setContentScaleFactor(MIN(smallResource.size.height/designResolutionSize.height, smallResource.size.width/designResolutionSize.width));
-    }*/
+    pDirector->setContentScaleFactor(
+                MIN(
+                    mediumResource.size.height*resource_scale/
+                    designResolutionSize.height/
+                    width_change,
+
+                    mediumResource.size.width*resource_scale/
+                    designResolutionSize.width/
+                    width_change));
 
     // turn on display FPS
     pDirector->setDisplayStats(true);
