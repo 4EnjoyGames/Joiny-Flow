@@ -577,7 +577,7 @@ void JoinyColorSchemeInit()
     palete3(2,5,6);
     palete3(0,2,1);
 
-    palete4(0,1,3,4);
+    palete4(0,1,3,2);
     palete4(2,7,5,3);
 }
 const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
