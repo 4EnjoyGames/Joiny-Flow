@@ -26,6 +26,7 @@ private:
         keyBackClicked();
     }
     void doGoBack();
+    void doDevelopers();
     void hideEverything(cocos2d::CCCallFunc *callback);
 
     void onMusicClicked(CCObject*);
@@ -33,7 +34,6 @@ private:
     void onResetClicked(CCObject*);
     void onRestorClicked(CCObject*);
     void onDevelopersClicked(CCObject*);
-    void onx4EnjoyClicked(CCObject*);
 
     const ccColor3B getSoundColor() const;
     const ccColor3B getMusicColor() const;

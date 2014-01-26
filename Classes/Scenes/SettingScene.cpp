@@ -4,6 +4,7 @@
 #include "GameInfo.h"
 #include "Core/MusicSettings.h"
 #include "Logic/RW.h"
+#include "DeveloperScene.h"
 
 SettingScene::SettingScene()
 {
@@ -224,6 +225,10 @@ void SettingScene::doGoBack()
 {
     CCDirector::sharedDirector()->replaceScene(MainScene::scene());
 }
+void SettingScene::doDevelopers()
+{
+    CCDirector::sharedDirector()->replaceScene(DeveloperScene::scene());
+}
 void SettingScene::keyBackClicked()
 {
     hideEverything(
@@ -282,10 +287,10 @@ void SettingScene::onRestorClicked(CCObject*)
 void SettingScene::onDevelopersClicked(CCObject*)
 {
     CCLog("onDevelopersClicked!!");
-}
-void SettingScene::onx4EnjoyClicked(CCObject*)
-{
-    CCLog("onx4EnjoyClicked!!");
+    hideEverything(
+                CCCallFunc::create(
+                    this,
+                    callfunc_selector(SettingScene::doDevelopers)));
 }
 
 const ccColor3B SettingScene::getSoundColor() const
