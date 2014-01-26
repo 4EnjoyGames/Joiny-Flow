@@ -51,28 +51,15 @@ private:
         std::string text ="";
         if(_mode==NotEnough)
         {
-            text = CCLocalizedString("End_first")
-                    +'\n'
-                    + std::to_string(_score)
-                    +  CCLocalizedString("End_second");
+            text = CCLocalizedString("End_bad")
+                    + std::to_string(_score);
         }
         else
         {
-            text =  CCLocalizedString("End_score")
+            text =  CCLocalizedString("End_good")
                     + std::to_string(_score)
                     +'\n';
-
-            //            if(_stars == 1)
-            //                text+="Medal BRONZE";
-            //            else if(_stars == 2)
-            //                text+="SILVER";
-            //            else if(_stars == 3)
-            //                text+="GOLD";
         }
-
-        const CCPoint ORIGIN = Screen::getOrigin();
-        const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-        const float SCALE = Screen::getScaleFactor();
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
                                                "fonts/Fredoka One.ttf",
@@ -93,7 +80,32 @@ private:
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
         if(parent_rgb)
         {
-            parent_rgb->setColor(ccc3(0,0,0));
+            if(_mode==NotEnough)
+                parent_rgb->setColor(GameInfo::getInstance()->getNegativeColor());
+            else
+                parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
+        }
+
+        //add stars
+        if(_mode==LevelEnd)
+        {
+            SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
+                                                              "level-menu/save_stars.plist",
+                                                              "level-menu/save_stars.png");
+            _spl->inject();
+
+            CCSprite* stars_spr = 0;
+
+            if(_stars==1)
+                stars_spr = _spl->loadSprite("stars_1.png");
+            else if(_stars==2)
+                stars_spr = _spl->loadSprite("stars_2.png");
+            else
+                stars_spr = _spl->loadSprite("stars_3.png");
+
+            stars_spr->setPosition(ccp(x_middle, size.height*0.8f));
+            //parent->addChild(stars_spr);
+
         }
 
         float vertical = size.height * 0.2f;
@@ -103,88 +115,54 @@ private:
                     menu_spl->loadSprite("level_end_button.png"),
                     this, menu_selector(Me::onPlayMore));
 
+        CCLabelTTF * retry_text = CCLabelTTF::create(CCLocalizedString("Retry").c_str(),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        retry_text->setColor(ccc3(255,255,255));
 
 
-        play_more_item->setPosition(ccp(size.width*0.25,
+
+        if(_mode==LevelEnd)
+        {
+            play_more_item->setPosition(ccp(size.width*0.25,
                                         vertical));
 
+            retry_text->setPosition(ccp(play_more_item->getContentSize().width/2,
+                                   play_more_item->getContentSize().height/2));
+        }
+        else
+        {
+            play_more_item->setPosition(ccp(size.width*0.5,
+                                        vertical));
+            retry_text->setPosition(ccp(play_more_item->getContentSize().width/2,
+                                   play_more_item->getContentSize().height/2));
+
+        }
+
+        play_more_item->addChild(retry_text);
 
 
         if(_mode == LevelEnd)
         {
+
+            CCLabelTTF * next_level_text = CCLabelTTF::create(CCLocalizedString("Next").c_str(),
+                                                    "fonts/Fredoka One.ttf",
+                                                    48);
+            next_level_text->setColor(ccc3(255,255,255));
 
             AnimatedMenuItem *next_level = AnimatedMenuItem::create(
                         menu_spl->loadSprite("level_end_button.png"),
                         this, menu_selector(Me::onNextLevel));
             next_level->setPosition(ccp(size.width*0.75,
                                         vertical));
+
+            next_level_text->setPosition(ccp(next_level->getContentSize().width/2,
+                                   next_level->getContentSize().height/2));
+            next_level->addChild(next_level_text);
             menu->menu()->addChild(next_level);
         }
+
         menu->menu()->addChild(play_more_item);
-
-        //        CCMenu* main_menu = CCMenu::create();
-        //        main_menu->setPosition(ccp(0,0));
-        //        main_menu->setAnchorPoint(ccp(0,0));
-        //        //main_menu->setPosition(ORIGIN);
-
-
-        //        float vertical = size.height * 0.2f;
-        //        CCSprite* reload = CCSprite::create("level-end/level_end_button.png");
-        //        //reload->setPosition(ccp(size.width*0.25,vertical));
-        //        //parent->addChild(reload);
-        //        AnimatedMenuItem* play
-
-
-        //        main_menu->addChild(CCMenuItemSprite::create(reload, reload, reload, 0, 0));
-        //        parent->addChild(main_menu);
-        //parent->addChild(reload);
-        //        AnimatedMenuItem *play_more_item = AnimatedMenuItem::create(
-        //                            reload,
-        //                            this, menu_selector(Me::onPlayMore));
-        //        play_more_item->addChild(CCSprite::create("level-end/level_end_button.png"));
-        //        play_more_item->setPosition(ccp(x_middle,vertical*0));
-        //        play_more_item->setColor(ccc3(0,0,0));
-        //        //parent->addChild(play_more_item);
-        //        main_menu->addChild(play_more_item);
-
-        //        parent->addChild(main_menu);
-
-        //        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
-        //                                                               Language::localizeFileName("level_end/level_end_buttons.plist").c_str(),
-        //                                                               Language::localizeFileName("level_end/level_end_buttons.png").c_str());
-        //        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
-        //        menu->setPosition(ccp(0,0));
-        //        menu->setAnchorPoint(ccp(0,0));
-        //        menu->setContentSize(size);
-        //        parent->addChild(menu);
-
-
-
-        //        float vertical = size.height * 0.2f;
-
-
-        //        AnimatedMenuItem *play_more_item = AnimatedMenuItem::create(
-        //                    menu_spl->loadSprite("play_more_button.png"),
-        //                    this, menu_selector(Me::onPlayMore));
-
-
-
-        //        play_more_item->setPosition(ccp(size.width*0.25,
-        //                                        vertical));
-
-
-
-        //        if(_mode == LevelEnd)
-        //        {
-
-        //            AnimatedMenuItem *next_level = AnimatedMenuItem::create(
-        //                        menu_spl->loadSprite("next_level_button.png"),
-        //                        this, menu_selector(Me::onNextLevel));
-        //            next_level->setPosition(ccp(size.width*0.75,
-        //                                        vertical));
-        //            menu->menu()->addChild(next_level);
-        //        }
-        //        menu->menu()->addChild(play_more_item);
 
     }
     FlowScore _score;
