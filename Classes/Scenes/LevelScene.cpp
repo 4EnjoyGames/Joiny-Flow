@@ -11,6 +11,7 @@ USING_NS_CC;
 #include "Scenes/SelectLevel.h"
 #include <algorithm>
 #include <ADLib/Device/ADAds.h>
+#include "Localization/CCLocalizedString.h"
 
 class LevelScene::LevelEndPopUp : public PopUpWindow::Content
 {
@@ -46,25 +47,27 @@ private:
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
 
+
         std::string text ="";
         if(_mode==NotEnough)
         {
-            text = "You need "
+            text = CCLocalizedString("End_first")
+                    +'\n'
                     + std::to_string(_score)
-                    +  " score to finish";
+                    +  CCLocalizedString("End_second");
         }
         else
         {
-            text = "Your score: "
+            text =  CCLocalizedString("End_score")
                     + std::to_string(_score)
                     +'\n';
 
-            if(_stars == 1)
-                text+="BRONZE";
-            else if(_stars == 2)
-                text+="SILVER";
-            else if(_stars == 3)
-                text+="GOLD";
+//            if(_stars == 1)
+//                text+="Medal BRONZE";
+//            else if(_stars == 2)
+//                text+="SILVER";
+//            else if(_stars == 3)
+//                text+="GOLD";
         }
 
 
