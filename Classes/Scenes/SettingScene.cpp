@@ -65,11 +65,43 @@ bool SettingScene::init()
 
     CCLabelTTF * settings = CCLabelTTF::create( CCLocalizedString("Settings").c_str(),"fonts/Fredoka One.ttf",72);
     settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
+                          ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     settings->setColor(GameInfo::getInstance()->getTitleColor());
     this->addChild(settings);
 
-    //CCSize size = settings->getContentSize();
+
+    float up_ellements = 120/SCALE;
+
+    CCSprite* music = CCSprite::create("settings-menu/music.png");
+    CCSize music_size = music->getContentSize();
+    music->removeFromParentAndCleanup(true);
+
+    CCSprite* buttons = CCSprite::create("settings-menu/node.png");
+    CCSize buttons_size = buttons->getContentSize();
+    buttons->removeFromParentAndCleanup(true);
+
+    float space_between_buttons = buttons_size.height;
+    float free_space_sum_y = VISIBLE_SIZE.height -
+            up_ellements -
+            music_size.height -
+            buttons_size.height*3 -
+            (space_between_buttons-buttons_size.height)*2;
+    float one_free_place = free_space_sum_y/3.0f;
+    one_free_place = MIN(one_free_place, VISIBLE_SIZE.height*0.1);
+
+    float music_position_y = VISIBLE_SIZE.height
+            - up_ellements
+            - one_free_place
+            - music_size.height/2.0f;
+
+    float reset_position_y = VISIBLE_SIZE.height
+            - up_ellements
+            - one_free_place*2
+            - music_size.height
+            - buttons_size.height/2.0f;
+
+    float restore_position_y = reset_position_y - space_between_buttons;
+    float dev_position_y = restore_position_y - space_between_buttons;
 
     ///////////////////////////////////////////////////////////////////
     //Music Button
@@ -80,8 +112,8 @@ bool SettingScene::init()
 
     music_button->addChild(_music_logo);
 
-    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35,
-                                  VISIBLE_SIZE.height - 300/SCALE));
+    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35,music_position_y
+                                  /*VISIBLE_SIZE.height - 300/SCALE*/));
     music_button->setPosition(position_music);
     _music_logo->setPosition(ccp(_music_logo->getContentSize().width/2,
                             _music_logo->getContentSize().height/2));
@@ -100,7 +132,7 @@ bool SettingScene::init()
     sound_button->addChild(_sound_logo);
 
     CCPoint position_sound(ccp(VISIBLE_SIZE.width*0.65,
-                                  VISIBLE_SIZE.height - 300/SCALE));
+                                  music_position_y));
     sound_button->setPosition(position_sound);
     _sound_logo->setPosition(ccp(_sound_logo->getContentSize().width/2,
                             _sound_logo->getContentSize().height/2));
@@ -116,8 +148,8 @@ bool SettingScene::init()
 
     reset_button->addChild(reset_logo);
 
-    CCPoint position_reset(ccp(VISIBLE_SIZE.width*0.5,
-                                  VISIBLE_SIZE.height - 520/SCALE));
+    CCPoint position_reset(ccp(VISIBLE_SIZE.width*0.5,reset_position_y
+                                  /*VISIBLE_SIZE.height - 520/SCALE*/));
     reset_button->setPosition(position_reset);
     reset_logo->setPosition(ccp(reset_logo->getContentSize().width/2,
                                reset_logo->getContentSize().height/2));
@@ -141,8 +173,8 @@ bool SettingScene::init()
 
     restor_button->addChild(restor_logo);
 
-    CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,
-                                  VISIBLE_SIZE.height - 620/SCALE));
+    CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,restore_position_y
+                                  /*VISIBLE_SIZE.height - 620/SCALE*/));
     restor_button->setPosition(position_restor);
     restor_logo->setPosition(ccp(restor_logo->getContentSize().width/2,
                                restor_logo->getContentSize().height/2));
@@ -166,8 +198,8 @@ bool SettingScene::init()
 
     dev_button->addChild(dev_logo);
 
-    CCPoint position_dev(ccp(VISIBLE_SIZE.width*0.5,
-                                  VISIBLE_SIZE.height - 720/SCALE));
+    CCPoint position_dev(ccp(VISIBLE_SIZE.width*0.5,dev_position_y
+                                  /*VISIBLE_SIZE.height - 720/SCALE*/));
     dev_button->setPosition(position_dev);
     dev_logo->setPosition(ccp(dev_logo->getContentSize().width/2,
                                dev_logo->getContentSize().height/2));
@@ -182,25 +214,6 @@ bool SettingScene::init()
     dev_button->addChild(dev);
 
     main_menu->addChild(dev_button);
-
-
-
-    ////////////////////////////////////////////////////////////////////
-
-    CCSprite* x4enjoy_logo = CCSprite::create("universal/x4Enjoy.png");
-    AnimatedMenuItem* x4enjoy_button = AnimatedMenuItem::create(
-                x4enjoy_logo, this, menu_selector(SettingScene::onx4EnjoyClicked));
-
-    x4enjoy_button->addChild(x4enjoy_logo);
-
-    CCPoint position_x4enjoy(VISIBLE_SIZE.width*0.5,
-                              200/SCALE);
-    x4enjoy_button->setPosition(position_x4enjoy);
-    x4enjoy_button->setBaseScale(dev_logo->getContentSize().width/x4enjoy_button->getContentSize().width);
-    x4enjoy_logo->setPosition(ccp(x4enjoy_logo->getContentSize().width/2,
-                               x4enjoy_logo->getContentSize().height/2));
-
-    main_menu->addChild(x4enjoy_button);
 
 
 
