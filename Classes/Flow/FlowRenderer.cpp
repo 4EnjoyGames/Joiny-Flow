@@ -451,21 +451,37 @@ FlowRenderer::ColorVec FlowRenderer::getDefaultColors()
 //    v[11] = ccc3(1,10,131); //Very dark blue
 
 
-    v[0] = ccc3(135, 234, 0); //Green
-    v[1] = ccc3(173, 0, 159); //Violet
-    v[2] = ccc3(255,250,0); //Yellow
+//    v[0] = ccc3(135, 234, 0); //Green
+//    v[1] = ccc3(173, 0, 159); //Violet
+//    v[2] = ccc3(255,250,0); //Yellow
 
-    v[3] = ccc3(255,0,0); //Red
-    v[4] = ccc3(0,178,255); //Light Blue
-    v[5] = ccc3(195,255,0); //Very Light Green
+//    v[3] = ccc3(255,0,0); //Red
+//    v[4] = ccc3(0,178,255); //Light Blue
+//    v[5] = ccc3(195,255,0); //Very Light Green
 
-    v[6] = ccc3(169,0,255); //Violet
-    v[7] = ccc3(252,255,0); //Light Yellow
+//    v[6] = ccc3(169,0,255); //Violet
+//    v[7] = ccc3(252,255,0); //Light Yellow
 
-    v[8] = ccc3(211,255,0); //Volet
-    v[9] = ccc3(255,0,45); //Red Pink
-    v[10] = ccc3(76,255,0); //Light Green
-    v[11] = ccc3(228,255,0); //Yellow
+//    v[8] = ccc3(211,255,0); //Volet
+//    v[9] = ccc3(255,0,45); //Red Pink
+//    v[10] = ccc3(76,255,0); //Light Green
+//    v[11] = ccc3(228,255,0); //Yellow
+
+    v[0] = ccc3(211, 0, 255); //Violet
+    v[1] = ccc3(255, 252, 0); //Yellow
+
+    v[2] = ccc3(76,255,0); //Green --
+
+    v[3] = ccc3(255,16,72); //Red
+
+    v[4] = ccc3(0,72,255); //Blue
+
+    v[5] = ccc3(255,142,0); //Orange
+
+    v[6] = ccc3(255,0,233); //Pink
+
+    v[7] = ccc3(0,155,255); //Light blue
+
     return v;
 }
 

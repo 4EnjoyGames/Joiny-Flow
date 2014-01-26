@@ -134,8 +134,8 @@ int main()
     {
         colors[i] = 0;
     }
-    unsigned int max = 3;
-    unsigned int min = 2;
+    unsigned int max = 4;
+    unsigned int min = 3;
 
     generated = 0;
     good = 0;
@@ -218,7 +218,7 @@ int main()
     std::random_shuffle(res.begin(), res.end());
 
     std::stringstream fname;
-    fname << "puzzle_" << joiny_size << "x" << joiny_size << "_2.ad";
+    fname << "puzzle_" << joiny_size << "x" << joiny_size << "_1.ad";
 
     std::ofstream file;
     file.open(fname.str().c_str(), ios::out | ios::binary);

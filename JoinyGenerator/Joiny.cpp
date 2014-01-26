@@ -571,14 +571,14 @@ void palete4(unsigned int c1, unsigned int c2,
 }
 void JoinyColorSchemeInit()
 {
-    palete2(6,7);
-    palete2(1,2);
+    palete2(0,1);
+    palete2(2,6);
 
-    palete3(0,1,2);
-    palete3(3,4,5);
+    palete3(2,5,6);
+    palete3(0,2,1);
 
-    palete4(8,9,10,11);
-    palete4(7,8,9,10);
+    palete4(0,1,3,4);
+    palete4(2,7,5,3);
 }
 const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
 {
