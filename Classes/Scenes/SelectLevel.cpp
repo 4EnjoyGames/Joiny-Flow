@@ -175,7 +175,7 @@ bool SelectLevel::init()
     const std::string coll_name = _current_collection->getCollectionName();
     CCLabelTTF * collections = CCLabelTTF::create( coll_name.c_str(),"fonts/Fredoka One.ttf",72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height - 80/SCALE));
+                          ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     collections->setColor(openLevel);
     this->addChild(collections);
 
