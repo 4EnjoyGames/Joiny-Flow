@@ -51,21 +51,44 @@ private:
         std::string text ="";
         if(_mode==NotEnough)
         {
-            text = CCLocalizedString("End_bad")
-                    + std::to_string(_score);
+            text = CCLocalizedString("End_bad");
+                    //+ std::to_string(_score);
         }
         else
         {
-            text =  CCLocalizedString("End_good")
-                    + std::to_string(_score)
-                    +'\n';
+            text =  CCLocalizedString("End_good");
+                    //std::to_string(_score)
+                    //+'\n';
         }
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
                                                "fonts/Fredoka One.ttf",
-                                               48);
+                                               62);
 
-        label->setPosition(ccp(x_middle, size.height*0.63f));
+        if(_mode == NotEnough)
+        {
+            label->setFontSize(48);
+            label->setPosition(ccp(x_middle, size.height*0.7f));
+
+            CCLabelTTF* score = CCLabelTTF::create(std::to_string(_score).c_str(),
+                                                   "fonts/Fredoka One.ttf",
+                                                   92);
+            score->setPosition(ccp(x_middle, size.height*0.55f));
+            parent->addChild(score);
+        }
+        else
+        {
+            label->setFontSize(48);
+            label->setPosition(ccp(x_middle, size.height*0.85f));
+
+            CCLabelTTF* score = CCLabelTTF::create(std::to_string(_score).c_str(),
+                                                   "fonts/Fredoka One.ttf",
+                                                   78);
+            score->setPosition(ccp(x_middle, size.height*0.78f));
+            parent->addChild(score);
+        }
+
+        //label->setPosition(ccp(x_middle, size.height*0.7f));
         parent->addChild(label);
 
         SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
@@ -90,25 +113,25 @@ private:
         if(_mode==LevelEnd)
         {
             SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
-                                                              "level-menu/save_stars.plist",
-                                                              "level-menu/save_stars.png");
+                                                              "level-end/big_stars.plist",
+                                                              "level-end/big_stars.png");
             _spl->inject();
 
             CCSprite* stars_spr = 0;
 
             if(_stars==1)
-                stars_spr = _spl->loadSprite("stars_1.png");
+                stars_spr = _spl->loadSprite("big_stars_1.png");
             else if(_stars==2)
-                stars_spr = _spl->loadSprite("stars_2.png");
+                stars_spr = _spl->loadSprite("big_stars_2.png");
             else
-                stars_spr = _spl->loadSprite("stars_3.png");
+                stars_spr = _spl->loadSprite("big_stars_3.png");
 
-            stars_spr->setPosition(ccp(x_middle, size.height*0.8f));
+            stars_spr->setPosition(ccp(x_middle, size.height*0.5f));
             //parent->addChild(stars_spr);
 
         }
 
-        float vertical = size.height * 0.2f;
+        float vertical = size.height * 0.18f;
 
 
         AnimatedMenuItem *play_more_item = AnimatedMenuItem::create(

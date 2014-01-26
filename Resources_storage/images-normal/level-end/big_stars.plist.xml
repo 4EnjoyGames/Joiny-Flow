@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>big_stars.png</texture>
+	<sheet>big_stars.plist</sheet>
+	
+	<image>big_stars_1.png</image>
+	<image>big_stars_2.png</image>
+	<image>big_stars_3.png</image>
+</spritesheet>
