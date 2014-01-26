@@ -42,33 +42,34 @@ private:
 
     void onCreate(CCNode *parent)
     {
-        float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
 
-        std::stringstream ss;
+        std::string text ="";
         if(_mode==NotEnough)
         {
-            ss << "You need more score to finish" << std::endl;
-            ss << _score << " needed" << std::endl;
+            text = "You need "
+                    + std::to_string(_score)
+                    +  " score to finish";
         }
         else
         {
-            ss << "Your score: " << _score << std::endl;
-            ss << "Your medal: ";
+            text = "Your score: "
+                    + std::to_string(_score)
+                    +'\n';
+
             if(_stars == 1)
-                ss << "BRONZE";
+                text+="BRONZE";
             else if(_stars == 2)
-                ss << "SILVER";
+                text+="SILVER";
             else if(_stars == 3)
-                ss << "GOLD";
-            ss << std::endl;
+                text+="GOLD";
         }
 
 
-        CCLabelTTF* label = CCLabelTTF::create(ss.str().c_str(),
-                                               "Arial",
+        CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
+                                               "fonts/Fredoka One.ttf",
                                                50,
                                                CCSize(size.width*0.8f, 0),
                                                kCCTextAlignmentCenter);
