@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spritesheet>
+	<texture>level_end.png</texture>
+	<sheet>level_end.plist</sheet>
+	
+	<image>level_end_button.png</image>
+</spritesheet>

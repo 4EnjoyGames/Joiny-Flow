@@ -8,4 +8,4 @@ Yes            = "Yes";
 No            = "No";
 End_first            = "You need ";
 End_second            = " points to Bronse ";
-End_score            = "You win! /nYour score: ";
+End_score            = "You win! \nYour score: ";

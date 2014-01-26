@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <directory>
+<!-- comment -->
+	<!--
 	<file>
 		<name>level_end_buttons.plist.xml</name>
 		<lang>1</lang>
+	</file>-->
+	<file>
+		<name>level_end.plist.xml</name>
 	</file>
 </directory>

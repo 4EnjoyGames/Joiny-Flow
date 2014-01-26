@@ -109,7 +109,7 @@ void PopUpWindow::initWindow()
     _sheet_menu = this;
 
     CCSprite* sheet = CCSprite::create("pop-up/background.png");
-    this->addChild(sheet);
+    this->addChild(sheet, 0, 123);
     //const unsigned int ELEMENTS_LAYER=100;
     //sheet->setVisible(false);
 
