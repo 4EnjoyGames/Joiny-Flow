@@ -280,10 +280,13 @@ void LevelManager::makePreviews(unsigned int joiny_size)
 
     FlowRenderer renderer(table);
 
-    CCRenderTexture * texture = CCRenderTexture::create(int(VISIBLE_SIZE.width),
-                                                    int(VISIBLE_SIZE.height));
+    CCRenderTexture * texture = CCRenderTexture::create(joiny_size*100,
+                                                    joiny_size*100);
     texture->setPosition(ccp(VISIBLE_SIZE.width/2, VISIBLE_SIZE.height/2));
     texture->beginWithClear(1,1,1,1);
+    renderer.setScale(0.5);
+    //renderer.setPosition(ccp(texture->getContentSize().width/2,
+     //                        texture->getContentSize().height/2));
     renderer.visit();
     texture->end();
     texture->saveToFile("screen1.png", kCCImageFormatPNG);
