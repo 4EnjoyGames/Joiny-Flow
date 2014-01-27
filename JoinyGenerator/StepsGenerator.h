@@ -8,6 +8,21 @@
 #include "Joiny.h"
 #include <fstream>
 #include <sstream>
+struct Color
+{
+public:
+    Color(unsigned int r, unsigned int g, unsigned int b):
+        _red(r), _green(g), _blue(b)
+    {
+
+    }
+
+private:
+    unsigned int _red;
+    unsigned int _green;
+    unsigned int _blue;
+
+};
 
 bool areNeighboors(const FlowPoint& a, const FlowPoint& b);
 bool operator<(const FlowPoint& a, const FlowPoint& b);
@@ -26,3 +41,7 @@ void SaveLevels(const unsigned int tablo_size,
                 const unsigned int level_number,
                 const unsigned int min_colors,
                 const unsigned int max_colors);
+
+void SaveCollection(const unsigned int tablo_size,
+                    const unsigned int level_number,
+                    const Color collection_color);

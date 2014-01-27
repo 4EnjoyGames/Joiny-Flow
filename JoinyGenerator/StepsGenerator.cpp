@@ -194,6 +194,12 @@ void SaveLevels(const unsigned int tablo_size,
     tabulate(generated, good, good_tasks.size());
 
 }
+void SaveCollection(const unsigned int tablo_size,
+                    const unsigned int level_number,
+                    const Color collection_color)
+{
+
+}
 
 //void SaveLevels(const unsigned int tablo_size,
 //                const unsigned int level_number,
