@@ -273,15 +273,6 @@ void FlowRenderer::createBackground()
         line->setPositionX(y*cell_width);
         line->visit();
     }
-//    for(unsigned int x=1; x<width+1; ++x)
-//    {
-//            line->setPosition(this->getNodePosition(FlowPoint(x,0)));
-//            line->setRotation(90.0f);
-//            curr_width+=cell_width;
-//            line->visit();
-
-//    }
-
 
 
     tablo->setPosition(ccp(0,0));

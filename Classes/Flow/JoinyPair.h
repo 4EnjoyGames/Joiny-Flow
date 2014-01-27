@@ -70,6 +70,11 @@ struct JoinyPuzzle
     JoinyPuzzle()
         : _info(0,0,0)
     {}
+    const JoinyTask& getJoinyTask()
+    {
+        return _task;
+    }
+
     JoinyTask _task;
     JoinyInfo _info;
 

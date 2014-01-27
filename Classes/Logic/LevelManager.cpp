@@ -2,6 +2,10 @@
 #include "Core/MusicSettings.h"
 #include "Core/FileUtils.h"
 #include <fstream>
+#include "Core/Screen.h"
+#include "Flow/FlowTable.h"
+#include "Flow/FlowRenderer.h"
+
 LevelManager::LevelManager()
     : _save_path(FileUtils::getStorageFilePath("save.ad")),
       _settings_path(FileUtils::getStorageFilePath("settings.ad"))
@@ -246,26 +250,64 @@ void LevelManager::makePreviews(unsigned int joiny_size)
     std::stringstream fname;
     fname << "../build/JoinyGeneratorDebug/" << joiny_size << "x" << joiny_size << "_" << "1" << ".ad";
 
+    JoinyPuzzle inp;
+    JoinyTask task;
     std::stringstream ss;
     if(FileUtils::openPackageFile(fname.str().c_str(), ss))
     {
         InputBinaryStream is(ss);
 
-        JoinyPuzzle inp;
+
         is >> inp;
 
         int a = 2;
         a++;
     }
+    task = inp.getJoinyTask();
+
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+
+    FlowTable table(5,5);
+    for(unsigned int i=0; i<task.size(); ++i)
+    {
+        JoinyPair pair = task[i];
+        FlowStartEnd start_end = pair.getPoints();
+        unsigned int color = pair.getColor();
+
+        table.addColor(start_end[0],start_end[1], color);
+    }
+
+    FlowRenderer renderer(table);
+
+    CCRenderTexture * texture = CCRenderTexture::create(int(VISIBLE_SIZE.width),
+                                                    int(VISIBLE_SIZE.height));
+    texture->setPosition(ccp(VISIBLE_SIZE.width/2, VISIBLE_SIZE.height/2));
+    texture->beginWithClear(1,1,1,1);
+    renderer.visit();
+    texture->end();
+    texture->saveToFile("screen1.png", kCCImageFormatPNG);
 }
 
-void SaveScreenshot()
+void LevelManager::SaveScreenshot()
 {
-    CCSize size = CCDirector::sharedDirector()->getWinSize();
-    CCRenderTexture* texture = CCRenderTexture::create((int)size.width, (int)size.height);
-    texture->setPosition(ccp(size.width/2, size.height/2));
-    texture->begin();
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+
+    CCRenderTexture * texture = CCRenderTexture::create(int(VISIBLE_SIZE.width),
+                                                    int(VISIBLE_SIZE.height));
+    texture->setPosition(ccp(VISIBLE_SIZE.width/2, VISIBLE_SIZE.height/2));
+    texture->beginWithClear(1,1,1,1);
     CCDirector::sharedDirector()->getRunningScene()->visit();
     texture->end();
-    texture->saveToFile("../build/JoinyGeneratorDebug/scrren1", kCCImageFormatPNG);
+    texture->saveToFile("screen1.png", kCCImageFormatPNG);
+
+    //these code make screens
+    //    CCRenderTexture * texture = CCRenderTexture::create(int(VISIBLE_SIZE.width),
+    //                                                    int(VISIBLE_SIZE.height));
+    //    texture->setPosition(ccp(VISIBLE_SIZE.width/2, VISIBLE_SIZE.height/2));
+    //    texture->beginWithClear(1,1,1,1);
+    //    CCDirector::sharedDirector()->getRunningScene()->visit();
+    //    texture->end();
+    //    texture->saveToFile("screen1.png", kCCImageFormatPNG);
 }

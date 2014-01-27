@@ -26,6 +26,7 @@ public:
     unsigned int getCollectionMinStars(const JoinyCollection *coll);
 
     void makePreviews(unsigned int joiny_size);
+    void SaveScreenshot();
 
 private:
     LevelManager();
