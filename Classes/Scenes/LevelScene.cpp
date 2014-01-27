@@ -70,7 +70,9 @@ private:
             label->setFontSize(48);
             label->setPosition(ccp(x_middle, size.height*0.7f));
 
-            CCLabelTTF* score = CCLabelTTF::create(std::to_string(_score).c_str(),
+            std::string score_to_bronze = std::to_string(_level->getPuzzle()._info.getBronze());
+
+            CCLabelTTF* score = CCLabelTTF::create(score_to_bronze.c_str(),
                                                    "fonts/Fredoka One.ttf",
                                                    92);
             score->setPosition(ccp(x_middle, size.height*0.55f));
