@@ -9,8 +9,6 @@ SOURCES += main.cpp \
     Joiny.cpp
 
 HEADERS += \
-    FlowGenerator.h \
-    FlowGenerator.h \
     FGenerator.h \
     FlowPoint.h \
     Joiny.h

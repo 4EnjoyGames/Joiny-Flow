@@ -38,9 +38,9 @@ const StarsNumber JoinyLevel::getStarsNumber(const Score score) const
     else
     {
         stars = 1;
-        if(score > _puzzle._info.getGold())
+        if(score >= _puzzle._info.getGold())
             stars = 3;
-        else if(score > _puzzle._info.getSilver())
+        else if(score >= _puzzle._info.getSilver())
             stars = 2;
 
     }

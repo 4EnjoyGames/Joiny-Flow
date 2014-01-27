@@ -9,4 +9,4 @@ No            = "No";
 End_bad            = "You need more points\n";
 End_good            = "Score\n";
 Retry            = "Retry";
-Next            = "Next Level";
+Next            = "Next";

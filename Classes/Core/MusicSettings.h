@@ -71,7 +71,7 @@ private:
     void do_turnOnSoundEffect(void)
     {
         //TODO: may be it needs changes
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
+        //CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeAllEffects();
         _sound_effect_on=true;
     }
     void do_turnOffSoundEffect(void)
