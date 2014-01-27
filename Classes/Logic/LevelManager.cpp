@@ -241,3 +241,31 @@ unsigned int LevelManager::getCollectionMinStars(const JoinyCollection *coll)
 {
     return coll->getMinStarsNumber();
 }
+void LevelManager::makePreviews(unsigned int joiny_size)
+{
+    std::stringstream fname;
+    fname << "../build/JoinyGeneratorDebug/" << joiny_size << "x" << joiny_size << "_" << "1" << ".ad";
+
+    std::stringstream ss;
+    if(FileUtils::openPackageFile(fname.str().c_str(), ss))
+    {
+        InputBinaryStream is(ss);
+
+        JoinyPuzzle inp;
+        is >> inp;
+
+        int a = 2;
+        a++;
+    }
+}
+
+void SaveScreenshot()
+{
+    CCSize size = CCDirector::sharedDirector()->getWinSize();
+    CCRenderTexture* texture = CCRenderTexture::create((int)size.width, (int)size.height);
+    texture->setPosition(ccp(size.width/2, size.height/2));
+    texture->begin();
+    CCDirector::sharedDirector()->getRunningScene()->visit();
+    texture->end();
+    texture->saveToFile("../build/JoinyGeneratorDebug/scrren1", kCCImageFormatPNG);
+}

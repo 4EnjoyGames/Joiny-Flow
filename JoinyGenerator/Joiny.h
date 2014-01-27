@@ -10,9 +10,16 @@ typedef std::map<unsigned int, std::vector<Palete> > AllPaletes;
 
 
 const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap);
+
+JoinyTask flowToJoiny(const FlowTask& task,
+                      const unsigned int colors,
+                      bool mode);
+
 JoinyTask flowToJoiny(const FlowTask& task,
                       const unsigned int colors);
+
 JoinyTask flowToJoinyStaightforward(const FlowTask& task);
+
 JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
                      const unsigned int height);

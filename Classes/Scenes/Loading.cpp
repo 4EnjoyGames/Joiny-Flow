@@ -8,6 +8,7 @@
 
 #include "StoreBridge/cocos2dx_StoreController.h"
 #include "StoreBridge/cocos2dx_EventHandlers.h"
+#include "Logic/LevelManager.h"
 
 Loading::Loading() : _sprites_to_load(0), _loaded_sprites(0)
 {
@@ -103,7 +104,6 @@ void Loading::initRW()
 }
 void Loading::addAll()
 {
-	
 
 //	addSpriteToLoad("common.png");
 //	addPlistToLoad("common.plist");
@@ -182,6 +182,8 @@ void Loading::addAll()
     RW::getLevelManager().loadSettings();
     addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
+
+    RW::getLevelManager().makePreviews(5);
 
 //    const CollectionsArr& arr = RW::getCollections();
 //    for(CollectionsArr::const_iterator it = arr.begin(); it != arr.end(); ++it)

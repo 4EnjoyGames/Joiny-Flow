@@ -440,6 +440,21 @@ JoinyTask relocorJoiny(const JoinyTask& joiny_task,
     }
     return result;
 }
+JoinyTask flowToJoiny(const FlowTask& task,
+                      const unsigned int colors,
+                      bool mode)
+{
+    mode;
+    assert(colors <= task.size());
+    JoinyTask res;
+
+    for(unsigned int i=0; i<task.size(); ++i)
+    {
+        unsigned int color = i % colors;
+        res.push_back(JoinyPair(task[i], color));
+    }
+    return res;
+}
 
 JoinyTask flowToJoiny(const FlowTask& task_2, const unsigned int colors)
 {
@@ -463,7 +478,6 @@ JoinyTask flowToJoiny(const FlowTask& task_2, const unsigned int colors)
 
     for(unsigned int i=colors; i<task.size(); ++i)
     {
-        //unsigned int color = rand() % colors;
         unsigned int color = rand() % palete.size();
         res.push_back(JoinyPair(task[i], palete[color]));
     }
@@ -539,7 +553,6 @@ JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsi
     }
     return JoinyInfo(0,0,0);
 }
-//typedef unsigned int Color;
 
 static AllPaletes _paletes;
 

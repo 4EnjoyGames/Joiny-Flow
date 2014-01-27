@@ -1,8 +1,3 @@
-//#ifndef STEPSGENERATOR_H
-//#define STEPSGENERATOR_H
-
-//#endif // STEPSGENERATOR_H
-
 #include <iostream>
 #include "FGenerator.h"
 #include <cstdlib>
@@ -19,6 +14,7 @@ bool operator<(const FlowPoint& a, const FlowPoint& b);
 bool operator<(const FlowTask& a, const FlowTask& b);
 bool operator<(const JoinyPair& a, const JoinyPair& b);
 bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info);
+bool isGooTask(const FlowTask& task);
 bool isGooTask(const FlowTask& task, unsigned int N);
 void tabulate(unsigned int generated, unsigned int good, unsigned int unique);
 bool operator<(const JoinyInfo& a, const JoinyInfo& b);

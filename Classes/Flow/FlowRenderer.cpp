@@ -3,7 +3,8 @@
 using namespace cocos2d;
 
 FlowRenderer::FlowRenderer(const FlowTable& table)
-    : _table(table), _nodes_renderers(table.getWidth(), Row(table.getHeight())),
+    : _table(table),
+      _nodes_renderers(table.getWidth(), Row(table.getHeight())),
       _active_circle(0)
 {
     //Get the sprites loader

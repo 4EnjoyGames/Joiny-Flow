@@ -25,6 +25,8 @@ public:
     unsigned int getCollectionCurrStars(const JoinyCollection *coll);
     unsigned int getCollectionMinStars(const JoinyCollection *coll);
 
+    void makePreviews(unsigned int joiny_size);
+
 private:
     LevelManager();
     void onInit();
