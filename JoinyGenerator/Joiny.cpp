@@ -32,25 +32,11 @@ public:
     Scores _scores;
 
 
-    struct Paar
-    {
-    public:
-        Distance _x;
-        Distance _y;
-        Paar(int x,int y): _x(x), _y(y) {}
-    };
-    typedef std::vector<Paar> OneColorPath;
-    //one color path
-    OneColorPath _color_path;
-
-    //one table pathes
-    typedef std::vector<OneColorPath> TablePath;
-    TablePath _table_pathes;
-
-    std::vector<TablePath> _game_pathes;
-
-    //v 1.1
+    //one tablo path for hints
     std::vector<int> _tablo_with_pathes;
+
+    typedef map<unsigned int, std::vector<int> > AllTablosPathes;
+    AllTablosPathes _all_pathes;
 
 
     NumberLink(const Distance width,
@@ -159,7 +145,6 @@ public:
         if (cell_key == size_)
         {
             Print();
-            SaveAllPath();
             return 1.0;
         }
         else
@@ -464,27 +449,28 @@ public:
                 }
             }
 
-
-
         if(score > 0)
         {
             if(_scores.find(score) == _scores.end())
             {
                 _scores[score]=1;
-                //add hints
-                //DoPrint();
+
+                SaveAllPath();
+                if(_all_pathes.find(score) == _all_pathes.end())
+                {
+                    _all_pathes[score] = _tablo_with_pathes;
+                }
             }
             else
+            {
                 _scores[score]++;
+            }
         }
 
         if(score > 0 && false)
         {
             cout << "Score: " << score << endl;
         }
-
-
-
     }
 
 private:
@@ -711,7 +697,9 @@ unsigned int clamp(const unsigned int num, const unsigned int clamper)
     return (num / clamper) * clamper;
 }
 
-JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsigned int height)
+JoinyInfo solveJoiny(const JoinyTask& task,
+                     const unsigned int width,
+                     const unsigned int height)
 {
     NumberLink nl((int)width, (int)height);
     nl.Initialize();
@@ -735,6 +723,7 @@ JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsi
     {
 
         NumberLink::Scores& sc = nl._scores;
+        NumberLink::AllTablosPathes& pathes = nl._all_pathes;
 
         typedef NumberLink::Scores::iterator It;
 
@@ -749,29 +738,28 @@ JoinyInfo solveJoiny(const JoinyTask& task, const unsigned int width, const unsi
         {
             unsigned int score = it->first;
             if(score < min)
+            {
                 min = score;
+            }
             if(score > max)
+            {
                 max = score;
+            }
 
             sum += score * it->second;
             n += it->second;
         }
 
-//        cout << "Min: " << min << endl;
-//        cout << "Max: " << max << endl;
-//        cout << "Average: " << (sum / n) << endl;
-//        cout << "N: " << n << endl;
+        //find path for max score
+        if(pathes.find(max) != pathes.end())
+        {
+            std::vector<int> tablo_pathes = pathes.find(max)->second;
+        }
 
         unsigned int average = sum/n;
-        return JoinyInfo(clamp(average, 500), clamp((average + max)/2, 500), clamp(max, 500));
-
-//        cout << "Bronze: " << clamp(average, 500) << endl;
-//        cout << "Silver: " << clamp((average + max)/2, 500) << endl;
-//        cout << "Gold: " << clamp(max, 500) << endl;
-
-//        nl.DoPrint();
-
-
+        return JoinyInfo(clamp(average, 500),
+                         clamp((average + max)/2, 500),
+                         clamp(max, 500));
     }
     return JoinyInfo(0,0,0);
 }
