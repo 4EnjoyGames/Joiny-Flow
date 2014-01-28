@@ -68,9 +68,15 @@ void DrawLayer::createDrawingNodes()
     _sprite->setScale(1.0/_real_scale);
     _sprite->retain();
 }
-void attachDrawingNodesToLayer(DrawLayer* layer)
+void DrawLayer::attachDrawingNodesToLayer(DrawLayer* layer)
 {
+    if(_background->getParent())
+        _background->removeFromParent();
+    if(_sprite->getParent())
+        _sprite->removeFromParent();
 
+    layer->CCLayer::addChild(_background, 0, 0);
+    layer->CCLayer::addChild(_sprite, 0, 0);
 }
 
 bool DrawLayer::init()
@@ -86,15 +92,11 @@ bool DrawLayer::init()
 
     _main_node = CCNodeRGBA::create();
 
-    this->scheduleUpdate();
+    //this->scheduleUpdate();
 
-    if(_background->getParent())
-        _background->removeFromParent();
-    if(_sprite->getParent())
-        _sprite->removeFromParent();
 
-    CCLayer::addChild(_background, 0, 0);
-    CCLayer::addChild(_sprite, 0, 0);
+
+    attachDrawingNodesToLayer(this);
     CCLayer::addChild(_main_node, 0, NO_DRAW);
 
     return true;
@@ -102,6 +104,8 @@ bool DrawLayer::init()
 
 void DrawLayer::visit()
 {
+    redrawMainNode();
+
     // quick return if not visible. children won't be drawn.
     if (!m_bVisible)
     {
@@ -172,7 +176,7 @@ void DrawLayer::redrawMainNode()
 
 void DrawLayer::update(float a)
 {
-    redrawMainNode();
+
 }
 
 void DrawLayer::addChild(CCNode * child)
