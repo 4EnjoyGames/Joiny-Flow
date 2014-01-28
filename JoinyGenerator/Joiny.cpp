@@ -31,6 +31,28 @@ public:
     typedef map<unsigned int, unsigned int> Scores;
     Scores _scores;
 
+
+    struct Paar
+    {
+    public:
+        Distance _x;
+        Distance _y;
+        Paar(int x,int y): _x(x), _y(y) {}
+    };
+    typedef std::vector<Paar> OneColorPath;
+    //one color path
+    OneColorPath _color_path;
+
+    //one table pathes
+    typedef std::vector<OneColorPath> TablePath;
+    TablePath _table_pathes;
+
+    std::vector<TablePath> _game_pathes;
+
+    //v 1.1
+    std::vector<int> _tablo_with_pathes;
+
+
     NumberLink(const Distance width,
                const Distance height):
         width_(width),
@@ -55,7 +77,8 @@ public:
         }
 
         // Generates references: (x, y) <=> CellKey
-        Distance x = 0, y = 0;
+        Distance x = 0;
+        Distance y = 0;
         CellKey cell_key = 0;
 
         while (true)
@@ -102,7 +125,10 @@ public:
     // Returns the key of the special order for the coordinate (x,y).
     CellKey GetCellKey(const Distance x, const Distance y) const
     {
-        return keys_[(CellPosition)y * width_ + x];
+        if((CellPosition)y * width_ >= keys_.size())
+            return keys_[keys_.size()-1];
+        else
+            return keys_[(CellPosition)y * width_ + x];
     }
 
     double Solve(const CellKey cell_key = 0)
@@ -133,6 +159,7 @@ public:
         if (cell_key == size_)
         {
             Print();
+            SaveAllPath();
             return 1.0;
         }
         else
@@ -210,11 +237,13 @@ public:
     }
 
     std::vector<bool> _traversed;
+    std::vector<bool> _hint_traveled;
 
     unsigned int traverse(const unsigned int x,
                           const unsigned int y,
                           unsigned int path_lenth)
     {
+
         _traversed[GetCellKey(x, y)] = true;
 
         if(path_lenth > 0 && table_[GetCellKey(x, y)])
@@ -250,12 +279,91 @@ public:
         //assert(false);
     }
 
+
+    void SaveAllPath()
+    {
+        _hint_traveled = std::vector<bool>(height_ * width_, false);
+        _tablo_with_pathes = std::vector<int>(height_ * width_, 0);
+
+        unsigned int result = 0;
+
+        bool stop = false;
+        for (Distance y = 0; y < height_ && !stop; y++)
+            for (Distance x = 0; x < width_ && !stop; x++)
+            {
+                if (table_[GetCellKey(x, y)] &&
+                        !_hint_traveled[GetCellKey(x, y)])
+                {
+                    CellNumber number = table_[GetCellKey(x, y)];
+                    result = saveOnePath(x,y,0,number);
+                    if(result == 0)
+                        stop = true;
+                }
+            }
+        if(result > 0)
+        {
+            //add path to data base
+        }
+
+    }
+
+    unsigned int saveOnePath(const unsigned int x,
+                  const unsigned int y,
+                  unsigned int path_lenth,
+                  const CellNumber& cell_number)
+    {
+        _hint_traveled[GetCellKey(x, y)] = true;
+
+        if(path_lenth > 0 && table_[GetCellKey(x, y)])
+        {
+            return 100;
+        }
+
+
+        //Next go to left?
+        if(x > 0 && connected_x_[GetCellKey(x, y)] &&
+                !_hint_traveled[GetCellKey(x-1, y)])
+        {
+            _tablo_with_pathes[GetCellKey(x-1, y)] = cell_number;
+            return saveOnePath(x-1, y, path_lenth+1, cell_number);
+        }
+
+        //Next go to top?
+        if(y > 0 && connected_y_[GetCellKey(x, y)] &&
+                !_hint_traveled[GetCellKey(x, y-1)])
+        {
+            _tablo_with_pathes[GetCellKey(x, y-1)] = cell_number;
+            return saveOnePath(x, y-1, path_lenth+1, cell_number);
+        }
+
+        //Next go to right?
+        if(x+1 < width_ && connected_x_[GetCellKey(x+1, y)] &&
+                !_hint_traveled[GetCellKey(x+1, y)])
+        {
+            _tablo_with_pathes[GetCellKey(x+1, y)] = cell_number;
+            return saveOnePath(x+1, y, path_lenth+1, cell_number);
+        }
+
+        //Next go bottom?
+        if(y+1 < height_ && connected_y_[GetCellKey(x, y+1)] &&
+                !_hint_traveled[GetCellKey(x, y+1)])
+        {
+            _tablo_with_pathes[GetCellKey(x, y+1)] = cell_number;
+            return saveOnePath(x, y+1, path_lenth+1, cell_number);
+        }
+
+        return 0;
+    }
+
     void DoPrint()
     {
         for (Distance y = 0; y <= height_; y++)
         {
+            //int curr_point = 0;
             for (Distance x = 0; x < width_; x++)
             {
+
+                //int curr_point = int(table_[GetCellKey(x, y)]);
                 cout << "+";
                 if((y % height_ == 0))
                     cout << "---";
@@ -264,6 +372,7 @@ public:
                     //Чи пішли ми з клітинки вгору
                     if(connected_y_[GetCellKey(x, y)])
                         cout << " # ";
+                        //cout << curr_point;
                     else
                         cout <<  "   ";
                 }
@@ -274,10 +383,13 @@ public:
 
             for (Distance x = 0; x < width_; x++)
             {
+                //curr_point = int(table_[GetCellKey(x, y)]);
+
                 if(x)
                 {
                     if(connected_x_[GetCellKey(x, y)])
                         cout << "#";
+                        //cout << curr_point;
                     else
                         cout << " ";
                 }
@@ -295,6 +407,7 @@ public:
                     //Чи прийшли ми зліва в клітинку (x y)
                     if(connected_x_[GetCellKey(x, y)])
                         cout << "#";
+                       // cout << curr_point;
                     else
                         cout << " ";
 
@@ -304,10 +417,13 @@ public:
                         cout << " ";
                     else
                         cout << "#";
+                        //cout << curr_point;
 
                     //Чи пішли ми враво із цієї клітинки
-                    if(x + 1 < width_ && connected_x_[GetCellKey(x + 1, y)])
+                    if(x + 1 < width_ &&
+                            connected_x_[GetCellKey(x + 1, y)])
                         cout << "#";
+                        //cout << curr_point;
                     else
                         cout << " ";
 
@@ -318,11 +434,12 @@ public:
         }
     }
 
-    void Print() {
-
-
-        //connected_x_[GetCellKey(x, y)]; true якщо в клітинку (x, y) шлях іде зліва
-        //connected_y_[GetCellKey(x, y)]; true якщо в клітинку (x, y) шлях іде згори
+    void Print()
+    {
+        //connected_x_[GetCellKey(x, y)]; true
+        //якщо в клітинку (x, y) шлях іде зліва
+        //connected_y_[GetCellKey(x, y)]; true
+        //якщо в клітинку (x, y) шлях іде згори
 
         _traversed = std::vector<bool>(height_ * width_, false);
         unsigned int score = 0;
@@ -331,7 +448,8 @@ public:
         for (Distance y = 0; y < height_ && !stop; y++)
             for (Distance x = 0; x < width_ && !stop; x++)
             {
-                if (table_[GetCellKey(x, y)] && !_traversed[GetCellKey(x, y)])
+                if (table_[GetCellKey(x, y)] &&
+                        !_traversed[GetCellKey(x, y)])
                 {
                     unsigned int sc = traverse(x,y,0);
                     if(sc == 0)
@@ -351,18 +469,21 @@ public:
         if(score > 0)
         {
             if(_scores.find(score) == _scores.end())
+            {
                 _scores[score]=1;
+                //add hints
+                //DoPrint();
+            }
             else
                 _scores[score]++;
         }
 
         if(score > 0 && false)
         {
-
-
             cout << "Score: " << score << endl;
-
         }
+
+
 
     }
 
@@ -387,7 +508,7 @@ private:
     vector<CellKey> start_;
 
     // Description of links on the board
-    vector<bool> connected_x;
+    vector<bool> connected_x_;
     vector<bool> connected_y_;
 
     // Hash table to identify a sequence of CellKeys
