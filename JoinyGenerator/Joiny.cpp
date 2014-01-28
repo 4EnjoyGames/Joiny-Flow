@@ -415,7 +415,7 @@ const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap)
 
     return min_it->first;
 }
-JoinyTask relocorJoiny(JoinyTask& joiny_task,
+JoinyTask recolorJoiny(JoinyTask& joiny_task,
                        const Palete& bad_palete)
 {
     //select new palete

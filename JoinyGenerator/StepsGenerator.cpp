@@ -212,18 +212,38 @@ void SaveCollection(std::string coll_save_name)
     std::string line;
 
     std::getline(infile, line);
-    std::string tablo_size = line;
-    int tablo_size_i = std::stoi(tablo_size);
+    std::string tablo_width = line;
+    uint32_t tablo_width_i = std::stoi(tablo_width);
+
+    std::getline(infile, line);
+    std::string tablo_height = line;
+    uint32_t tablo_height_i = std::stoi(tablo_height);
 
     std::getline(infile, line);
     std::string level_num = line;
-    int level_num_i = std::stoi(level_num);
+    uint32_t level_num_i = std::stoi(level_num);
 
     std::getline(infile,line);
     std::string collection_color = line;
+    std::string r = "";
+    std::string g = "";
+    std::string b = "";
+
+    //get collection color
+    istringstream iss(collection_color);
+    iss >> r;
+    iss >> g;
+    iss >> b;
+
+    //convert coll colors from string to uint32
+    uint32_t r_uint = std::stoi(r);
+    uint32_t g_uint = std::stoi(g);
+    uint32_t b_uint = std::stoi(b);
+
+
+
 
     std::vector<std::string> level_files_name;
-
     for(unsigned int i=0; i<level_num_i; ++i)
     {
         std::getline(infile, line);
@@ -261,7 +281,7 @@ void SaveCollection(std::string coll_save_name)
 
         if(_past_palete == _curr_palete)
         {
-            relocorJoiny(puzzle_ptr->getJoinyTask(),
+            recolorJoiny(puzzle_ptr->getJoinyTask(),
                                               _curr_palete);
             _curr_palete = getPalete(*it);
         }
@@ -277,6 +297,20 @@ void SaveCollection(std::string coll_save_name)
     std::ofstream file;
     file.open(fname.str().c_str(), ios::out | ios::binary);
     OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
+
+    //save width and height
+    os << tablo_width_i;
+    os << tablo_height_i;
+
+    //level num
+    os << level_num_i;
+
+    //level color
+    os << r_uint;
+    os << g_uint;
+    os << b_uint;
+
+    //levels
     os << good_tasks;
 }
 const Palete getPalete(JoinyPuzzle& puzzle)

@@ -12,16 +12,16 @@ GameInfo::GameInfo()
 void GameInfo::setInfo()
 {
     _coll_files.push_back("puzzle_5x5_1.ad");
-    _coll_files.push_back("puzzle_5x5_2.ad");
-    _coll_files.push_back("puzzle_6x6_1.ad");
+    //_coll_files.push_back("puzzle_5x5_2.ad");
+    //_coll_files.push_back("puzzle_6x6_1.ad");
 
     _flow_points.push_back(FlowPoint(5,5));
-    _flow_points.push_back(FlowPoint(5,5));
-    _flow_points.push_back(FlowPoint(6,6));
+    //_flow_points.push_back(FlowPoint(5,5));
+    //_flow_points.push_back(FlowPoint(6,6));
 
     _colors.push_back(ccc3(248,105,159));
-    _colors.push_back(ccc3(100,243,248));
-    _colors.push_back(ccc3(64,255,68));
+    //_colors.push_back(ccc3(100,243,248));
+    //_colors.push_back(ccc3(64,255,68));
 
     _level_number = 100;
 

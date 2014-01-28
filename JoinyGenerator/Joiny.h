@@ -24,7 +24,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
                      const unsigned int height);
 
-JoinyTask relocorJoiny(JoinyTask &joiny_task,
+JoinyTask recolorJoiny(JoinyTask &joiny_task,
                        const Palete &bad_palete);
 
 const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete);
