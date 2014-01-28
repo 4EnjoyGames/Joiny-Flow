@@ -15,6 +15,9 @@ public:
     bool init();
     void visit();
 private:
+    static void createDrawingNodes();
+    static void attachDrawingNodesToLayer(DrawLayer* layer);
+    void redrawMainNode();
     static const int NO_DRAW = 911;
 
     static CCRenderTexture* _render;

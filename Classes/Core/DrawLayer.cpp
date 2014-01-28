@@ -12,6 +12,66 @@ CCRenderTexture* DrawLayer::_render = nullptr;
 CCSprite* DrawLayer::_sprite = nullptr;
 CCSprite* DrawLayer::_background = nullptr;
 CCNode* DrawLayer::_transform = nullptr;
+void DrawLayer::createDrawingNodes()
+{
+    assert(_render == nullptr);
+    const CCPoint ORIGIN = Screen::getOrigin();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
+
+    //Init global rendering
+    CCSize win_size = Screen::getRealSize();
+
+    //Create sprite for background
+    CCSprite* background_piece = CCSprite::create("universal/game_background.png");
+    CCTexture2D *texture = background_piece->getTexture();
+    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
+    texture->setTexParameters(&params);
+
+    const float DESIGN_SCALE = Screen::getDesignResourceScale();
+
+    _background = CCSprite::createWithTexture(texture,
+                                                  CCRectMake(0,
+                                                             0,
+                                                             win_size.width/DESIGN_SCALE,
+                                                             win_size.height/DESIGN_SCALE));
+
+
+    _background->setAnchorPoint(ccp(0,0));
+    _background->setPosition(ORIGIN);
+    _background->setScale(VISIBLE_SIZE.width/win_size.width*DESIGN_SCALE);
+    _background->retain();
+
+    //Prepare render node
+    _render = CCRenderTexture::createNoScale(win_size.width/DESIGN_SCALE,
+                                             win_size.height/DESIGN_SCALE,
+                                             kTexture2DPixelFormat_RGBA8888);
+    _render->retain();
+
+    float _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE/DESIGN_SCALE;
+    CCPoint _neg_origin = ORIGIN * -_real_scale;
+
+    //Prepare transform for rendering
+    _transform = CCNode::create();
+    _transform->setPosition(_neg_origin);
+    _transform->setScale(_real_scale);
+    _transform->retain();
+
+
+    //Create display sprite
+    _sprite = CCSprite::createWithTexture(_render->getSprite()->getTexture());
+    ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
+    _sprite->setBlendFunc(function);
+    _sprite->setAnchorPoint(ccp(0,0));
+    _sprite->setPosition(ORIGIN);
+    _sprite->setFlipY(true);
+    _sprite->setScale(1.0/_real_scale);
+    _sprite->retain();
+}
+void attachDrawingNodesToLayer(DrawLayer* layer)
+{
+
+}
 
 bool DrawLayer::init()
 {
@@ -20,58 +80,7 @@ bool DrawLayer::init()
 
     if(_render == nullptr)
     {
-        const CCPoint ORIGIN = Screen::getOrigin();
-        const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-        const float SCALE = Screen::getScaleFactor();
-
-        //Init global rendering
-        CCSize win_size = Screen::getRealSize();
-
-        //Create sprite for background
-        CCSprite* background_piece = CCSprite::create("universal/game_background.png");
-        CCTexture2D *texture = background_piece->getTexture();
-        ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-        texture->setTexParameters(&params);
-
-        const float DESIGN_SCALE = Screen::getDesignResourceScale();
-
-        _background = CCSprite::createWithTexture(texture,
-                                                      CCRectMake(0,
-                                                                 0,
-                                                                 win_size.width/DESIGN_SCALE,
-                                                                 win_size.height/DESIGN_SCALE));
-
-
-        _background->setAnchorPoint(ccp(0,0));
-        _background->setPosition(ORIGIN);
-        _background->setScale(VISIBLE_SIZE.width/win_size.width*DESIGN_SCALE);
-        _background->retain();
-
-        //Prepare render node
-        _render = CCRenderTexture::createNoScale(win_size.width/DESIGN_SCALE,
-                                                 win_size.height/DESIGN_SCALE,
-                                                 kTexture2DPixelFormat_RGBA8888);
-        _render->retain();
-
-        float _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE/DESIGN_SCALE;
-        CCPoint _neg_origin = ORIGIN * -_real_scale;
-
-        //Prepare transform for rendering
-        _transform = CCNode::create();
-        _transform->setPosition(_neg_origin);
-        _transform->setScale(_real_scale);
-        _transform->retain();
-
-
-        //Create display sprite
-        _sprite = CCSprite::createWithTexture(_render->getSprite()->getTexture());
-        ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
-        _sprite->setBlendFunc(function);
-        _sprite->setAnchorPoint(ccp(0,0));
-        _sprite->setPosition(ORIGIN);
-        _sprite->setFlipY(true);
-        _sprite->setScale(1.0/_real_scale);
-        _sprite->retain();
+        createDrawingNodes();
     }
 
 
@@ -147,8 +156,7 @@ void DrawLayer::visit()
 DrawLayer::~DrawLayer()
 {
 }
-
-void DrawLayer::update(float a)
+void DrawLayer::redrawMainNode()
 {
     _render->beginWithClear(1,1,1,1);
 
@@ -160,6 +168,11 @@ void DrawLayer::update(float a)
     kmGLPopMatrix();
 
     _render->end();
+}
+
+void DrawLayer::update(float a)
+{
+    redrawMainNode();
 }
 
 void DrawLayer::addChild(CCNode * child)
