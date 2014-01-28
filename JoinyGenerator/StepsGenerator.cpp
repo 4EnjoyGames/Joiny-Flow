@@ -18,30 +18,6 @@ bool areNeighboors(const FlowPoint& a, const FlowPoint& b)
 
 bool operator<(const FlowTask& a, const FlowTask& b)
 {
-//    bool result = true;
-//    if(a.size()>b.size())
-//        result = false;
-//    else if(a.size()<b.size())
-//        result = false;
-//    else
-//    {
-//        for(unsigned int i=0; i<a.size(); ++i)
-//        {
-//            FlowStartEnd a_curr = a[i];
-//            FlowStartEnd b_curr = b[i];
-
-//            if(a_curr < b_curr)
-//            {
-//                result = true;
-//            }
-//            else
-//            {
-//                result = false;
-//                break;
-//            }
-//        }
-//    }
-//    return result;
     return std::lexicographical_compare(a.begin(), a.end(), b.begin(), b.end());
 }
 
@@ -222,8 +198,15 @@ void GenerateLevels(const unsigned int tablo_size,
     tabulate(generated, good, good_tasks.size());
 
 }
+
+
+
 void SaveCollection(std::string coll_save_name)
 {
+
+    Palete _past_palete;
+    Palete _curr_palete;
+
     //get info about main settings for collection
     std::ifstream infile("collection.txt");
     std::string line;
@@ -263,10 +246,28 @@ void SaveCollection(std::string coll_save_name)
 
     }
 
-    //TODO: recolor puzzle
-    //2 rules:
-    //two neighbour level can not have the same Color Palete
-    //mix Color Paletes
+    //recolor puzzle
+    for(std::vector<JoinyPuzzle>::iterator it = good_tasks.begin();
+        it != good_tasks.end();
+        ++it)
+    {
+        //JoinyPuzzle* puzzle = &it;
+        JoinyPuzzle * puzzle_ptr = &(*it);
+        //JoinyPuzzle puzzle = *it;
+
+
+        _past_palete = _curr_palete;
+        _curr_palete = getPalete(*it);
+
+        if(_past_palete == _curr_palete)
+        {
+            relocorJoiny(puzzle_ptr->getJoinyTask(),
+                                              _curr_palete);
+            _curr_palete = getPalete(*it);
+        }
+
+
+    }
 
 
     //TODO: then write all other important info to collection binary file
@@ -278,7 +279,25 @@ void SaveCollection(std::string coll_save_name)
     OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
     os << good_tasks;
 }
-void RecolorJoiny(JoinyPuzzle& puzzle)
+const Palete getPalete(JoinyPuzzle& puzzle)
 {
+    JoinyTask task = puzzle.getJoinyTask();
+    JoinyPair pair;
+    Palete palete;
+    std::set<unsigned int> palete_set;
 
+    for(unsigned int i=0; i<task.size(); ++i)
+    {
+        pair = task[i];
+        palete_set.insert(pair.getColor());
+    }
+
+    //copy unique colors from set to Palete
+    for(std::set<unsigned int>::iterator it = palete_set.begin();
+        it != palete_set.end(); ++it)
+    {
+        palete.push_back(*it);
+    }
+
+    return palete;
 }

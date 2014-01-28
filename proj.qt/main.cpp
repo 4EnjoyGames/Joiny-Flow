@@ -75,7 +75,7 @@ int CALLBACK WinMain(
 
     const float max_width = swidth;
     const float max_height = sheight;
-    bool zoom = false;
+    bool zoom = true;
 
     float width = 0;
     float height = 0;

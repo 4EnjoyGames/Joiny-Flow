@@ -24,6 +24,7 @@ private:
 
 };
 
+
 bool areNeighboors(const FlowPoint& a, const FlowPoint& b);
 bool operator<(const FlowTask& a, const FlowTask& b);
 bool operator<(const JoinyPair& a, const JoinyPair& b);
@@ -42,5 +43,4 @@ void GenerateLevels(const unsigned int tablo_size,
                 const unsigned int max_colors);
 
 void SaveCollection(std::string coll_save_name);
-
-void RecolorJoiny(JoinyPuzzle& puzzle);
+const Palete getPalete(JoinyPuzzle &puzzle);

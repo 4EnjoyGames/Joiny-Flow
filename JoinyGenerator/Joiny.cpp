@@ -415,7 +415,7 @@ const unsigned int getColor(std::map<unsigned int,unsigned int>& mymap)
 
     return min_it->first;
 }
-JoinyTask relocorJoiny(const JoinyTask& joiny_task,
+JoinyTask relocorJoiny(JoinyTask& joiny_task,
                        const Palete& bad_palete)
 {
     //select new palete
@@ -436,6 +436,7 @@ JoinyTask relocorJoiny(const JoinyTask& joiny_task,
                 break;
             }
         }
+        joiny_task[i].setColor(new_color);
         result.push_back(JoinyPair(joiny_task[i].getPoints(), new_color));
     }
     return result;
@@ -466,7 +467,6 @@ JoinyTask flowToJoiny(const FlowTask& task_2, const unsigned int colors)
 //        mymap.insert ( std::pair<unsigned int,unsigned int>(j,0) );
 //    }
     Palete palete = getColorScheme(colors);
-    _curr_palete = palete;
 
     FlowTask task = task_2;
     std::random_shuffle(task.begin(), task.end());
@@ -627,10 +627,6 @@ const Palete &getColorScheme(unsigned int color_num)
 
     auto& paletes = _paletes[color_num];
     return paletes[rand() % paletes.size()];
-}
-const Palete& getCurrPalete()
-{
-    return _curr_palete;
 }
 bool operator==(const Palete& p1, const Palete& p2)
 {

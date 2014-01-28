@@ -24,15 +24,14 @@ JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
                      const unsigned int height);
 
-JoinyTask relocorJoiny(const JoinyTask &joiny_task,
+JoinyTask relocorJoiny(JoinyTask &joiny_task,
                        const Palete &bad_palete);
 
 const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete);
 
 
-static Palete _curr_palete;
+
 bool operator==(const Palete& p1, const Palete& p2);
-const Palete& getCurrPalete();
 
 void JoinyColorSchemeInit();
 const Palete& getColorScheme(unsigned int color_num);
