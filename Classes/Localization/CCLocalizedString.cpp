@@ -48,14 +48,13 @@ std::string CCLocalizedString(const char * mKey)
         string line="";
         string contents="";
         unsigned long fileSize = 0;
+        fileContents = CCFileUtils::sharedFileUtils()->getFileData( fileName , "r", &fileSize );
 
-        std::string fullPath = FileUtils::getPackageFilePath(fileName);
-        if(FileUtils::isFileExists(fullPath))
+
+        if(fileSize != 0)
         {
 
-            fileContents = CCFileUtils::sharedFileUtils()->getFileData( fullPath.c_str( ) , "r", &fileSize );
             contents.append( ( char * ) fileContents );
-
             istringstream fileStringStream( contents );
             while ( std::getline( fileStringStream, line ) )
             {
