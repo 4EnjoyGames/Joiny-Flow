@@ -38,3 +38,5 @@ debug
 *.apk
 
 proj.androi*/*
+__pycache__
+environment.py

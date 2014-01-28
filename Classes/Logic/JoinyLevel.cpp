@@ -14,7 +14,7 @@ const StarsNumber JoinyLevel::getHighStar() const
 {
     return getStarsNumber(getHighScore());
 }
-bool  JoinyLevel::isCompleted() const
+bool JoinyLevel::isCompleted() const
 {
     if (getStarsNumber(getHighScore()) == 0)
         return false;

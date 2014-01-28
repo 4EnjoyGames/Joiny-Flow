@@ -6,8 +6,6 @@
 #include "Logic/Language.h"
 #include "../Core/MusicSettings.h"
 
-#include "StoreBridge/cocos2dx_StoreController.h"
-#include "StoreBridge/cocos2dx_EventHandlers.h"
 #include "Logic/LevelManager.h"
 
 Loading::Loading() : _sprites_to_load(0), _loaded_sprites(0)
@@ -93,14 +91,6 @@ void Loading::initRW()
 {
 	//TODO: write cleanup
     RW::onInit();
-
-    /**
-         * The initialization of StoreController. This is the first and ONLY time it's initialized.
-         **/
-
-    cocos2dx_StoreController::initialize("DIb8Vy95lnJH4PtgUQro");
-    cocos2dx_EventHandlers::getInstance()->addHandler(AppDelegate::getPurchaseHandler());
-
 }
 void Loading::addAll()
 {
@@ -180,7 +170,7 @@ void Loading::addAll()
 //    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
 	
     RW::getLevelManager().loadSettings();
-    addSoundToLoad("music/silly_fun.mp3");
+    //addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
 
     RW::getLevelManager().makePreviews(5,15);

@@ -7,7 +7,7 @@
 #include "Scenes/SelectCollection.h"
 #include "Localization/CCLocalizedString.h"
 #include "ADLib/Device/ADAds.h"
-
+#include "ADLib/ADString.h"
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
 {
@@ -109,7 +109,7 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                     this,
                     menu_selector(SelectLevel::onLevelSelect));
 
-    CCLabelTTF* label = CCLabelTTF::create(std::to_string(joiny_level_id).c_str(),
+    CCLabelTTF* label = CCLabelTTF::create(AD_to_string(joiny_level_id).c_str(),
                                            "fonts/Fredoka One.ttf",
                                            60/SCALE);
     item->addChild(label);

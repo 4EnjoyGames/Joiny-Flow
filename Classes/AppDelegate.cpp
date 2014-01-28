@@ -17,13 +17,7 @@ USING_NS_CC;
 #endif
 
 #include "Logic/RW.h"
-#ifndef JUNIOR
-PurchaseHandler AppDelegate::_purchase_handler;
-PurchaseHandler* AppDelegate::getPurchaseHandler()
-{
-    return &_purchase_handler;
-}
-#endif
+
 
 AppDelegate::AppDelegate() {
 
@@ -32,35 +26,10 @@ AppDelegate::AppDelegate() {
 AppDelegate::~AppDelegate() 
 {
     RW::onDestroy();
-#ifndef JUNIOR
-    cocos2dx_EventHandlers::getInstance()->removeHandler(&_purchase_handler);
-#endif
+
     //delete _purchase_handler;
 }
-#ifdef CC_WIN8_METRO
-bool AppDelegate::initInstance()
-{
-    bool bRet = false;
-    do
-    {
 
-
-
-        // fix bug: 16bit aligned
-        void* buff=_aligned_malloc(sizeof(CCEGLView),16);
-        CCEGLView* mainView = new (buff) CCEGLView();
-
-        CCDirector *pDirector = CCDirector::sharedDirector();
-        mainView->Create();
-        pDirector->setOpenGLView(mainView);
-
-
-
-        bRet = true;
-    } while (0);
-    return bRet;
-}
-#endif
 bool AppDelegate::applicationDidFinishLaunching() {
 
     Screen::setDesignScale(1);
@@ -69,11 +38,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     CCDirector* pDirector = CCDirector::sharedDirector();
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
 
-#ifndef CC_WIN8_METRO
-    pDirector->setOpenGLView(pEGLView);
-#endif
 
-    Language::setLanguage(Language::getDeviceLanguage());
+    pDirector->setOpenGLView(pEGLView);
 
     // Set the design resolution
     pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
@@ -153,18 +119,12 @@ void AppDelegate::applicationDidEnterBackground() {
     RW::onPause();
 }
 #include "Core/MusicSettings.h"
+#include "Core/DrawLayer.h"
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    if(MusicSettings::isBackgrHolderMusic() && MusicSettings::isMusicOn())
-    {
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-    }
-#else
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-#endif
-    
+    //DrawLayer::updateDrawNodes();
 }

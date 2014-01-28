@@ -1,44 +1,9 @@
-#include "StoreBridge/cocos2dx_EventHandlers.h"
-#include "StoreBridge/cocos2dx_StoreController.h"
 #include "AppDelegate.h"
 #include "Core/Browser.h"
 #include "Core/Statistics.h"
 #include "Logic/Language.h"
 #include "Core/Notification.h"
-cocos2dx_EventHandlers* cocos2dx_EventHandlers::instance=0;
 
-cocos2dx_EventHandlers* cocos2dx_EventHandlers::getInstance()
-{
-    if(instance == 0)
-        instance = new cocos2dx_EventHandlers();
-    return instance;
-}
-
-void cocos2dx_EventHandlers::addHandler(IEventHandler* )
-{}
-void cocos2dx_EventHandlers::removeHandler(IEventHandler*)
-{}
-void cocos2dx_StoreController::initialize(string)
-{}
-void cocos2dx_StoreController::restoreTransactions()
-{
-#ifndef JUNIOR
-    unsigned int i = rand() % 2;
-    bool res = i == 1;
-    AppDelegate::getPurchaseHandler()->restoreTransactions(res);
-#endif
-}
-
-void cocos2dx_StoreController::buyMarketItem(string item)
-{
-#ifndef JUNIOR
-    AppDelegate::getPurchaseHandler()->marketPurchase(item);
-#endif
-}
-void cocos2dx_StoreController::storeOpening()
-{}
-void cocos2dx_StoreController::storeClosing()
-{}
 void Browser::openURL(const URLId id)
 {
     cocos2d::CCLog("Open URL: %d", id);
@@ -65,7 +30,7 @@ void Notification::notify(const Type t)
 
 }
 #define AD_ADS_NOSIZE
-#include <ADLib/Device/ADAds_NoAds.cpp>
+#include <ADLib/PlatformImpl/ADAds_NoAds.hpp>
 cocos2d::CCSize ADAds::Platform::getBannerSize(const BannerType& type)
 {
     cocos2d::CCSize base (468, 60);
@@ -75,3 +40,10 @@ cocos2d::CCSize ADAds::Platform::getBannerSize(const BannerType& type)
     float density = 1;
     return cocos2d::CCSize(base.width*density, base.height*density);
 }
+#define AD_LANGUAGE_CURRENT "ru"
+
+#include <ADLib/PlatformImpl/ADBrowser_None.hpp>
+#include <ADLib/PlatformImpl/ADStatistics_None.hpp>
+#include <ADLib/PlatformImpl/ADLanguage_Default.hpp>
+#include <ADLib/PlatformImpl/ADNotification_None.hpp>
+#include <ADLib/PlatformImpl/ADInfo_Default.hpp>

@@ -49,10 +49,8 @@ SOURCES += main.cpp \
     ../Classes/Core/CCTime.cpp \
     ../Classes/Core/MusicSettings.cpp \
     ../Classes/Logic/Language.cpp \
-    ../Classes/PurchaseHandler.cpp \
     PurchaseEmulator.cpp \
     ../Classes/Layers/PopUpWindow.cpp \
-    ../Classes/Store.cpp \
     ../Classes/Layers/YesNoDialog.cpp \
     ../Classes/Flow/FlowTable.cpp \
     ../Classes/Flow/FlowRendererNode.cpp \
@@ -93,7 +91,6 @@ HEADERS += \
     ../Classes/Core/CCManualFont.h \
     ../Classes/Core/MusicSettings.h \
     ../Classes/Logic/Language.h \
-    ../Classes/PurchaseHandler.h \
     ../Classes/Layers/PopUpWindow.h \
     ../Classes/Store.h \
     ../Classes/Core/Browser.h \

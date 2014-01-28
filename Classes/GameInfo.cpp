@@ -1,7 +1,7 @@
 #include "GameInfo.h"
 #include "Localization/CCLocalizedString.h"
 #include <sstream>
-
+#include <ADLib/ADString.h>
 GameInfo* GameInfo::instance = nullptr;
 
 GameInfo::GameInfo()
@@ -70,8 +70,8 @@ const std::vector<std::string>& GameInfo::getCollectionNames()
             //std::string coll_name = base + int_converted;
             //std::string curr_coll = CCLocalizedString(coll_name.c_str());
 
-            std::string x = std::to_string(flow_points[i-1].x());
-            std::string y = std::to_string(flow_points[i-1].y());
+            std::string x = AD_to_string(flow_points[i-1].x());
+            std::string y = AD_to_string(flow_points[i-1].y());
             std::string curr_coll = x + 'x' + y;
             _coll_names.push_back(curr_coll);
         }
