@@ -1,6 +1,7 @@
 #include "StepsGenerator.h"
-
-
+#include <sstream>
+#include <string>
+#include <fstream>
 using namespace std;
 
 
@@ -111,6 +112,9 @@ void SaveLevels(const unsigned int tablo_size,
                 const unsigned int min_colors,
                 const unsigned int max_colors)
 {
+
+    SaveCollection("coll1.ad");
+
     srand(time(0));
     unsigned int joiny_size = tablo_size;
     unsigned int N = level_number;
@@ -193,12 +197,67 @@ void SaveLevels(const unsigned int tablo_size,
 
     tabulate(generated, good, good_tasks.size());
 
-}
-void SaveCollection(const unsigned int tablo_size,
-                    const unsigned int level_number,
-                    const Color collection_color)
-{
 
+
+}
+void SaveCollection(std::string coll_save_name)
+{
+    //get info about main settings for collection
+    std::ifstream infile("collection.txt");
+    std::string line;
+
+    std::getline(infile, line);
+    std::string tablo_size = line;
+    int tablo_size_i = std::stoi(tablo_size);
+
+    std::getline(infile, line);
+    std::string level_num = line;
+    int level_num_i = std::stoi(level_num);
+
+    std::getline(infile,line);
+    std::string collection_color = line;
+
+    std::vector<std::string> level_files_name;
+
+    for(unsigned int i=0; i<level_num_i; ++i)
+    {
+        std::getline(infile, line);
+        level_files_name.push_back(line);
+    }
+
+
+    //open level files and save info to std::vector<JoinyPuzzle>
+    std::vector<JoinyPuzzle> good_tasks;
+    for(unsigned int i=0; i<level_files_name.size(); ++i)
+    {
+        JoinyPuzzle puzzle;
+        std::ifstream file;
+        file.open(level_files_name[i], ios::in | ios::binary);
+        InputBinaryStream is(file);
+
+        is >> puzzle;
+
+        good_tasks.push_back(puzzle);
+
+    }
+
+    //TODO: recolor puzzle
+    //2 rules:
+    //two neighbour level can not have the same Color Palete
+    //mix Color Paletes
+
+
+    //TODO: then write all other important info to collection binary file
+    //create collection
+    std::stringstream fname;
+    fname << coll_save_name;
+    std::ofstream file;
+    file.open(fname.str().c_str(), ios::out | ios::binary);
+    OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
+    os << good_tasks;
+
+    int a =2;
+    ++a;
 }
 
 //void SaveLevels(const unsigned int tablo_size,

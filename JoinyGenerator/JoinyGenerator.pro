@@ -13,5 +13,6 @@ HEADERS += \
     FGenerator.h \
     FlowPoint.h \
     Joiny.h \
-    StepsGenerator.h
+    StepsGenerator.h \
+    FileUnits.h
 

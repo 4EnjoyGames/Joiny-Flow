@@ -42,6 +42,4 @@ void SaveLevels(const unsigned int tablo_size,
                 const unsigned int min_colors,
                 const unsigned int max_colors);
 
-void SaveCollection(const unsigned int tablo_size,
-                    const unsigned int level_number,
-                    const Color collection_color);
+void SaveCollection(std::string coll_save_name);
