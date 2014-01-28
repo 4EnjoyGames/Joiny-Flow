@@ -201,14 +201,15 @@ void GenerateLevels(const unsigned int tablo_size,
 
 
 
-void SaveCollection(std::string coll_save_name)
+void SaveCollection(std::string plan_file,
+                    std::string coll_save_name)
 {
 
     Palete _past_palete;
     Palete _curr_palete;
 
     //get info about main settings for collection
-    std::ifstream infile("collection.txt");
+    std::ifstream infile(plan_file);
     std::string line;
 
     std::getline(infile, line);
@@ -271,9 +272,7 @@ void SaveCollection(std::string coll_save_name)
         it != good_tasks.end();
         ++it)
     {
-        //JoinyPuzzle* puzzle = &it;
         JoinyPuzzle * puzzle_ptr = &(*it);
-        //JoinyPuzzle puzzle = *it;
 
 
         _past_palete = _curr_palete;
@@ -290,7 +289,7 @@ void SaveCollection(std::string coll_save_name)
     }
 
 
-    //TODO: then write all other important info to collection binary file
+    //write all other important info to collection binary file
     //create collection
     std::stringstream fname;
     fname << coll_save_name;

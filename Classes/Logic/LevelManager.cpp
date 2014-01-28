@@ -79,10 +79,6 @@ void LevelManager::loadLevelsInfo()
     GameInfo* info = GameInfo::getInstance();
 
     std::vector<std::string> coll_files = info->getCollectionFiles();
-    //std::vector<std::string> coll_names = info->getCollectionNames();
-    //std::vector<ccColor3B> coll_colors  = info->getCollectionColors();
-
-    //std::vector<FlowPoint> flow_points = info->getFlowPoints();
 
     for(unsigned int j=0; j<coll_files.size(); ++j)
     {
@@ -114,17 +110,14 @@ void LevelManager::loadLevelsInfo()
 
             CollectionPtr col(new JoinyCollection);
             col->_id = j+1;
-//            col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
-//                        new JoinyCollection::LevelsVector(inp.size(),
-//                                                          JoinyLevel()));
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
                         new JoinyCollection::LevelsVector(level_num,
                                                           JoinyLevel()));
             std::string coll_name = std::to_string(width)
                     + "x"
                     + std::to_string(height);
-            col->setCollectionName(coll_name/*coll_names[j]*/);
-            col->setCollectionColor(ccc3(r,g,b)/*coll_colors[j]*/);
+            col->setCollectionName(coll_name);
+            col->setCollectionColor(ccc3(r,g,b));
 
             for(unsigned int i=0; i<inp.size(); ++i)
             {
@@ -132,7 +125,6 @@ void LevelManager::loadLevelsInfo()
                 l._level_id = i+1;
                 l._parent = col.get();
                 l._puzzle = inp[i];
-//                l._size = flow_points[j];
                 l._size = FlowPoint(width,height);
             }
 

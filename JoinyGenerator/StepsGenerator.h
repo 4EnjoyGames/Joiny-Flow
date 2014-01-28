@@ -42,5 +42,5 @@ void GenerateLevels(const unsigned int tablo_size,
                 const unsigned int min_colors,
                 const unsigned int max_colors);
 
-void SaveCollection(std::string coll_save_name);
+void SaveCollection(std::string plan_file, std::string coll_save_name);
 const Palete getPalete(JoinyPuzzle &puzzle);
