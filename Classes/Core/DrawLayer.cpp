@@ -13,6 +13,12 @@ CCSprite* DrawLayer::_sprite = nullptr;
 CCSprite* DrawLayer::_background = nullptr;
 CCNode* DrawLayer::_transform = nullptr;
 DrawLayer* DrawLayer::_current_layer = nullptr;
+bool DrawLayer::_update_needed = false;
+
+void DrawLayer::registerUpdateDrawingNodes()
+{
+    _update_needed = true;
+}
 
 void DrawLayer::updateDrawingNodes()
 {
@@ -124,6 +130,7 @@ bool DrawLayer::init()
 
 void DrawLayer::visit()
 {
+
     redrawMainNode();
 
     // quick return if not visible. children won't be drawn.
@@ -182,6 +189,11 @@ DrawLayer::~DrawLayer()
 }
 void DrawLayer::redrawMainNode()
 {
+    if(_update_needed)
+    {
+        _update_needed = false;
+        updateDrawingNodes();
+    }
     _render->beginWithClear(1,1,1,1);
 
     kmGLPushMatrix();
