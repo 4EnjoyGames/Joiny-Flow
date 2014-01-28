@@ -245,56 +245,66 @@ unsigned int LevelManager::getCollectionMinStars(const JoinyCollection *coll)
 {
     return coll->getMinStarsNumber();
 }
-void LevelManager::makePreviews(unsigned int joiny_size)
+void LevelManager::makePreviews(unsigned int joiny_size,
+                                unsigned int levels_num)
 {
-    std::stringstream fname;
-    fname << "../build/JoinyGeneratorDebug/" << joiny_size << "x" << joiny_size << "_" << "1" << ".ad";
 
-    JoinyPuzzle inp;
-    JoinyTask task;
-    std::stringstream ss;
-    if(FileUtils::openPackageFile(fname.str().c_str(), ss))
+    for(unsigned int curr_l_num = 1; curr_l_num < levels_num; ++curr_l_num)
     {
-        InputBinaryStream is(ss);
+        std::string curr_file_name = std::to_string(joiny_size)
+                + "x"
+                + std::to_string(joiny_size)
+                +"_"
+                + std::to_string(curr_l_num);
 
+        std::stringstream fname;
+        fname << "../build/JoinyGeneratorDebug/" << curr_file_name << ".ad";
 
-        is >> inp;
+        JoinyPuzzle inp;
+        JoinyTask task;
+        std::stringstream ss;
+        if(FileUtils::openPackageFile(fname.str().c_str(), ss))
+        {
+            InputBinaryStream is(ss);
+            is >> inp;
+        }
+        task = inp.getJoinyTask();
 
-        int a = 2;
-        a++;
+        //const CCPoint ORIGIN = Screen::getOrigin();
+        const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+
+        FlowTable table(joiny_size,joiny_size);
+        for(unsigned int i=0; i<task.size(); ++i)
+        {
+            JoinyPair pair = task[i];
+            FlowStartEnd start_end = pair.getPoints();
+            unsigned int color = pair.getColor();
+
+            table.addColor(start_end[0],start_end[1], color);
+        }
+
+        FlowRenderer renderer(table);
+
+        CCRenderTexture * texture = CCRenderTexture::create(joiny_size*100,
+                                                        joiny_size*100);
+        texture->setPosition(ccp(VISIBLE_SIZE.width/2,
+                                 VISIBLE_SIZE.height/2));
+        texture->beginWithClear(1,1,1,1);
+        renderer.setScale(0.5);
+        renderer.visit();
+        texture->end();
+
+        std::string save_png_name = "../../JoinyGeneratorDebug/"
+                + curr_file_name
+                + ".png";
+        texture->saveToFile(save_png_name.c_str(),
+                            kCCImageFormatPNG);
     }
-    task = inp.getJoinyTask();
 
-    const CCPoint ORIGIN = Screen::getOrigin();
-    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
-
-    FlowTable table(5,5);
-    for(unsigned int i=0; i<task.size(); ++i)
-    {
-        JoinyPair pair = task[i];
-        FlowStartEnd start_end = pair.getPoints();
-        unsigned int color = pair.getColor();
-
-        table.addColor(start_end[0],start_end[1], color);
-    }
-
-    FlowRenderer renderer(table);
-
-    CCRenderTexture * texture = CCRenderTexture::create(joiny_size*100,
-                                                    joiny_size*100);
-    texture->setPosition(ccp(VISIBLE_SIZE.width/2, VISIBLE_SIZE.height/2));
-    texture->beginWithClear(1,1,1,1);
-    renderer.setScale(0.5);
-    //renderer.setPosition(ccp(texture->getContentSize().width/2,
-     //                        texture->getContentSize().height/2));
-    renderer.visit();
-    texture->end();
-    texture->saveToFile("screen1.png", kCCImageFormatPNG);
 }
 
 void LevelManager::SaveScreenshot()
 {
-    const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
 
     CCRenderTexture * texture = CCRenderTexture::create(int(VISIBLE_SIZE.width),
@@ -303,14 +313,5 @@ void LevelManager::SaveScreenshot()
     texture->beginWithClear(1,1,1,1);
     CCDirector::sharedDirector()->getRunningScene()->visit();
     texture->end();
-    texture->saveToFile("screen1.png", kCCImageFormatPNG);
-
-    //these code make screens
-    //    CCRenderTexture * texture = CCRenderTexture::create(int(VISIBLE_SIZE.width),
-    //                                                    int(VISIBLE_SIZE.height));
-    //    texture->setPosition(ccp(VISIBLE_SIZE.width/2, VISIBLE_SIZE.height/2));
-    //    texture->beginWithClear(1,1,1,1);
-    //    CCDirector::sharedDirector()->getRunningScene()->visit();
-    //    texture->end();
-    //    texture->saveToFile("screen1.png", kCCImageFormatPNG);
+    texture->saveToFile("screenshot.png", kCCImageFormatPNG);
 }
