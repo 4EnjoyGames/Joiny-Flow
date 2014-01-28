@@ -249,7 +249,8 @@ void LevelManager::makePreviews(unsigned int joiny_size,
                                 unsigned int levels_num)
 {
 
-    for(unsigned int curr_l_num = 1; curr_l_num < levels_num; ++curr_l_num)
+
+    for(unsigned int curr_l_num = 0; curr_l_num < levels_num; ++curr_l_num)
     {
         std::string curr_file_name = std::to_string(joiny_size)
                 + "x"

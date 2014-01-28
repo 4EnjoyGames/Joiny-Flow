@@ -183,7 +183,7 @@ void Loading::addAll()
     addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
 
-    RW::getLevelManager().makePreviews(5,15);
+    RW::getLevelManager().makePreviews(5,100);
 
 //    const CollectionsArr& arr = RW::getCollections();
 //    for(CollectionsArr::const_iterator it = arr.begin(); it != arr.end(); ++it)

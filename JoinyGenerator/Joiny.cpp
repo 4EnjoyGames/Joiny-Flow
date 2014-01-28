@@ -453,6 +453,7 @@ JoinyTask flowToJoiny(const FlowTask& task,
         unsigned int color = i % colors;
         res.push_back(JoinyPair(task[i], color));
     }
+
     return res;
 }
 
