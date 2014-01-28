@@ -36,3 +36,5 @@ local.properties
 debug
 *.pdb
 *.apk
+
+proj.androi*/*
