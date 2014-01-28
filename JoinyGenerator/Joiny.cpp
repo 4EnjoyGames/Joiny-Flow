@@ -750,16 +750,22 @@ JoinyInfo solveJoiny(const JoinyTask& task,
             n += it->second;
         }
 
+        bool has_pathes = false;
+        std::vector<int> tablo_pathes;
         //find path for max score
         if(pathes.find(max) != pathes.end())
         {
-            std::vector<int> tablo_pathes = pathes.find(max)->second;
+            tablo_pathes = pathes.find(max)->second;
+            has_pathes = true;
         }
 
         unsigned int average = sum/n;
-        return JoinyInfo(clamp(average, 500),
+        JoinyInfo info = JoinyInfo(clamp(average, 500),
                          clamp((average + max)/2, 500),
                          clamp(max, 500));
+        if(has_pathes)
+            info.setHintPathes(tablo_pathes);
+        return info;
     }
     return JoinyInfo(0,0,0);
 }

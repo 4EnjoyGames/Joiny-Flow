@@ -36,7 +36,9 @@ class JoinyInfo
 public:
     JoinyInfo(const Score bronze=0, const Score silver=0, const Score gold=0
               )
-        : _bronze_score(bronze), _silver_score(silver), _gold_score(gold)
+        : _bronze_score(bronze),
+          _silver_score(silver),
+          _gold_score(gold)
     {
 
     }
@@ -55,11 +57,23 @@ public:
     {
         return _gold_score;
     }
+
+    const std::vector<int> getPathes() const
+    {
+        return _hint_pathes;
+    }
+
+    void setHintPathes(const std::vector<int> pathes)
+    {
+        _hint_pathes = pathes;
+    }
+
 private:
     Score _bronze_score;
     Score _silver_score;
     Score _gold_score;
 
+    std::vector<int> _hint_pathes;
 };
 
 struct JoinyPuzzle
