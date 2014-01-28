@@ -12,6 +12,30 @@ CCRenderTexture* DrawLayer::_render = nullptr;
 CCSprite* DrawLayer::_sprite = nullptr;
 CCSprite* DrawLayer::_background = nullptr;
 CCNode* DrawLayer::_transform = nullptr;
+DrawLayer* DrawLayer::_current_layer = nullptr;
+
+void DrawLayer::updateDrawingNodes()
+{
+    if(_current_layer && _render)
+    {
+        _sprite->removeFromParent();
+        _background->removeFromParent();
+
+        _render->release();
+        _sprite->release();
+        _transform->release();
+        _background->release();
+
+        _render = nullptr;
+        _sprite = nullptr;
+        _transform = nullptr;
+        _background = nullptr;
+
+        createDrawingNodes();
+        attachDrawingNodesToLayer(_current_layer);
+    }
+}
+
 void DrawLayer::createDrawingNodes()
 {
     assert(_render == nullptr);
@@ -91,14 +115,10 @@ bool DrawLayer::init()
 
 
     _main_node = CCNodeRGBA::create();
-
-    //this->scheduleUpdate();
-
-
-
     attachDrawingNodesToLayer(this);
     CCLayer::addChild(_main_node, 0, NO_DRAW);
 
+    _current_layer = this;
     return true;
 }
 

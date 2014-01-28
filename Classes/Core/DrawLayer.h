@@ -14,6 +14,7 @@ public:
     void addChild(CCNode* child, int zOrder, int tag);
     bool init();
     void visit();
+    static void updateDrawingNodes();
 private:
     static void createDrawingNodes();
     static void attachDrawingNodesToLayer(DrawLayer* layer);
@@ -26,7 +27,7 @@ private:
     static CCNode* _transform;
 
     CCNodeRGBA* _main_node;
-
+    static DrawLayer* _current_layer;
 };
 
 #endif // DRAWLAYER_H

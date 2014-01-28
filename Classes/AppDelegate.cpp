@@ -126,5 +126,5 @@ void AppDelegate::applicationWillEnterForeground() {
 
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-    //DrawLayer::updateDrawNodes();
+    DrawLayer::updateDrawingNodes();
 }
