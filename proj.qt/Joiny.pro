@@ -66,7 +66,8 @@ SOURCES += main.cpp \
     ../Classes/BackButton.cpp \
     ../Classes/Localization/CCLocalizedString.cpp \
     ../Classes/Core/DrawLayer.cpp \
-    ../Classes/Scenes/DeveloperScene.cpp
+    ../Classes/Scenes/DeveloperScene.cpp \
+    ../Classes/Logic/Hints.cpp
 
 HEADERS += \
     ../Classes/AppMacros.h \
@@ -109,6 +110,7 @@ HEADERS += \
     ../Classes/BackButton.h \
     ../Classes/Localization/CCLocalizedString.h \
     ../Classes/Core/DrawLayer.h \
-    ../Classes/Scenes/DeveloperScene.h
+    ../Classes/Scenes/DeveloperScene.h \
+    ../Classes/Logic/Hints.h
 
 
