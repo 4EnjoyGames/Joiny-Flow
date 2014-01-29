@@ -131,7 +131,7 @@ void GenerateLevels(const unsigned int tablo_size,
         FlowTask t = generate(joiny_size,joiny_size);
         std::sort(t.begin(), t.end());
 
-        if(isGooTask(t))
+        //if(isGooTask(t))
         {
             unsigned int colors = max;
 
@@ -149,26 +149,27 @@ void GenerateLevels(const unsigned int tablo_size,
             //std::sort(task.begin(), task.end());
 
 
-            JoinyInfo info_old = solveJoiny(task,
-                                            joiny_size,
-                                            joiny_size);
+            //JoinyInfo info_old = solveJoiny(task,
+            //                                joiny_size,
+            //                                joiny_size);
 
             JoinyTask task_origin = flowToJoinyStaightforward(t);
             JoinyInfo info_origin = solveJoiny(task_origin,
                                                joiny_size,
                                                joiny_size);
 
-            JoinyInfo info = mergeInfo(info_old, info_origin);
+            //JoinyInfo info = mergeInfo(info_old, info_origin);
 
-            if(info.getGold() > 100000)
+            if(1>2)//(info.getGold() > 100000)
             {
                 std::cout << "Bug!!" << endl;
             }
-            else if(isGoodJoiny(task, info))
+            else //if(isGoodJoiny(task, info))
             {
 
                 //std::sort(task.begin(), task.end());
-                JoinyPuzzle puzzle(task, info);
+                //JoinyPuzzle puzzle(task, info);
+                JoinyPuzzle puzzle(task,info_origin);
 
                 good_tasks.insert(puzzle);
                 ++good;

@@ -111,9 +111,9 @@ public:
     // Returns the key of the special order for the coordinate (x,y).
     CellKey GetCellKey(const Distance x, const Distance y) const
     {
-        if((CellPosition)y * width_ >= keys_.size())
-            return keys_[keys_.size()-1];
-        else
+//        if((CellPosition)y * width_ >= keys_.size())
+//            return keys_[keys_.size()-1];
+//        else
             return keys_[(CellPosition)y * width_ + x];
     }
 
@@ -269,6 +269,8 @@ public:
 
     void SaveAllPath()
     {
+        cout<<"Tablo"<<endl;
+
         _hint_traveled = std::vector<bool>(height_ * width_, false);
         _tablo_with_pathes = std::vector<unsigned int>(height_ * width_, 0);
 
@@ -285,6 +287,7 @@ public:
                     _tablo_with_pathes[GetCellKey(x, y)] = number;
 
                     result = saveOnePath(x,y,0,number);
+                    cout<<endl;
                     if(result == 0)
                         stop = true;
                 }
@@ -294,6 +297,14 @@ public:
             //add path to data base
         }
 
+
+
+    }
+
+    unsigned int outCellCordinates(const unsigned int x,
+                                   const unsigned int y)
+    {
+        return width_*y + x;
     }
 
     unsigned int saveOnePath(const unsigned int x,
@@ -314,7 +325,12 @@ public:
         if(x > 0 && connected_x_[GetCellKey(x, y)] &&
                 !_hint_traveled[GetCellKey(x-1, y)])
         {
-            _tablo_with_pathes[GetCellKey(x-1, y)] = cell_number;
+            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+
+            cout << 'l' << '(' << x << ',' << y << ')' << " = "
+                 << static_cast<int>(cell_number)
+                 << " = " << outCellCordinates(x, y) << endl;
+
             return saveOnePath(x-1, y, path_lenth+1, cell_number);
         }
 
@@ -322,7 +338,12 @@ public:
         if(y > 0 && connected_y_[GetCellKey(x, y)] &&
                 !_hint_traveled[GetCellKey(x, y-1)])
         {
-            _tablo_with_pathes[GetCellKey(x, y-1)] = cell_number;
+            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+
+            cout << 'b' << '(' << x << ',' << y << ')' << " = "
+                 << static_cast<int>(cell_number)
+                 << " = " << outCellCordinates(x, y) << endl;
+
             return saveOnePath(x, y-1, path_lenth+1, cell_number);
         }
 
@@ -330,7 +351,12 @@ public:
         if(x+1 < width_ && connected_x_[GetCellKey(x+1, y)] &&
                 !_hint_traveled[GetCellKey(x+1, y)])
         {
-            _tablo_with_pathes[GetCellKey(x+1, y)] = cell_number;
+            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+
+            cout << 'r' << '(' << x << ',' << y << ')' << " = "
+                 << static_cast<int>(cell_number)
+                 << " = " << outCellCordinates(x, y) << endl;
+
             return saveOnePath(x+1, y, path_lenth+1, cell_number);
         }
 
@@ -338,7 +364,12 @@ public:
         if(y+1 < height_ && connected_y_[GetCellKey(x, y+1)] &&
                 !_hint_traveled[GetCellKey(x, y+1)])
         {
-            _tablo_with_pathes[GetCellKey(x, y+1)] = cell_number;
+            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+
+            cout << 't' << '(' << x << ',' << y << ')' << " = "
+                 << static_cast<int>(cell_number)
+                 << " = " << outCellCordinates(x, y) << endl;
+
             return saveOnePath(x, y+1, path_lenth+1, cell_number);
         }
 
