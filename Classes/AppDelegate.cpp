@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "Logic/Language.h"
 #include "Scenes/Loading.h"
 #include "Core/Screen.h"
 #include <ADLib/Device/ADAds.h>

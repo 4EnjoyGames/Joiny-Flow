@@ -1,34 +1,3 @@
-#include "AppDelegate.h"
-#include "Core/Browser.h"
-#include "Core/Statistics.h"
-#include "Logic/Language.h"
-#include "Core/Notification.h"
-
-void Browser::openURL(const URLId id)
-{
-    cocos2d::CCLog("Open URL: %d", id);
-}
-
-void Statistics::statisticEvent(const StatisticsEvent id)
-{
-    cocos2d::CCLog("Event %d", id);
-}
-
-void Statistics::detailStatisticEvent(const StatisticsEvent id, const unsigned int level_id, const unsigned int collection_id, const unsigned int stamps_num)
-{
-    cocos2d::CCLog("Event %d, Level %d, Collection %d, Stamps %d", id, level_id+1, collection_id, stamps_num);
-}
-
-Language::Languages Language::getDeviceLanguage()
-{
-    return Language::English;
-}
-
-void Notification::notify(const Type t)
-{
-    cocos2d::CCLog("Notification ID %d", t);
-
-}
 #define AD_ADS_NOSIZE
 #include <ADLib/PlatformImpl/ADAds_NoAds.hpp>
 cocos2d::CCSize ADAds::Platform::getBannerSize(const BannerType& type)

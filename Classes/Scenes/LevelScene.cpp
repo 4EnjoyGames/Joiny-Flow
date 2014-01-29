@@ -3,8 +3,6 @@
 USING_NS_CC;
 
 
-#include "Logic/Language.h"
-#include "Core/Browser.h"
 #include "Flow/FlowGame.h"
 #include "Flow/Generator/FGenerator.h"
 #include "Flow/JoinyPair.h"

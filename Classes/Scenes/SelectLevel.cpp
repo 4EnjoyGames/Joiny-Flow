@@ -1,8 +1,6 @@
 #include "Logic/RW.h"
 #include "SelectLevel.h"
-#include "Logic/Language.h"
 #include "Store.h"
-#include "Core/Statistics.h"
 #include "Scenes/LevelScene.h"
 #include "Scenes/SelectCollection.h"
 #include "Localization/CCLocalizedString.h"

@@ -50,7 +50,7 @@ void DrawLayer::createDrawingNodes()
     const float SCALE = Screen::getScaleFactor();
 
     //Init global rendering
-    CCSize win_size = Screen::getRealSize();
+    CCSize win_size = Screen::getFrameSize();
 
     //Create sprite for background
     CCSprite* background_piece = CCSprite::create("universal/game_background.png");

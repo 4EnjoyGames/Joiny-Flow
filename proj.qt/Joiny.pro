@@ -44,11 +44,7 @@ SOURCES += main.cpp \
     ../Classes/Core/CCScrollView.cpp \
     ../Classes/Layers/DebugLayer.cpp \
     ../Classes/Scenes/Loading.cpp \
-    ../Classes/Core/CCTime.cpp \
-    ../Classes/Core/CCManualFont.cpp \
-    ../Classes/Core/CCTime.cpp \
     ../Classes/Core/MusicSettings.cpp \
-    ../Classes/Logic/Language.cpp \
     PurchaseEmulator.cpp \
     ../Classes/Layers/PopUpWindow.cpp \
     ../Classes/Layers/YesNoDialog.cpp \
@@ -64,7 +60,6 @@ SOURCES += main.cpp \
     ../Classes/Scenes/LevelScene.cpp \
     ../Classes/Scenes/SelectLevel.cpp \
     ../Classes/Scenes/MainScene.cpp \
-    ../Classes/Core/Screen.cpp \
     ../Classes/Scenes/SelectCollection.cpp \
     ../Classes/Scenes/SettingScene.cpp \
     ../Classes/GameInfo.cpp \
@@ -83,20 +78,13 @@ HEADERS += \
     ../Classes/Core/MenuSpriteBatch.h \
     ../Classes/Layers/BackgroundHolder.h \
     ../Classes/Core/CCScrollView.h \
-    ../Classes/Core/ExtensionMacros.h \
     ../Classes/Layers/DebugLayer.h \
     ../Classes/Logic/RW.h \
     ../Classes/Core/CCTime.h \
-    ../Classes/Core/CCNodeWithOpacity.h \
-    ../Classes/Core/CCManualFont.h \
     ../Classes/Core/MusicSettings.h \
-    ../Classes/Logic/Language.h \
     ../Classes/Layers/PopUpWindow.h \
     ../Classes/Store.h \
-    ../Classes/Core/Browser.h \
-    ../Classes/Core/Statistics.h \
     ../Classes/Layers/YesNoDialog.h \
-    ../Classes/Core/Notification.h \
     ../Classes/Flow/FlowTable.h \
     ../Classes/Flow/FlowRendererNode.h \
     ../Classes/Flow/FlowRenderer.h \
