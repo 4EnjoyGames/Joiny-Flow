@@ -19,4 +19,9 @@
 	<file>
 		<name>Localized_en</name>
 	</file>
+	
+	<file>
+		<name>Localization.en.po</name>
+	</file>
+	
 </directory>

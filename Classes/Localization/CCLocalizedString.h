@@ -13,5 +13,6 @@
 /*get the localized string by the key, if can't get the value then return mComment
  */
 std::string CCLocalizedString(const char * mKey);
+std::string Localization (const char* key);
 
 #endif

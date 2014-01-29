@@ -21,8 +21,68 @@ using namespace std;
 
 static map<std::string,std::string> localizedStrings;
 
+std::string Localization (const char* key)
+{
+    //get info about main settings for collection
+    std::string file_name = "Translation.en.po";
+    std::ifstream infile(file_name);
+    std::string line="";
+
+    //first 13 lines is setting for proEdit
+    for(unsigned int i=0; i<13; ++i)
+    {
+        getline(infile,line);
+    }
+    while(getline(infile,line))
+    {
+        getline(infile,line);
+
+        std::string curr_line = line;
+        if(curr_line.size()>0 && curr_line[0] != '#')
+        {
+
+            std::string msg="";
+            std::string key="";
+
+            istringstream is(line);
+            is >> msg;
+            is >> key;
+
+            if(msg=="msgid")
+            {
+                //cut first and last symbol
+                key = key.substr(1,key.size()-1);
+
+                if(getline(infile,line))
+                {
+                    std::string msgstr="";
+                    std::string value="";
+
+                    istringstream is(line);
+                    is >> msgstr;
+                    is >> value;
+
+                    if(msgstr=="msgstr")
+                    {
+                        //cut first and last symbol
+                        value = value.substr(1,value.size()-1);
+
+                        localizedStrings.insert(std::pair<std::string, std::string>(key,value));
+                    }
+                }
+            }
+
+        }
+    }
+
+    return "1";
+}
+
 std::string CCLocalizedString(const char * mKey)
 { 
+    Localization("1");
+
+
     if(localizedStrings.empty())
     {
         ccLanguageType curLanguage = CCApplication::sharedApplication()->getCurrentLanguage();
@@ -48,7 +108,9 @@ std::string CCLocalizedString(const char * mKey)
         string line="";
         string contents="";
         unsigned long fileSize = 0;
-        fileContents = CCFileUtils::sharedFileUtils()->getFileData( fileName , "r", &fileSize );
+        fileContents = CCFileUtils::sharedFileUtils()->getFileData( fileName,
+                                                                    "r",
+                                                                    &fileSize);
 
 
         if(fileSize != 0)
