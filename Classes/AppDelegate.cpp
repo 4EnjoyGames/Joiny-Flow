@@ -10,6 +10,8 @@
 #include "Scenes/Loading.h"
 #include "Core/Screen.h"
 #include <ADLib/Device/ADAds.h>
+#include <ADLib/Device/ADLanguage.h>
+#include <ADLib/Device/ADStatistics.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -31,8 +33,20 @@ AppDelegate::~AppDelegate()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    //Statistics init
+    ADStatistics::startSession("flurry_id");
 
-    Screen::setDesignScale(1);
+    //Language init
+    ADLanguage::addSupportedLanguage("en");
+    ADLanguage::addSupportedLanguage("uk");
+    //ADLanguage::addSupportedLanguage("ru");
+    //ADLanguage::addSupportedLanguage("hu");
+    //ADLanguage::addSupportedLanguage("fr");
+    //ADLanguage::addSupportedLanguage("de");
+
+    ADLanguage::setDefaultLanguage("en");
+    ADLanguage::getLanguage();
+
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();
