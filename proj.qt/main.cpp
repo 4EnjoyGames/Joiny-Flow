@@ -63,7 +63,7 @@ int CALLBACK WinMain(
     //assert(false);
 #endif
     bool portrait_mode = true;
-    Mode open_in_mode = Galaxy_Ace2;
+    Mode open_in_mode = IPhone4GS;
 
 
     int swidth = 0;
@@ -75,7 +75,7 @@ int CALLBACK WinMain(
 
     const float max_width = swidth;
     const float max_height = sheight;
-    bool zoom = false;
+    bool zoom = true;
 
     float width = 0;
     float height = 0;

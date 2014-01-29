@@ -14,10 +14,7 @@ bool areNeighboors(const FlowPoint& a, const FlowPoint& b)
     return false;
 }
 
-bool operator<(const FlowPoint& a, const FlowPoint& b)
-{
-    return (a.x() < b.x() || (a.x() == b.x() && a.y() < b.y()));
-}
+
 
 bool operator<(const FlowTask& a, const FlowTask& b)
 {
@@ -35,7 +32,7 @@ bool operator<(const JoinyPair& a, const JoinyPair& b)
 
 bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info)
 {
-    Score precision = info.getGold()/15;
+    Score precision = info.getGold()/20;
     if(info.getBronze() + precision <= info.getSilver() &&
             info.getSilver() <= info.getGold())
     {
@@ -105,15 +102,18 @@ JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
     JoinyInfo res(gold - 2*step,
                   gold - step,
                   gold);
+
+    if(a.getGold() > b.getGold())
+        res.setHintPathes(a.getPathes());
+    else
+        res.setHintPathes(b.getPathes());
     return res;
 }
-void SaveLevels(const unsigned int tablo_size,
+void GenerateLevels(const unsigned int tablo_size,
                 const unsigned int level_number,
                 const unsigned int min_colors,
                 const unsigned int max_colors)
 {
-
-    SaveCollection("coll1.ad");
 
     srand(time(0));
     unsigned int joiny_size = tablo_size;
@@ -122,7 +122,6 @@ void SaveLevels(const unsigned int tablo_size,
     unsigned int good = 0;
     unsigned int max = max_colors;
     unsigned int min = min_colors;
-    unsigned int set_size =0;
     std::set<JoinyPuzzle> good_tasks;
 
 
@@ -130,7 +129,9 @@ void SaveLevels(const unsigned int tablo_size,
     {
 
         FlowTask t = generate(joiny_size,joiny_size);
-        if(isGooTask(t))
+        std::sort(t.begin(), t.end());
+
+        //if(isGooTask(t))
         {
             unsigned int colors = max;
 
@@ -145,48 +146,33 @@ void SaveLevels(const unsigned int tablo_size,
             }
 
             JoinyTask task = flowToJoiny(t, colors, true);
+            //std::sort(task.begin(), task.end());
 
 
-            JoinyInfo info_old = solveJoiny(task,
-                                            joiny_size,
-                                            joiny_size);
+            //JoinyInfo info_old = solveJoiny(task,
+            //                                joiny_size,
+            //                                joiny_size);
 
             JoinyTask task_origin = flowToJoinyStaightforward(t);
             JoinyInfo info_origin = solveJoiny(task_origin,
                                                joiny_size,
                                                joiny_size);
 
-            JoinyInfo info = mergeInfo(info_old, info_origin);
+            //JoinyInfo info = mergeInfo(info_old, info_origin);
 
-            if(info.getGold() > 100000)
+            if(1>2)//(info.getGold() > 100000)
             {
                 std::cout << "Bug!!" << endl;
             }
-            else if(isGoodJoiny(task, info))
+            else //if(isGoodJoiny(task, info))
             {
 
-                std::sort(task.begin(), task.end());
-                JoinyPuzzle puzzle(task, info);
-
-                //set - verify is it a unique ellement
-                set_size = good_tasks.size();
+                //std::sort(task.begin(), task.end());
+                //JoinyPuzzle puzzle(task, info);
+                JoinyPuzzle puzzle(task,info_origin);
 
                 good_tasks.insert(puzzle);
                 ++good;
-
-
-                //write in file, when we insert in the set
-                if(good_tasks.size() > set_size)
-                {
-                    std::stringstream fname;
-                    fname << joiny_size << "x" << joiny_size << "_" << good << ".ad";
-
-                    std::ofstream file;
-                    file.open(fname.str().c_str(), ios::out | ios::binary);
-                    OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
-
-                    os << puzzle;
-                }
 
             }
         }
@@ -195,30 +181,76 @@ void SaveLevels(const unsigned int tablo_size,
             tabulate(generated, good, good_tasks.size());
     }
 
+
+    //write in file all ell from the set
+    unsigned int num = 0;
+    for(std::set<JoinyPuzzle>::iterator it = good_tasks.begin();
+        it != good_tasks.end();
+        ++it)
+    {
+        JoinyPuzzle puzzle = *it;
+
+        std::stringstream fname;
+        fname << joiny_size << "x" << joiny_size << "_" << num << ".ad";
+        ++num;
+
+        std::ofstream file;
+        file.open(fname.str().c_str(), ios::out | ios::binary);
+        OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
+
+        os << puzzle;
+    }
+
     tabulate(generated, good, good_tasks.size());
 
-
-
 }
-void SaveCollection(std::string coll_save_name)
+
+
+
+void SaveCollection(std::string plan_file,
+                    std::string coll_save_name)
 {
+
+    Palete _past_palete;
+    Palete _curr_palete;
+
     //get info about main settings for collection
-    std::ifstream infile("collection.txt");
+    std::ifstream infile(plan_file);
     std::string line;
 
     std::getline(infile, line);
-    std::string tablo_size = line;
-    int tablo_size_i = std::stoi(tablo_size);
+    std::string tablo_width = line;
+    uint32_t tablo_width_i = std::stoi(tablo_width);
+
+    std::getline(infile, line);
+    std::string tablo_height = line;
+    uint32_t tablo_height_i = std::stoi(tablo_height);
 
     std::getline(infile, line);
     std::string level_num = line;
-    int level_num_i = std::stoi(level_num);
+    uint32_t level_num_i = std::stoi(level_num);
 
     std::getline(infile,line);
     std::string collection_color = line;
+    std::string r = "";
+    std::string g = "";
+    std::string b = "";
+
+    //get collection color
+    istringstream iss(collection_color);
+    iss >> r;
+    iss >> g;
+    iss >> b;
+
+    //convert coll colors from string to uint32
+    uint32_t r_uint = std::stoi(r);
+    uint32_t g_uint = std::stoi(g);
+    uint32_t b_uint = std::stoi(b);
+
+
+
 
     std::vector<std::string> level_files_name;
-
     for(unsigned int i=0; i<level_num_i; ++i)
     {
         std::getline(infile, line);
@@ -241,133 +273,70 @@ void SaveCollection(std::string coll_save_name)
 
     }
 
-    //TODO: recolor puzzle
-    //2 rules:
-    //two neighbour level can not have the same Color Palete
-    //mix Color Paletes
+    //recolor puzzle
+    for(std::vector<JoinyPuzzle>::iterator it = good_tasks.begin();
+        it != good_tasks.end();
+        ++it)
+    {
+        JoinyPuzzle * puzzle_ptr = &(*it);
 
 
-    //TODO: then write all other important info to collection binary file
+        _past_palete = _curr_palete;
+        _curr_palete = getPalete(*it);
+
+        if(_past_palete == _curr_palete)
+        {
+            recolorJoiny(puzzle_ptr->getJoinyTask(),
+                                              _curr_palete);
+            _curr_palete = getPalete(*it);
+        }
+
+
+    }
+
+
+    //write all other important info to collection binary file
     //create collection
     std::stringstream fname;
     fname << coll_save_name;
     std::ofstream file;
     file.open(fname.str().c_str(), ios::out | ios::binary);
     OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
+
+    //save width and height
+    os << tablo_width_i;
+    os << tablo_height_i;
+
+    //level num
+    os << level_num_i;
+
+    //level color
+    os << r_uint;
+    os << g_uint;
+    os << b_uint;
+
+    //levels
     os << good_tasks;
-
-    int a =2;
-    ++a;
 }
+const Palete getPalete(JoinyPuzzle& puzzle)
+{
+    JoinyTask task = puzzle.getJoinyTask();
+    JoinyPair pair;
+    Palete palete;
+    std::set<unsigned int> palete_set;
 
-//void SaveLevels(const unsigned int tablo_size,
-//                const unsigned int level_number,
-//                const unsigned int min_colors,
-//                const unsigned int max_colors)
-//{
-//    srand(time(0));
-//    unsigned int joiny_size = tablo_size;
+    for(unsigned int i=0; i<task.size(); ++i)
+    {
+        pair = task[i];
+        palete_set.insert(pair.getColor());
+    }
 
-//    unsigned int N = level_number;
-//    unsigned int generated = 0;
-//    unsigned int good = 0;
+    //copy unique colors from set to Palete
+    for(std::set<unsigned int>::iterator it = palete_set.begin();
+        it != palete_set.end(); ++it)
+    {
+        palete.push_back(*it);
+    }
 
-
-//    typedef std::map<unsigned int, unsigned int> ColorsMap;
-//    ColorsMap colors;
-//    for(unsigned int i=0; i<20; ++i)
-//    {
-//        colors[i] = 0;
-//    }
-//    unsigned int max = max_colors;
-//    unsigned int min = min_colors;
-
-//    generated = 0;
-//    good = 0;
-
-//    std::set<JoinyPuzzle> good_tasks;
-
-//    Palete past;
-//    Palete curr;
-//    while(good_tasks.size() < N)
-//    {
-
-//        FlowTask t = generate(joiny_size,joiny_size);
-//        if(isGooTask(t, N))
-//        {
-//            unsigned int colors = max;
-
-//            if(t.size() == 2)
-//                colors = 2;
-//            else if(t.size() == 3)
-//                colors = 3;
-//            else
-//            {
-//                colors = min + (rand() % (unsigned int)(max - min + 1));
-//            }
-
-//            JoinyTask task = flowToJoiny(t, colors);
-
-
-//            JoinyInfo info_old = solveJoiny(task,
-//                                            joiny_size,
-//                                            joiny_size);
-
-//            JoinyTask task_origin = flowToJoinyStaightforward(t);
-//            JoinyInfo info_origin = solveJoiny(task_origin,
-//                                               joiny_size,
-//                                               joiny_size);
-
-//            JoinyInfo info = mergeInfo(info_old, info_origin);
-
-//            if(info.getGold() > 100000)
-//            {
-//                std::cout << "Bug!!" << endl;
-//            }
-//            else if(isGoodJoiny(task, info))
-//            {
-//                past = curr;
-//                curr = getCurrPalete();
-
-
-
-//                if(curr == past)
-//                {
-//                    //choose new palete except curr palete
-//                    //recolor JoinyTask
-//                    task = relocorJoiny(task,curr);
-//                }
-
-//                std::sort(task.begin(), task.end());
-//                JoinyPuzzle puzzle(task, info);
-//                good_tasks.insert(puzzle);
-//                good++;
-
-
-//            }
-//        }
-//        generated++;
-//        if(generated % 10 == 0)
-//            tabulate(generated, good, good_tasks.size());
-//    }
-
-//    tabulate(generated, good, good_tasks.size());
-
-//    for(ColorsMap::iterator it = colors.begin(); it!= colors.end(); ++it)
-//    {
-//        if(it->second != 0)
-//            cout << "Colors " << it->first << ": " << it->second << endl;
-//    }
-
-//    std::vector<JoinyPuzzle> res(good_tasks.begin(), good_tasks.end());
-//    std::random_shuffle(res.begin(), res.end());
-
-//    std::stringstream fname;
-//    fname << "puzzle_" << joiny_size << "x" << joiny_size << "_1.ad";
-
-//    std::ofstream file;
-//    file.open(fname.str().c_str(), ios::out | ios::binary);
-//    OutputBinaryStream os(file, BinaryStream::MaxProtocolVersion);
-
-//    os << res;
-//}
+    return palete;
+}

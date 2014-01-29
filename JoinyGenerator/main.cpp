@@ -4,8 +4,9 @@ using namespace std;
 
 int main()
 {
-
-    SaveLevels(5,100,3,4);
+    //GenerateLevels(5,1,3,4);
+    SaveCollection("collection_5x5_1.txt","puzzle_5x5_1.ad");
+    //SaveCollection("collection_5x5_2.txt","puzzle_5x5_2.ad");
 
     return 0;
 }

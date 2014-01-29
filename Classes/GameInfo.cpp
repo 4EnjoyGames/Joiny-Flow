@@ -12,18 +12,13 @@ GameInfo::GameInfo()
 void GameInfo::setInfo()
 {
     _coll_files.push_back("puzzle_5x5_1.ad");
-    _coll_files.push_back("puzzle_5x5_2.ad");
-    _coll_files.push_back("puzzle_6x6_1.ad");
+    //_coll_files.push_back("puzzle_5x5_2.ad");
+    //_coll_files.push_back("puzzle_6x6_1.ad");
 
-    _flow_points.push_back(FlowPoint(5,5));
-    _flow_points.push_back(FlowPoint(5,5));
-    _flow_points.push_back(FlowPoint(6,6));
+    //_colors.push_back(ccc3(248,105,159));
+    //_colors.push_back(ccc3(100,243,248));
+    //_colors.push_back(ccc3(64,255,68));
 
-    _colors.push_back(ccc3(248,105,159));
-    _colors.push_back(ccc3(100,243,248));
-    _colors.push_back(ccc3(64,255,68));
-
-    _level_number = 100;
 
     _close_color = ccc3(170,170,170);
 
@@ -39,44 +34,14 @@ GameInfo* GameInfo::getInstance( )
         instance = new GameInfo();
      return instance;
 }
-const std::vector<FlowPoint>& GameInfo::getFlowPoints()
-{
-    return _flow_points;
-}
-
 const std::vector<std::string>& GameInfo::getCollectionFiles()
 {
     return _coll_files;
 }
-const std::vector<ccColor3B>& GameInfo::getCollectionColors()
-{
-    return _colors;
-}
+
 unsigned int GameInfo::getCollectionNumber()
 {
     return _coll_files.size();
-}
-const std::vector<std::string>& GameInfo::getCollectionNames()
-{
-    if(_coll_names.size()==0)
-    {
-        //std::string base = "Col";
-
-        std::vector<FlowPoint> flow_points = getFlowPoints();
-        unsigned int coll_num = getCollectionNumber()+1;
-        for (unsigned int i=1; i<coll_num; ++i)
-        {
-            //std::string int_converted = std::to_string(i);
-            //std::string coll_name = base + int_converted;
-            //std::string curr_coll = CCLocalizedString(coll_name.c_str());
-
-            std::string x = AD_to_string(flow_points[i-1].x());
-            std::string y = AD_to_string(flow_points[i-1].y());
-            std::string curr_coll = x + 'x' + y;
-            _coll_names.push_back(curr_coll);
-        }
-    }
-    return _coll_names;
 }
 
 const ccColor3B& GameInfo::getCloseColor()

@@ -18,6 +18,11 @@ public:
     {
         return _y;
     }
+//    FlowPoint& operator=(const FlowPoint& a)
+//    {
+
+//    }
+
 private:
     Cordinate _x;
     Cordinate _y;
@@ -30,6 +35,22 @@ inline bool operator==(const FlowPoint& a, const FlowPoint& b)
 inline bool operator!=(const FlowPoint& a, const FlowPoint& b)
 {
     return !(a == b);
+}
+inline bool operator<(const FlowPoint& a, const FlowPoint& b)
+{
+    return (a.x() < b.x() || (a.x() == b.x() && a.y() < b.y()));
+}
+inline bool operator> (const FlowPoint& a, const FlowPoint& b)
+{
+    return  (!(a<b) && a!=b);
+}
+inline bool operator<=(const FlowPoint& a, const FlowPoint& b)
+{
+    return (a<b || a==b);
+}
+inline bool operator>=(const FlowPoint& a, const FlowPoint& b)
+{
+    return (a>b || a==b);
 }
 
 inline bool isPointNextTo(const FlowPoint& a, const FlowPoint& b)

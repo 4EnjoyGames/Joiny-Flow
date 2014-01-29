@@ -9,12 +9,12 @@ class GameInfo
    public:
        static GameInfo* getInstance( );
 
-       const std::vector<FlowPoint>& getFlowPoints();
+       //const std::vector<FlowPoint>& getFlowPoints();
        const std::vector<std::string>& getCollectionFiles();
-       const std::vector<ccColor3B>& getCollectionColors();
+       //const std::vector<ccColor3B>& getCollectionColors();
 
        unsigned int getCollectionNumber();
-       const std::vector<std::string>& getCollectionNames();
+       //const std::vector<std::string>& getCollectionNames();
 
        const ccColor3B& getCloseColor();
        const ccColor3B& getTitleColor();
@@ -31,11 +31,11 @@ class GameInfo
        static GameInfo* instance;
 
 
-       std::vector<std::string> _coll_names;
-       std::vector<FlowPoint> _flow_points;
+       //std::vector<std::string> _coll_names;
+       //std::vector<FlowPoint> _flow_points;
        std::vector<std::string> _coll_files;
-       std::vector<ccColor3B> _colors;
-       unsigned int _level_number;
+       //std::vector<ccColor3B> _colors;
+       //unsigned int _level_number;
 
        ccColor3B _close_color;
        ccColor3B _title_color;

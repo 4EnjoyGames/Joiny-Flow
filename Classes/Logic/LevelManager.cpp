@@ -79,10 +79,6 @@ void LevelManager::loadLevelsInfo()
     GameInfo* info = GameInfo::getInstance();
 
     std::vector<std::string> coll_files = info->getCollectionFiles();
-    std::vector<std::string> coll_names = info->getCollectionNames();
-    std::vector<ccColor3B> coll_colors  = info->getCollectionColors();
-
-    std::vector<FlowPoint> flow_points = info->getFlowPoints();
 
     for(unsigned int j=0; j<coll_files.size(); ++j)
     {
@@ -91,16 +87,37 @@ void LevelManager::loadLevelsInfo()
         if(FileUtils::openPackageFile(file, ss))
         {
             InputBinaryStream is(ss);
+
+            uint32_t width=0;
+            is >> width;
+
+            uint32_t height=0;
+            is >> height;
+
+            uint32_t level_num = 0;
+            is >> level_num;
+
+            uint32_t r = 0;
+            uint32_t g = 0;
+            uint32_t b = 0;
+            is >> r;
+            is >> g;
+            is >> b;
+
+
             std::vector<JoinyPuzzle> inp;
             is >> inp;
 
             CollectionPtr col(new JoinyCollection);
             col->_id = j+1;
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
-                        new JoinyCollection::LevelsVector(inp.size(),
+                        new JoinyCollection::LevelsVector(level_num,
                                                           JoinyLevel()));
-            col->setCollectionName(coll_names[j]);
-            col->setCollectionColor(coll_colors[j]);
+            std::string coll_name = std::to_string(width)
+                    + "x"
+                    + std::to_string(height);
+            col->setCollectionName(coll_name);
+            col->setCollectionColor(ccc3(r,g,b));
 
             for(unsigned int i=0; i<inp.size(); ++i)
             {
@@ -108,7 +125,7 @@ void LevelManager::loadLevelsInfo()
                 l._level_id = i+1;
                 l._parent = col.get();
                 l._puzzle = inp[i];
-                l._size = flow_points[j];
+                l._size = FlowPoint(width,height);
             }
 
             _collections[col->_id] = col;
@@ -249,7 +266,8 @@ void LevelManager::makePreviews(unsigned int joiny_size,
                                 unsigned int levels_num)
 {
 
-    for(unsigned int curr_l_num = 1; curr_l_num < levels_num; ++curr_l_num)
+
+    for(unsigned int curr_l_num = 0; curr_l_num < levels_num; ++curr_l_num)
     {
         std::string curr_file_name = AD_to_string(joiny_size)
                 + "x"
