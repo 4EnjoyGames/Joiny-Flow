@@ -12,6 +12,7 @@
 #include <ADLib/Device/ADAds.h>
 #include <ADLib/Device/ADLanguage.h>
 #include <ADLib/Device/ADStatistics.h>
+#include <ADLib/Device/ADInfo.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -34,7 +35,9 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     //Statistics init
-    ADStatistics::startSession("flurry_id");
+    if(ADInfo::getPlatform() == ADPlatform::Android)
+        ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
+    ADStatistics::startSession();
 
     //Language init
     ADLanguage::addSupportedLanguage("en");
@@ -127,6 +130,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
 
+    ADStatistics::stopSession();
 
     // if you use SimpleAudioEngine, it must be pause
     CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
@@ -137,6 +141,8 @@ void AppDelegate::applicationDidEnterBackground() {
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
+
+    ADStatistics::startSession();
 
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();

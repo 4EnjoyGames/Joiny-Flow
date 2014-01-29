@@ -40,7 +40,8 @@ project.addModule('android_ADBrowser')
 
 project.project_name = 'Joiny'
 project.package_name = 'com.x4enjoy.joiny'
-
+project.version_name = "1.01"
+project.version_code = "5"
 project.resources_compile_task = createResourceCompilerTask(
     os.path.join(working_directory, 'Resources_storage'),
     'joiny',
