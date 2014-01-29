@@ -17,19 +17,6 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
                                                 "level-scene/flow.plist",
                                                 "level-scene/flow.png");
 
-   // _spl2 = GraphicsManager::getLoaderFor(this,
-     //                                                  "level-scene/flow2.plist",
-     //                                                  "level-scene/flow2.png");
-     //_spl2->inject();
-
-     //CCSprite* probe = _spl2->loadSprite("cell_active.png");
-     //CCSize probe_size = probe->getContentSize();
-     //_probe_size = probe_size.width;
-     //_textures_size = _probe_size;
-     //probe->removeFromParentAndCleanup(true);
-     //this->setContentSize(CCSize(_probe_size * table.getWidth(),
-     //                            _probe_size * table.getHeight()));
-
     CCSprite* test_texture = _spl_layer0->loadSprite("background.png");
     _textures_size = test_texture->getContentSize().width;
     test_texture->removeFromParent();
@@ -76,145 +63,6 @@ const cocos2d::CCPoint FlowRenderer::getNodePosition(const FlowPoint& pos)
 //                    _textures_size * pos.y());
 }
 
-//void FlowRenderer::drawBorder(CCSprite* img,
-//                int x, int y,
-//                int rotate, bool flip_y)
-//{
-//    img->setColor(ccc3(0,0,0));
-//    img->setPosition(this->getNodePosition(FlowPoint(x, y)));
-//    //img->setPosition(ccp(cell_width * (x+1), cell_width * (y+1)));
-//    img->setRotation(static_cast<float>(rotate));
-//    img->setFlipY(flip_y);
-//    //img->visit();
-//}
-
-//void FlowRenderer::drawTable()
-//{
-//    //Open image of active cell
-//    CCSprite* c_filled = _spl2->loadSprite("cell_active.png");
-//    //c_filled->setAnchorPoint(ccp(0.5f,0.5f));
-
-//    CCSprite* c_border = _spl2->loadSprite("cell_top.png");
-//    //c_border->setAnchorPoint(ccp(0.5f, 0.5f));
-
-//    CCSprite* c_corner_straight = _spl2->loadSprite("cell_corner_straight.png");
-//    //c_corner_straight->setAnchorPoint(ccp(0.5f, 0.5f));
-
-//    CCSprite* c_corner_round = _spl2->loadSprite("cell_corner_round.png");
-//    //c_corner_round->setAnchorPoint(ccp(0.5f, 0.5f));
-
-//    CCSprite* c_corner_outer = _spl2->loadSprite("cell_corner_outer.png");
-//    //c_corner_outer->setAnchorPoint(ccp(0.5f, 0.5f));
-
-//    //Placement of the border
-////    auto drawBorder = [cell_width](
-////            CCSprite* img,
-////            int x, int y,
-////            int rotate, bool flip_y)
-////    {
-////        img->setPosition(this->getNodePosition(FlowPoint(cell_width * (x+1), cell_width * (y+1))));
-////        //img->setPosition(ccp(cell_width * (x+1), cell_width * (y+1)));
-////        img->setRotation(rotate);
-////        img->setFlipY(flip_y);
-////        img->visit();
-////    };
-
-
-//    unsigned int width = _table.getWidth();
-//    unsigned int height = _table.getHeight();
-
-//    auto isShowableCell = [this](int x, int y)
-//    {
-//        unsigned int width = _table.getWidth();
-//        unsigned int height = _table.getHeight();
-
-//        if(x>=0 && x<width && y>=0 && y<height)
-//            return true;
-//        else
-//            return false;
-//    };
-
-
-//    for(int x=0; x<width; ++x)
-//        for(int y=0; y<height; ++y)
-//        {
-//            //TablePoint cord(x,y);
-//            //const Cell* cell = _table_info->getCell(x, y);
-////            if(!holes_inside &&
-////                    (y != -1 &&
-////                     x != -1 &&
-////                     y != height &&
-////                     x != width))
-////            {
-////                drawBorder(c_filled, x, y, 0, false);
-////            }
-////            else
-//            {
-//                drawBorder(c_filled, x, y, 0, false);
-
-//                bool neig_top = isShowableCell(x, y+1);
-//                bool neig_bottom = isShowableCell(x, y-1);
-//                bool neig_right = isShowableCell(x+1, y);
-//                bool neig_left = isShowableCell(x-1, y);
-//                if(neig_top)
-//                {
-//                    drawBorder(c_border, x, y, 0, false);
-//                    if(neig_left)
-//                        drawBorder(c_corner_round, x, y, 0, false);
-
-//                    if(!neig_left)
-//                        drawBorder(c_corner_straight, x, y, 0, false);
-//                    if(!neig_right)
-//                        drawBorder(c_corner_straight, x, y, 180, true);
-//                }
-//                if(neig_left)
-//                {
-//                    drawBorder(c_border, x, y, 90, true);
-//                    if(neig_bottom)
-//                        drawBorder(c_corner_round, x, y, 0, true);
-
-//                    if(!neig_bottom)
-//                        drawBorder(c_corner_straight, x, y, -90, false);
-//                    if(!neig_top)
-//                        drawBorder(c_corner_straight, x, y, 90, true);
-//                }
-//                if(neig_bottom)
-//                {
-//                    drawBorder(c_border, x, y, 0, true);
-//                    if(neig_right)
-//                        drawBorder(c_corner_round, x, y, 180, false);
-
-//                    if(!neig_right)
-//                        drawBorder(c_corner_straight, x, y, 180, false);
-//                    if(!neig_left)
-//                        drawBorder(c_corner_straight, x, y, 0, true);
-//                }
-//                if(neig_right)
-//                {
-//                    drawBorder(c_border, x, y, 90, false);
-//                    if(neig_top)
-//                        drawBorder(c_corner_round, x, y, 90, false);
-
-//                    if(!neig_top)
-//                        drawBorder(c_corner_straight, x, y, 90, false);
-//                    if(!neig_bottom)
-//                        drawBorder(c_corner_straight, x, y, -90, true);
-//                }
-
-//                if(!neig_bottom && !neig_left && isShowableCell(x-1, y-1))
-//                    drawBorder(c_corner_outer, x, y, 180, false);
-
-//                if(!neig_bottom && !neig_right && isShowableCell(x+1, y-1))
-//                    drawBorder(c_corner_outer, x, y, 0, true);
-
-//                if(!neig_top && !neig_left && isShowableCell(x-1, y+1))
-//                    drawBorder(c_corner_outer, x, y, 180, true);
-
-//                if(!neig_top && !neig_right && isShowableCell(x+1, y+1))
-//                    drawBorder(c_corner_outer, x, y, 0, false);
-//            }
-//        }
-//}
 
 void FlowRenderer::createBackground()
 {
@@ -284,79 +132,10 @@ void FlowRenderer::createBackground()
 
     //Create sprite with drawing result
     CCSprite* res = CCSprite::createWithTexture(render->getSprite()->getTexture());
-    //res->setFlipY(true);
-    //res->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2 + 100/SCALE,
-    //                     ORIGIN.y + VISIBLE_SIZE.height/2 - 50/SCALE));
     res->setAnchorPoint(ccp(0,0));
     res->setPosition(ccp(0,0));
     res->setScale(this->getContentSize().width / tablo_size.width);
     this->addChild(res);
-
-
-
-
-
-//    for(unsigned int x=0; x<width; ++x)
-//    {
-//        for(unsigned int y=0; y<height; ++y)
-//        {
-//            CCSprite* border = nullptr;
-
-//            if(y==0 && x==0)
-//            {
-//                border = _spl->loadSprite("border_angle.png");
-//                border->setRotation(270.0f);
-//            }
-//            else if(y==0 && x==width-1)
-//            {
-//                border = _spl->loadSprite("border_angle.png");
-//                border->setRotation(180.0f);
-//            }
-//            else if(x==0 && y==height-1)
-//            {
-//                border = _spl->loadSprite("border_angle.png");
-//            }
-//            else if(x==width-1 && y==height-1)
-//            {
-//                border = _spl->loadSprite("border_angle.png");
-//                border->setRotation(90.0f);
-//            }
-//            else if(y==0 ||x==0 || y==0 || x==width-1 || y==height-1)
-//            {
-//                border = _spl->loadSprite("border_double.png");
-//                if(y==0)
-//                {
-//                    border->setRotation(180.0f);
-//                }
-//                else if(x==0)
-//                {
-//                    border->setRotation(270.0f);
-//                }
-//                else if(x==width-1)
-//                {
-//                    border->setRotation(90.0f);
-//                }
-
-//            }
-
-
-//            if(x!=height-1)
-//            {
-//                CCSprite* border_right = _spl->loadSprite("border_normal.png");
-//                border_right->setRotation(90.0f);
-//                border_right->setPosition(this->getNodePosition(FlowPoint(x, y)));
-//            }
-//            if(y!=height-1)
-//            {
-//                CCSprite* border_upper = _spl->loadSprite("border_normal.png");
-//                //border_right->setRotation(90.0f);
-//                border_upper->setPosition(this->getNodePosition(FlowPoint(x, y)));
-//            }
-
-//            if(border!=nullptr)
-//                border->setPosition(this->getNodePosition(FlowPoint(x, y)));
-//        }
-//    }
 }
 
 void FlowRenderer::createNodes()
@@ -483,7 +262,8 @@ const FlowTable& FlowRenderer::getTable() const
     return _table;
 }
 
-void FlowRenderer::showActiveCircle(const cocos2d::CCPoint& p, const FlowColor color)
+void FlowRenderer::showActiveCircle(const cocos2d::CCPoint& p,
+                                    const FlowColor color)
 {
     if(_active_circle == 0)
     {

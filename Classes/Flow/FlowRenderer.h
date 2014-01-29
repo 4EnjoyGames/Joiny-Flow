@@ -23,10 +23,6 @@ public:
 
     static FlowRenderer* create(const FlowTable&);
 private:
-    //void drawTable();
-    //void drawBorder(cocos2d::CCSprite* img,
-    //                int x, int y,
-    //                int rotate, bool flip_y);
     void createBackground();
     void createNodes();
     void initNodes();
