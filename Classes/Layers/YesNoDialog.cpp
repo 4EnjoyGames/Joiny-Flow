@@ -1,5 +1,5 @@
 #include "YesNoDialog.h"
-#include "Logic/Language.h"
+#include <ADLib/Device/ADLanguage.h>
 YesNoDialog::YesNoDialog(CCNode* content,
             CCObject* yes_callback,
             SEL_CallFunc yes_fun,
@@ -25,8 +25,8 @@ void YesNoDialog::onCreate(CCNode *parent)
     _content->setPosition(ccp(x_middle, size.height*0.65));
 
     SpritesLoader menu_spl = GraphicsManager::getLoaderFor(parent,
-                                                           Language::localizeFileName("yes_no_menu.plist").c_str(),
-                                                           Language::localizeFileName("yes_no_menu.png").c_str());
+                                                           ADLanguage::localizeFileName("yes_no_menu.plist").c_str(),
+                                                           ADLanguage::localizeFileName("yes_no_menu.png").c_str());
     //Create menu items
     //Yes button
     AnimatedMenuItem *yes_button = AnimatedMenuItem::create(

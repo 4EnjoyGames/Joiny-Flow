@@ -1,7 +1,6 @@
 #include "BackgroundHolder.h"
 #include "SimpleAudioEngine.h"
 #include "Core/MusicSettings.h"
-#include "StoreBridge/cocos2dx_StoreController.h"
 bool BackgroundHolder::_firstly=true;
 
 BackgroundHolder::BackgroundHolder()
@@ -89,26 +88,12 @@ BackgroundHolder::BackgroundLayer::~BackgroundLayer()
 }
 void BackgroundHolder::storeClose()
 {
-#ifndef JUNIOR
-    BackgroundHolder& bgh = getHolder();
-    if(bgh._store_opened)
-    {
-        cocos2dx_StoreController::storeClosing();
-        bgh._store_opened = false;
-    }
-#endif
+
 }
 
 void BackgroundHolder::storeOpen()
 {
-#ifndef JUNIOR
-    BackgroundHolder& bgh = getHolder();
-    if(!bgh._store_opened)
-    {
-        cocos2dx_StoreController::storeOpening();
-        bgh._store_opened = true;
-    }
-#endif
+
 }
 
 void BackgroundHolder::BackgroundLayer::triggerAnimations()

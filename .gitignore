@@ -36,3 +36,7 @@ local.properties
 debug
 *.pdb
 *.apk
+
+proj.androi*/*
+__pycache__
+environment.py

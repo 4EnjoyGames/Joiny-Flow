@@ -5,7 +5,7 @@
 #include "Core/Screen.h"
 #include "Flow/FlowTable.h"
 #include "Flow/FlowRenderer.h"
-
+#include "ADLib/ADString.h"
 LevelManager::LevelManager()
     : _save_path(FileUtils::getStorageFilePath("save.ad")),
       _settings_path(FileUtils::getStorageFilePath("settings.ad"))
@@ -269,11 +269,11 @@ void LevelManager::makePreviews(unsigned int joiny_size,
 
     for(unsigned int curr_l_num = 0; curr_l_num < levels_num; ++curr_l_num)
     {
-        std::string curr_file_name = std::to_string(joiny_size)
+        std::string curr_file_name = AD_to_string(joiny_size)
                 + "x"
-                + std::to_string(joiny_size)
+                + AD_to_string(joiny_size)
                 +"_"
-                + std::to_string(curr_l_num);
+                + AD_to_string(curr_l_num);
 
         std::stringstream fname;
         fname << "../build/JoinyGeneratorDebug/" << curr_file_name << ".ad";

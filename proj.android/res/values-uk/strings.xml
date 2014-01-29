@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-       
-    <string name="restore_purchases_failed">Извините, во время восстановления  покупок произошла ошибка. 
-Пожалуйста, попробуйте еще раз позже.</string>
-    <string name="restore_purchases_ok">Покупки восстановлены успешно!</string>
-</resources>

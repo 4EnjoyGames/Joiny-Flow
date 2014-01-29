@@ -6,7 +6,7 @@
 #include "BackButton.h"
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/Device/ADAds.h>
-
+#include <ADLib/ADString.h>
 SelectCollection::SelectCollection()
 {
 }
@@ -92,10 +92,10 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
                 menu_selector(SelectCollection::onCollectionSelect));
 
     unsigned int l_num = collection->getLevelsNumber();
-    std::string l_num_str = std::to_string(l_num);
+    std::string l_num_str = AD_to_string(l_num);
 
     unsigned int l_curr = collection->getCompletedLevelsNumber();
-    std::string l_curr_str = std::to_string(l_curr);
+    std::string l_curr_str = AD_to_string(l_curr);
 
 
     std::string label_text = collection_name + "  "+ l_curr_str + '/'  + l_num_str ;

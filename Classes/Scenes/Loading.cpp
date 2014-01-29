@@ -3,11 +3,8 @@
 #include "MainScene.h"
 #include "Core/CCTime.h"
 #include "SimpleAudioEngine.h"
-#include "Logic/Language.h"
 #include "../Core/MusicSettings.h"
 
-#include "StoreBridge/cocos2dx_StoreController.h"
-#include "StoreBridge/cocos2dx_EventHandlers.h"
 #include "Logic/LevelManager.h"
 
 Loading::Loading() : _sprites_to_load(0), _loaded_sprites(0)
@@ -70,19 +67,12 @@ void Loading::loadingCallBack(CCObject *)
     if(_loaded_sprites == _sprites_to_load)
     {
         const float splash_screen_time = 1;
-        float loading_time = GetMilliCount() - _started_in;
-        float still_wait = splash_screen_time - float(loading_time)/1000;
-        if(still_wait > 0)
-        {
-            this->runAction(CCSequence::create(
-                                CCDelayTime::create(still_wait),
-                                CCCallFunc::create(this, callfunc_selector(Loading::hideLogo)),
-                                NULL));
-        }
-        else
-        {
-            hideLogo();
-        }
+
+        this->runAction(CCSequence::create(
+                            CCDelayTime::create(splash_screen_time),
+                            CCCallFunc::create(this, callfunc_selector(Loading::hideLogo)),
+                            NULL));
+
 
     }
 }
@@ -93,14 +83,6 @@ void Loading::initRW()
 {
 	//TODO: write cleanup
     RW::onInit();
-
-    /**
-         * The initialization of StoreController. This is the first and ONLY time it's initialized.
-         **/
-
-    cocos2dx_StoreController::initialize("DIb8Vy95lnJH4PtgUQro");
-    cocos2dx_EventHandlers::getInstance()->addHandler(AppDelegate::getPurchaseHandler());
-
 }
 void Loading::addAll()
 {
@@ -180,7 +162,7 @@ void Loading::addAll()
 //    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
 	
     RW::getLevelManager().loadSettings();
-    addSoundToLoad("music/silly_fun.mp3");
+    //addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
 
     bool previev_mode = false;
@@ -253,19 +235,13 @@ void Loading::loadAll()
 void Loading::onLoadFinished()
 {
 	const float splash_screen_time = float(SPLASH_SCREEN_TIME);
-    float loading_time = float(GetMilliCount()) - _started_in;
-    float still_wait = splash_screen_time - float(loading_time)/1000;
-    if(still_wait > 0)
-    {
-        this->runAction(CCSequence::create(
-                            CCDelayTime::create(still_wait),
-                            CCCallFunc::create(this, callfunc_selector(Loading::hideLogo)),
-                            NULL));
-    }
-    else
-    {
-        hideLogo();
-    }
+
+
+    this->runAction(CCSequence::create(
+                        CCDelayTime::create(splash_screen_time),
+                        CCCallFunc::create(this, callfunc_selector(Loading::hideLogo)),
+                        NULL));
+
 }
 
 #ifdef CC_WIN8_METRO
@@ -296,7 +272,7 @@ bool Loading::init()
     {
         return false;
     }
-    _started_in = GetMilliCount();
+
 
     
 //#ifndef CC_WIN8_PHONE

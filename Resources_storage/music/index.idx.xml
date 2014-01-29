@@ -5,12 +5,16 @@
 	</file>
 	<file>
 		<name>silly_fun.mp3</name>
+		<platform>none</platform>
 	</file>
 	<file>
 		<name>silly_fun.wav</name>
+		<platform>android_win</platform>
+		<platform>windows</platform>
 	</file>
 	<file>
 		<name>silly_fun.ogg</name>
+		<platform>android</platform>
 	</file>
 	
 

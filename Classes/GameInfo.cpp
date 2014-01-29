@@ -1,7 +1,7 @@
 #include "GameInfo.h"
 #include "Localization/CCLocalizedString.h"
 #include <sstream>
-
+#include <ADLib/ADString.h>
 GameInfo* GameInfo::instance = nullptr;
 
 GameInfo::GameInfo()

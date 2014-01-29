@@ -3,8 +3,6 @@
 USING_NS_CC;
 
 
-#include "Logic/Language.h"
-#include "Core/Browser.h"
 #include "Flow/FlowGame.h"
 #include "Flow/Generator/FGenerator.h"
 #include "Flow/JoinyPair.h"
@@ -12,7 +10,7 @@ USING_NS_CC;
 #include <algorithm>
 #include <ADLib/Device/ADAds.h>
 #include "Localization/CCLocalizedString.h"
-
+#include <ADLib/ADString.h>
 class LevelScene::LevelEndPopUp : public PopUpWindow::Content
 {
 
@@ -70,7 +68,7 @@ private:
             label->setFontSize(48);
             label->setPosition(ccp(x_middle, size.height*0.7f));
 
-            std::string score_to_bronze = std::to_string(_level->getPuzzle()._info.getBronze());
+            std::string score_to_bronze = AD_to_string(_level->getPuzzle()._info.getBronze());
 
             CCLabelTTF* score = CCLabelTTF::create(score_to_bronze.c_str(),
                                                    "fonts/Fredoka One.ttf",
@@ -83,7 +81,7 @@ private:
             label->setFontSize(48);
             label->setPosition(ccp(x_middle, size.height*0.85f));
 
-            CCLabelTTF* score = CCLabelTTF::create(std::to_string(_score).c_str(),
+            CCLabelTTF* score = CCLabelTTF::create(AD_to_string(_score).c_str(),
                                                    "fonts/Fredoka One.ttf",
                                                    78);
             score->setPosition(ccp(x_middle, size.height*0.78f));
@@ -263,11 +261,11 @@ private:
 
 void LevelScene::onNextLevel()
 {
-    if(ADAds::getInstance().getInterstialTimesShowed() < 5)
-    {
-        ADAds::getInstance().showInterstitial();
-        ADAds::getInstance().prepareInterstitial();
-    }
+//    if(ADAds::getInstance().getInterstialTimesShowed() < 5)
+//    {
+//        ADAds::getInstance().showInterstitial();
+//        ADAds::getInstance().prepareInterstitial();
+//    }
 
     const JoinyLevel* next_level = RW::getLevelManager().getNextLevel(_current_level);
     if(next_level != nullptr)

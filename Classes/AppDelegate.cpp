@@ -6,10 +6,12 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "Logic/Language.h"
 #include "Scenes/Loading.h"
 #include "Core/Screen.h"
 #include <ADLib/Device/ADAds.h>
+#include <ADLib/Device/ADLanguage.h>
+#include <ADLib/Device/ADStatistics.h>
+#include <ADLib/Device/ADInfo.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -17,13 +19,7 @@ USING_NS_CC;
 #endif
 
 #include "Logic/RW.h"
-#ifndef JUNIOR
-PurchaseHandler AppDelegate::_purchase_handler;
-PurchaseHandler* AppDelegate::getPurchaseHandler()
-{
-    return &_purchase_handler;
-}
-#endif
+
 
 AppDelegate::AppDelegate() {
 
@@ -32,48 +28,34 @@ AppDelegate::AppDelegate() {
 AppDelegate::~AppDelegate() 
 {
     RW::onDestroy();
-#ifndef JUNIOR
-    cocos2dx_EventHandlers::getInstance()->removeHandler(&_purchase_handler);
-#endif
+
     //delete _purchase_handler;
 }
-#ifdef CC_WIN8_METRO
-bool AppDelegate::initInstance()
-{
-    bool bRet = false;
-    do
-    {
 
-
-
-        // fix bug: 16bit aligned
-        void* buff=_aligned_malloc(sizeof(CCEGLView),16);
-        CCEGLView* mainView = new (buff) CCEGLView();
-
-        CCDirector *pDirector = CCDirector::sharedDirector();
-        mainView->Create();
-        pDirector->setOpenGLView(mainView);
-
-
-
-        bRet = true;
-    } while (0);
-    return bRet;
-}
-#endif
 bool AppDelegate::applicationDidFinishLaunching() {
+    //Statistics init
+    if(ADInfo::getPlatform() == ADPlatform::Android)
+        ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
+    ADStatistics::startSession();
 
-    Screen::setDesignScale(1);
+    //Language init
+    ADLanguage::addSupportedLanguage("en");
+    ADLanguage::addSupportedLanguage("uk");
+    //ADLanguage::addSupportedLanguage("ru");
+    //ADLanguage::addSupportedLanguage("hu");
+    //ADLanguage::addSupportedLanguage("fr");
+    //ADLanguage::addSupportedLanguage("de");
+
+    ADLanguage::setDefaultLanguage("en");
+    ADLanguage::getLanguage();
+
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
 
-#ifndef CC_WIN8_METRO
-    pDirector->setOpenGLView(pEGLView);
-#endif
 
-    Language::setLanguage(Language::getDeviceLanguage());
+    pDirector->setOpenGLView(pEGLView);
 
     // Set the design resolution
     pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
@@ -147,24 +129,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
 
+    ADStatistics::stopSession();
 
     // if you use SimpleAudioEngine, it must be pause
     CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
     RW::onPause();
 }
 #include "Core/MusicSettings.h"
+#include "Core/DrawLayer.h"
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    if(MusicSettings::isBackgrHolderMusic() && MusicSettings::isMusicOn())
-    {
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-    }
-#else
+    ADStatistics::startSession();
+
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-#endif
-    
+    DrawLayer::registerUpdateDrawingNodes();
 }

@@ -17,9 +17,8 @@ const unsigned int JoinyCollection::getCompletedLevelsNumber() const
     unsigned int l_num = getLevelsNumber()+1;
     for(unsigned int i=1; i<l_num; ++i)
     {
-        bool compl = getLevel(i)->isCompleted();
-
-        if(compl)
+        const JoinyLevel* level = getLevel(i);
+        if(level->isCompleted())
             result+=1;
     }
     return result;

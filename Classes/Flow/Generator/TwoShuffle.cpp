@@ -1,6 +1,6 @@
 #include "FGenerator.h"
 #ifdef USE_TWO_SHUFFLE
-
+#include <cstdlib>
 void shuffle(Table&);
 void oddCorner(Table&);
 
