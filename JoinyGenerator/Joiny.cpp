@@ -33,9 +33,9 @@ public:
 
 
     //one tablo path for hints
-    std::vector<int> _tablo_with_pathes;
+    std::vector<unsigned int> _tablo_with_pathes;
 
-    typedef map<unsigned int, std::vector<int> > AllTablosPathes;
+    typedef map<unsigned int, std::vector<unsigned int> > AllTablosPathes;
     AllTablosPathes _all_pathes;
 
 
@@ -268,7 +268,7 @@ public:
     void SaveAllPath()
     {
         _hint_traveled = std::vector<bool>(height_ * width_, false);
-        _tablo_with_pathes = std::vector<int>(height_ * width_, 0);
+        _tablo_with_pathes = std::vector<unsigned int>(height_ * width_, 0);
 
         unsigned int result = 0;
 
@@ -751,7 +751,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
         }
 
         bool has_pathes = false;
-        std::vector<int> tablo_pathes;
+        std::vector<uint32_t> tablo_pathes;
         //find path for max score
         if(pathes.find(max) != pathes.end())
         {

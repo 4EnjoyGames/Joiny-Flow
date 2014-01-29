@@ -41,6 +41,7 @@ private:
     void onPreviousLevelClicked(CCObject*);
     void onNextLevelClicked(CCObject*);
     void onReloadLevelClicked(CCObject*);
+    void onHintClicked(CCObject*);
 
     FlowScore _last_score;
     FlowScore _bronze;

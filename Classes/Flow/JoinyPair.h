@@ -34,7 +34,9 @@ typedef unsigned int Score;
 class JoinyInfo
 {
 public:
-    JoinyInfo(const Score bronze=0, const Score silver=0, const Score gold=0
+    JoinyInfo(const Score bronze=0,
+              const Score silver=0,
+              const Score gold=0
               )
         : _bronze_score(bronze),
           _silver_score(silver),
@@ -58,12 +60,12 @@ public:
         return _gold_score;
     }
 
-    const std::vector<int> getPathes() const
+    const std::vector<uint32_t> getPathes() const
     {
         return _hint_pathes;
     }
 
-    void setHintPathes(const std::vector<int> pathes)
+    void setHintPathes(const std::vector<uint32_t>& pathes)
     {
         _hint_pathes = pathes;
     }
@@ -73,7 +75,7 @@ private:
     Score _silver_score;
     Score _gold_score;
 
-    std::vector<int> _hint_pathes;
+    std::vector<uint32_t> _hint_pathes;
 };
 
 struct JoinyPuzzle
@@ -117,7 +119,7 @@ inline InputBinaryStream& operator>>(InputBinaryStream& is, JoinyPair& task)
 
 inline OutputBinaryStream& operator<<(OutputBinaryStream& os, const JoinyInfo& info)
 {
-    os << uint32_t(info.getBronze()) << uint32_t(info.getSilver()) << uint32_t(info.getGold());
+    os << uint32_t(info.getBronze()) << uint32_t(info.getSilver()) << uint32_t(info.getGold())<< std::vector<uint32_t>(info.getPathes());
     return os;
 }
 
@@ -126,10 +128,14 @@ inline InputBinaryStream& operator>>(InputBinaryStream& is, JoinyInfo& info)
     uint32_t bronze = 0;
     uint32_t silver = 0;
     uint32_t gold = 0;
+    std::vector<uint32_t> hints;
 
     is >> bronze >> silver >> gold;
+    is >> hints;
+
     JoinyInfo f(bronze, silver, gold);
     info = f;
+    info.setHintPathes(hints);
 
     return is;
 }
