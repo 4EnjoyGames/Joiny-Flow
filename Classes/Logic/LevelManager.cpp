@@ -113,9 +113,9 @@ void LevelManager::loadLevelsInfo()
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
                         new JoinyCollection::LevelsVector(level_num,
                                                           JoinyLevel()));
-            std::string coll_name = std::to_string(width)
+            std::string coll_name = AD_to_string(width)
                     + "x"
-                    + std::to_string(height);
+                    + AD_to_string(height);
             col->setCollectionName(coll_name);
             col->setCollectionColor(ccc3(r,g,b));
 
