@@ -119,12 +119,14 @@ public:
 
     double Solve(const CellKey cell_key = 0)
     {
-        if (cell_key == 0) solved_ = false;
+        if (cell_key == 0)
+            solved_ = false;
         // See the newly fixed cells
         if (0 < cell_key)
         {
             for (CellKey hidden = start_[cell_key - 1];
-                 hidden < start_[cell_key]; hidden++)
+                 hidden < start_[cell_key];
+                 hidden++)
             {
                 if (table_[hidden] == 0)
                 {
@@ -280,6 +282,8 @@ public:
                         !_hint_traveled[GetCellKey(x, y)])
                 {
                     CellNumber number = table_[GetCellKey(x, y)];
+                    _tablo_with_pathes[GetCellKey(x, y)] = number;
+
                     result = saveOnePath(x,y,0,number);
                     if(result == 0)
                         stop = true;
@@ -301,6 +305,7 @@ public:
 
         if(path_lenth > 0 && table_[GetCellKey(x, y)])
         {
+
             return 100;
         }
 
@@ -337,6 +342,8 @@ public:
             return saveOnePath(x, y+1, path_lenth+1, cell_number);
         }
 
+
+        //_tablo_with_pathes[GetCellKey(x, y)] = cell_number;
         return 0;
     }
 

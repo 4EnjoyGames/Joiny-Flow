@@ -346,7 +346,11 @@ void LevelScene::onHintClicked(CCObject*)
             {
                 if(hint_path[y*width + x] == curr_hint_num)
                 {
-                    std::string log = std::to_string(x) +' '+ std::to_string(y);
+                    std::string log = "x = "
+                            + std::to_string(x)
+                            +' '
+                            + "y = "
+                            + std::to_string(y);
                     CCLog(log.c_str());
                 }
             }
