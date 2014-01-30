@@ -232,7 +232,7 @@ bool SettingScene::init()
                                rate_logo->getContentSize().height/2));
 
 
-    std::string label = "Rate Me"+ADInApp::getProduct("hints_10")->getPrice();
+    std::string label = "Rate Me "+ADInApp::getProduct("hints_10")->getPrice();
     CCLabelTTF * rate = CCLabelTTF::create(label.c_str(),
                                             "fonts/Fredoka One.ttf",
                                             72);
