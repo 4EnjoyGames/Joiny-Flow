@@ -12,6 +12,7 @@
 #include <ADLib/Device/ADLanguage.h>
 #include <ADLib/Device/ADStatistics.h>
 #include <ADLib/Device/ADInfo.h>
+#include <ADLib/Device/ADInApp.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -32,6 +33,50 @@ AppDelegate::~AppDelegate()
     //delete _purchase_handler;
 }
 
+class InAppDelegate : public ADInApp::Delegate
+{
+public:
+    void purchaseSuccessful(const ADInApp::ProductID & id)
+    {
+        CCLog("Purchase %s finished successful", id.c_str());
+    }
+    void purchaseFailed(const ADInApp::ProductID & id)
+    {
+        CCLog("Purchase %s failed", id.c_str());
+    }
+};
+
+
+void initInAppPurchases()
+{
+    typedef ADInApp::Product Product;
+    Product unlock_full("unlock_full", "$1.99");
+    Product hints_10("hints_10", "$0.99");
+    Product hints_100("hints_100", "$3.99");
+    Product hints_1000("hints_1000", "$9.99");
+
+    ADStore store = ADInfo::getStore();
+    if(store == ADStore::GooglePlay)
+    {
+        ADInApp::setStoreKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzjm8X23+3Aws5jkK8wBdau9jWYmIOSSdW9VfEg3E5f2lwolhWxxMpn7+o1SqZ2HljKDwvLyeVRLKuBjiwW/0OzMzFwW/JSFQdz/zFKL8UsypmKTdLc3dTo6mgPgUshgchse6ArF3xRWMFYVzmf8ePLDozCfGp71jhSbO5Rx5mQrq9se0eThRpuGUcNUC9PNvvQOnSm6ddkpnuVfxvLGwBRM7RlDCT60ClrfTY+/A6x0+YSiz7C+LJDaxkUg0X1U3nzQbVG8V9L0nk0dW6Fdtc5vY6wAcwtAV5KsX7tbQwrTM+OD2+R7h/3MqM/BH2/MWFXcoT9hakx6ZrYlc8hDZIwIDAQAB");
+        unlock_full.setParameter("type", "non-consumable");
+        hints_10.setParameter("type", "consumable");
+        hints_100.setParameter("type", "consumable");
+        hints_1000.setParameter("type", "consumable");
+    }
+
+    ADInApp::addProduct(unlock_full);
+    ADInApp::addProduct(hints_10);
+    ADInApp::addProduct(hints_100);
+    ADInApp::addProduct(hints_1000);
+
+    ADInApp::setDelegate(std::make_shared<InAppDelegate>());
+
+
+
+    ADInApp::loadStore();
+}
+
 bool AppDelegate::applicationDidFinishLaunching() {
     //Statistics init
     if(ADInfo::getPlatform() == ADPlatform::Android)
@@ -50,6 +95,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     ADLanguage::setDefaultLanguage("en");
     ADLanguage::getLanguage();
 
+    initInAppPurchases();
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();

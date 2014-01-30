@@ -5,7 +5,7 @@
 #include "Core/MusicSettings.h"
 #include "Logic/RW.h"
 #include "DeveloperScene.h"
-
+#include <ADLib/Device/ADInApp.h>
 SettingScene::SettingScene()
 {
 }
@@ -232,7 +232,8 @@ bool SettingScene::init()
                                rate_logo->getContentSize().height/2));
 
 
-    CCLabelTTF * rate = CCLabelTTF::create("Rate Me",
+    std::string label = "Rate Me"+ADInApp::getProduct("hints_10")->getPrice();
+    CCLabelTTF * rate = CCLabelTTF::create(label.c_str(),
                                             "fonts/Fredoka One.ttf",
                                             72);
     rate->setPosition(ccp(rate_logo->getContentSize().width/2,
@@ -308,8 +309,10 @@ void SettingScene::onSoundClicked(CCObject*)
 
     RW::getLevelManager().saveSettings();
 }
+
 void SettingScene::onResetClicked(CCObject*)
 {
+    ADInApp::buyProduct("hints_10");
     CCLog("onResetClicked clicked");
 }
 #include <ADLib/Device/ADNotification.h>
