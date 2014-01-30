@@ -312,13 +312,16 @@ void SettingScene::onResetClicked(CCObject*)
 {
     CCLog("onResetClicked clicked");
 }
+#include <ADLib/Device/ADNotification.h>
 void SettingScene::onRestorClicked(CCObject*)
 {
+    ADNotification::showNotification("Purchases restore is not implemented");
     CCLog("onRestorClicked!!");
 }
 void SettingScene::onDevelopersClicked(CCObject*)
 {
     CCLog("onDevelopersClicked!!");
+
     hideEverything(
                 CCCallFunc::create(
                     this,
