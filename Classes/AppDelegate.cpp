@@ -37,6 +37,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     if(ADInfo::getPlatform() == ADPlatform::Android)
         ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
     ADStatistics::startSession();
+    ADInfo::getStore();
 
     //Language init
     ADLanguage::addSupportedLanguage("en");
