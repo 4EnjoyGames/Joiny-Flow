@@ -16,8 +16,8 @@ ard_mode = sys.argv[1]
 
 
 from build_android_config import *
-project.addModule('android_ADInfo_Store_GooglePlay')
-project.output_name = 'proj.android'
+project.addModule('android_ADInfo_Store_SamsungStore')
+project.output_name = 'proj.android.samsung'
 
 if ard_mode == 'debug':
     project.debuggable = True

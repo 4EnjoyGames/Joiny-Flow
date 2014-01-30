@@ -85,8 +85,8 @@ bool SettingScene::init()
     float free_space_sum_y = VISIBLE_SIZE.height -
             up_ellements -
             music_size.height -
-            buttons_size.height*3 -
-            (space_between_buttons-buttons_size.height)*2;
+            buttons_size.height*4 -
+            (space_between_buttons-buttons_size.height)*3;
     float one_free_place = free_space_sum_y/3.0f;
     one_free_place = MIN(one_free_place, VISIBLE_SIZE.height*0.1);
 
@@ -103,6 +103,7 @@ bool SettingScene::init()
 
     float restore_position_y = reset_position_y - space_between_buttons;
     float dev_position_y = restore_position_y - space_between_buttons;
+    float rate_position_y = dev_position_y - space_between_buttons;
 
     ///////////////////////////////////////////////////////////////////
     //Music Button
@@ -216,11 +217,42 @@ bool SettingScene::init()
 
     main_menu->addChild(dev_button);
 
+    //////////////////////////////////////////////////////////////////
+
+    CCSprite* rate_logo = CCSprite::create("settings-menu/node.png");
+    AnimatedMenuItem* rate_button = AnimatedMenuItem::create(
+                rate_logo, this, menu_selector(SettingScene::onRateMeClicked));
+
+    rate_button->addChild(rate_logo);
+
+    CCPoint position_rate(ccp(VISIBLE_SIZE.width*0.5,rate_position_y
+                                  /*VISIBLE_SIZE.height - 720/SCALE*/));
+    rate_button->setPosition(position_rate);
+    rate_logo->setPosition(ccp(rate_logo->getContentSize().width/2,
+                               rate_logo->getContentSize().height/2));
+
+
+    CCLabelTTF * rate = CCLabelTTF::create("Rate Me",
+                                            "fonts/Fredoka One.ttf",
+                                            72);
+    rate->setPosition(ccp(rate_logo->getContentSize().width/2,
+                           rate_logo->getContentSize().height/2));
+    rate->setColor(GameInfo::getInstance()->getNegativeColor());
+    rate_button->addChild(rate);
+
+    main_menu->addChild(rate_button);
+
 
 
     this->addChild(main_menu);
     return true;
 }
+#include <ADLib/Device/ADBrowser.h>
+void SettingScene::onRateMeClicked(CCObject*)
+{
+    ADBrowser::openApplicationPage(GameInfo::getPackageName());
+}
+
 void SettingScene::doGoBack()
 {
     CCDirector::sharedDirector()->replaceScene(MainScene::scene());
