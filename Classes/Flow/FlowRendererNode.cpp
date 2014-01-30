@@ -2,7 +2,12 @@
 #include "FlowRenderer.h"
 using namespace cocos2d;
 FlowRendererNode::FlowRendererNode()
-    : _parent(0), _point(0), _highlight_sprite(0), _circle_sprite(0), _connection_sprite(0)
+    : _parent(0),
+      _point(0),
+      _highlight_sprite(0),
+      _circle_sprite(0),
+      _connection_sprite(0),
+      _hint_sprite(0)
 
 {
 }
@@ -25,6 +30,7 @@ void FlowRendererNode::setHighlightSprite(cocos2d::CCSprite* sp)
 
 void FlowRendererNode::update(const FlowPointState& new_state)
 {
+    //TODO: check is hint state
     //Connection check
     if(new_state.hasNext() != _point->hasNext() ||
             new_state.getNextCordinates() != _point->getNextCordinates() ||
@@ -45,6 +51,11 @@ void FlowRendererNode::update(const FlowPointState& new_state)
         else
             hideHighlight();
     }
+
+    if(new_state.hasHintNext())
+    {
+        showHintConnection(new_state);
+    }
 }
 
 void FlowRendererNode::init()
@@ -55,6 +66,8 @@ void FlowRendererNode::init()
         showHighlight(*_point);
     if(_point->hasNext())
         showConnection(*_point);
+    if(_point->getNodeType() == FlowPointState::Hint)
+        showHintConnection(*_point);
 }
 
 void FlowRendererNode::showHighlight(const FlowPointState& new_state)
@@ -78,6 +91,39 @@ void FlowRendererNode::createCircle()
         _circle_sprite->setPosition(_parent->getNodePosition(_point->getCordinates()));
         _circle_sprite->setColor(_parent->getRenderColor(_point->getLineColor()));
     }
+}
+
+void FlowRendererNode::showHintConnection(const FlowPointState& new_state)
+{
+    if(_hint_sprite== 0)
+    {
+        _hint_sprite = _parent->createSprite("hint_connection.png");
+    }
+    _hint_sprite->setVisible(true);
+    _hint_sprite->setColor(ccc3(0,0,0));//_parent->getRenderColor(new_state.getLineColor()));
+    FlowPoint my = new_state.getCordinates();
+    FlowPoint target = new_state.getHintNextCordinate();
+
+    int h_diff = int(my.x()) - int(target.x());
+    int v_diff = int(my.y()) - int(target.y());
+
+    CCSize node_size = _parent->getNodeSize();
+    //TODO: correct pos
+    CCPoint pos = _highlight_sprite->getPosition();
+
+    if(h_diff == 0)
+    {
+        _hint_sprite->setRotation(90);
+        _hint_sprite->setPositionX(pos.x);
+        _hint_sprite->setPositionY(pos.y - node_size.height /2 * v_diff);
+    }
+    else if(v_diff == 0)
+    {
+        _hint_sprite->setRotation(0);
+        _hint_sprite->setPositionY(pos.y);
+        _hint_sprite->setPositionX(pos.x - node_size.width /2 * h_diff);
+    }
+
 }
 
 void FlowRendererNode::showConnection(const FlowPointState& new_state)

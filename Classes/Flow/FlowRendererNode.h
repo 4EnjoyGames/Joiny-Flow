@@ -21,11 +21,13 @@ private:
     cocos2d::CCSprite* _highlight_sprite;
     cocos2d::CCSprite* _circle_sprite;
     cocos2d::CCSprite* _connection_sprite;
+    cocos2d::CCSprite* _hint_sprite;
 
     void showHighlight(const FlowPointState& new_state);
     void hideHighlight();
     void createCircle();
     void showConnection(const FlowPointState& new_state);
+    void showHintConnection(const FlowPointState& new_state);
     void hideConnection();
 };
 

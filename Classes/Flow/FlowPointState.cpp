@@ -1,9 +1,19 @@
 #include "FlowPointState.h"
 const FlowPoint FlowPoint::UNDEFINED(100,100);
 FlowPointState::FlowPointState()
-    : _line_color(0), _state(Free), _highlighted(false), _has_next(false),
-      _has_previous(false), _my_cordinates(0,0), _next_cordinates(0,0),
-      _previous_cordinates(0,0), _trace_id(FlowPoint::UNDEFINED)
+    : _line_color(0),
+      _state(Free),
+      _highlighted(false),
+      _has_next(false),
+      _has_previous(false),
+      _my_cordinates(0,0),
+      _next_cordinates(0,0),
+      _previous_cordinates(0,0),
+      _trace_id(FlowPoint::UNDEFINED),
+      _hint_has_next(false),
+      _hint_has_previous(false),
+      _hint_next_cordinates(0,0),
+      _hint_previous_cordinates(0,0)
 
 {}
 
@@ -104,4 +114,42 @@ const FlowPoint FlowPointState::getPreviousCordinates() const
 bool FlowPointState::isFree() const
 {
     return !hasPrevious() && !hasNext();
+}
+void FlowPointState::setHintNextCordinate(const FlowPoint p)
+{
+    _hint_next_cordinates = p;
+    _hint_has_next = true;
+}
+bool FlowPointState::hasHintNext() const
+{
+    return _hint_has_next;
+}
+
+void FlowPointState::removeHintNext()
+{
+     _hint_has_next = false;
+}
+
+void FlowPointState::setHintPreviousCordinate(const FlowPoint p)
+{
+    _hint_previous_cordinates = p;
+    _hint_has_previous = true;
+}
+bool FlowPointState::hasHintPrevious() const
+{
+    return _hint_has_previous;
+}
+
+void FlowPointState::removeHintPrevious()
+{
+     _hint_has_previous = false;
+}
+
+const FlowPoint FlowPointState::getHintNextCordinate() const
+{
+    return _hint_next_cordinates;
+}
+const FlowPoint FlowPointState::getHintPreviousCordinate() const
+{
+    return _hint_previous_cordinates;
 }
