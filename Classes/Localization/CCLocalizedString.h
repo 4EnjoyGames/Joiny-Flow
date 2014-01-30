@@ -1,18 +1,12 @@
-//
-//  CCLocalizedString.h
-//  SkeletonX
-//
-//  Created by 小苏 on 11-12-1.
-//  Copyright (c) 2011年 GeekStudio. All rights reserved.
-//
-
 #ifndef _CCLocalizedString_h
 #define _CCLocalizedString_h
 #include "string"
+#include <memory>
 
-/*get the localized string by the key, if can't get the value then return mComment
- */
-std::string CCLocalizedString(const char * mKey);
-std::string Localization (const char* key);
+const std::string& CCLocalizedString(const std::string &key);
+void parse_data(const char *data, size_t length);
+uint32_t swap_le(const char *buf, size_t ofs);
+uint32_t swap_be(const char *buf, size_t ofs);
+void parse_file(const char *filename);
 
 #endif

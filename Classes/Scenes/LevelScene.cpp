@@ -49,12 +49,12 @@ private:
         std::string text ="";
         if(_mode==NotEnough)
         {
-            text = CCLocalizedString("End_bad");
+            text = CCLocalizedString("End_bad")+'\n';
                     //+ std::to_string(_score);
         }
         else
         {
-            text =  CCLocalizedString("End_good");
+            text =  CCLocalizedString("End_good")+'\n';
                     //std::to_string(_score)
                     //+'\n';
         }

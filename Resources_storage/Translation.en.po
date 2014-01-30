@@ -1,16 +1,51 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Project-Id-Version: Joiny\n"
+"POT-Creation-Date: 2014-01-30 18:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.3\n"
+"X-Poedit-KeywordsList: CCLocalizedString\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../Classes\n"
 
-# it is my comment
-msgid "Try1"
-msgstr "Try1ValueEdited2"
+#: ../Classes/Scenes/LevelScene.cpp:52
+msgid "End_bad"
+msgstr "You need more points"
+
+#: ../Classes/Scenes/LevelScene.cpp:57
+msgid "End_good"
+msgstr "Score"
+
+#: ../Classes/Scenes/LevelScene.cpp:141
+msgid "Retry"
+msgstr "Retry"
+
+#: ../Classes/Scenes/LevelScene.cpp:171
+msgid "Next"
+msgstr "Next"
+
+#: ../Classes/Scenes/SelectCollection.cpp:152
+msgid "Collection"
+msgstr "Collections"
+
+#: ../Classes/Scenes/SettingScene.cpp:67
+msgid "Settings"
+msgstr "Settings"
+
+#: ../Classes/Scenes/SettingScene.cpp:160
+msgid "Reset"
+msgstr "Reset Progress"
+
+#: ../Classes/Scenes/SettingScene.cpp:185
+msgid "Restore"
+msgstr "Restore Purchases"
+
+#: ../Classes/Scenes/SettingScene.cpp:210
+msgid "Developers"
+msgstr "Developers"
