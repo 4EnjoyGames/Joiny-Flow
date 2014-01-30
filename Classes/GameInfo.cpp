@@ -62,3 +62,8 @@ const ccColor3B& GameInfo::getPositiveColor()
     return _positive_color;
 }
 
+const std::string& GameInfo::getPackageName()
+{
+    static std::string package_name = "com.x4enjoy.joiny";
+    return package_name;
+}

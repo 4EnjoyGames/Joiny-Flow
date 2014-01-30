@@ -586,7 +586,7 @@ bool LevelScene::init()
                        banner_zone_height - BANNER_MARGIN);
 
 
-    ADAds::Banner* banner = ADAds::getInstance().getBanner(banner_zone);
+    ADAds::Banner* banner = ADAds::getBanner(banner_zone);
 
     banner_zone_height = 0;
     if(banner)
