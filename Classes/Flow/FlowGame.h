@@ -32,6 +32,7 @@ public:
 
 
     void connectPoints(FlowPointState& a, FlowPointState& b);
+    void disconnectPoints(FlowPointState& a, FlowPointState& b);
 
 private:
     FlowRenderer* _renderer;
@@ -52,7 +53,6 @@ private:
     void cutTheTrace(const FlowPoint& start, const FlowPoint trace_id,
                      const bool remove_highlight);
     FlowColor getPointColor(const FlowPoint& p);
-    void disconnectPoints(FlowPointState& a, FlowPointState& b);
     void updateHighlighted();
     void removeHighlight(FlowPointState &st);
 

@@ -337,12 +337,22 @@ void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
 {
     //FlowPointState a_st = _table->get(a);
     //FlowPointState b_st = _table->get(b);
+    if(a_st.Hint && b_st.Hint)
+    {
+        a_st.setHintNextCordinate(b_st.getCordinates());
+        b_st.setHintPreviousCordinate(a_st.getCordinates());
+        b_st.removeHintNext();
+        b_st.setLineColor(a_st.getLineColor());
+    }
+    else
+    {
 
-    a_st.setNextCordinates(b_st.getCordinates());
-    b_st.setPreviousCordinates(a_st.getCordinates());
-    b_st.removeNext();
-    b_st.setLineColor(a_st.getLineColor());
-    b_st.setTraceId(a_st.getTraceId());
+        a_st.setNextCordinates(b_st.getCordinates());
+        b_st.setPreviousCordinates(a_st.getCordinates());
+        b_st.removeNext();
+        b_st.setLineColor(a_st.getLineColor());
+        b_st.setTraceId(a_st.getTraceId());
+    }
 
     _renderer->updateCell(a_st.getCordinates(), a_st);
     _renderer->updateCell(b_st.getCordinates(), b_st);
