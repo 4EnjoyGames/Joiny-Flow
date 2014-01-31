@@ -30,6 +30,9 @@ public:
     static FlowGame* create(const FlowTable& table, DelegatePtr delegate);
     void cleanTheTrace();
 
+
+    void connectPoints(FlowPointState& a, FlowPointState& b);
+
 private:
     FlowRenderer* _renderer;
     const FlowTable* _table;
@@ -49,7 +52,6 @@ private:
     void cutTheTrace(const FlowPoint& start, const FlowPoint trace_id,
                      const bool remove_highlight);
     FlowColor getPointColor(const FlowPoint& p);
-    void connectPoints(FlowPointState& a, FlowPointState& b);
     void disconnectPoints(FlowPointState& a, FlowPointState& b);
     void updateHighlighted();
     void removeHighlight(FlowPointState &st);

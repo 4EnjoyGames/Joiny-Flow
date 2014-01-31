@@ -95,6 +95,15 @@ struct JoinyPuzzle
         return _task;
     }
 
+    const JoinyInfo& getJoinyInfo() const
+    {
+        return _info;
+    }
+    JoinyInfo& getJoinyInfo()
+    {
+        return _info;
+    }
+
     JoinyTask _task;
     JoinyInfo _info;
 

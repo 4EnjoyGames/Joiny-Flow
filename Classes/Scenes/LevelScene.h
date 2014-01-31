@@ -72,17 +72,17 @@ private:
 
     MenuSpriteBatch* _buttons_menu;
 public:
-    LevelScene(const JoinyLevel*);
+    LevelScene(const JoinyLevel *);
 
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene(const JoinyLevel * current_level);
+    static cocos2d::CCScene* scene(const JoinyLevel *current_level);
 
 
-    static LevelScene* create(const JoinyLevel* level);
+    static LevelScene* create(const JoinyLevel *level);
 
 };
 

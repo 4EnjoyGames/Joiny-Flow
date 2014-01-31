@@ -11,6 +11,8 @@ USING_NS_CC;
 #include <ADLib/Device/ADAds.h>
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/ADString.h>
+#include "Logic/Hints.h"
+
 class LevelScene::LevelEndPopUp : public PopUpWindow::Content
 {
 
@@ -324,36 +326,39 @@ void LevelScene::onNextLevelClicked(CCObject*)
 }
 void LevelScene::onHintClicked(CCObject*)
 {
-    CCLog("Hint clicked");
-    std::vector<uint32_t> hint_path = _current_info.getPathes();
-    uint32_t curr_hint_num = 1;
+    CCLog("Hint clicked in LevelScene");
+    Hints hint(_current_level,_flow_game);
 
-    unsigned int height = _current_level->getBoardSize().x();
-    unsigned int width =  _current_level->getBoardSize().y();
 
-    for (unsigned int y = 0; y < height; y++)
-    {
-        for (unsigned int x = 0; x < width; x++)
-        {
-//            if((CellPosition)y * width_ >= keys_.size())
-//                return keys_[keys_.size()-1];
-//            else
-//                return keys_[(CellPosition)y * width_ + x];
+//    std::vector<uint32_t> hint_path = _current_info.getPathes();
+//    uint32_t curr_hint_num = 1;
 
-            if(hint_path.size()>0)
-            {
-                if(hint_path[y*width + x] == curr_hint_num)
-                {
-                    std::string log = "x = "
-                            + AD_to_string(x)
-                            +' '
-                            + "y = "
-                            + AD_to_string(y);
-                    CCLog(log.c_str());
-                }
-            }
-        }
-    }
+//    unsigned int height = _current_level->getBoardSize().x();
+//    unsigned int width =  _current_level->getBoardSize().y();
+
+//    for (unsigned int y = 0; y < height; y++)
+//    {
+//        for (unsigned int x = 0; x < width; x++)
+//        {
+////            if((CellPosition)y * width_ >= keys_.size())
+////                return keys_[keys_.size()-1];
+////            else
+////                return keys_[(CellPosition)y * width_ + x];
+
+//            if(hint_path.size()>0)
+//            {
+//                if(hint_path[y*width + x] == curr_hint_num)
+//                {
+//                    std::string log = "x = "
+//                            + AD_to_string(x)
+//                            +' '
+//                            + "y = "
+//                            + AD_to_string(y);
+//                    CCLog(log.c_str());
+//                }
+//            }
+//        }
+//    }
 
 }
 void LevelScene::onReloadLevelClicked(CCObject*)
