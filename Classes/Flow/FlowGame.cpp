@@ -332,28 +332,42 @@ void FlowGame::removeHighlight(FlowPointState& st)
         _renderer->updateCell(nst.getCordinates(), nst);
     }
 }
+void FlowGame::connectHintPoints(FlowPointState& a_st, FlowPointState& b_st)
+{
+    a_st.setHintNextCordinate(b_st.getCordinates());
+    b_st.setHintPreviousCordinate(a_st.getCordinates());
+    b_st.removeHintNext();
+    b_st.setLineColor(a_st.getHintColor());
+
+    _renderer->updateCell(a_st.getCordinates(), a_st);
+    _renderer->updateCell(b_st.getCordinates(), b_st);
+}
+
+void FlowGame::disconnectHintPoints(FlowPointState& a, FlowPointState& b)
+{
+    a.removeHintNext();
+    b.removeHintPrevious();
+
+    //b.setTraceId(FlowPoint::UNDEFINED);
+    _renderer->updateCell(a.getCordinates(), a);
+    _renderer->updateCell(b.getCordinates(), b);
+}
 
 void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
 {
-    //FlowPointState a_st = _table->get(a);
-    //FlowPointState b_st = _table->get(b);
-    if(a_st.getNodeType() == FlowPointState::Hint
-            && b_st.getNodeType() == FlowPointState::Hint)
-    {
-        a_st.setHintNextCordinate(b_st.getCordinates());
-        b_st.setHintPreviousCordinate(a_st.getCordinates());
-        b_st.removeHintNext();
-        b_st.setLineColor(a_st.getLineColor());
-    }
-    else
-    {
 
-        a_st.setNextCordinates(b_st.getCordinates());
-        b_st.setPreviousCordinates(a_st.getCordinates());
-        b_st.removeNext();
-        b_st.setLineColor(a_st.getLineColor());
-        b_st.setTraceId(a_st.getTraceId());
-    }
+    //
+//    if(a_st.getNodeType() == FlowPointState::Hint ||
+//            b_st.getNodeType() == FlowPointState::Hint)
+//    {
+//        disconnectHintPoints(a_st,b_st);
+//    }
+    a_st.setNextCordinates(b_st.getCordinates());
+    b_st.setPreviousCordinates(a_st.getCordinates());
+    b_st.removeNext();
+    b_st.setLineColor(a_st.getLineColor());
+    b_st.setTraceId(a_st.getTraceId());
+
 
     _renderer->updateCell(a_st.getCordinates(), a_st);
     _renderer->updateCell(b_st.getCordinates(), b_st);

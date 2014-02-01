@@ -62,5 +62,5 @@ void Hints::showHint()
         states[i+1].setHintPreviousCordinate(curr.getCordinates());
 
     }
-    _flow_game->connectPoints(states[0],states[1]);
+    _flow_game->connectHintPoints(states[0],states[1]);
 }

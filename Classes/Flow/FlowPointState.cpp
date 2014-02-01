@@ -10,7 +10,6 @@ FlowPointState::FlowPointState()
       _next_cordinates(0,0),
       _previous_cordinates(0,0),
       _trace_id(FlowPoint::UNDEFINED),
-      _is_hint(false),
       _hint_color(0),
       _hint_has_next(false),
       _hint_has_previous(false),
@@ -116,10 +115,6 @@ const FlowPoint FlowPointState::getPreviousCordinates() const
 bool FlowPointState::isFree() const
 {
     return !hasPrevious() && !hasNext();
-}
-bool FlowPointState::hasHint() const
-{
-    return _is_hint;
 }
 
 void FlowPointState::setHintColorColor(const FlowColor c)

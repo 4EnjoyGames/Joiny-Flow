@@ -45,8 +45,6 @@ public:
     const FlowPoint getCordinates() const;
 
     //hints
-    bool hasHint() const;
-
     void setHintColorColor(const FlowColor c);
     const FlowColor getHintColor() const;
 
@@ -77,7 +75,6 @@ private:
     bool _has_previous;
 
     //hints
-    bool _is_hint;
     FlowColor _hint_color;
     FlowPoint _hint_next_cordinates;
     bool _hint_has_next;
