@@ -13,6 +13,8 @@
 #include <ADLib/Device/ADStatistics.h>
 #include <ADLib/Device/ADInfo.h>
 #include <ADLib/Device/ADInApp.h>
+#include <ADLib/Device/ADNotification.h>
+#include "Localization/CCLocalizedString.h"
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -40,8 +42,20 @@ public:
     {
         CCLog("Purchase %s finished successful", id.c_str());
     }
-    void purchaseFailed(const ADInApp::ProductID & id)
+    void purchaseFailed(const ADInApp::ProductID & id,
+                        const ADInApp::ErrorType error)
     {
+        typedef ADInApp::ErrorType Error;
+        if(error == ADInApp::ErrorType::BillingUnavaliable)
+        {
+            ADNotification::showNotification(CCLocalizedString("iap.error.billing_unavaliable"));
+        }
+        else if(error == ADInApp::ErrorType::DeveloperError ||
+                error == ADInApp::ErrorType::Error)
+        {
+            ADNotification::showNotification(CCLocalizedString("iap.error.purchase_error"));
+        }
+
         CCLog("Purchase %s failed", id.c_str());
     }
 };
@@ -86,7 +100,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     //Language init
     ADLanguage::addSupportedLanguage("en");
-    ADLanguage::addSupportedLanguage("uk");
+    //ADLanguage::addSupportedLanguage("uk");
     //ADLanguage::addSupportedLanguage("ru");
     //ADLanguage::addSupportedLanguage("hu");
     //ADLanguage::addSupportedLanguage("fr");

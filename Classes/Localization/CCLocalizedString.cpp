@@ -82,5 +82,9 @@ const string &CCLocalizedString(const string& key)
     {
         parse_file(ADLanguage::localizeFileName("Translation.mo").c_str());
     }
-    return localizedStrings.find(key)->second;
+    auto it = localizedStrings.find(key);
+    if(it == localizedStrings.end())
+        return key;
+    else
+        return it->second;
 }
