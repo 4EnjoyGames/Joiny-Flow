@@ -162,8 +162,6 @@ bool FlowGame::touchStart(const FlowPoint& p)
     return res;
 }
 
-
-
 void FlowGame::touchMoved(const FlowPoint& p)
 {
     if(p.x() >= _table->getWidth() || p.y() >= _table->getHeight())
@@ -332,25 +330,35 @@ void FlowGame::removeHighlight(FlowPointState& st)
         _renderer->updateCell(nst.getCordinates(), nst);
     }
 }
-void FlowGame::connectHintPoints(FlowPointState& a_st, FlowPointState& b_st)
+void FlowGame::connectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p, const FlowColor color)
 {
-    a_st.setHintNextCordinate(b_st.getCordinates());
-    b_st.setHintPreviousCordinate(a_st.getCordinates());
-    b_st.removeHintNext();
-    b_st.setLineColor(a_st.getHintColor());
-
-    _renderer->updateCell(a_st.getCordinates(), a_st);
-    _renderer->updateCell(b_st.getCordinates(), b_st);
+    FlowPointState a = _table->get(a_p);
+    a.setHintNextCordinate(b_p);
+    a.setHintColorColor(color);
+    _renderer->updateCell(a_p, a);
 }
 
-void FlowGame::disconnectHintPoints(FlowPointState& a, FlowPointState& b)
+void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
 {
-    a.removeHintNext();
-    b.removeHintPrevious();
+    FlowPointState a = _table->get(a_p);
+    FlowPointState b = _table->get(b_p);
 
-    //b.setTraceId(FlowPoint::UNDEFINED);
-    _renderer->updateCell(a.getCordinates(), a);
-    _renderer->updateCell(b.getCordinates(), b);
+    if(a.getHintNextCordinate() == b_p)
+    {
+        a.removeHintNext();
+        _renderer->updateCell(a_p, a);
+    }
+    else if(b.getHintNextCordinate() == a_p)
+    {
+        b.removeHintNext();
+        _renderer->updateCell(b_p, b);
+    }
+    else
+    {
+        CCLog("ERROR: Points are not connected");
+        assert(false);
+    }
+
 }
 
 void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)

@@ -66,7 +66,7 @@ void FlowRendererNode::init()
         showHighlight(*_point);
     if(_point->hasNext())
         showConnection(*_point);
-    if(_point->getNodeType() == FlowPointState::Hint)
+    if(_point->hasHintNext())
         showHintConnection(*_point);
 }
 
@@ -100,7 +100,7 @@ void FlowRendererNode::showHintConnection(const FlowPointState& new_state)
         _hint_sprite = _parent->createSprite("hint_connection.png");
     }
     _hint_sprite->setVisible(true);
-    _hint_sprite->setColor(ccc3(0,0,0));//_parent->getRenderColor(new_state.getLineColor()));
+    _hint_sprite->setColor(_parent->getRenderColor(new_state.getHintColor()));//_parent->getRenderColor(new_state.getLineColor()));
     FlowPoint my = new_state.getCordinates();
     FlowPoint target = new_state.getHintNextCordinate();
 

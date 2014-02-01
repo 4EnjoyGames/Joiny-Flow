@@ -31,8 +31,8 @@ public:
     void cleanTheTrace();
 
 
-    void connectHintPoints(FlowPointState& a, FlowPointState& b);
-    void disconnectHintPoints(FlowPointState& a, FlowPointState& b);
+    void connectHintPoints(const FlowPoint& a, const FlowPoint& b, const FlowColor color);
+    void disconnectHintPoints(const FlowPoint& a, const FlowPoint& b);
 
 private:
     FlowRenderer* _renderer;
