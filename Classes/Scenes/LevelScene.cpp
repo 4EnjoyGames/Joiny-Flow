@@ -48,20 +48,20 @@ private:
         float x_middle = size.width / 2;
 
 
-        std::string text ="";
+       char* text ="";
         if(_mode==NotEnough)
         {
-            text = CCLocalizedString("End_bad")+'\n';
+            //text = CCLocalizedString("End_bad");//+'\n';
                     //+ std::to_string(_score);
         }
         else
         {
-            text =  CCLocalizedString("End_good")+'\n';
+            //text =  CCLocalizedString("End_good");//+'\n';
                     //std::to_string(_score)
                     //+'\n';
         }
 
-        CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
+        CCLabelTTF* label = CCLabelTTF::create(CCLocalizedString("End_bad"),
                                                "fonts/Fredoka One.ttf",
                                                62);
 
@@ -140,7 +140,7 @@ private:
                     menu_spl->loadSprite("level_end_button.png"),
                     this, menu_selector(Me::onPlayMore));
 
-        CCLabelTTF * retry_text = CCLabelTTF::create(CCLocalizedString("Retry").c_str(),
+        CCLabelTTF * retry_text = CCLabelTTF::create(CCLocalizedString("Retry"),
                                                 "fonts/Fredoka One.ttf",
                                                 48);
         retry_text->setColor(ccc3(255,255,255));
@@ -170,7 +170,7 @@ private:
         if(_mode == LevelEnd)
         {
 
-            CCLabelTTF * next_level_text = CCLabelTTF::create(CCLocalizedString("Next").c_str(),
+            CCLabelTTF * next_level_text = CCLabelTTF::create(CCLocalizedString("Next"),
                                                     "fonts/Fredoka One.ttf",
                                                     48);
             next_level_text->setColor(ccc3(255,255,255));

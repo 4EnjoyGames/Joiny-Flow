@@ -76,7 +76,7 @@ void parse_data(const char *data, size_t length)
   }
 }
 
-const string &CCLocalizedString(const string& key)
+const char* CCLocalizedString(const string& key)
 {
     if(localizedStrings.empty())
     {
@@ -84,7 +84,7 @@ const string &CCLocalizedString(const string& key)
     }
     auto it = localizedStrings.find(key);
     if(it == localizedStrings.end())
-        return key;
+        return key.c_str();
     else
-        return it->second;
+        return (it->second).c_str();
 }

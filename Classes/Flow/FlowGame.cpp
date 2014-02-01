@@ -337,7 +337,8 @@ void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
 {
     //FlowPointState a_st = _table->get(a);
     //FlowPointState b_st = _table->get(b);
-    if(a_st.Hint && b_st.Hint)
+    if(a_st.getNodeType() == FlowPointState::Hint
+            && b_st.getNodeType() == FlowPointState::Hint)
     {
         a_st.setHintNextCordinate(b_st.getCordinates());
         b_st.setHintPreviousCordinate(a_st.getCordinates());
