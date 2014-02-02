@@ -48,9 +48,9 @@ bool isGooTask(const FlowTask& task)
     for(FlowTask::const_iterator it = task.begin(); it!=task.end(); ++it)
     {
         const FlowStartEnd& s = *it;
-        if(s.size() != 2)
-            return false;
-        if(areNeighboors(s[0], s[1]))
+//        if(s.size() != 2)
+//            return false;
+        if(areNeighboors(s.first, s.second))
             return false;
     }
     return true;
@@ -104,9 +104,9 @@ JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
                   gold);
 
     if(a.getGold() > b.getGold())
-        res.setHintPathes(a.getPathes());
+        res.getPathes() = a.getPathes();
     else
-        res.setHintPathes(b.getPathes());
+        res.getPathes() = b.getPathes();
     return res;
 }
 void GenerateLevels(const unsigned int tablo_size,

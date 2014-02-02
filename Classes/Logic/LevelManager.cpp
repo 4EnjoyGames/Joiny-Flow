@@ -298,7 +298,7 @@ void LevelManager::makePreviews(unsigned int joiny_size,
             FlowStartEnd start_end = pair.getPoints();
             unsigned int color = pair.getColor();
 
-            table.addColor(start_end[0],start_end[1], color);
+            table.addColor(start_end.first,start_end.second, color);
         }
 
         FlowRenderer renderer(table);

@@ -33,9 +33,12 @@ public:
 
 
     //one tablo path for hints
-    std::vector<unsigned int> _tablo_with_pathes;
+    std::vector<FlowPoint> _one_path;
 
-    typedef map<unsigned int, std::vector<unsigned int> > AllTablosPathes;
+    typedef std::vector < std::vector<FlowPoint> > OneTabloPathes;
+    OneTabloPathes _one_tablo_pathes;
+
+    typedef map<unsigned int, OneTabloPathes > AllTablosPathes;
     AllTablosPathes _all_pathes;
 
 
@@ -277,7 +280,7 @@ public:
         cout<<"Tablo"<<endl;
 
         _hint_traveled = std::vector<bool>(height_ * width_, false);
-        _tablo_with_pathes = std::vector<unsigned int>(height_ * width_, 0);
+        _one_path.clear();//(height_ * width_, 0);
 
         unsigned int result = 0;
 
@@ -291,7 +294,12 @@ public:
                     CellNumber number = table_[GetCellKey(x, y)];
 
                     result = saveOnePath(x,y,0,number);
+                    _one_tablo_pathes.push_back(_one_path);
+
+
                     cout<<endl;
+                    _one_path.clear();
+
                     if(result == 0)
                         stop = true;
                 }
@@ -317,7 +325,7 @@ public:
             cout << 'l' << '(' << x << ',' << y << ')' << " = "
                  << static_cast<int>(cell_number)
                  << " = " << outCellCordinates(x, y) << endl;
-            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+            _one_path.push_back(FlowPoint(x,y));
             return 100;
         }
 
@@ -326,7 +334,7 @@ public:
         if(x > 0 && connected_x_[GetCellKey(x, y)] &&
                 !_hint_traveled[GetCellKey(x-1, y)])
         {
-            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+            _one_path.push_back(FlowPoint(x,y));
 
             cout << 'l' << '(' << x << ',' << y << ')' << " = "
                  << static_cast<int>(cell_number)
@@ -339,7 +347,7 @@ public:
         if(y > 0 && connected_y_[GetCellKey(x, y)] &&
                 !_hint_traveled[GetCellKey(x, y-1)])
         {
-            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+            _one_path.push_back(FlowPoint(x,y));
 
             cout << 'b' << '(' << x << ',' << y << ')' << " = "
                  << static_cast<int>(cell_number)
@@ -352,7 +360,7 @@ public:
         if(x+1 < width_ && connected_x_[GetCellKey(x+1, y)] &&
                 !_hint_traveled[GetCellKey(x+1, y)])
         {
-            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+            _one_path.push_back(FlowPoint(x,y));
 
             cout << 'r' << '(' << x << ',' << y << ')' << " = "
                  << static_cast<int>(cell_number)
@@ -365,7 +373,7 @@ public:
         if(y+1 < height_ && connected_y_[GetCellKey(x, y+1)] &&
                 !_hint_traveled[GetCellKey(x, y+1)])
         {
-            _tablo_with_pathes[outCellCordinates(x, y)] = cell_number;
+            _one_path.push_back(FlowPoint(x,y));
 
             cout << 't' << '(' << x << ',' << y << ')' << " = "
                  << static_cast<int>(cell_number)
@@ -495,7 +503,7 @@ public:
                 SaveAllPath();
                 if(_all_pathes.find(score) == _all_pathes.end())
                 {
-                    _all_pathes[score] = _tablo_with_pathes;
+                    _all_pathes[score] = _one_tablo_pathes;
                 }
             }
             else
@@ -744,8 +752,8 @@ JoinyInfo solveJoiny(const JoinyTask& task,
     for(unsigned int i=0; i<task.size(); ++i)
     {
         JoinyPair pair = task[i];
-        FlowPoint start = pair.getPoints()[0];
-        FlowPoint end = pair.getPoints()[1];
+        FlowPoint start = pair.getPoints().first;
+        FlowPoint end = pair.getPoints().second;
 
         nl.Cell(start.x(), start.y()) = pair.getColor()+1;
         nl.Cell(end.x(), end.y()) = pair.getColor()+1;
@@ -788,7 +796,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
         }
 
         bool has_pathes = false;
-        std::vector<uint32_t> tablo_pathes;
+        NumberLink::OneTabloPathes tablo_pathes;
         //find path for max score
         if(pathes.find(max) != pathes.end())
         {
@@ -801,7 +809,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
                          clamp((average + max)/2, 500),
                          clamp(max, 500));
         if(has_pathes)
-            info.setHintPathes(tablo_pathes);
+            info.getPathes() = tablo_pathes;
         return info;
     }
     return JoinyInfo(0,0,0);

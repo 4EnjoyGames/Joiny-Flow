@@ -394,10 +394,7 @@ bool LevelScene::init()
     for(JoinyTask::iterator it = task._task.begin(); it!=task._task.end(); ++it)
     {
         JoinyPair& s = *it;
-        if(s.getPoints().size() == 2)
-        {
-            table.addColor(s.getPoints()[0], s.getPoints()[1], s.getColor());
-        }
+        table.addColor(s.getPoints().first, s.getPoints().second, s.getColor());
     }
 
     //    std::stringstream ss;
