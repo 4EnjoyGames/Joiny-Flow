@@ -312,13 +312,13 @@ void SettingScene::onSoundClicked(CCObject*)
 
 void SettingScene::onResetClicked(CCObject*)
 {
-    ADInApp::buyProduct("hints_10");
+    ADInApp::buyProduct("unlock_full");
     CCLog("onResetClicked clicked");
 }
 #include <ADLib/Device/ADNotification.h>
 void SettingScene::onRestorClicked(CCObject*)
 {
-    ADNotification::showNotification("Purchases restore is not implemented");
+    ADInApp::restorePurchases();
     CCLog("onRestorClicked!!");
 }
 void SettingScene::onDevelopersClicked(CCObject*)

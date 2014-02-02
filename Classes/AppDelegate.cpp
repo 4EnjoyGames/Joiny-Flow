@@ -58,6 +58,16 @@ public:
 
         CCLog("Purchase %s failed", id.c_str());
     }
+
+    void restorePurchasesSuccessfully()
+    {
+        ADNotification::showNotification(CCLocalizedString("iap.restore_purchases.success"));
+    }
+
+    void restorePurchasesFailed()
+    {
+        ADNotification::showNotification(CCLocalizedString("iap.restore_purchases.failed"));
+    }
 };
 
 
@@ -78,6 +88,14 @@ void initInAppPurchases()
         hints_100.setParameter("type", "consumable");
         hints_1000.setParameter("type", "consumable");
     }
+    else if(store == ADStore::SamsungStore)
+    {
+        ADInApp::setStoreKey("100000102739");
+        unlock_full.setParameter("samsung-id", "000001013715");
+        hints_10.setParameter("samsung-id", "000001013712");
+        hints_100.setParameter("samsung-id", "000001013713");
+        hints_1000.setParameter("samsung-id", "000001013714");
+    }
 
     ADInApp::addProduct(unlock_full);
     ADInApp::addProduct(hints_10);
@@ -86,9 +104,9 @@ void initInAppPurchases()
 
     ADInApp::setDelegate(std::make_shared<InAppDelegate>());
 
+    ADInApp::loadStore(ADInApp::Mode::TestSuccess);
 
 
-    ADInApp::loadStore();
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {

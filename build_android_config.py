@@ -39,6 +39,7 @@ project.working_directory = working_directory
 project.addLookUpDir('libraries/ADLib/platform/Android/cpp')
 project.addLookUpDir('libraries/ADLib/platform/Android/libs')
 project.addLookUpDir('libraries/ADLib/platform/Android/java')
+project.addLookUpDir('libraries/ADLib/platform/Android/res')
 project.addLookUpDir('libraries/ADLib/src')
 project.addLookUpDir('Classes')
 project.main_activity_definition = project.getMainActivityDeclaration(screenOrientation="sensorPortrait")
