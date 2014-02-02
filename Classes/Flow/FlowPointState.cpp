@@ -10,10 +10,9 @@ FlowPointState::FlowPointState()
       _next_cordinates(0,0),
       _previous_cordinates(0,0),
       _trace_id(FlowPoint::UNDEFINED),
+      _hint_color(0),
       _hint_has_next(false),
-      _hint_has_previous(false),
-      _hint_next_cordinates(0,0),
-      _hint_previous_cordinates(0,0)
+      _hint_next_cordinates(0,0)
 
 {}
 
@@ -115,6 +114,15 @@ bool FlowPointState::isFree() const
 {
     return !hasPrevious() && !hasNext();
 }
+void FlowPointState::setHintColorColor(const FlowColor c)
+{
+    _hint_color = c;
+}
+
+const FlowColor FlowPointState::getHintColor() const
+{
+    return _hint_color;
+}
 void FlowPointState::setHintNextCordinate(const FlowPoint p)
 {
     _hint_next_cordinates = p;
@@ -130,26 +138,9 @@ void FlowPointState::removeHintNext()
      _hint_has_next = false;
 }
 
-void FlowPointState::setHintPreviousCordinate(const FlowPoint p)
-{
-    _hint_previous_cordinates = p;
-    _hint_has_previous = true;
-}
-bool FlowPointState::hasHintPrevious() const
-{
-    return _hint_has_previous;
-}
-
-void FlowPointState::removeHintPrevious()
-{
-     _hint_has_previous = false;
-}
 
 const FlowPoint FlowPointState::getHintNextCordinate() const
 {
     return _hint_next_cordinates;
 }
-const FlowPoint FlowPointState::getHintPreviousCordinate() const
-{
-    return _hint_previous_cordinates;
-}
+

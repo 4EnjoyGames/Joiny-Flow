@@ -162,8 +162,6 @@ bool FlowGame::touchStart(const FlowPoint& p)
     return res;
 }
 
-
-
 void FlowGame::touchMoved(const FlowPoint& p)
 {
     if(p.x() >= _table->getWidth() || p.y() >= _table->getHeight())
@@ -332,27 +330,47 @@ void FlowGame::removeHighlight(FlowPointState& st)
         _renderer->updateCell(nst.getCordinates(), nst);
     }
 }
-
-void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
+void FlowGame::connectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p, const FlowColor color)
 {
-    //FlowPointState a_st = _table->get(a);
-    //FlowPointState b_st = _table->get(b);
-    if(a_st.Hint && b_st.Hint)
+    FlowPointState a = _table->get(a_p);
+    a.setHintNextCordinate(b_p);
+    a.setHintColorColor(color);
+    _renderer->updateCell(a_p, a);
+}
+
+void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
+{
+    FlowPointState a = _table->get(a_p);
+    FlowPointState b = _table->get(b_p);
+
+    if(a.getHintNextCordinate() == b_p)
     {
-        a_st.setHintNextCordinate(b_st.getCordinates());
-        b_st.setHintPreviousCordinate(a_st.getCordinates());
-        b_st.removeHintNext();
-        b_st.setLineColor(a_st.getLineColor());
+        a.removeHintNext();
+        _renderer->updateCell(a_p, a);
+    }
+    else if(b.getHintNextCordinate() == a_p)
+    {
+        b.removeHintNext();
+        _renderer->updateCell(b_p, b);
     }
     else
     {
-
-        a_st.setNextCordinates(b_st.getCordinates());
-        b_st.setPreviousCordinates(a_st.getCordinates());
-        b_st.removeNext();
-        b_st.setLineColor(a_st.getLineColor());
-        b_st.setTraceId(a_st.getTraceId());
+        CCLog("ERROR: Points are not connected");
+        assert(false);
     }
+
+}
+
+void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
+{
+    //TODO: disconect hints
+
+    a_st.setNextCordinates(b_st.getCordinates());
+    b_st.setPreviousCordinates(a_st.getCordinates());
+    b_st.removeNext();
+    b_st.setLineColor(a_st.getLineColor());
+    b_st.setTraceId(a_st.getTraceId());
+
 
     _renderer->updateCell(a_st.getCordinates(), a_st);
     _renderer->updateCell(b_st.getCordinates(), b_st);

@@ -27,7 +27,6 @@ public:
 
     void makePreviews(unsigned int joiny_size, unsigned int levels_num);
     void SaveScreenshot();
-
 private:
     LevelManager();
     void onInit();

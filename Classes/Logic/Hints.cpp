@@ -2,65 +2,142 @@
 #include "cocos2d-A.h"
 #include <ADLib/ADString.h>
 
-Hints::Hints(const JoinyLevel *level, FlowGame *flow_game):
-    _flow_game(flow_game),
-    _level(level)
+Hints::Hints():_hint_number(3),
+    _level(0),
+    _flow_game(0)
 {
-    showHint();
+
 }
+Hints* Hints::_instance = nullptr;
 
-void Hints::showHint()
+Hints* Hints::getInstance( )
 {
-    CCLog("Hint clicked");
-    std::vector<uint32_t> hint_path = _level->getPuzzle().getJoinyInfo().getPathes();
-    uint32_t curr_hint_num = 1;
+    if (_instance == nullptr)
+        _instance = new Hints();
+    return _instance;
+}
+void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
+{
+    //delete previous hint
+    deleteHint();
+
+    //decrease hint humber
+    useHint();
+
+    //save current hint
+    _level = level;
+    _flow_game = flow_game;
+
+    std::vector < std::vector<FlowPoint> > hint_path =
+            _level->getPuzzle().getJoinyInfo().getPathes();
+    unsigned int hint_size = hint_path.size();
 
 
-    unsigned int height = _level->getBoardSize().x();
-    unsigned int width =  _level->getBoardSize().y();
+    //find which path index we must show
+    std::map<JoinyLevelID, PathID>::iterator itor =
+            _order.find(_level->getLevelId());
 
-    std::vector<FlowPointState> states;
-    for (unsigned int y = 0; y < height; y++)
+    PathID curr_path_id = 0;
+    //we never show hint for this level
+    if(itor ==_order.end())
     {
-        for (unsigned int x = 0; x < width; x++)
+        PathID path_id = 0;
+
+        if(hint_size >1)
+            path_id = 1;
+
+        _order[_level->getLevelId()] = path_id;
+    }
+    else
+    {
+        curr_path_id = (*itor).second;
+
+        if(curr_path_id < (hint_size-1))
+            (*itor).second = curr_path_id+1;
+        else
+            (*itor).second = 0;
+    }
+
+    std::vector<FlowPoint> curr_path = hint_path[curr_path_id];
+    FlowColor color = 3;
+
+    CCLog("level id = %d",level->getLevelId());
+    CCLog("Path id = %d",curr_path_id);
+
+    for(unsigned int i=1; i<curr_path.size(); ++i)
+    {
+        CCLog("(%d, %d) -> (%d, %d)",curr_path[i-1].x(),curr_path[i-1].y(),
+                curr_path[i].x(),curr_path[i].y());
+        _flow_game->connectHintPoints(curr_path[i-1], curr_path[i], color);
+    }
+}
+void Hints::deleteHint()
+{
+    if(_level!=0)
+    {
+        std::vector < std::vector<FlowPoint> > hint_path =
+                _level->getPuzzle().getJoinyInfo().getPathes();
+        unsigned int hint_size = hint_path.size();
+
+
+        //find which path index we must show
+        std::map<JoinyLevelID, PathID>::iterator itor =
+                _order.find(_level->getLevelId());
+
+        PathID curr_path_id = 0;
+        //we never show hint for this level
+        if(itor ==_order.end())
         {
-//            if((CellPosition)y * width_ >= keys_.size())
-//                return keys_[keys_.size()-1];
-//            else
-//                return keys_[(CellPosition)y * width_ + x];
+            CCLog("Hint delete Error! We delete hint, which was not showed");
+        }
+        else
+        {
+            curr_path_id = (*itor).second;
 
-            if(hint_path.size()>0)
+            //if now we show the first path - the previous time we showed
+            //1. or the last path
+            //2. or the first path (if there is only one  hint path)
+
+            if(curr_path_id == 0)
             {
-                if(hint_path[y*width + x] == curr_hint_num)
-                {
-                    std::string log = "x = "
-                            + AD_to_string(x)
-                            +' '
-                            + "y = "
-                            + AD_to_string(y);
-                    CCLog(log.c_str());
-
-
-                    FlowPointState curr_state;
-                    curr_state.setNodeType(FlowPointState::Hint);
-                    curr_state.setCordinates(FlowPoint(x,y));
-
-                    states.push_back(curr_state);
-
-                }
+                //gave from the end
+                if(hint_size==1)
+                    curr_path_id = 0;
+                else
+                    curr_path_id = hint_size - 1;
             }
+            else
+                --curr_path_id;
+        }
+
+        std::vector<FlowPoint> curr_path = hint_path[curr_path_id];
+
+        CCLog("level id = %d",_level->getLevelId());
+        CCLog("Path id = %d",curr_path_id);
+
+        for(unsigned int i=1; i<curr_path.size(); ++i)
+        {
+            CCLog("(%d, %d) -> (%d, %d)",curr_path[i-1].x(),curr_path[i-1].y(),
+                    curr_path[i].x(),curr_path[i].y());
+            _flow_game->disconnectHintPoints(curr_path[i-1], curr_path[i]);
         }
     }
+}
 
-    for(unsigned int i=0; i<states.size()-1; ++i)
-    {
-        FlowPointState curr = states[i];
-        FlowPointState next = states[i+1];
+const unsigned int Hints::getHintNumber()
+{
+    return _hint_number;
+}
 
-        states[i].setHintNextCordinate(next.getCordinates());
-
-        states[i+1].setHintPreviousCordinate(curr.getCordinates());
-
-    }
-    _flow_game->connectPoints(states[0],states[1]);
+void Hints::useHint()
+{
+    --_hint_number;
+}
+bool Hints::hasHint()
+{
+    return (_hint_number!=0);
+}
+void Hints::setHintNumber(const unsigned int num)
+{
+    _hint_number = num;
 }

@@ -7,24 +7,18 @@
 #define USE_TWO_SHUFFLE
 //#define THREE_BLOCK_SHUFFLE
 
-typedef std::vector<FlowPoint> FlowStartEnd;
+typedef std::pair<FlowPoint, FlowPoint> FlowStartEnd;
 #include "Binary/Binary.h"
 
 inline InputBinaryStream& operator>>(InputBinaryStream& is, FlowStartEnd& s)
 {
-    FlowPoint a(0,0);
-    FlowPoint b(0,0);
-    is >> a >> b;
-    s.resize(0, FlowPoint(0,0));
-    s.reserve(2);
-    s.push_back(a);
-    s.push_back(b);
+    is >> s.first >> s.second;
     return is;
 }
 
 inline OutputBinaryStream& operator<<(OutputBinaryStream& os, const FlowStartEnd& s)
 {
-    os << s[0] << s[1];
+    os << s.first << s.second;
     return os;
 }
 

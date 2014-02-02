@@ -31,8 +31,8 @@ public:
     void cleanTheTrace();
 
 
-    void connectPoints(FlowPointState& a, FlowPointState& b);
-    void disconnectPoints(FlowPointState& a, FlowPointState& b);
+    void connectHintPoints(const FlowPoint& a, const FlowPoint& b, const FlowColor color);
+    void disconnectHintPoints(const FlowPoint& a, const FlowPoint& b);
 
 private:
     FlowRenderer* _renderer;
@@ -55,6 +55,10 @@ private:
     FlowColor getPointColor(const FlowPoint& p);
     void updateHighlighted();
     void removeHighlight(FlowPointState &st);
+
+    void connectPoints(FlowPointState& a, FlowPointState& b);
+    void disconnectPoints(FlowPointState& a, FlowPointState& b);
+
 
     bool checkWinCondition();
     void updateActiveCircle(cocos2d::CCPoint p);

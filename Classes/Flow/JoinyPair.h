@@ -60,14 +60,14 @@ public:
         return _gold_score;
     }
 
-    const std::vector<uint32_t> getPathes() const
+    const std::vector < std::vector<FlowPoint> >& getPathes() const
     {
         return _hint_pathes;
     }
 
-    void setHintPathes(const std::vector<uint32_t>& pathes)
+    std::vector < std::vector<FlowPoint> >& getPathes()
     {
-        _hint_pathes = pathes;
+        return _hint_pathes;
     }
 
 private:
@@ -75,7 +75,7 @@ private:
     Score _silver_score;
     Score _gold_score;
 
-    std::vector<uint32_t> _hint_pathes;
+    std::vector < std::vector<FlowPoint> > _hint_pathes;
 };
 
 struct JoinyPuzzle
@@ -128,7 +128,12 @@ inline InputBinaryStream& operator>>(InputBinaryStream& is, JoinyPair& task)
 
 inline OutputBinaryStream& operator<<(OutputBinaryStream& os, const JoinyInfo& info)
 {
-    os << uint32_t(info.getBronze()) << uint32_t(info.getSilver()) << uint32_t(info.getGold())<< std::vector<uint32_t>(info.getPathes());
+    os << uint32_t(info.getBronze()) <<
+          uint32_t(info.getSilver()) <<
+          uint32_t(info.getGold());
+
+    os << info.getPathes();
+
     return os;
 }
 
@@ -137,15 +142,18 @@ inline InputBinaryStream& operator>>(InputBinaryStream& is, JoinyInfo& info)
     uint32_t bronze = 0;
     uint32_t silver = 0;
     uint32_t gold = 0;
-    std::vector<uint32_t> hints;
+
 
     is >> bronze >> silver >> gold;
-    is >> hints;
+
 
     JoinyInfo f(bronze, silver, gold);
     info = f;
-    info.setHintPathes(hints);
+    //info.setHintPathes(hints);
 
+    std::vector < std::vector<FlowPoint> >& hints = info.getPathes();
+
+    is >> hints;
     return is;
 }
 

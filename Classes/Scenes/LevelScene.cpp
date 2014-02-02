@@ -48,20 +48,20 @@ private:
         float x_middle = size.width / 2;
 
 
-        std::string text ="";
+       char* text ="";
         if(_mode==NotEnough)
         {
-            text = CCLocalizedString("End_bad")+'\n';
+            //text = CCLocalizedString("End_bad");//+'\n';
                     //+ std::to_string(_score);
         }
         else
         {
-            text =  CCLocalizedString("End_good")+'\n';
+            //text =  CCLocalizedString("End_good");//+'\n';
                     //std::to_string(_score)
                     //+'\n';
         }
 
-        CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
+        CCLabelTTF* label = CCLabelTTF::create(_("End_bad"),
                                                "fonts/Fredoka One.ttf",
                                                62);
 
@@ -140,7 +140,7 @@ private:
                     menu_spl->loadSprite("level_end_button.png"),
                     this, menu_selector(Me::onPlayMore));
 
-        CCLabelTTF * retry_text = CCLabelTTF::create(CCLocalizedString("Retry").c_str(),
+        CCLabelTTF * retry_text = CCLabelTTF::create(_("Retry"),
                                                 "fonts/Fredoka One.ttf",
                                                 48);
         retry_text->setColor(ccc3(255,255,255));
@@ -170,7 +170,7 @@ private:
         if(_mode == LevelEnd)
         {
 
-            CCLabelTTF * next_level_text = CCLabelTTF::create(CCLocalizedString("Next").c_str(),
+            CCLabelTTF * next_level_text = CCLabelTTF::create(_("Next"),
                                                     "fonts/Fredoka One.ttf",
                                                     48);
             next_level_text->setColor(ccc3(255,255,255));
@@ -327,38 +327,12 @@ void LevelScene::onNextLevelClicked(CCObject*)
 void LevelScene::onHintClicked(CCObject*)
 {
     CCLog("Hint clicked in LevelScene");
-    Hints hint(_current_level,_flow_game);
-
-
-//    std::vector<uint32_t> hint_path = _current_info.getPathes();
-//    uint32_t curr_hint_num = 1;
-
-//    unsigned int height = _current_level->getBoardSize().x();
-//    unsigned int width =  _current_level->getBoardSize().y();
-
-//    for (unsigned int y = 0; y < height; y++)
-//    {
-//        for (unsigned int x = 0; x < width; x++)
-//        {
-////            if((CellPosition)y * width_ >= keys_.size())
-////                return keys_[keys_.size()-1];
-////            else
-////                return keys_[(CellPosition)y * width_ + x];
-
-//            if(hint_path.size()>0)
-//            {
-//                if(hint_path[y*width + x] == curr_hint_num)
-//                {
-//                    std::string log = "x = "
-//                            + AD_to_string(x)
-//                            +' '
-//                            + "y = "
-//                            + AD_to_string(y);
-//                    CCLog(log.c_str());
-//                }
-//            }
-//        }
-//    }
+    if(Hints::getInstance()->hasHint())
+        Hints::getInstance()->showHint(_current_level,_flow_game);
+    else
+    {
+        //TODO: show hint purchase window
+    }
 
 }
 void LevelScene::onReloadLevelClicked(CCObject*)
@@ -394,10 +368,7 @@ bool LevelScene::init()
     for(JoinyTask::iterator it = task._task.begin(); it!=task._task.end(); ++it)
     {
         JoinyPair& s = *it;
-        if(s.getPoints().size() == 2)
-        {
-            table.addColor(s.getPoints()[0], s.getPoints()[1], s.getColor());
-        }
+        table.addColor(s.getPoints().first, s.getPoints().second, s.getColor());
     }
 
     //    std::stringstream ss;

@@ -29,6 +29,7 @@ private:
     void showConnection(const FlowPointState& new_state);
     void showHintConnection(const FlowPointState& new_state);
     void hideConnection();
+    void hideHintConnection();
 };
 
 #endif // FLOWRENDERERNODE_H

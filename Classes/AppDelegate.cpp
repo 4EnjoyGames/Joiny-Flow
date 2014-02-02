@@ -48,12 +48,12 @@ public:
         typedef ADInApp::ErrorType Error;
         if(error == ADInApp::ErrorType::BillingUnavaliable)
         {
-            ADNotification::showNotification(CCLocalizedString("iap.error.billing_unavaliable"));
+            ADNotification::showNotification(_("iap.error.billing_unavaliable"));
         }
         else if(error == ADInApp::ErrorType::DeveloperError ||
                 error == ADInApp::ErrorType::Error)
         {
-            ADNotification::showNotification(CCLocalizedString("iap.error.purchase_error"));
+            ADNotification::showNotification(_("iap.error.purchase_error"));
         }
 
         CCLog("Purchase %s failed", id.c_str());

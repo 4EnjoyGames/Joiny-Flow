@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-01-30 19:01+0200\n"
+"POT-Creation-Date: 2014-02-02 12:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,23 +10,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.3\n"
-"X-Poedit-KeywordsList: CCLocalizedString\n"
+"X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../Classes\n"
 
-#: ../Classes/Scenes/LevelScene.cpp:52
+#: ../Classes/AppDelegate.cpp:51
+msgid "iap.error.billing_unavaliable"
+msgstr ""
+
+#: ../Classes/AppDelegate.cpp:56
+msgid "iap.error.purchase_error"
+msgstr ""
+
+#: ../Classes/Scenes/LevelScene.cpp:64
 msgid "End_bad"
 msgstr "You need more points"
 
-#: ../Classes/Scenes/LevelScene.cpp:57
-msgid "End_good"
-msgstr "Score"
-
-#: ../Classes/Scenes/LevelScene.cpp:141
+#: ../Classes/Scenes/LevelScene.cpp:143
 msgid "Retry"
 msgstr "Retry"
 
-#: ../Classes/Scenes/LevelScene.cpp:171
+#: ../Classes/Scenes/LevelScene.cpp:173
 msgid "Next"
 msgstr "Next"
 
@@ -49,3 +53,6 @@ msgstr "Restore Purchases"
 #: ../Classes/Scenes/SettingScene.cpp:210
 msgid "Developers"
 msgstr "Developers"
+
+#~ msgid "End_good"
+#~ msgstr "Score"

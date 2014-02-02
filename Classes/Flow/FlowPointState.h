@@ -8,8 +8,7 @@ public:
     enum NodeType
     {
         Free,
-        Circle,
-        Hint
+        Circle
     };
 
     FlowPointState();
@@ -45,16 +44,15 @@ public:
     const FlowPoint getCordinates() const;
 
     //hints
+    void setHintColorColor(const FlowColor c);
+    const FlowColor getHintColor() const;
+
     void setHintNextCordinate(const FlowPoint p);
     bool hasHintNext() const;
     void removeHintNext();
 
-    void setHintPreviousCordinate(const FlowPoint p);
-    bool hasHintPrevious() const;
-    void removeHintPrevious();
 
     const FlowPoint getHintNextCordinate() const;
-    const FlowPoint getHintPreviousCordinate() const;
 
 private:
     FlowColor _line_color;
@@ -72,11 +70,9 @@ private:
     bool _has_previous;
 
     //hints
+    FlowColor _hint_color;
     FlowPoint _hint_next_cordinates;
     bool _hint_has_next;
-
-    FlowPoint _hint_previous_cordinates;
-    bool _hint_has_previous;
 
     NodeType _state;
 
