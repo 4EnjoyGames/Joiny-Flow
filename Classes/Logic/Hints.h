@@ -16,10 +16,15 @@ public:
     void useHint();
     bool hasHint();
 
+    bool less_vectors(const std::vector<FlowPoint> & a,
+                      const std::vector<FlowPoint> & b );
+
 private:
     Hints();
     Hints(Hints const&);              // don't Implement
     void operator=(Hints const&); // don't implement
+
+
 
     static Hints* _instance;
 
@@ -31,6 +36,11 @@ private:
     //save for each level id the hint id, which we must show next time
     typedef unsigned int PathID;
     std::map<JoinyLevelID, PathID> _order;
+
+    // hint pathes, which were used
+    typedef std::vector < std::vector<FlowPoint> > UsedPathes;
+    //save all pathes, which we hinted with their LevelID
+    std::map< JoinyLevelID, UsedPathes > _saves;
 
     friend class LevelManager;
     void setHintNumber(const unsigned int num);

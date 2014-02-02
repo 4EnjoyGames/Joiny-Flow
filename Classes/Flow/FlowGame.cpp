@@ -360,6 +360,26 @@ void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
     }
 
 }
+//verify has the user drow this path
+bool FlowGame::hasUserThisPath(
+        const std::vector< FlowPoint>& path) const
+{
+    return false;
+}
+
+//delete the hint path
+void FlowGame::deleteHintPath(
+        const std::vector< FlowPoint>& path)
+{
+
+}
+
+//delete all connections which interfere to show hint path
+void FlowGame::deleteInterferePathes(
+        const std::vector< FlowPoint>& path)
+{
+
+}
 
 void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
 {
@@ -562,10 +582,7 @@ bool FlowGame::checkWinCondition()
 
     return win;
 }
-void FlowGame::cleanTheTrace()
-{
 
-}
 
 void FlowGame::traceDebug(std::ostream& ss, const Traces& tr) const
 {

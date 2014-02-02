@@ -28,12 +28,18 @@ public:
 
     FlowGame(const FlowTable& table, DelegatePtr delegate);
     static FlowGame* create(const FlowTable& table, DelegatePtr delegate);
-    void cleanTheTrace();
-
 
     void connectHintPoints(const FlowPoint& a, const FlowPoint& b, const FlowColor color);
     void disconnectHintPoints(const FlowPoint& a, const FlowPoint& b);
 
+    //verify has the user drow this path
+    bool hasUserThisPath(const std::vector< FlowPoint>& path) const;
+
+    //delete the hint path
+    void deleteHintPath(const std::vector< FlowPoint>& path);
+
+    //delete all connections which interfere to show hint path
+    void deleteInterferePathes(const std::vector< FlowPoint>& path);
 private:
     FlowRenderer* _renderer;
     const FlowTable* _table;
