@@ -363,13 +363,8 @@ void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
 
 void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
 {
+    //TODO: disconect hints
 
-    //
-//    if(a_st.getNodeType() == FlowPointState::Hint ||
-//            b_st.getNodeType() == FlowPointState::Hint)
-//    {
-//        disconnectHintPoints(a_st,b_st);
-//    }
     a_st.setNextCordinates(b_st.getCordinates());
     b_st.setPreviousCordinates(a_st.getCordinates());
     b_st.removeNext();

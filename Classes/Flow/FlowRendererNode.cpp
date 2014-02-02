@@ -56,6 +56,10 @@ void FlowRendererNode::update(const FlowPointState& new_state)
     {
         showHintConnection(new_state);
     }
+    else
+    {
+        hideHintConnection();
+    }
 }
 
 void FlowRendererNode::init()
@@ -165,5 +169,12 @@ void FlowRendererNode::hideConnection()
     if(_connection_sprite != 0)
     {
         _connection_sprite->setVisible(false);
+    }
+}
+void FlowRendererNode::hideHintConnection()
+{
+    if(_hint_sprite != 0)
+    {
+        _hint_sprite->setVisible(false);
     }
 }
