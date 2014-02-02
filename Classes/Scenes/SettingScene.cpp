@@ -64,7 +64,7 @@ bool SettingScene::init()
     CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
-    CCLabelTTF * settings = CCLabelTTF::create(CCLocalizedString("Settings"),"fonts/Fredoka One.ttf",72);
+    CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),"fonts/Fredoka One.ttf",72);
     settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     settings->setColor(GameInfo::getInstance()->getTitleColor());
@@ -157,7 +157,7 @@ bool SettingScene::init()
                                reset_logo->getContentSize().height/2));
 
 
-    CCLabelTTF * reset = CCLabelTTF::create(CCLocalizedString("Reset"),
+    CCLabelTTF * reset = CCLabelTTF::create(_("Reset"),
                                             "fonts/Fredoka One.ttf",
                                             72);
     reset->setPosition(ccp(reset_logo->getContentSize().width/2,
@@ -182,7 +182,7 @@ bool SettingScene::init()
                                restor_logo->getContentSize().height/2));
 
 
-    CCLabelTTF * restor = CCLabelTTF::create(CCLocalizedString("Restore"),
+    CCLabelTTF * restor = CCLabelTTF::create(_("Restore"),
                                             "fonts/Fredoka One.ttf",
                                             72);
     restor->setPosition(ccp(restor_logo->getContentSize().width/2,
@@ -207,7 +207,7 @@ bool SettingScene::init()
                                dev_logo->getContentSize().height/2));
 
 
-    CCLabelTTF * dev = CCLabelTTF::create(CCLocalizedString("Developers"),
+    CCLabelTTF * dev = CCLabelTTF::create(_("Developers"),
                                             "fonts/Fredoka One.ttf",
                                             72);
     dev->setPosition(ccp(dev_logo->getContentSize().width/2,

@@ -3,7 +3,7 @@
 #include "string"
 #include <memory>
 
-const char *CCLocalizedString(const std::string &key);
+const char *_(const std::string &key);
 void parse_data(const char *data, size_t length);
 uint32_t swap_le(const char *buf, size_t ofs);
 uint32_t swap_be(const char *buf, size_t ofs);

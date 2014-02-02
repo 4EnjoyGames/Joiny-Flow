@@ -73,7 +73,7 @@ void parse_data(const char *data, size_t length)
     }
 }
 
-const char* CCLocalizedString(const string& key)
+const char* _(const string& key)
 {
     static bool loaded = false;
     if(!loaded)

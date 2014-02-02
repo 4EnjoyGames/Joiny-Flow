@@ -61,7 +61,7 @@ private:
                     //+'\n';
         }
 
-        CCLabelTTF* label = CCLabelTTF::create(CCLocalizedString("End_bad"),
+        CCLabelTTF* label = CCLabelTTF::create(_("End_bad"),
                                                "fonts/Fredoka One.ttf",
                                                62);
 
@@ -140,7 +140,7 @@ private:
                     menu_spl->loadSprite("level_end_button.png"),
                     this, menu_selector(Me::onPlayMore));
 
-        CCLabelTTF * retry_text = CCLabelTTF::create(CCLocalizedString("Retry"),
+        CCLabelTTF * retry_text = CCLabelTTF::create(_("Retry"),
                                                 "fonts/Fredoka One.ttf",
                                                 48);
         retry_text->setColor(ccc3(255,255,255));
@@ -170,7 +170,7 @@ private:
         if(_mode == LevelEnd)
         {
 
-            CCLabelTTF * next_level_text = CCLabelTTF::create(CCLocalizedString("Next"),
+            CCLabelTTF * next_level_text = CCLabelTTF::create(_("Next"),
                                                     "fonts/Fredoka One.ttf",
                                                     48);
             next_level_text->setColor(ccc3(255,255,255));

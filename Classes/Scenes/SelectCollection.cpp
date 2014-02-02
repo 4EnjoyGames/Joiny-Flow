@@ -149,7 +149,7 @@ bool SelectCollection::init()
     //                           ORIGIN.y + VISIBLE_SIZE.height/2));
     //    this->addChild(noise);
 
-    CCLabelTTF * collections = CCLabelTTF::create( CCLocalizedString("Collection"),
+    CCLabelTTF * collections = CCLabelTTF::create( _("Collection"),
                                                    "fonts/Fredoka One.ttf",
                                                    72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
