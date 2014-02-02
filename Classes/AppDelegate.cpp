@@ -61,12 +61,12 @@ public:
 
     void restorePurchasesSuccessfully()
     {
-        ADNotification::showNotification(CCLocalizedString("iap.restore_purchases.success"));
+        ADNotification::showNotification(_("iap.restore_purchases.success"));
     }
 
     void restorePurchasesFailed()
     {
-        ADNotification::showNotification(CCLocalizedString("iap.restore_purchases.failed"));
+        ADNotification::showNotification(_("iap.restore_purchases.failed"));
     }
 };
 
