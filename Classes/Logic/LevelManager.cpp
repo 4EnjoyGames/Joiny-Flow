@@ -6,6 +6,8 @@
 #include "Flow/FlowTable.h"
 #include "Flow/FlowRenderer.h"
 #include "ADLib/ADString.h"
+#include "Logic/Hints.h"
+
 LevelManager::LevelManager()
     : _save_path(FileUtils::getStorageFilePath("save.ad")),
       _settings_path(FileUtils::getStorageFilePath("settings.ad"))
@@ -15,16 +17,19 @@ LevelManager::LevelManager()
 void LevelManager::onInit()
 {
     loadLevelsInfo();
+    loadSettings();
 }
 
 void LevelManager::onDestroy()
 {
     saveGame();
+    saveSettings();
 }
 
 void LevelManager::onPause()
 {
     saveGame();
+    saveSettings();
 }
 
 void LevelManager::onRun()
@@ -151,6 +156,8 @@ void LevelManager::saveSettings()
 
     std::ofstream oss(_settings_path, std::ios::out | std::ios::binary);
     oss.write(ss.str().c_str(), ss.str().length());
+
+    //TODO: save hint number in file
 }
 void LevelManager::loadSettings()
 {
@@ -182,6 +189,9 @@ void LevelManager::loadSettings()
             MusicSettings::turnOnMusic();
         }
     }
+
+    //TODO: get hint number from the file
+    Hints::getInstance()->setHintNumber(3);
 
 }
 
@@ -333,3 +343,4 @@ void LevelManager::SaveScreenshot()
     texture->end();
     texture->saveToFile("screenshot.png", kCCImageFormatPNG);
 }
+

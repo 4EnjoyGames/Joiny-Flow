@@ -23,6 +23,8 @@ class GameInfo
        const ccColor3B& getPositiveColor();
 
        static const std::string& getPackageName();
+
+
    private:
        GameInfo( );
        void setInfo();
