@@ -331,6 +331,7 @@ void FlowGame::removeHighlight(FlowPointState& st)
     {
         FlowPointState nst(st);
         nst.setHighlighted(false);
+        st.setHighlighted(false);
         _renderer->updateCell(nst.getCordinates(), nst);
     }
 }
