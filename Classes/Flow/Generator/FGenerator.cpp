@@ -203,7 +203,14 @@ FlowTask print(const Table& table)
             if (isFlowHead(x, y, table))
             {
                 TraceID tid = table[y][x];
-                map[tid].push_back(FlowPoint(x, y));
+                auto it = map.find(tid);
+                if(it == map.end())
+                    map.insert(FlowTaskMap::value_type(
+                                   tid,
+                                   FlowStartEnd(FlowPoint(x, y), FlowPoint(x, y))
+                                   ));
+                else
+                    it->second.second = FlowPoint(x, y);
             }
         }
     }
