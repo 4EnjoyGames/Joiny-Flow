@@ -136,6 +136,8 @@ bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
         //6. show the hint
         CCLog("Hints::level id = %d",level->getLevelId());
 
+        _flow_game->showPath(hint_path_i);
+
         for(unsigned int i=1; i<hint_path_i.size(); ++i)
         {
             CCLog("Hints::(%d, %d) -> (%d, %d)",hint_path_i[i-1].x(),

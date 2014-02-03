@@ -406,6 +406,7 @@ void FlowGame::deleteHintPath(
 void FlowGame::deleteInterferePathes(
         const std::vector< FlowPoint>& path)
 {
+    //Clean space
     for(unsigned int i=0; i< path.size(); ++i)
     {
         FlowPoint curr_p = path[i];
@@ -415,15 +416,46 @@ void FlowGame::deleteInterferePathes(
         //FlowColor color = getPointColor(curr_p);
         if(st.hasNext() || st.hasPrevious())
         {
-            //_working_color = color;
-            //_working_trace_id = st.getTraceId();
-            //_last_point = curr_p;
-            cutTheTrace(curr_p,
-                        st.getTraceId()/*_working_trace_id*/,
-                        true);
+
+            Trace& a1 = _submitted_traces[st.getTraceId()];
+            Trace& a2 = _active_traces[st.getTraceId()];
+            if(a1.size() > 0)
+                cutTheTrace(a1[0], st.getTraceId(), true);
+            a1.clear();
+            a2.clear();
+
         }
     }
 }
+void FlowGame::showPath(const std::vector< FlowPoint>& path)
+{
+    if(path.size() > 0)
+    {
+        FlowPointState st = _table->get(path[0]);
+
+        //Path should always start from circle
+        assert(st.getNodeType() == FlowPointState::Circle);
+
+        //Put new trace as submited
+        Trace& a1 = _submitted_traces[path[0]];
+        a1 = path;
+
+        //Update starting point
+        st = _table->get(path[0]);
+        st.setTraceId(FlowPoint::UNDEFINED);
+        _renderer->updateCell(st.getCordinates(), st);
+
+        //Clear active trace starting from same point
+        Trace& active = _active_traces[path[0]];
+        active.clear();
+
+        _working_trace_id = FlowPoint::UNDEFINED;
+
+        //Use restore function to restore trace
+        restoreTraces();
+    }
+}
+
 const FlowColor& FlowGame::getCellColor(const FlowPoint& point) const
 {
     FlowPointState st = _table->get(point);

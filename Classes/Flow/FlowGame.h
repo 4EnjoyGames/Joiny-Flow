@@ -41,6 +41,8 @@ public:
     //delete all connections which interfere to show hint path
     void deleteInterferePathes(const std::vector< FlowPoint>& path);
 
+    void showPath(const std::vector< FlowPoint>& path);
+
     //return the cell color
     const FlowColor& getCellColor(const FlowPoint& point) const;
 
