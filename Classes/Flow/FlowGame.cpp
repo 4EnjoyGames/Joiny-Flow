@@ -369,14 +369,17 @@ bool FlowGame::hasUserThisPath(
         const std::vector< FlowPoint>& path) const
 {
 
-    bool result = false;
+    bool result = true;
     for(unsigned int i=0; i< path.size(); ++i)
     {
         FlowPointState st = _table->get(path[i]);
 
         if(st.hasNext() || st.hasPrevious())
         {
-            result  = true;
+        }
+        else
+        {
+            result = false;
             break;
         }
     }
@@ -407,7 +410,9 @@ void FlowGame::deleteInterferePathes(
             _working_color = color;
             _working_trace_id = st.getTraceId();
             _last_point = curr_p;
-            cutTheTrace(curr_p, _working_trace_id, true);
+            cutTheTrace(curr_p,
+                        st.getTraceId()/*_working_trace_id*/,
+                        true);
         }
     }
 }

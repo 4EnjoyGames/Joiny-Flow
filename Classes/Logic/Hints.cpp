@@ -130,8 +130,10 @@ bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
         //4. save the path in used path map
         _saves[_level->getLevelId()].push_back(hint_path_i);
 
+        //5. delete path ellements which intersected with our hint path
+        _flow_game->deleteInterferePathes(hint_path_i);
 
-        //5. show the hint
+        //6. show the hint
         CCLog("Hints::level id = %d",level->getLevelId());
 
         for(unsigned int i=1; i<hint_path_i.size(); ++i)
