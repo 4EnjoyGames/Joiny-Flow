@@ -335,8 +335,16 @@ void LevelScene::onHintClicked(CCObject*)
         //TODO: show hint purchase window
     }
 
-    //TODO: if not succesfull hint - show toast: "Showed all hints at the level"
-
+    if(succesfull_hint)
+    {
+        unsigned int hint = Hints::getInstance()->getHintNumber();
+        std::string hint_num = 'x'+ AD_to_string(hint);
+        _hint_number_text->setString(hint_num.c_str());
+    }
+    else
+    {
+        //TODO: if not succesfull hint - show toast: "Showed all hints at the level"
+    }
 }
 void LevelScene::onReloadLevelClicked(CCObject*)
 {
@@ -486,6 +494,18 @@ bool LevelScene::init()
     hint_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 300/SCALE,
                                        menu_height/2));
     _buttons_menu->menu()->addChild(hint_button);
+
+
+    //add hints number text
+    unsigned int hints = Hints::getInstance()->getHintNumber();
+    std::string hints_str = 'x' + AD_to_string(hints);
+    _hint_number_text = CCLabelTTF::create(hints_str.c_str(),
+                                           "fonts/Fredoka One.ttf",
+                                           50);
+    _hint_number_text->setColor(GameInfo::getInstance()->getNegativeColor());
+    _hint_number_text->setPosition(ccp(hint_button->getContentSize().width*0.9,
+                                  hint_button->getContentSize().height*0.4));
+    hint_button->addChild(_hint_number_text);
 
 
     this->addChild(_buttons_menu);

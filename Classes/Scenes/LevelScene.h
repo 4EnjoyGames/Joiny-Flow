@@ -71,6 +71,8 @@ private:
     CCPoint _gold_position;
 
     MenuSpriteBatch* _buttons_menu;
+
+    CCLabelTTF* _hint_number_text;
 public:
     LevelScene(const JoinyLevel *);
 

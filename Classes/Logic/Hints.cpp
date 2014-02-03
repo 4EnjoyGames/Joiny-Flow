@@ -27,7 +27,7 @@ bool Hints::findSubVector(const UsedPathes& showed_ids,
         std::vector<FlowPoint> curr = showed_ids[i];
 
         //ellements are unique - so it is enought to verify the equalty of first ellement
-        if(vec.size()== curr.size() && vec[i]==curr[i])
+        if(vec.size()== curr.size() && vec[0]==curr[0])
         {
             result = true;
             break;
