@@ -48,20 +48,20 @@ private:
         float x_middle = size.width / 2;
 
 
-       char* text ="";
+       std::string text ="";
         if(_mode==NotEnough)
         {
-            //text = CCLocalizedString("End_bad");//+'\n';
+            text = _("End_bad");//+'\n';
                     //+ std::to_string(_score);
         }
         else
         {
-            //text =  CCLocalizedString("End_good");//+'\n';
+            text =  _("End_good");//+'\n';
                     //std::to_string(_score)
                     //+'\n';
         }
 
-        CCLabelTTF* label = CCLabelTTF::create(_("End_bad"),
+        CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
                                                "fonts/Fredoka One.ttf",
                                                62);
 
@@ -81,7 +81,7 @@ private:
         else
         {
             label->setFontSize(48);
-            label->setPosition(ccp(x_middle, size.height*0.85f));
+            label->setPosition(ccp(x_middle, size.height*0.9f));
 
             CCLabelTTF* score = CCLabelTTF::create(AD_to_string(_score).c_str(),
                                                    "fonts/Fredoka One.ttf",
