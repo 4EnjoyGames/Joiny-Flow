@@ -151,56 +151,24 @@ bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
     return succesful;
 
 }
-void Hints::deleteHint()
+void Hints::deleteHint(const JoinyLevel *level, FlowGame *flow_game)
 {
-    if(_level!=0)
+    //find which path index we showed
+    std::map<JoinyLevelID, UsedPathes>::iterator it =
+                _saves.find(level->getLevelId());
+
+    if(it!=_saves.end())
     {
-        std::vector < std::vector<FlowPoint> > hint_path =
-                _level->getPuzzle().getJoinyInfo().getPathes();
-        unsigned int hint_size = hint_path.size();
+        //get all hint, showed on this level
+        UsedPathes showed_ids = (*it).second;
 
-
-        //find which path index we must show
-        std::map<JoinyLevelID, PathID>::iterator itor =
-                _order.find(_level->getLevelId());
-
-        PathID curr_path_id = 0;
-        //we never show hint for this level
-        if(itor ==_order.end())
+        for(unsigned int i=0; i<showed_ids.size(); ++i)
         {
-            CCLog("Hint delete Error! We delete hint, which was not showed");
-        }
-        else
-        {
-            curr_path_id = (*itor).second;
-
-            //if now we show the first path - the previous time we showed
-            //1. or the last path
-            //2. or the first path (if there is only one  hint path)
-
-            if(curr_path_id == 0)
-            {
-                //gave from the end
-                if(hint_size==1)
-                    curr_path_id = 0;
-                else
-                    curr_path_id = hint_size - 1;
-            }
-            else
-                --curr_path_id;
+            flow_game->deleteHintPath(showed_ids[i]);
         }
 
-        std::vector<FlowPoint> curr_path = hint_path[curr_path_id];
-
-        CCLog("level id = %d",_level->getLevelId());
-        CCLog("Path id = %d",curr_path_id);
-
-        for(unsigned int i=1; i<curr_path.size(); ++i)
-        {
-            CCLog("(%d, %d) -> (%d, %d)",curr_path[i-1].x(),curr_path[i-1].y(),
-                    curr_path[i].x(),curr_path[i].y());
-            _flow_game->disconnectHintPoints(curr_path[i-1], curr_path[i]);
-        }
+        //delete saves of hints and level id from map
+        _saves.erase(it);
     }
 }
 

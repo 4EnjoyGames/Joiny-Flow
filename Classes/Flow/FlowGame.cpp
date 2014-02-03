@@ -393,6 +393,13 @@ void FlowGame::deleteHintPath(
         const std::vector< FlowPoint>& path)
 {
 
+    for(unsigned int i=1; i<path.size(); ++i)
+    {
+        //CCLog("(%d, %d) -> (%d, %d)",path[i-1].x(),path[i-1].y(),
+        //       path[i].x(),path[i].y());
+
+        disconnectHintPoints(path[i-1], path[i]);
+    }
 }
 
 //delete all connections which interfere to show hint path
@@ -405,12 +412,12 @@ void FlowGame::deleteInterferePathes(
 
         //if current coordinate has connectin.png -> cut the trace
         FlowPointState st = _table->get(curr_p);
-        FlowColor color = getPointColor(curr_p);
+        //FlowColor color = getPointColor(curr_p);
         if(st.hasNext() || st.hasPrevious())
         {
-            _working_color = color;
-            _working_trace_id = st.getTraceId();
-            _last_point = curr_p;
+            //_working_color = color;
+            //_working_trace_id = st.getTraceId();
+            //_last_point = curr_p;
             cutTheTrace(curr_p,
                         st.getTraceId()/*_working_trace_id*/,
                         true);
