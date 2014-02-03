@@ -11,7 +11,7 @@ public:
 
     //return we show the hint succesfully or not
     bool showHint(const JoinyLevel* level, FlowGame* flow_game);
-    void deleteHint();
+    void deleteHint(const JoinyLevel *level, FlowGame *flow_game);
 
     const unsigned int getHintNumber();
     void useHint();

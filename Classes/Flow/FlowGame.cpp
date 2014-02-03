@@ -393,6 +393,13 @@ void FlowGame::deleteHintPath(
         const std::vector< FlowPoint>& path)
 {
 
+    for(unsigned int i=1; i<path.size(); ++i)
+    {
+        //CCLog("(%d, %d) -> (%d, %d)",path[i-1].x(),path[i-1].y(),
+        //       path[i].x(),path[i].y());
+
+        disconnectHintPoints(path[i-1], path[i]);
+    }
 }
 
 //delete all connections which interfere to show hint path
