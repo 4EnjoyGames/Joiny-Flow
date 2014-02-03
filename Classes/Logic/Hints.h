@@ -9,15 +9,19 @@ class Hints
 public:
     static Hints* getInstance( );
 
-    void showHint(const JoinyLevel* level, FlowGame* flow_game);
+    //return we show the hint succesfully or not
+    bool showHint(const JoinyLevel* level, FlowGame* flow_game);
     void deleteHint();
 
     const unsigned int getHintNumber();
     void useHint();
     bool hasHint();
 
-    bool less_vectors(const std::vector<FlowPoint> & a,
-                      const std::vector<FlowPoint> & b );
+
+    // hint pathes, which were used
+    typedef std::vector < std::vector<FlowPoint> > UsedPathes;
+    bool findSubVector(const UsedPathes &showed_ids,
+                       const std::vector<FlowPoint>& vec) const;
 
 private:
     Hints();
@@ -37,8 +41,7 @@ private:
     typedef unsigned int PathID;
     std::map<JoinyLevelID, PathID> _order;
 
-    // hint pathes, which were used
-    typedef std::vector < std::vector<FlowPoint> > UsedPathes;
+
     //save all pathes, which we hinted with their LevelID
     std::map< JoinyLevelID, UsedPathes > _saves;
 

@@ -52,7 +52,8 @@ bool FlowGame::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *)
     return false;
 }
 
-void FlowGame::ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *)
+void FlowGame::ccTouchMoved(cocos2d::CCTouch *pTouch,
+                            cocos2d::CCEvent *)
 {
     if(_is_touch_active && pTouch->getID()==_active_touch_id && this->isVisible())
     {
@@ -71,7 +72,8 @@ void FlowGame::updateActiveCircle(cocos2d::CCPoint local)
         _renderer->hideActiveCircle();
 }
 
-void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *)
+void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch,
+                            cocos2d::CCEvent *)
 {
     if(_is_touch_active && pTouch->getID()==_active_touch_id && this->isVisible())
     {
@@ -80,7 +82,8 @@ void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *)
     }
 }
 
-void FlowGame::ccTouchCancelled(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *)
+void FlowGame::ccTouchCancelled(cocos2d::CCTouch *pTouch,
+                                cocos2d::CCEvent *)
 {
     if(_is_touch_active && pTouch->getID()==_active_touch_id && this->isVisible())
     {
@@ -292,7 +295,8 @@ void FlowGame::updateScore()
     }
 }
 
-void FlowGame::cutTheTrace(const FlowPoint& start, const FlowPoint trace_id,
+void FlowGame::cutTheTrace(const FlowPoint& start,
+                           const FlowPoint trace_id,
                            const bool remove_highlight)
 {
     FlowPointState st = _table->get(start);
@@ -364,7 +368,20 @@ void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
 bool FlowGame::hasUserThisPath(
         const std::vector< FlowPoint>& path) const
 {
-    return false;
+
+    bool result = false;
+    for(unsigned int i=0; i< path.size(); ++i)
+    {
+        FlowPointState st = _table->get(path[i]);
+
+        if(st.hasNext() || st.hasPrevious())
+        {
+            result  = true;
+            break;
+        }
+    }
+
+    return result;
 }
 
 //delete the hint path
@@ -378,7 +395,21 @@ void FlowGame::deleteHintPath(
 void FlowGame::deleteInterferePathes(
         const std::vector< FlowPoint>& path)
 {
+    for(unsigned int i=0; i< path.size(); ++i)
+    {
+        FlowPoint curr_p = path[i];
 
+        //if current coordinate has connectin.png -> cut the trace
+        FlowPointState st = _table->get(curr_p);
+        FlowColor color = getPointColor(curr_p);
+        if(st.hasNext() || st.hasPrevious())
+        {
+            _working_color = color;
+            _working_trace_id = st.getTraceId();
+            _last_point = curr_p;
+            cutTheTrace(curr_p, _working_trace_id, true);
+        }
+    }
 }
 const FlowColor& FlowGame::getCellColor(const FlowPoint& point) const
 {

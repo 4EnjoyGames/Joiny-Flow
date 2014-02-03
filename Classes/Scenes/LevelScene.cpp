@@ -326,13 +326,16 @@ void LevelScene::onNextLevelClicked(CCObject*)
 }
 void LevelScene::onHintClicked(CCObject*)
 {
+    bool succesfull_hint = false;
     CCLog("Hint clicked in LevelScene");
     if(Hints::getInstance()->hasHint())
-        Hints::getInstance()->showHint(_current_level,_flow_game);
+        succesfull_hint = Hints::getInstance()->showHint(_current_level,_flow_game);
     else
     {
         //TODO: show hint purchase window
     }
+
+    //TODO: if not succesfull hint - show toast: "Showed all hints at the level"
 
 }
 void LevelScene::onReloadLevelClicked(CCObject*)

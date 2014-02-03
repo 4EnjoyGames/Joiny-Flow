@@ -3,7 +3,7 @@
 #include <ADLib/ADString.h>
 #include <algorithm>    // std::sort
 
-Hints::Hints():_hint_number(3),
+Hints::Hints():_hint_number(5),
     _level(0),
     _flow_game(0)
 {
@@ -17,16 +17,31 @@ Hints* Hints::getInstance( )
         _instance = new Hints();
     return _instance;
 }
-bool Hints::less_vectors (const std::vector<FlowPoint> &a,
-                          const std::vector<FlowPoint> &b)
-{
-   return a.size() < b.size();
-}
-void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
-{
 
-    //decrease hint humber
-    useHint();
+bool Hints::findSubVector(const UsedPathes& showed_ids,
+                          const std::vector<FlowPoint>& vec) const
+{
+    bool result = false;
+    for(unsigned int i=0; i<showed_ids.size(); ++i)
+    {
+        std::vector<FlowPoint> curr = showed_ids[i];
+
+        //ellements are unique - so it is enought to verify the equalty of first ellement
+        if(vec.size()== curr.size() && vec[i]==curr[i])
+        {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
+{
+    //return - succesfully showed the hint : true
+    //       - we havn`t hints to show : false
+    bool succesful = false;
+
 
     //save current hint
     _level = level;
@@ -41,40 +56,47 @@ void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
                 _saves.find(_level->getLevelId());
 
 
-    //1. find which pathes the user do not drowed
-    for(unsigned int i=0; i<hint_path.size(); ++i)
-    {
-        //if the user HAS DROW this path on the table
-        if(_flow_game->hasUserThisPath(hint_path[i]))
-        {
-            //delete this ellement
-            hint_path.erase(hint_path.begin()+i);
-        }
-    }
-
-    //2. we showed hints at this level ->
+    //1. we showed hints at this level ->
     //do not show same pathes again
     if(it != _saves.end())
     {
         //we showed hints at this level ->
         //do not show same pathes again
         UsedPathes showed_ids = (*it).second;
-        for(unsigned int j=0; j<hint_path.size(); ++j)
+        int j=0;
+        for(j=0; j<hint_path.size(); ++j)
         {
             //find jID in showed_ids
-            if (std::find(showed_ids.begin(),
-                          showed_ids.end(),
-                          hint_path[j])!=
-                    showed_ids.end())
+            //std::find(showed_ids.begin(),
+            //showed_ids.end(),
+            //hint_path[j])!= showed_ids.end()
+
+            if (findSubVector(showed_ids,hint_path[j]))
             {
                 //we find hint[j] in showed ides
                 //delete this ellement
                 hint_path.erase(hint_path.begin()+j);
+                --j;
 
             }
         }
 
     }
+
+    //2. find which pathes the user do not drowed
+    int usr_ps = 0;
+    for(usr_ps=0; usr_ps < hint_path.size(); ++usr_ps)
+    {
+        //if the user HAS DROW this path on the table
+        if(_flow_game->hasUserThisPath(hint_path[usr_ps]))
+        {
+            //delete this ellement
+            hint_path.erase(hint_path.begin()+usr_ps);
+            --usr_ps;
+        }
+    }
+
+
 
     //3.0
     //firstly - lower ellements
@@ -89,27 +111,42 @@ void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
     unsigned int middle = hint_path.size()/2;
     if(middle!=0 && hint_path.size()%2==0)
         middle-=1;
-    std::vector<FlowPoint> hint_path_i = hint_path[middle];
-    FlowColor color = _flow_game->getCellColor(hint_path_i[0]);
 
-
-    //4. save the path in used path map
-    _saves[_level->getLevelId()].push_back(hint_path_i);
-
-
-    //5. show the hint
-    CCLog("Hints::level id = %d",level->getLevelId());
-
-    for(unsigned int i=1; i<hint_path_i.size(); ++i)
+    //have we hints to show
+    if(!hint_path.empty())
     {
-        CCLog("Hints::(%d, %d) -> (%d, %d)",hint_path_i[i-1].x(),
-                hint_path_i[i-1].y(),
-                hint_path_i[i].x(),hint_path_i[i].y());
 
-        _flow_game->connectHintPoints(hint_path_i[i-1],
-                hint_path_i[i],
-                color);
+        //return, that we really show the hint
+        succesful = true;
+
+
+        //decrease hint number, only if we have what hint to show
+        useHint();
+
+        std::vector<FlowPoint> hint_path_i = hint_path[middle];
+        FlowColor color = _flow_game->getCellColor(hint_path_i[0]);
+
+
+        //4. save the path in used path map
+        _saves[_level->getLevelId()].push_back(hint_path_i);
+
+
+        //5. show the hint
+        CCLog("Hints::level id = %d",level->getLevelId());
+
+        for(unsigned int i=1; i<hint_path_i.size(); ++i)
+        {
+            CCLog("Hints::(%d, %d) -> (%d, %d)",hint_path_i[i-1].x(),
+                    hint_path_i[i-1].y(),
+                    hint_path_i[i].x(),hint_path_i[i].y());
+
+            _flow_game->connectHintPoints(hint_path_i[i-1],
+                    hint_path_i[i],
+                    color);
+        }
     }
+
+    return succesful;
 
 }
 void Hints::deleteHint()
