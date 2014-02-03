@@ -454,6 +454,15 @@ void FlowGame::showPath(const std::vector< FlowPoint>& path)
         //Use restore function to restore trace
         restoreTraces();
     }
+
+    updateScore();
+    if(checkWinCondition())
+    {
+         if(_delegate.get() != 0)
+        {
+            _delegate->onWin();
+        }
+    }
 }
 
 const FlowColor& FlowGame::getCellColor(const FlowPoint& point) const

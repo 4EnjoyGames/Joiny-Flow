@@ -338,7 +338,7 @@ void LevelScene::onHintClicked(CCObject*)
     if(succesfull_hint)
     {
         unsigned int hint = Hints::getInstance()->getHintNumber();
-        std::string hint_num = 'x'+ AD_to_string(hint);
+        std::string hint_num = AD_to_string(hint);
         _hint_number_text->setString(hint_num.c_str());
     }
     else
@@ -496,17 +496,28 @@ bool LevelScene::init()
     _buttons_menu->menu()->addChild(hint_button);
 
 
-    //add hints number text
+    //add hints number text with background
+    CCPoint hint_text_position(ccp(hint_button->getContentSize().width*0.9,
+                                   hint_button->getContentSize().height*0.3));
+
+    //number of hints
     unsigned int hints = Hints::getInstance()->getHintNumber();
-    std::string hints_str = 'x' + AD_to_string(hints);
+    std::string hints_str = AD_to_string(hints);
     _hint_number_text = CCLabelTTF::create(hints_str.c_str(),
                                            "fonts/Fredoka One.ttf",
-                                           50);
+                                           55);
     _hint_number_text->setColor(GameInfo::getInstance()->getNegativeColor());
-    _hint_number_text->setPosition(ccp(hint_button->getContentSize().width*0.9,
-                                  hint_button->getContentSize().height*0.4));
+    _hint_number_text->setPosition(hint_text_position);
+    _hint_number_text->setAnchorPoint(ccp(0.5,0.5));
     hint_button->addChild(_hint_number_text);
 
+
+    //white circle background
+//    CCSprite* hint_text_background = buttons_spl->loadSprite("hint_background.png");
+//    hint_text_background->setPosition(ccp(hint_button->getPositionX()+hint_button->getContentSize().width*0.41,
+//                                          hint_button->getContentSize().height*0.4));
+//    hint_text_background->setScale(_hint_number_text->getContentSize().width/_hint_number_text->getContentSize().width*0.5);
+//    hint_button->addNephew(hint_text_background);
 
     this->addChild(_buttons_menu);
 
