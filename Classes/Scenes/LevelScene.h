@@ -11,6 +11,7 @@
 class LevelScene : public DrawLayer //cocos2d::CCLayer
 {
 private:
+    class BuyHintPopUp;
     class LevelEndPopUp;
     class FlowDelegate;
 

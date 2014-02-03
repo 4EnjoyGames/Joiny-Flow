@@ -12,10 +12,75 @@ USING_NS_CC;
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/ADString.h>
 #include "Logic/Hints.h"
+#include <ADLib/Device/ADInApp.h>
+
+class LevelScene::BuyHintPopUp : public PopUpWindow::Content
+{
+public:
+    BuyHintPopUp(LevelScene* parent=0):_parent(parent){}
+private:
+
+    typedef BuyHintPopUp Me;
+    LevelScene* _parent;
+
+    void onCreate(CCNode *parent)
+    {
+        CCSize size = parent->getContentSize();
+        float x_middle = size.width / 2;
+        float vertical = size.height * 0.18f;
+
+        //set collor to background
+        CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
+        parent_rgb->setColor(GameInfo::getInstance()->getPositiveColor());
+
+
+        //create menu for AnimatedSprites
+        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
+                                                               "buy-hints/buy_hints.plist",
+                                                               "buy-hints/buy_hints.png");
+        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
+        menu->setPosition(ccp(0,0));
+        menu->setAnchorPoint(ccp(0,0));
+        menu->setContentSize(size);
+        parent->addChild(menu);
+
+
+        //create first button == buy_5_hints
+        std::string x5_price = ADInApp::getProduct("hints_10")->getPrice();
+        CCLabelTTF * first_button_text = CCLabelTTF::create(x5_price.c_str(),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        first_button_text->setColor(ccc3(255,255,255));
+
+        AnimatedMenuItem *x5_hint = AnimatedMenuItem::create(
+                    menu_spl->loadSprite("buy_button.png"),
+                    this, menu_selector(Me::onFirstButton));
+        x5_hint->setPosition(ccp(size.width*0.75,
+                                    vertical));
+
+        first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
+                               x5_hint->getContentSize().height/2));
+        x5_hint->addChild(first_button_text);
+        menu->menu()->addChild(x5_hint);
+    }
+    void onFirstButton(CCObject*)
+    {
+        //_parent->onNextLevel();
+
+    }
+    void onSecondButton(CCObject*)
+    {
+
+    }
+    void onThirdButton(CCObject*)
+    {
+
+    }
+
+};
 
 class LevelScene::LevelEndPopUp : public PopUpWindow::Content
 {
-
 public:
     enum Mode
     {
@@ -24,8 +89,13 @@ public:
     };
 
 
-    LevelEndPopUp(const Mode mode, const FlowScore score=0, const unsigned int stars=0, const JoinyLevel* level=0, LevelScene* parent=0)
-        : _mode(mode), _score(score), _stars(stars), _level(level), _parent(parent)
+    LevelEndPopUp(const Mode mode,
+                  const FlowScore score=0,
+                  const unsigned int stars=0,
+                  const JoinyLevel* level=0,
+                  LevelScene* parent=0)
+        : _mode(mode), _score(score),
+          _stars(stars), _level(level), _parent(parent)
     {}
 private:
     typedef LevelEndPopUp Me;
@@ -46,7 +116,6 @@ private:
 
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
-
 
        std::string text ="";
         if(_mode==NotEnough)
@@ -332,7 +401,8 @@ void LevelScene::onHintClicked(CCObject*)
         succesfull_hint = Hints::getInstance()->showHint(_current_level,_flow_game);
     else
     {
-        //TODO: show hint purchase window
+        //show hint purchase window
+        _pop_up_manager.openWindow(new BuyHintPopUp(this));
     }
 
     if(succesfull_hint)
