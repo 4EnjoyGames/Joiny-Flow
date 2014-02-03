@@ -405,12 +405,12 @@ void FlowGame::deleteInterferePathes(
 
         //if current coordinate has connectin.png -> cut the trace
         FlowPointState st = _table->get(curr_p);
-        FlowColor color = getPointColor(curr_p);
+        //FlowColor color = getPointColor(curr_p);
         if(st.hasNext() || st.hasPrevious())
         {
-            _working_color = color;
-            _working_trace_id = st.getTraceId();
-            _last_point = curr_p;
+            //_working_color = color;
+            //_working_trace_id = st.getTraceId();
+            //_last_point = curr_p;
             cutTheTrace(curr_p,
                         st.getTraceId()/*_working_trace_id*/,
                         true);
