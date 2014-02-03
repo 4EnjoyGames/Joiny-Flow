@@ -55,13 +55,35 @@ private:
         AnimatedMenuItem *x5_hint = AnimatedMenuItem::create(
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onFirstButton));
-        x5_hint->setPosition(ccp(size.width*0.75,
+        x5_hint->setPosition(ccp(size.width*0.17,
                                     vertical));
 
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
                                x5_hint->getContentSize().height/2));
         x5_hint->addChild(first_button_text);
         menu->menu()->addChild(x5_hint);
+
+
+        //create second button == buy_100_hints
+        AnimatedMenuItem *x100_hint = AnimatedMenuItem::create(
+                    menu_spl->loadSprite("buy_button.png"),
+                    this, menu_selector(Me::onSecondButton));
+        x100_hint->setPosition(ccp(size.width*0.5,
+                                    vertical));
+
+
+        menu->menu()->addChild(x100_hint);
+
+
+        //create third button == buy 1000 hints
+        AnimatedMenuItem *x1000_hint = AnimatedMenuItem::create(
+                    menu_spl->loadSprite("buy_button.png"),
+                    this, menu_selector(Me::onThirdButton));
+        x1000_hint->setPosition(ccp(size.width*0.83,
+                                    vertical));
+
+
+        menu->menu()->addChild(x1000_hint);
     }
     void onFirstButton(CCObject*)
     {
