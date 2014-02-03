@@ -380,7 +380,11 @@ void FlowGame::deleteInterferePathes(
 {
 
 }
-
+const FlowColor& FlowGame::getCellColor(const FlowPoint& point) const
+{
+    FlowPointState st = _table->get(point);
+    return st.getLineColor();
+}
 void FlowGame::connectPoints(FlowPointState& a_st, FlowPointState& b_st)
 {
     //TODO: disconect hints

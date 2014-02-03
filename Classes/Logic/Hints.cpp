@@ -40,9 +40,6 @@ void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
     std::map<JoinyLevelID, UsedPathes>::iterator it =
                 _saves.find(_level->getLevelId());
 
-    //empty vector
-    std::vector<FlowPoint> empty;
-
 
     //1. find which pathes the user do not drowed
     for(unsigned int i=0; i<hint_path.size(); ++i)
@@ -65,7 +62,10 @@ void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
         for(unsigned int j=0; j<hint_path.size(); ++j)
         {
             //find jID in showed_ids
-            if (std::find(showed_ids.begin(),showed_ids.end(),hint_path[j])!=showed_ids.end())
+            if (std::find(showed_ids.begin(),
+                          showed_ids.end(),
+                          hint_path[j])!=
+                    showed_ids.end())
             {
                 //we find hint[j] in showed ides
                 //delete this ellement
@@ -77,7 +77,6 @@ void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
     }
 
     //3.0
-
     //firstly - lower ellements
 
     std::sort(hint_path.begin(),hint_path.end(),
@@ -86,66 +85,32 @@ void Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
              return a.size() < b.size();
         });
 
-    //3. from formed set choose pathes with middle size
-    for(unsigned int k=0; k<hint_path.size(); ++k)
+    //3.1 from formed set choose pathes with middle size
+    unsigned int middle = hint_path.size()/2;
+    if(middle!=0 && hint_path.size()%2==0)
+        middle-=1;
+    std::vector<FlowPoint> hint_path_i = hint_path[middle];
+    FlowColor color = _flow_game->getCellColor(hint_path_i[0]);
+
+
+    //4. save the path in used path map
+    _saves[_level->getLevelId()].push_back(hint_path_i);
+
+
+    //5. show the hint
+    CCLog("Hints::level id = %d",level->getLevelId());
+
+    for(unsigned int i=1; i<hint_path_i.size(); ++i)
     {
+        CCLog("Hints::(%d, %d) -> (%d, %d)",hint_path_i[i-1].x(),
+                hint_path_i[i-1].y(),
+                hint_path_i[i].x(),hint_path_i[i].y());
 
-
+        _flow_game->connectHintPoints(hint_path_i[i-1],
+                hint_path_i[i],
+                color);
     }
 
-
-//    //delete previous hint
-//    deleteHint();
-
-//    //decrease hint humber
-//    useHint();
-
-//    //save current hint
-//    _level = level;
-//    _flow_game = flow_game;
-
-//    std::vector < std::vector<FlowPoint> > hint_path =
-//            _level->getPuzzle().getJoinyInfo().getPathes();
-//    unsigned int hint_size = hint_path.size();
-
-
-//    //find which path index we must show
-//    std::map<JoinyLevelID, PathID>::iterator itor =
-//            _order.find(_level->getLevelId());
-
-//    PathID curr_path_id = 0;
-//    //we never show hint for this level
-//    if(itor ==_order.end())
-//    {
-//        PathID path_id = 0;
-
-//        if(hint_size >1)
-//            path_id = 1;
-
-//        _order[_level->getLevelId()] = path_id;
-//    }
-//    else
-//    {
-//        curr_path_id = (*itor).second;
-
-//        if(curr_path_id < (hint_size-1))
-//            (*itor).second = curr_path_id+1;
-//        else
-//            (*itor).second = 0;
-//    }
-
-//    std::vector<FlowPoint> curr_path = hint_path[curr_path_id];
-//    FlowColor color = 3;
-
-//    CCLog("level id = %d",level->getLevelId());
-//    CCLog("Path id = %d",curr_path_id);
-
-//    for(unsigned int i=1; i<curr_path.size(); ++i)
-//    {
-//        CCLog("(%d, %d) -> (%d, %d)",curr_path[i-1].x(),curr_path[i-1].y(),
-//                curr_path[i].x(),curr_path[i].y());
-//        _flow_game->connectHintPoints(curr_path[i-1], curr_path[i], color);
-//    }
 }
 void Hints::deleteHint()
 {
