@@ -15,10 +15,10 @@ public:
             CCObject* obj_close_callback = 0,
             cocos2d::SEL_CallFunc callfunc_close_callback = 0);
 
-    void showWindow();
+    void showWindow(bool vertical=false);
     ~PopUpWindow();
 private:
-    void initWindow();
+    void initWindow(bool vertical=false);
 
     virtual bool ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
     virtual void ccTouchMoved(cocos2d::CCTouch *pTouch, cocos2d::CCEvent *pEvent);
@@ -45,7 +45,8 @@ public:
     PopUpWindowManager(cocos2d::CCNode* parent);
     void closeWindow(cocos2d::CCObject* obj_callback = 0,
                      cocos2d::SEL_CallFunc callfunc_callback = 0);
-    PopUpWindow* openWindow(PopUpWindow::Content* content);
+    PopUpWindow* openWindow(PopUpWindow::Content* content,
+                            bool vertical=false);
 
     bool backAction();
     void addMenuToAutoDisable(cocos2d::CCMenu* menu);
@@ -53,7 +54,8 @@ public:
 private:
     void onLastClosed();
     void setMenusAvaliablitity(bool enabled);
-    void do_openWindow(PopUpWindow* window);
+    void do_openWindow(PopUpWindow* window,
+                       bool vertical_mode=false);
     PopUpWindow* _opened_window;
     PopUpWindow* _pending_window;
 

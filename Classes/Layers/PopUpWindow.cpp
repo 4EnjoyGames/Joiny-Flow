@@ -1,4 +1,5 @@
 #include "PopUpWindow.h"
+#include "Core/Screen.h"
 #include "cocos2d-A.h"
 using namespace cocos2d;
 
@@ -61,9 +62,9 @@ PopUpWindow::PopUpWindow(Content* content,
 
 }
 
-void PopUpWindow::showWindow()
+void PopUpWindow::showWindow(bool vertical)
 {
-    initWindow();
+    initWindow(vertical);
 }
 
 bool PopUpWindow::ccTouchBegan(cocos2d::CCTouch *pTouch, cocos2d::CCEvent * /* pEvent */)
@@ -92,33 +93,25 @@ void PopUpWindow::ccTouchEnded(cocos2d::CCTouch *, cocos2d::CCEvent *)
 void PopUpWindow::ccTouchCancelled(cocos2d::CCTouch *, cocos2d::CCEvent *)
 {}
 
-void PopUpWindow::initWindow()
+void PopUpWindow::initWindow(bool vertical)
 {
     this->setTouchEnabled(true);
     CCDirector* pDirector = CCDirector::sharedDirector();
     pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
-    //Get the size of the screen we can see
-    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-    //Get the screen start of cordinates
-    CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+    const CCPoint origin = Screen::getOrigin();
+    const CCSize visibleSize = Screen::getVisibleSize();
 
-
-    //Create the sheet
-    //_sheet_menu = CCNode::create();
-    //this->addChild(_sheet_menu);
     _sheet_menu = this;
 
     CCSprite* sheet = CCSprite::create("pop-up/background.png");
     this->addChild(sheet, 0, 123);
-    //const unsigned int ELEMENTS_LAYER=100;
-    //sheet->setVisible(false);
+
 
     //Create the zone for menu
-    CCSize menu_zone_size(visibleSize.width*0.9, visibleSize.width*0.6);
+    CCSize menu_zone_size(visibleSize.width*0.9,
+                          visibleSize.width*0.6);
 
     CCSize sheet_size = sheet->getContentSize();
-    sheet->setScaleX(menu_zone_size.width / sheet_size.width);
-    sheet->setScaleY(menu_zone_size.height / sheet_size.height);
 
     _sheet_target_position = ccp(visibleSize.width/2+origin.x - menu_zone_size.width/2,
                                  visibleSize.height/2+origin.y - menu_zone_size.height/2);
@@ -129,8 +122,22 @@ void PopUpWindow::initWindow()
     _sheet_menu->stopAllActions();
     _sheet_menu->runAction(CCMoveTo::create(0.2f, _sheet_target_position));
 
-    //sheet->setRotation(-90);
+    if(vertical)
+    {
+        sheet->setScaleX(menu_zone_size.width / sheet_size.width);
+        sheet->setScaleY(visibleSize.width*0.9 / sheet_size.height);
+
+        sheet->setPositionY(_sheet_menu->getPositionY());
+    }
+    else
+    {
+        sheet->setScaleX(menu_zone_size.width / sheet_size.width);
+        sheet->setScaleY(menu_zone_size.height / sheet_size.height);
+    }
+
     sheet->setAnchorPoint(ccp(0,0));
+//    if(vertical)
+//        sheet->setRotation(90);
 
 
     _content->perform_init(_sheet_menu, this);
@@ -181,7 +188,8 @@ void PopUpWindowManager::closeWindow(cocos2d::CCObject* obj_callback,
 
 }
 
-PopUpWindow* PopUpWindowManager::openWindow(PopUpWindow::Content* content)
+PopUpWindow* PopUpWindowManager::openWindow(PopUpWindow::Content* content,
+                                            bool vertical)
 {
     PopUpWindow* window = PopUpWindow::create(
                 content,
@@ -197,15 +205,17 @@ PopUpWindow* PopUpWindowManager::openWindow(PopUpWindow::Content* content)
 
     }
 
-    do_openWindow(window);
+
+    do_openWindow(window,vertical);
     return window;
 }
 
- void PopUpWindowManager::do_openWindow(PopUpWindow* window)
+ void PopUpWindowManager::do_openWindow(PopUpWindow* window,
+                                        bool vertical_mode)
  {
      setMenusAvaliablitity(false);
      _opened_window = window;
-     window->showWindow();
+     window->showWindow(vertical_mode);
      _parent->addChild(window);
      window->release();
  }

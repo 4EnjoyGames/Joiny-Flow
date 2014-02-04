@@ -55,8 +55,8 @@ private:
         AnimatedMenuItem *x5_hint = AnimatedMenuItem::create(
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onFirstButton));
-        x5_hint->setPosition(ccp(size.width*0.17,
-                                    vertical));
+        x5_hint->setPosition(ccp(size.width*0.5,
+                                    size.height*0.8));
 
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
                                x5_hint->getContentSize().height/2));
@@ -69,7 +69,7 @@ private:
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onSecondButton));
         x100_hint->setPosition(ccp(size.width*0.5,
-                                    vertical));
+                                   size.height*0.4));
 
 
         menu->menu()->addChild(x100_hint);
@@ -79,8 +79,8 @@ private:
         AnimatedMenuItem *x1000_hint = AnimatedMenuItem::create(
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onThirdButton));
-        x1000_hint->setPosition(ccp(size.width*0.83,
-                                    vertical));
+        x1000_hint->setPosition(ccp(size.width*0.5,
+                                    size.height*0.0));
 
 
         menu->menu()->addChild(x1000_hint);
@@ -424,7 +424,7 @@ void LevelScene::onHintClicked(CCObject*)
     else
     {
         //show hint purchase window
-        _pop_up_manager.openWindow(new BuyHintPopUp(this));
+        _pop_up_manager.openWindow(new BuyHintPopUp(this),true);
     }
 
     if(succesfull_hint)
