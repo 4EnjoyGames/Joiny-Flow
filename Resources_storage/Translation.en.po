@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-04 20:35+0200\n"
+"POT-Creation-Date: 2014-02-04 22:32+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,23 +30,49 @@ msgstr ""
 msgid "iap.restore_purchases.failed"
 msgstr ""
 
-#: ../Classes/Scenes/LevelScene.cpp:49
+#: ../Classes/Scenes/DeveloperScene.cpp:65
+msgid "diana"
+msgstr "Diana Sirenko"
+
+#: ../Classes/Scenes/DeveloperScene.cpp:73
+msgid "andrii"
+msgstr "Andrii Chaika"
+
+#: ../Classes/Scenes/DeveloperScene.cpp:82
+msgid "thank"
+msgstr "Thanks to:"
+
+#: ../Classes/Scenes/DeveloperScene.cpp:91
+msgid "thank1"
+msgstr "thank1"
+
+#: ../Classes/Scenes/DeveloperScene.cpp:100
+#: ../Classes/Scenes/DeveloperScene.cpp:109
+#: ../Classes/Scenes/DeveloperScene.cpp:118
+msgid "thank2"
+msgstr "thank2"
+
+#: ../Classes/Scenes/DeveloperScene.cpp:139
+msgid "madeInUkraine"
+msgstr "made in Ukraine"
+
+#: ../Classes/Scenes/LevelScene.cpp:47
 msgid "BuyHint"
 msgstr "Buy Hints"
 
-#: ../Classes/Scenes/LevelScene.cpp:155
+#: ../Classes/Scenes/LevelScene.cpp:174
 msgid "End_bad"
 msgstr "You need more points"
 
-#: ../Classes/Scenes/LevelScene.cpp:160
+#: ../Classes/Scenes/LevelScene.cpp:179
 msgid "End_good"
 msgstr "Score"
 
-#: ../Classes/Scenes/LevelScene.cpp:244
+#: ../Classes/Scenes/LevelScene.cpp:263
 msgid "Retry"
 msgstr "Retry"
 
-#: ../Classes/Scenes/LevelScene.cpp:274
+#: ../Classes/Scenes/LevelScene.cpp:293
 msgid "Next"
 msgstr "Next"
 
