@@ -16,7 +16,9 @@ public:
     const cocos2d::ccColor3B& getRenderColor(const FlowColor);
     const cocos2d::CCSize getNodeSize();
     const cocos2d::CCPoint getNodePosition(const FlowPoint& pos);
+
     cocos2d::CCSprite* createSprite(const char* name);
+    cocos2d::CCSprite* createHintSprite(const char* name);
 
     void showActiveCircle(const cocos2d::CCPoint& p, const FlowColor color);
     void hideActiveCircle();
@@ -41,8 +43,20 @@ private:
     cocos2d::CCSprite* _active_circle;
 
     SpritesLoader _spl_layer0;
+
+    //for hints
+    SpritesLoader _spl_layer05;
+
     //need to show flow upper
     SpritesLoader _spl_layer1;
+
+
+
+
+
+
+
+
 
     float _textures_size;
 };

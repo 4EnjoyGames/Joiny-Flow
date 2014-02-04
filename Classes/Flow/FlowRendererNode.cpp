@@ -101,7 +101,7 @@ void FlowRendererNode::showHintConnection(const FlowPointState& new_state)
 {
     if(_hint_sprite== 0)
     {
-        _hint_sprite = _parent->createSprite("hint_connection.png");
+        _hint_sprite = _parent->createHintSprite("hint_connection.png");
     }
     _hint_sprite->setVisible(true);
     _hint_sprite->setColor(_parent->getRenderColor(new_state.getHintColor()));//_parent->getRenderColor(new_state.getLineColor()));

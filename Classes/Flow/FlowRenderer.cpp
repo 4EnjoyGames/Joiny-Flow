@@ -7,15 +7,36 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
       _nodes_renderers(table.getWidth(), Row(table.getHeight())),
       _active_circle(0)
 {
+
     //Get the sprites loader
     _spl_layer0 = GraphicsManager::getLoaderFor(this,
                                                       "level-scene/flow.plist",
                                                       "level-scene/flow.png");
     _spl_layer0->inject();
 
+    //hints sprite loader
+    _spl_layer05 = GraphicsManager::getLoaderFor(this,
+                                                 "level-scene/flow.plist",
+                                                 "level-scene/flow.png");
+    _spl_layer05->inject();
+
+
+
     _spl_layer1 = GraphicsManager::getLoaderFor(this,
                                                 "level-scene/flow.plist",
                                                 "level-scene/flow.png");
+    _spl_layer1->inject();
+
+
+
+
+
+
+
+
+
+
+
 
     CCSprite* test_texture = _spl_layer0->loadSprite("background.png");
     _textures_size = test_texture->getContentSize().width;
@@ -33,7 +54,7 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
     initNodes();
     createBackground();
 
-    _spl_layer1->inject();
+
 
 }
 
@@ -179,6 +200,10 @@ void FlowRenderer::initNodes()
 cocos2d::CCSprite* FlowRenderer::createSprite(const char* name)
 {
     return _spl_layer1->loadSprite(name);
+}
+cocos2d::CCSprite* FlowRenderer::createHintSprite( const char* name)
+{
+    return _spl_layer05->loadSprite(name);
 }
 
 FlowRenderer* FlowRenderer::create(const FlowTable& t)
