@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-03 10:16+0200\n"
+"POT-Creation-Date: 2014-02-04 20:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,19 +30,23 @@ msgstr ""
 msgid "iap.restore_purchases.failed"
 msgstr ""
 
-#: ../Classes/Scenes/LevelScene.cpp:54
+#: ../Classes/Scenes/LevelScene.cpp:49
+msgid "BuyHint"
+msgstr "Buy Hints"
+
+#: ../Classes/Scenes/LevelScene.cpp:155
 msgid "End_bad"
 msgstr "You need more points"
 
-#: ../Classes/Scenes/LevelScene.cpp:59
+#: ../Classes/Scenes/LevelScene.cpp:160
 msgid "End_good"
 msgstr "Score"
 
-#: ../Classes/Scenes/LevelScene.cpp:143
+#: ../Classes/Scenes/LevelScene.cpp:244
 msgid "Retry"
 msgstr "Retry"
 
-#: ../Classes/Scenes/LevelScene.cpp:173
+#: ../Classes/Scenes/LevelScene.cpp:274
 msgid "Next"
 msgstr "Next"
 

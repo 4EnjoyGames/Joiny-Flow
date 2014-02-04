@@ -108,8 +108,17 @@ void PopUpWindow::initWindow(bool vertical)
 
 
     //Create the zone for menu
-    CCSize menu_zone_size(visibleSize.width*0.9,
+    CCSize menu_zone_size;
+    if(vertical)
+    {
+        menu_zone_size = CCSize(visibleSize.width*0.8,
+                          visibleSize.width*1.0);
+    }
+    else
+    {
+        menu_zone_size = CCSize(visibleSize.width*0.9,
                           visibleSize.width*0.6);
+    }
 
     CCSize sheet_size = sheet->getContentSize();
 
@@ -122,23 +131,12 @@ void PopUpWindow::initWindow(bool vertical)
     _sheet_menu->stopAllActions();
     _sheet_menu->runAction(CCMoveTo::create(0.2f, _sheet_target_position));
 
-    if(vertical)
-    {
-        sheet->setScaleX(menu_zone_size.width / sheet_size.width);
-        sheet->setScaleY(visibleSize.width*0.9 / sheet_size.height);
+//        sheet->setScaleX(menu_zone_size.width / sheet_size.width);
+//        sheet->setScaleY(visibleSize.width*0.9 / sheet_size.height);
 
-        sheet->setPositionY(_sheet_menu->getPositionY());
-    }
-    else
-    {
-        sheet->setScaleX(menu_zone_size.width / sheet_size.width);
-        sheet->setScaleY(menu_zone_size.height / sheet_size.height);
-    }
-
+    sheet->setScaleX(menu_zone_size.width / sheet_size.width);
+    sheet->setScaleY(menu_zone_size.height / sheet_size.height);
     sheet->setAnchorPoint(ccp(0,0));
-//    if(vertical)
-//        sheet->setRotation(90);
-
 
     _content->perform_init(_sheet_menu, this);
 }

@@ -26,8 +26,6 @@ private:
     void onCreate(CCNode *parent)
     {
         CCSize size = parent->getContentSize();
-        float x_middle = size.width / 2;
-        float vertical = size.height * 0.18f;
 
         //set collor to background
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
@@ -45,19 +43,31 @@ private:
         parent->addChild(menu);
 
 
+        //greeting text
+        CCLabelTTF * greeting = CCLabelTTF::create(_("BuyHint"),
+                                                   "fonts/Fredoka One.ttf",
+                                                   72);
+        greeting->setPosition(ccp(size.width*0.5,
+                                  size.height*0.8));
+        greeting->setColor(ccc3(255,255,255));
+        parent->addChild(greeting);
+
+
         //create first button == buy_5_hints
-        std::string x5_price = ADInApp::getProduct("hints_10")->getPrice();
-        CCLabelTTF * first_button_text = CCLabelTTF::create(x5_price.c_str(),
-                                                "fonts/Fredoka One.ttf",
-                                                48);
-        first_button_text->setColor(ccc3(255,255,255));
 
         AnimatedMenuItem *x5_hint = AnimatedMenuItem::create(
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onFirstButton));
         x5_hint->setPosition(ccp(size.width*0.5,
-                                    size.height*0.8));
+                                    size.height*0.6));
 
+
+        std::string x10_price = ADInApp::getProduct("hints_10")->getPrice();
+        std::string x10_for1 = "x10  " + x10_price;
+        CCLabelTTF * first_button_text = CCLabelTTF::create(x10_for1.c_str(),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        first_button_text->setColor(ccc3(255,255,255));
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
                                x5_hint->getContentSize().height/2));
         x5_hint->addChild(first_button_text);
@@ -71,6 +81,15 @@ private:
         x100_hint->setPosition(ccp(size.width*0.5,
                                    size.height*0.4));
 
+        std::string x100_price = ADInApp::getProduct("hints_100")->getPrice();
+        std::string x100_for4 = "x100  " + x100_price;
+        CCLabelTTF * second_button_text = CCLabelTTF::create(x100_for4.c_str(),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        second_button_text->setColor(ccc3(255,255,255));
+        second_button_text->setPosition(ccp(x100_hint->getContentSize().width/2,
+                               x100_hint->getContentSize().height/2));
+        x100_hint->addChild(second_button_text);
 
         menu->menu()->addChild(x100_hint);
 
@@ -80,23 +99,33 @@ private:
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onThirdButton));
         x1000_hint->setPosition(ccp(size.width*0.5,
-                                    size.height*0.0));
+                                    size.height*0.2));
+        std::string x1000_price = ADInApp::getProduct("hints_1000")->getPrice();
+        std::string x1000_for9 = "x1000  " + x1000_price;
+        CCLabelTTF * third_button_text = CCLabelTTF::create(x1000_for9.c_str(),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        third_button_text->setColor(ccc3(255,255,255));
+        third_button_text->setPosition(ccp(x1000_hint->getContentSize().width/2,
+                               x100_hint->getContentSize().height/2));
+        x1000_hint->addChild(third_button_text);
 
 
         menu->menu()->addChild(x1000_hint);
     }
     void onFirstButton(CCObject*)
     {
-        //_parent->onNextLevel();
+        //TODO: may be it will be "get free hints button" action
+        ADInApp::buyProduct("hints_10");
 
     }
     void onSecondButton(CCObject*)
     {
-
+        ADInApp::buyProduct("hints_100");
     }
     void onThirdButton(CCObject*)
     {
-
+        ADInApp::buyProduct("hints_1000");
     }
 
 };
