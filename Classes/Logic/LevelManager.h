@@ -27,6 +27,10 @@ public:
 
     void makePreviews(unsigned int joiny_size, unsigned int levels_num);
     void SaveScreenshot();
+
+    const unsigned int getHintNumber() const;
+    void decreaseHintNumber(unsigned int num=1);
+    void increaseHintNumber(unsigned int num=1);
 private:
     LevelManager();
     void onInit();
@@ -42,6 +46,9 @@ private:
 
     std::string _save_path;
     std::string _settings_path;
+    std::string _hints_path;
+
+    unsigned int _hints_number;
 
     typedef std::map<JoinyLevelID, CollectionPtr> CollectionMap;
 

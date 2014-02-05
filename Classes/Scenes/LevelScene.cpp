@@ -2,7 +2,6 @@
 #include "AppMacros.h"
 USING_NS_CC;
 
-
 #include "Flow/FlowGame.h"
 #include "Flow/Generator/FGenerator.h"
 #include "Flow/JoinyPair.h"
@@ -11,7 +10,6 @@ USING_NS_CC;
 #include <ADLib/Device/ADAds.h>
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/ADString.h>
-#include "Logic/Hints.h"
 #include <ADLib/Device/ADInApp.h>
 
 class LevelScene::BuyHintPopUp : public PopUpWindow::Content
@@ -448,8 +446,8 @@ void LevelScene::onHintClicked(CCObject*)
 {
     bool succesfull_hint = false;
     CCLog("Hint clicked in LevelScene");
-    if(Hints::getInstance()->hasHint())
-        succesfull_hint = Hints::getInstance()->showHint(_current_level,_flow_game);
+    if(_hints.hasHint())
+        succesfull_hint = _hints.showHint();
     else
     {
         //show hint purchase window
@@ -458,7 +456,7 @@ void LevelScene::onHintClicked(CCObject*)
 
     if(succesfull_hint)
     {
-        unsigned int hint = Hints::getInstance()->getHintNumber();
+        unsigned int hint = _hints.getHintNumber();
         std::string hint_num = AD_to_string(hint);
         _hint_number_text->setString(hint_num.c_str());
     }
@@ -489,7 +487,6 @@ bool LevelScene::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
-    Hints::getInstance()->newLevel();
 
     this->setKeypadEnabled(true);
 
@@ -623,7 +620,7 @@ bool LevelScene::init()
                                    hint_button->getContentSize().height*0.3));
 
     //number of hints
-    unsigned int hints = Hints::getInstance()->getHintNumber();
+    unsigned int hints = _hints.getHintNumber();
     std::string hints_str = AD_to_string(hints);
     _hint_number_text = CCLabelTTF::create(hints_str.c_str(),
                                            "fonts/Fredoka One.ttf",
@@ -749,6 +746,10 @@ bool LevelScene::init()
     _flow_game->setPositionX(ORIGIN.x + VISIBLE_SIZE.width/2);
     _flow_game->setPositionY(_buttons_menu->getPositionY() + menu_height + main_node_margin);
 
+
+
+    //create hint object
+    _hints = Hints(_current_level,_flow_game);
     return true;
 }
 

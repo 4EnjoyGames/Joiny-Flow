@@ -9,8 +9,10 @@
 #include "Logic/Hints.h"
 
 LevelManager::LevelManager()
-    : _save_path(FileUtils::getStorageFilePath("save.ad")),
-      _settings_path(FileUtils::getStorageFilePath("settings.ad"))
+    : _hints_number(10),
+      _save_path(FileUtils::getStorageFilePath("save.ad")),
+      _settings_path(FileUtils::getStorageFilePath("settings.ad")),
+      _hints_path(FileUtils::getStorageFilePath("hints.ad"))
 {
 }
 
@@ -157,7 +159,15 @@ void LevelManager::saveSettings()
     std::ofstream oss(_settings_path, std::ios::out | std::ios::binary);
     oss.write(ss.str().c_str(), ss.str().length());
 
-    //TODO: save hint number in file
+
+    //save hint number in file
+    std::stringstream ss2(std::ios::out | std::ios::binary);
+    OutputBinaryStream os2(ss2,BinaryStream::MaxProtocolVersion);
+
+    os2 << uint32_t(_hints_number);
+
+    std::ofstream oss2(_hints_path, std::ios::out | std::ios::binary);
+    oss2.write(ss2.str().c_str(), ss2.str().length());
 }
 void LevelManager::loadSettings()
 {
@@ -190,8 +200,17 @@ void LevelManager::loadSettings()
         }
     }
 
-    //TODO: get hint number from the file
-    Hints::getInstance()->setHintNumber(500);
+    //save hint number to the LevelManager
+    if(FileUtils::isFileExists(_hints_path))
+    {
+        std::ifstream iss(_hints_path, std::ios::in | std::ios::binary);
+        InputBinaryStream is(iss);
+
+        uint32_t hints_number = 10;
+        is >> hints_number;
+
+        _hints_number = hints_number;
+    }
 
 }
 
@@ -344,3 +363,15 @@ void LevelManager::SaveScreenshot()
     texture->saveToFile("screenshot.png", kCCImageFormatPNG);
 }
 
+const unsigned int LevelManager::getHintNumber() const
+{
+    return _hints_number;
+}
+void LevelManager::decreaseHintNumber(unsigned int num)
+{
+    _hints_number-=num;
+}
+void LevelManager::increaseHintNumber(unsigned int num)
+{
+    _hints_number+=num;
+}

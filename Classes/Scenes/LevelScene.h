@@ -8,6 +8,8 @@
 #include "Logic/JoinyLevel.h"
 #include "BackButton.h"
 #include "Core/DrawLayer.h"
+#include "Logic/Hints.h"
+
 class LevelScene : public DrawLayer //cocos2d::CCLayer
 {
 private:
@@ -19,6 +21,7 @@ private:
     void onNextLevel();
 
 
+    Hints _hints;
     CCLabelTTF* _score_label;
     PopUpWindowManager _pop_up_manager;
     void hideEverything(cocos2d::CCCallFunc *callback);

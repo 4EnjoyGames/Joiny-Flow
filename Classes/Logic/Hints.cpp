@@ -1,21 +1,18 @@
 #include "Hints.h"
 #include "cocos2d-A.h"
 #include <ADLib/ADString.h>
+#include "Logic/RW.h"
 #include <algorithm>    // std::sort
 
-Hints::Hints():_hint_number(5),
-    _level(0),
-    _flow_game(0)
+Hints::Hints(const JoinyLevel *level, FlowGame *flow_game):
+    _hint_number(RW::getLevelManager().getHintNumber()),
+    _level(level),
+    _flow_game(flow_game)
 {
-
 }
-Hints* Hints::_instance = nullptr;
-
-Hints* Hints::getInstance( )
+Hints::Hints():
+    _hint_number(RW::getLevelManager().getHintNumber())
 {
-    if (_instance == nullptr)
-        _instance = new Hints();
-    return _instance;
 }
 
 bool Hints::findSubVector(const UsedPathes& showed_ids,
@@ -35,57 +32,31 @@ bool Hints::findSubVector(const UsedPathes& showed_ids,
     }
     return result;
 }
-void Hints::newLevel()
-{
-    _saves.clear();
-}
 
-bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
+bool Hints::showHint()
 {
     //return - succesfully showed the hint : true
     //       - we havn`t hints to show : false
     bool succesful = false;
 
-
-    //save current hint
-    _level = level;
-    _flow_game = flow_game;
-
     std::vector < std::vector<FlowPoint> > hint_path =
     _level->getPuzzle().getJoinyInfo().getPathes();
 
 
-    //find which path index we showed
-    std::map<JoinyLevelID, UsedPathes>::iterator it =
-                _saves.find(_level->getLevelId());
-
-
-    //1. we showed hints at this level ->
-    //do not show same pathes again
-    if(it != _saves.end())
+    UsedPathes showed_ids = _saves;//(*it).second;
+    int j=0;
+    for(j=0; j<hint_path.size(); ++j)
     {
-        //we showed hints at this level ->
-        //do not show same pathes again
-        UsedPathes showed_ids = (*it).second;
-        int j=0;
-        for(j=0; j<hint_path.size(); ++j)
+        if (findSubVector(showed_ids,hint_path[j]))
         {
-            //find jID in showed_ids
-            //std::find(showed_ids.begin(),
-            //showed_ids.end(),
-            //hint_path[j])!= showed_ids.end()
+            //we find hint[j] in showed ides
+            //delete this ellement
+            hint_path.erase(hint_path.begin()+j);
+            --j;
 
-            if (findSubVector(showed_ids,hint_path[j]))
-            {
-                //we find hint[j] in showed ides
-                //delete this ellement
-                hint_path.erase(hint_path.begin()+j);
-                --j;
-
-            }
         }
-
     }
+
 
     //2. find which pathes the user do not drowed
     int usr_ps = 0;
@@ -129,16 +100,17 @@ bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
 
         std::vector<FlowPoint> hint_path_i = hint_path[middle];
         FlowColor color = _flow_game->getCellColor(hint_path_i[0]);
-        CCLog("Hint color: %d", color);
+        //CCLog("Hint color: %d", color);
 
         //4. save the path in used path map
-        _saves[_level->getLevelId()].push_back(hint_path_i);
+        //_saves[_level->getLevelId()].push_back(hint_path_i);
+        _saves.push_back(hint_path_i);
 
         //5. delete path ellements which intersected with our hint path
         _flow_game->deleteInterferePathes(hint_path_i);
 
         //6. show the hint
-        CCLog("Hints::level id = %d",level->getLevelId());
+        CCLog("Hints::level id = %d",_level->getLevelId());
 
         _flow_game->showPath(hint_path_i);
 
@@ -157,41 +129,41 @@ bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
     return succesful;
 
 }
-void Hints::deleteHint(const JoinyLevel *level, FlowGame *flow_game)
+void Hints::deleteHint()
 {
-    //find which path index we showed
-    std::map<JoinyLevelID, UsedPathes>::iterator it =
-                _saves.find(level->getLevelId());
-
-    if(it!=_saves.end())
+    for(unsigned int i=0; i<_saves.size(); ++i)
     {
-        //get all hint, showed on this level
-        UsedPathes showed_ids = (*it).second;
-
-        for(unsigned int i=0; i<showed_ids.size(); ++i)
-        {
-            flow_game->deleteHintPath(showed_ids[i]);
-        }
-
-        //delete saves of hints and level id from map
-        _saves.erase(it);
+        _flow_game->deleteHintPath(_saves[i]);
     }
+    _saves.clear();
 }
 
 const unsigned int Hints::getHintNumber()
 {
+    _hint_number = RW::getLevelManager().getHintNumber();
     return _hint_number;
 }
 
 void Hints::useHint()
 {
     --_hint_number;
+    RW::getLevelManager().decreaseHintNumber();
 }
+void Hints::decreaseHintNumber(const unsigned int num)
+{
+    --_hint_number;
+    RW::getLevelManager().decreaseHintNumber(num);
+}
+
+void Hints::increaseHintNumber(const unsigned int num)
+{
+    ++_hint_number;
+    RW::getLevelManager().increaseHintNumber(num);
+}
+
 bool Hints::hasHint()
 {
+    _hint_number = RW::getLevelManager().getHintNumber();
     return (_hint_number!=0);
 }
-void Hints::setHintNumber(const unsigned int num)
-{
-    _hint_number = num;
-}
+
