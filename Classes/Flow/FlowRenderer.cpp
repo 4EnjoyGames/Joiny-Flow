@@ -8,26 +8,26 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
       _active_circle(0)
 {
 
-    //Get the sprites loader
-    _spl_layer0 = GraphicsManager::getLoaderFor(this,
-                                                      "level-scene/flow.plist",
-                                                      "level-scene/flow.png");
-    _spl_layer0->inject();
+    _spl_layer1 = GraphicsManager::getLoaderFor(this,
+                                                "level-scene/flow.plist",
+                                                "level-scene/flow.png");
+
 
     //hints sprite loader
     _spl_layer05 = GraphicsManager::getLoaderFor(this,
                                                  "level-scene/flow.plist",
                                                  "level-scene/flow.png");
-    _spl_layer05->inject();
 
 
 
-    _spl_layer1 = GraphicsManager::getLoaderFor(this,
-                                                "level-scene/flow.plist",
-                                                "level-scene/flow.png");
-    _spl_layer1->inject();
 
 
+
+    //Get the sprites loader
+    _spl_layer0 = GraphicsManager::getLoaderFor(this,
+                                                      "level-scene/flow.plist",
+                                                      "level-scene/flow.png");
+    _spl_layer0->inject();
 
 
 
@@ -54,7 +54,8 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
     initNodes();
     createBackground();
 
-
+    _spl_layer05->inject();
+    _spl_layer1->inject();
 
 }
 

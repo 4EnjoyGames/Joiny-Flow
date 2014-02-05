@@ -44,13 +44,15 @@ msgstr "Thanks to:"
 
 #: ../Classes/Scenes/DeveloperScene.cpp:91
 msgid "thank1"
-msgstr "thank1"
+msgstr ""
+"aaa\n"
+"bbb"
 
 #: ../Classes/Scenes/DeveloperScene.cpp:100
 #: ../Classes/Scenes/DeveloperScene.cpp:109
 #: ../Classes/Scenes/DeveloperScene.cpp:118
 msgid "thank2"
-msgstr "thank2"
+msgstr "thank2rrrr"
 
 #: ../Classes/Scenes/DeveloperScene.cpp:139
 msgid "madeInUkraine"
