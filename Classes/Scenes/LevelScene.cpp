@@ -812,10 +812,21 @@ void LevelScene::onWin()
         _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::NotEnough, _current_info.getBronze()-_last_score, 0, _current_level, this));
     else
     {
-        RW::getLevelManager().onLevelFinished(_current_level, _last_score);
-        unsigned int stars = _current_level->getStarsNumber(_last_score);
 
-        _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
+        //if it is a test version - open statistic window
+        static bool test_mode = false;
+
+        if(!test_mode)
+        {
+            RW::getLevelManager().onLevelFinished(_current_level, _last_score);
+            unsigned int stars = _current_level->getStarsNumber(_last_score);
+
+            _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
+        }
+        else
+        {
+
+        }
     }
 }
 
