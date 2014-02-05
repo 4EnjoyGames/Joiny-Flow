@@ -10,6 +10,8 @@
 
 LevelManager::LevelManager()
     : _hints_number(10),
+      _full_version(0),
+      _full_version_path(FileUtils::getStorageFilePath("full_version.ad")),
       _save_path(FileUtils::getStorageFilePath("save.ad")),
       _settings_path(FileUtils::getStorageFilePath("settings.ad")),
       _hints_path(FileUtils::getStorageFilePath("hints.ad"))
@@ -168,6 +170,20 @@ void LevelManager::saveSettings()
 
     std::ofstream oss2(_hints_path, std::ios::out | std::ios::binary);
     oss2.write(ss2.str().c_str(), ss2.str().length());
+
+    //save is full version buyed
+    std::stringstream ss3(std::ios::out | std::ios::binary);
+    OutputBinaryStream os3(ss3,BinaryStream::MaxProtocolVersion);
+
+    bool full_version = false;
+    if(full_version)
+        os3 << uint16_t(1);
+    else
+        os3 << uint16_t(0);
+
+    std::ofstream oss3(_full_version_path, std::ios::out | std::ios::binary);
+    oss3.write(ss3.str().c_str(), ss3.str().length());
+
 }
 void LevelManager::loadSettings()
 {
@@ -210,6 +226,18 @@ void LevelManager::loadSettings()
         is >> hints_number;
 
         _hints_number = hints_number;
+    }
+
+    //save full version info
+    if(FileUtils::isFileExists(_full_version_path))
+    {
+        std::ifstream iss(_full_version_path, std::ios::in | std::ios::binary);
+        InputBinaryStream is(iss);
+
+        uint16_t full = 0;
+        is >> full;
+
+        _full_version = full;
     }
 
 }
@@ -374,4 +402,13 @@ void LevelManager::decreaseHintNumber(unsigned int num)
 void LevelManager::increaseHintNumber(unsigned int num)
 {
     _hints_number+=num;
+}
+
+bool LevelManager::isFullGameVersion() const
+{
+    return _full_version;
+}
+void LevelManager::makeFullGameVersion()
+{
+    _full_version = true;
 }

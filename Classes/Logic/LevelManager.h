@@ -31,6 +31,10 @@ public:
     const unsigned int getHintNumber() const;
     void decreaseHintNumber(unsigned int num=1);
     void increaseHintNumber(unsigned int num=1);
+
+    bool isFullGameVersion() const;
+    void makeFullGameVersion();
+
 private:
     LevelManager();
     void onInit();
@@ -44,11 +48,14 @@ private:
     void loadGame();
 
 
+    std::string _full_version_path;
     std::string _save_path;
     std::string _settings_path;
     std::string _hints_path;
 
     unsigned int _hints_number;
+
+    bool _full_version;
 
     typedef std::map<JoinyLevelID, CollectionPtr> CollectionMap;
 
