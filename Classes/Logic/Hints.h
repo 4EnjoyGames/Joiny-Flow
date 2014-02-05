@@ -9,6 +9,8 @@ class Hints
 public:
     static Hints* getInstance( );
 
+    void newLevel();
+
     //return we show the hint succesfully or not
     bool showHint(const JoinyLevel* level, FlowGame* flow_game);
     void deleteHint(const JoinyLevel *level, FlowGame *flow_game);

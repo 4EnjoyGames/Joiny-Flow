@@ -191,7 +191,7 @@ void LevelManager::loadSettings()
     }
 
     //TODO: get hint number from the file
-    Hints::getInstance()->setHintNumber(5);
+    Hints::getInstance()->setHintNumber(500);
 
 }
 

@@ -489,6 +489,7 @@ bool LevelScene::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
+    Hints::getInstance()->newLevel();
 
     this->setKeypadEnabled(true);
 

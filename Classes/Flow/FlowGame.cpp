@@ -465,7 +465,7 @@ void FlowGame::showPath(const std::vector< FlowPoint>& path)
     }
 }
 
-const FlowColor& FlowGame::getCellColor(const FlowPoint& point) const
+const FlowColor FlowGame::getCellColor(const FlowPoint& point) const
 {
     FlowPointState st = _table->get(point);
     return st.getLineColor();

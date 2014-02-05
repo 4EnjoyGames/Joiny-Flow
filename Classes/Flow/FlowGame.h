@@ -44,7 +44,7 @@ public:
     void showPath(const std::vector< FlowPoint>& path);
 
     //return the cell color
-    const FlowColor& getCellColor(const FlowPoint& point) const;
+    const FlowColor getCellColor(const FlowPoint& point) const;
 
 private:
     FlowRenderer* _renderer;

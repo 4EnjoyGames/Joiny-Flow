@@ -35,6 +35,10 @@ bool Hints::findSubVector(const UsedPathes& showed_ids,
     }
     return result;
 }
+void Hints::newLevel()
+{
+    _saves.clear();
+}
 
 bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
 {
@@ -125,7 +129,7 @@ bool Hints::showHint(const JoinyLevel *level, FlowGame *flow_game)
 
         std::vector<FlowPoint> hint_path_i = hint_path[middle];
         FlowColor color = _flow_game->getCellColor(hint_path_i[0]);
-
+        CCLog("Hint color: %d", color);
 
         //4. save the path in used path map
         _saves[_level->getLevelId()].push_back(hint_path_i);
