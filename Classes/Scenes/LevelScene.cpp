@@ -769,32 +769,38 @@ void LevelScene::onScoreChanged(const FlowScore s)
 
     if(s>=_bronze)
     {
+        _bronze_star->removeFromParent();
         _bronze_star = _spl->loadSprite("color_star.png");
         _bronze_star->setPosition(_bronze_position);
     }
     if(s>=_silver)
     {
+        _silver_star->removeFromParent();
         _silver_star = _spl->loadSprite("color_star.png");
         _silver_star->setPosition(_silver_position);
     }
     if(s>=_gold)
     {
+        _gold_star->removeFromParent();
         _gold_star = _spl->loadSprite("color_star.png");
         _gold_star ->setPosition(_gold_position);
     }
 
     if(s<_bronze)
     {
+        _bronze_star->removeFromParent();
         _bronze_star = _spl->loadSprite("black_star.png");
         _bronze_star->setPosition(_bronze_position);
     }
     if(s<_silver)
     {
+        _silver_star->removeFromParent();
         _silver_star = _spl->loadSprite("black_star.png");
         _silver_star->setPosition(_silver_position);
     }
     if(s<_gold)
     {
+        _gold_star->removeFromParent();
         _gold_star = _spl->loadSprite("black_star.png");
         _gold_star ->setPosition(_gold_position);
     }

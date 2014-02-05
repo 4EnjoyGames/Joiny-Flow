@@ -35,6 +35,9 @@ public:
     bool isFullGameVersion() const;
     void makeFullGameVersion();
 
+    //return is resetting succesfull or no
+    bool resetProgress();
+
 private:
     LevelManager();
     void onInit();

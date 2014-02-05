@@ -273,16 +273,21 @@ void SettingScene::onResetClicked(CCObject*)
 {
     ADInApp::buyProduct("unlock_full");
     CCLog("onResetClicked clicked");
+
+    //reset progress implementing
+    bool result = RW::getLevelManager().resetProgress();
+
+    //show good result toast
 }
 #include <ADLib/Device/ADNotification.h>
 void SettingScene::onRestorClicked(CCObject*)
 {
     ADInApp::restorePurchases();
-    CCLog("onRestorClicked!!");
+    //CCLog("onRestorClicked!!");
 }
 void SettingScene::onDevelopersClicked(CCObject*)
 {
-    CCLog("onDevelopersClicked!!");
+    //CCLog("onDevelopersClicked!!");
 
     hideEverything(
                 CCCallFunc::create(

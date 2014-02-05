@@ -260,9 +260,41 @@ void LevelManager::saveGame()
 
     }
 
-
     std::ofstream oss(_save_path, std::ios::out | std::ios::binary);
     oss.write(ss.str().c_str(), ss.str().length());
+}
+
+bool LevelManager::resetProgress()
+{
+    if(FileUtils::isFileExists(_save_path))
+    {
+        std::ifstream iss(_save_path, std::ios::in | std::ios::binary);
+
+        iss.clear();
+        iss.close();
+    }
+
+//    for(CollectionsArr::iterator it = _rw->_collections.begin();
+//        it != _rw->_collections.end(); ++it)
+//    {
+//        Collection* a = it->second;
+//        if(a->_state == Collection::Unlocked)
+//            a->_state = Collection::Locked;
+//    }
+
+//    for(auto& i : _collections)
+//    {
+//        CollectionPtr col = i.second;
+//        os << uint32_t(col->getCollectionID()) << uint32_t(col->getLevelsNumber());
+//        for(const JoinyLevel& level : *col->_levels)
+//        {
+//            os << uint32_t(level.getLevelId()) << uint32_t(level.getHighScore());
+//        }
+
+//    }
+
+    saveGame();
+    return true;
 }
 
 void LevelManager::loadGame()
