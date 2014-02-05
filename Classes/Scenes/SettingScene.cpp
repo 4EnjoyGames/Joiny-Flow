@@ -57,8 +57,8 @@ bool SettingScene::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
-    CCMenu* main_menu = CCMenu::create();
-    main_menu->setPosition(ORIGIN);
+    _main_menu = CCMenu::create();
+    _main_menu->setPosition(ORIGIN);
 
     //Back Button
     CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
@@ -106,148 +106,107 @@ bool SettingScene::init()
     float rate_position_y = dev_position_y - space_between_buttons;
 
     ///////////////////////////////////////////////////////////////////
+
     //Music Button
     _music_logo = CCSprite::create("settings-menu/music.png");
+    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35,music_position_y));
 
-    AnimatedMenuItem* music_button = AnimatedMenuItem::create(
-                _music_logo, this, menu_selector(SettingScene::onMusicClicked));
-
-    music_button->addChild(_music_logo);
-
-    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35,music_position_y
-                                  /*VISIBLE_SIZE.height - 300/SCALE*/));
-    music_button->setPosition(position_music);
-    _music_logo->setPosition(ccp(_music_logo->getContentSize().width/2,
-                            _music_logo->getContentSize().height/2));
-    _music_logo->setColor(getMusicColor());
-
-    main_menu->addChild(music_button);
+    createButton(_music_logo,
+                 menu_selector(SettingScene::onMusicClicked),
+                 position_music,
+                 "",
+                 getMusicColor());
 
     //////////////////////////////////////////////////////////////////
 
     //Sound Button
     _sound_logo = CCSprite::create("settings-menu/sound.png");
 
-    AnimatedMenuItem* sound_button = AnimatedMenuItem::create(
-                _sound_logo, this, menu_selector(SettingScene::onSoundClicked));
+    CCPoint position_sound(ccp(VISIBLE_SIZE.width*0.65, music_position_y));
 
-    sound_button->addChild(_sound_logo);
-
-    CCPoint position_sound(ccp(VISIBLE_SIZE.width*0.65,
-                                  music_position_y));
-    sound_button->setPosition(position_sound);
-    _sound_logo->setPosition(ccp(_sound_logo->getContentSize().width/2,
-                            _sound_logo->getContentSize().height/2));
-    _sound_logo->setColor(getSoundColor());
-
-    main_menu->addChild(sound_button);
+    createButton(_sound_logo,
+                 menu_selector(SettingScene::onSoundClicked),
+                 position_sound,
+                 "",
+                 getSoundColor());
 
     //////////////////////////////////////////////////////////////////
 
-    CCSprite* reset_logo = CCSprite::create("settings-menu/node.png");
-    AnimatedMenuItem* reset_button = AnimatedMenuItem::create(
-                reset_logo, this, menu_selector(SettingScene::onResetClicked));
-
-    reset_button->addChild(reset_logo);
-
-    CCPoint position_reset(ccp(VISIBLE_SIZE.width*0.5,reset_position_y
-                                  /*VISIBLE_SIZE.height - 520/SCALE*/));
-    reset_button->setPosition(position_reset);
-    reset_logo->setPosition(ccp(reset_logo->getContentSize().width/2,
-                               reset_logo->getContentSize().height/2));
-
-
-    CCLabelTTF * reset = CCLabelTTF::create(_("Reset"),
-                                            "fonts/Fredoka One.ttf",
-                                            72);
-    reset->setPosition(ccp(reset_logo->getContentSize().width/2,
-                           reset_logo->getContentSize().height/2));
-    reset->setColor(GameInfo::getInstance()->getTitleColor());
-    reset_button->addChild(reset);
-
-    main_menu->addChild(reset_button);
+    CCPoint position_reset(ccp(VISIBLE_SIZE.width*0.5,reset_position_y));
+    createButton(CCSprite::create("settings-menu/node.png"),
+                 menu_selector(SettingScene::onResetClicked),
+                 position_reset,
+                 _("Reset"),
+                 GameInfo::getInstance()->getTitleColor());
 
     //////////////////////////////////////////////////////////////////
 
-    CCSprite* restor_logo = CCSprite::create("settings-menu/node.png");
-    AnimatedMenuItem* restor_button = AnimatedMenuItem::create(
-                restor_logo, this, menu_selector(SettingScene::onRestorClicked));
+    CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,restore_position_y));
 
-    restor_button->addChild(restor_logo);
-
-    CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,restore_position_y
-                                  /*VISIBLE_SIZE.height - 620/SCALE*/));
-    restor_button->setPosition(position_restor);
-    restor_logo->setPosition(ccp(restor_logo->getContentSize().width/2,
-                               restor_logo->getContentSize().height/2));
-
-
-    CCLabelTTF * restor = CCLabelTTF::create(_("Restore"),
-                                            "fonts/Fredoka One.ttf",
-                                            72);
-    restor->setPosition(ccp(restor_logo->getContentSize().width/2,
-                           restor_logo->getContentSize().height/2));
-    restor->setColor(GameInfo::getInstance()->getTitleColor());
-    restor_button->addChild(restor);
-
-    main_menu->addChild(restor_button);
+    createButton(CCSprite::create("settings-menu/node.png"),
+                 menu_selector(SettingScene::onRestorClicked),
+                 position_restor,
+                 _("Restore"),
+                 GameInfo::getInstance()->getTitleColor());
 
     //////////////////////////////////////////////////////////////////
 
-    CCSprite* dev_logo = CCSprite::create("settings-menu/node.png");
-    AnimatedMenuItem* dev_button = AnimatedMenuItem::create(
-                dev_logo, this, menu_selector(SettingScene::onDevelopersClicked));
+    CCPoint position_dev(ccp(VISIBLE_SIZE.width*0.5,dev_position_y));
 
-    dev_button->addChild(dev_logo);
-
-    CCPoint position_dev(ccp(VISIBLE_SIZE.width*0.5,dev_position_y
-                                  /*VISIBLE_SIZE.height - 720/SCALE*/));
-    dev_button->setPosition(position_dev);
-    dev_logo->setPosition(ccp(dev_logo->getContentSize().width/2,
-                               dev_logo->getContentSize().height/2));
-
-
-    CCLabelTTF * dev = CCLabelTTF::create(_("Developers"),
-                                            "fonts/Fredoka One.ttf",
-                                            72);
-    dev->setPosition(ccp(dev_logo->getContentSize().width/2,
-                           dev_logo->getContentSize().height/2));
-    dev->setColor(GameInfo::getInstance()->getTitleColor());
-    dev_button->addChild(dev);
-
-    main_menu->addChild(dev_button);
+    createButton(CCSprite::create("settings-menu/node.png"),
+                 menu_selector(SettingScene::onDevelopersClicked),
+                 position_dev,
+                 _("Developers"),
+                 GameInfo::getInstance()->getTitleColor());
 
     //////////////////////////////////////////////////////////////////
 
-    CCSprite* rate_logo = CCSprite::create("settings-menu/node.png");
-    AnimatedMenuItem* rate_button = AnimatedMenuItem::create(
-                rate_logo, this, menu_selector(SettingScene::onRateMeClicked));
+    CCPoint position_rate(ccp(VISIBLE_SIZE.width*0.5,rate_position_y));
 
-    rate_button->addChild(rate_logo);
-
-    CCPoint position_rate(ccp(VISIBLE_SIZE.width*0.5,rate_position_y
-                                  /*VISIBLE_SIZE.height - 720/SCALE*/));
-    rate_button->setPosition(position_rate);
-    rate_logo->setPosition(ccp(rate_logo->getContentSize().width/2,
-                               rate_logo->getContentSize().height/2));
+    createButton(CCSprite::create("settings-menu/node.png"),
+                 menu_selector(SettingScene::onRateMeClicked),
+                 position_rate,
+                 _("Rate"),
+                 GameInfo::getInstance()->getNegativeColor());
 
 
-    std::string label = "Rate Me "+ADInApp::getProduct("hints_10")->getPrice();
-    CCLabelTTF * rate = CCLabelTTF::create(label.c_str(),
-                                            "fonts/Fredoka One.ttf",
-                                            72);
-    rate->setPosition(ccp(rate_logo->getContentSize().width/2,
-                           rate_logo->getContentSize().height/2));
-    rate->setColor(GameInfo::getInstance()->getNegativeColor());
-    rate_button->addChild(rate);
-
-    main_menu->addChild(rate_button);
-
-
-
-    this->addChild(main_menu);
+    this->addChild(_main_menu);
     return true;
 }
+void SettingScene::createButton(CCSprite* logo,
+                                SEL_MenuHandler ptr,
+                                CCPoint& position,
+                                const char* button_text,
+                                const ccColor3B& color)
+{
+    AnimatedMenuItem* button = AnimatedMenuItem::create(
+                logo, this, ptr);
+
+    button->addChild(logo);
+
+    button->setPosition(position);
+    logo->setPosition(ccp(logo->getContentSize().width/2,
+                               logo->getContentSize().height/2));
+
+
+    if(button_text[0] != '\0')
+    {
+        CCLabelTTF * dev = CCLabelTTF::create(button_text,
+                                                "fonts/Fredoka One.ttf",
+                                                72);
+        dev->setPosition(ccp(logo->getContentSize().width/2,
+                               logo->getContentSize().height/2));
+        dev->setColor(color);
+        button->addChild(dev);
+    }
+    else
+    {
+        logo->setColor(color);
+    }
+
+    _main_menu->addChild(button);
+}
+
 #include <ADLib/Device/ADBrowser.h>
 void SettingScene::onRateMeClicked(CCObject*)
 {
