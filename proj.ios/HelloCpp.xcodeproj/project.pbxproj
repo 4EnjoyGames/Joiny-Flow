@@ -11,6 +11,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840AE31D18A02F5200189085 /* libcocos2dx.a */; };
+		84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84129DA718A3F27700C24960 /* PlatformEmulator.cpp */; };
 		84C8088418A0230600653977 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C8082B18A0230300653977 /* AppDelegate.cpp */; };
 		84C8088518A0230600653977 /* BackButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C8082E18A0230300653977 /* BackButton.cpp */; };
 		84C8088618A0230600653977 /* AnimatedMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C8083518A0230400653977 /* AnimatedMenuItem.cpp */; };
@@ -105,6 +106,8 @@
 		781C33B31547F06B00633F88 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		781C33B51547F06B00633F88 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		840AE31818A02F4D00189085 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
+		84129DA718A3F27700C24960 /* PlatformEmulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformEmulator.cpp; sourceTree = "<group>"; };
+		84129DA818A3F27700C24960 /* PlatformEmulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformEmulator.h; sourceTree = "<group>"; };
 		84C8082B18A0230300653977 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		84C8082C18A0230300653977 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84C8082D18A0230300653977 /* AppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacros.h; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				BF365AA712A103F70050DCF4 /* AppController.mm */,
 				BF4DE6AB138BB89600CF907D /* RootViewController.h */,
 				BF4DE6AC138BB89600CF907D /* RootViewController.mm */,
+				84129DA718A3F27700C24960 /* PlatformEmulator.cpp */,
+				84129DA818A3F27700C24960 /* PlatformEmulator.h */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -725,6 +730,7 @@
 				84C8089518A0230600653977 /* GameInfo.cpp in Sources */,
 				84E6535618A2C10000708286 /* ADScreen.cpp in Sources */,
 				84E6535218A2C10000708286 /* ADBrowser.cpp in Sources */,
+				84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
