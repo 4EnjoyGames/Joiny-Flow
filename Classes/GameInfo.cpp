@@ -67,9 +67,18 @@ const ccColor3B& GameInfo::getPositiveColor()
  {
      return _gray_color;
  }
+#include <ADLib/Device/ADInfo.h>
+
+std::string doGetPackageName()
+{
+    if(ADInfo::getPlatform() == ADPlatform::iOS)
+        return "id657095501";
+    else
+        return "com.x4enjoy.joiny";
+}
 
 const std::string& GameInfo::getPackageName()
 {
-    static std::string package_name = "com.x4enjoy.joiny";
+    static std::string package_name = doGetPackageName();
     return package_name;
 }

@@ -7,7 +7,7 @@
 //
 //#define AD_LANGUAGE_CURRENT "en"
 
-#include <ADLib/PlatformImpl/ADBrowser_None.hpp>
+//#include <ADLib/PlatformImpl/ADBrowser_None.hpp>
 //#include <ADLib/PlatformImpl/ADStatistics_None.hpp>
 //#include <ADLib/PlatformImpl/ADLanguage_Default.hpp>
 //#include <ADLib/PlatformImpl/ADNotification_None.hpp>

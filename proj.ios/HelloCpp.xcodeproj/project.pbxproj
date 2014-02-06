@@ -26,6 +26,7 @@
 		8402CE6D18A411D000703CF7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */; };
 		8402CE7018A4174800703CF7 /* ADInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE6F18A4174800703CF7 /* ADInfo.mm */; };
 		8402CE7318A41B0500703CF7 /* ADNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE7218A41B0500703CF7 /* ADNotification.mm */; };
+		8402CE7818A41DD600703CF7 /* ADBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE7718A41DD600703CF7 /* ADBrowser.mm */; };
 		840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840AE31D18A02F5200189085 /* libcocos2dx.a */; };
 		84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84129DA718A3F27700C24960 /* PlatformEmulator.cpp */; };
 		84C8088418A0230600653977 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C8082B18A0230300653977 /* AppDelegate.cpp */; };
@@ -139,6 +140,7 @@
 		8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8402CE6F18A4174800703CF7 /* ADInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADInfo.mm; sourceTree = "<group>"; };
 		8402CE7218A41B0500703CF7 /* ADNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADNotification.mm; sourceTree = "<group>"; };
+		8402CE7718A41DD600703CF7 /* ADBrowser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADBrowser.mm; sourceTree = "<group>"; };
 		840AE31818A02F4D00189085 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		84129DA718A3F27700C24960 /* PlatformEmulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformEmulator.cpp; sourceTree = "<group>"; };
 		84129DA818A3F27700C24960 /* PlatformEmulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformEmulator.h; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 		8402CE5618A4071700703CF7 /* ADLibImpl */ = {
 			isa = PBXGroup;
 			children = (
+				8402CE7618A41DD600703CF7 /* ADBrowser */,
 				8402CE7118A41B0500703CF7 /* ADNotification */,
 				8402CE6E18A4174800703CF7 /* ADInfo */,
 				8402CE6418A4118D00703CF7 /* ADStatistics_Flurry */,
@@ -420,6 +423,15 @@
 			);
 			name = ADNotification;
 			path = ../libraries/ADLib/platform/iOS/ADNotification;
+			sourceTree = "<group>";
+		};
+		8402CE7618A41DD600703CF7 /* ADBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				8402CE7718A41DD600703CF7 /* ADBrowser.mm */,
+			);
+			name = ADBrowser;
+			path = ../libraries/ADLib/platform/iOS/ADBrowser;
 			sourceTree = "<group>";
 		};
 		840AE31918A02F4D00189085 /* Products */ = {
@@ -825,6 +837,7 @@
 				84C8088C18A0230600653977 /* MusicSettings.cpp in Sources */,
 				8402CE7018A4174800703CF7 /* ADInfo.mm in Sources */,
 				84E6535318A2C10000708286 /* ADInApp.cpp in Sources */,
+				8402CE7818A41DD600703CF7 /* ADBrowser.mm in Sources */,
 				84C8089D18A0230600653977 /* Hints.cpp in Sources */,
 				8402CE5A18A4072500703CF7 /* ADLanguage.mm in Sources */,
 				84E6535018A2C10000708286 /* ADRandom.cpp in Sources */,
