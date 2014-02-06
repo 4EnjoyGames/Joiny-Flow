@@ -26,6 +26,8 @@ void GameInfo::setInfo()
 
     _negative_color = ccc3(255,30,99);
     _positive_color = ccc3(0,255,0);
+
+    _gray_color = ccc3(233,234,234);
 }
 
 GameInfo* GameInfo::getInstance( )
@@ -61,6 +63,10 @@ const ccColor3B& GameInfo::getPositiveColor()
 {
     return _positive_color;
 }
+ const ccColor3B& GameInfo::getGrayColor()
+ {
+     return _gray_color;
+ }
 
 const std::string& GameInfo::getPackageName()
 {

@@ -22,6 +22,8 @@ class GameInfo
        const ccColor3B& getNegativeColor();
        const ccColor3B& getPositiveColor();
 
+       const ccColor3B& getGrayColor();
+
        static const std::string& getPackageName();
 
 
@@ -45,5 +47,7 @@ class GameInfo
 
        ccColor3B _negative_color;
        ccColor3B _positive_color;
+
+       ccColor3B _gray_color;
 };
 #endif // GAMEINFO_H

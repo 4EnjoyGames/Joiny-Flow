@@ -6,7 +6,111 @@
 #include "Logic/RW.h"
 #include "DeveloperScene.h"
 #include <ADLib/Device/ADInApp.h>
-SettingScene::SettingScene()
+
+class SettingScene::ResetPopUp : public PopUpWindow::Content
+{
+public:
+
+    ResetPopUp()
+    {}
+
+private:
+    typedef ResetPopUp Me;
+    SettingScene* _parent;
+
+    void onNo(CCObject*)
+    {
+        this->closeWindow();
+    }
+
+    void onYes(CCObject*)
+    {
+        RW::getLevelManager().resetProgress();
+        this->closeWindow();
+    }
+
+
+    void onCreate(CCNode *parent)
+    {
+
+        CCSize size = parent->getContentSize();
+        float x_middle = size.width / 2;
+
+        CCLabelTTF* label = CCLabelTTF::create(_("Sure_reset"),
+                                               "fonts/Fredoka One.ttf",
+                                               48);
+        label->setColor(GameInfo::getInstance()->getTitleColor());
+        label->setPosition(ccp(x_middle, size.height*0.7f));
+        parent->addChild(label);
+
+
+        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
+                                                               "level-end/level_end.plist",
+                                                               "level-end/level_end.png");
+        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
+        menu->setPosition(ccp(0,0));
+        menu->setAnchorPoint(ccp(0,0));
+        menu->setContentSize(size);
+        parent->addChild(menu);
+
+        CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
+        if(parent_rgb)
+            parent_rgb->setColor(GameInfo::getInstance()->getGrayColor());
+
+
+
+        float vertical = size.height * 0.18f;
+
+        ///////////////////////////////////////////////////////
+
+        CCSprite* button0 = menu_spl->loadSprite("level_end_button.png");
+        button0->setColor(GameInfo::getInstance()->getPositiveColor());
+
+        AnimatedMenuItem *yes_reset = AnimatedMenuItem::create(
+                    button0,
+                    this, menu_selector(Me::onYes));
+        yes_reset->setPosition(ccp(size.width*0.25, vertical));
+
+
+        CCLabelTTF * yes_reset_text = CCLabelTTF::create(_("Yes"),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        yes_reset_text->setColor(GameInfo::getInstance()->getPositiveColor());
+        yes_reset_text->setPosition(ccp(yes_reset->getContentSize().width/2,
+                               yes_reset->getContentSize().height/2));
+
+
+        yes_reset->addChild(yes_reset_text);
+        menu->menu()->addChild(yes_reset);
+
+        //////////////////////////////////////////////////////
+
+        CCSprite* button1 = menu_spl->loadSprite("level_end_button.png");
+        button1->setColor(GameInfo::getInstance()->getNegativeColor());
+
+        AnimatedMenuItem *no_reset = AnimatedMenuItem::create(
+                    button1,
+                    this, menu_selector(Me::onNo));
+        no_reset->setPosition(ccp(size.width*0.75,vertical));
+
+
+        CCLabelTTF * no_reset_text = CCLabelTTF::create(_("No"),
+                                                "fonts/Fredoka One.ttf",
+                                                48);
+        no_reset_text->setColor(GameInfo::getInstance()->getNegativeColor());
+        no_reset_text->setPosition(ccp(no_reset->getContentSize().width/2,
+                               no_reset->getContentSize().height/2));
+
+
+        no_reset->addChild(no_reset_text);
+        menu->menu()->addChild(no_reset);
+
+    }
+};
+
+
+
+SettingScene::SettingScene():_pop_up_manager(this)
 {
 }
 
@@ -272,10 +376,12 @@ void SettingScene::onSoundClicked(CCObject*)
 void SettingScene::onResetClicked(CCObject*)
 {
     //ADInApp::buyProduct("unlock_full");
-    CCLog("onResetClicked clicked");
+    //CCLog("onResetClicked clicked");
 
     //reset progress implementing
-    bool result = RW::getLevelManager().resetProgress();
+    _pop_up_manager.openWindow(new ResetPopUp());
+
+    //bool result = RW::getLevelManager().resetProgress();
 
     //show good result toast
 }

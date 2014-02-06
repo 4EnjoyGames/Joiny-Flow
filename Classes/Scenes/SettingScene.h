@@ -4,6 +4,8 @@
 #include "Core/Screen.h"
 #include "BackButton.h"
 #include "Core/DrawLayer.h"
+#include "Layers/YesNoDialog.h"
+
 class SettingScene: public DrawLayer //CCLayer
 {
 public:
@@ -12,6 +14,9 @@ public:
     static SettingScene* create();
 
 private:
+    PopUpWindowManager _pop_up_manager;
+
+    class ResetPopUp;
     BackButton _back;
     bool init();
 
