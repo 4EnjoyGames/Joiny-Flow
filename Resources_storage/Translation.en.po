@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-06 19:16+0200\n"
+"POT-Creation-Date: 2014-02-06 21:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -59,23 +59,39 @@ msgstr "made in Ukraine"
 msgid "copy"
 msgstr "© 2014"
 
-#: ../Classes/Scenes/LevelScene.cpp:45
+#: ../Classes/Scenes/LevelScene.cpp:49
+msgid "Test_level_end"
+msgstr "How do you rate this level?"
+
+#: ../Classes/Scenes/LevelScene.cpp:87
+msgid "Good_level"
+msgstr "Good"
+
+#: ../Classes/Scenes/LevelScene.cpp:109
+msgid "So_level"
+msgstr "I don`t know"
+
+#: ../Classes/Scenes/LevelScene.cpp:130
+msgid "Bad_level"
+msgstr "Bad"
+
+#: ../Classes/Scenes/LevelScene.cpp:174
 msgid "BuyHint"
 msgstr "Buy Hints"
 
-#: ../Classes/Scenes/LevelScene.cpp:172
+#: ../Classes/Scenes/LevelScene.cpp:301
 msgid "End_bad"
 msgstr "You need more points"
 
-#: ../Classes/Scenes/LevelScene.cpp:177
+#: ../Classes/Scenes/LevelScene.cpp:306
 msgid "End_good"
 msgstr "Score"
 
-#: ../Classes/Scenes/LevelScene.cpp:261
+#: ../Classes/Scenes/LevelScene.cpp:390
 msgid "Retry"
 msgstr "Retry"
 
-#: ../Classes/Scenes/LevelScene.cpp:291
+#: ../Classes/Scenes/LevelScene.cpp:420
 msgid "Next"
 msgstr "Next"
 
@@ -83,37 +99,37 @@ msgstr "Next"
 msgid "Collection"
 msgstr "Collections"
 
-#: ../Classes/Scenes/SettingScene.cpp:38
+#: ../Classes/Scenes/SettingScene.cpp:39
 msgid "Sure_reset"
 msgstr ""
 "Would you like\n"
 " to delete all saves ?"
 
-#: ../Classes/Scenes/SettingScene.cpp:71
+#: ../Classes/Scenes/SettingScene.cpp:75
 msgid "Yes"
 msgstr "Yes"
 
-#: ../Classes/Scenes/SettingScene.cpp:90
+#: ../Classes/Scenes/SettingScene.cpp:97
 msgid "No"
 msgstr "No"
 
-#: ../Classes/Scenes/SettingScene.cpp:164
+#: ../Classes/Scenes/SettingScene.cpp:171
 msgid "Settings"
 msgstr "Settings"
 
-#: ../Classes/Scenes/SettingScene.cpp:236
+#: ../Classes/Scenes/SettingScene.cpp:243
 msgid "Reset"
 msgstr "Reset Progress"
 
-#: ../Classes/Scenes/SettingScene.cpp:246
+#: ../Classes/Scenes/SettingScene.cpp:253
 msgid "Restore"
 msgstr "Restore Purchases"
 
-#: ../Classes/Scenes/SettingScene.cpp:256
+#: ../Classes/Scenes/SettingScene.cpp:263
 msgid "Developers"
 msgstr "Developers"
 
-#: ../Classes/Scenes/SettingScene.cpp:266
+#: ../Classes/Scenes/SettingScene.cpp:273
 msgid "Rate"
 msgstr "Rate Me"
 

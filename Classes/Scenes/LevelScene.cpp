@@ -11,6 +11,168 @@ USING_NS_CC;
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/ADString.h>
 #include <ADLib/Device/ADInApp.h>
+#include <ADLib/Device/ADStatistics.h>
+
+
+class LevelScene::TesterEndPopUp : public PopUpWindow::Content
+{
+public:
+    TesterEndPopUp(LevelScene* parent=0, const JoinyLevel* level=0)
+        : _parent(parent),
+          _level(level)
+    {}
+private:
+    typedef TesterEndPopUp Me;
+    LevelScene* _parent;
+
+    void onGoodLevel(CCObject*)
+    {
+        std::string collection_id = AD_to_string(_level->getCollection()->getCollectionID());
+        std::string level_id =  collection_id
+                +'-' + AD_to_string(_level->getLevelId());
+        std::string rate = "good";
+
+        ADStatistics::Params params;
+        params.add("level_id", level_id);
+        params.add("collection_id", collection_id);
+        params.add("rate", rate);
+        ADStatistics::logEvent("Tester Level Rate", params);
+
+        _parent->onNextLevel();
+    }
+
+    void onBadLevel(CCObject*)
+    {
+        std::string collection_id = AD_to_string(_level->getCollection()->getCollectionID());
+        std::string level_id =  collection_id
+                +'-' + AD_to_string(_level->getLevelId());
+        std::string rate = "bad";
+
+        ADStatistics::Params params;
+        params.add("level_id", level_id);
+        params.add("collection_id", collection_id);
+        params.add("rate", rate);
+        ADStatistics::logEvent("Tester Level Rate", params);
+
+        _parent->onNextLevel();
+    }
+
+    //when clock "I do not knaw is it a bad or a good level"
+    void onSoLevel(CCObject*)
+    {
+        std::string collection_id = AD_to_string(_level->getCollection()->getCollectionID());
+        std::string level_id =  collection_id
+                +'-' + AD_to_string(_level->getLevelId());
+        std::string rate = "so-so";
+
+        ADStatistics::Params params;
+        params.add("level_id", level_id);
+        params.add("collection_id", collection_id);
+        params.add("rate", rate);
+        ADStatistics::logEvent("Tester Level Rate", params);
+
+        _parent->onNextLevel();
+    }
+
+
+    void onCreate(CCNode *parent)
+    {
+
+        CCSize size = parent->getContentSize();
+        float x_middle = size.width / 2;
+
+        CCLabelTTF* label = CCLabelTTF::create(_("Test_level_end"),
+                                               "fonts/Fredoka One.ttf",
+                                               42);
+        label->setPosition(ccp(x_middle, size.height*0.8f));
+        label->setColor(ccc3(0,0,0));
+        parent->addChild(label);
+
+
+        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
+                                                               "level-end/level_end.plist",
+                                                               "level-end/level_end.png");
+        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
+        menu->setPosition(ccp(0,0));
+        menu->setAnchorPoint(ccp(0,0));
+        menu->setContentSize(size);
+        parent->addChild(menu);
+
+        CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
+        if(parent_rgb)
+            parent_rgb->setColor(GameInfo::getInstance()->getGrayColor());
+
+        /////////////////////////////////////////
+
+        int font_size = 35;
+        float label_scale_factor = 0.1f;
+
+        CCSprite* good_sprite = menu_spl->loadSprite("level_end_button.png");
+        good_sprite->setScale(good_sprite->getContentSize().width/
+                              good_sprite->getContentSize().width*label_scale_factor);
+        good_sprite->setColor(GameInfo::getInstance()->getPositiveColor());
+
+        AnimatedMenuItem *good_level_button = AnimatedMenuItem::create(
+                    good_sprite,
+                    this, menu_selector(Me::onGoodLevel));
+        good_level_button->setPosition(ccp(x_middle,size.height*0.6));
+
+        CCLabelTTF * good_level_text = CCLabelTTF::create(_("Good_level"),
+                                                "fonts/Fredoka One.ttf",
+                                                font_size);
+
+        good_level_text->setColor(GameInfo::getInstance()->getPositiveColor());
+        good_level_text->setPosition(ccp(good_level_button->getContentSize().width/2,
+                               good_level_button->getContentSize().height/2));
+        good_level_button->addChild(good_level_text);
+        menu->menu()->addChild(good_level_button);
+
+        ////////////////////////////////////////////////////
+
+        CCSprite* so_sprite = menu_spl->loadSprite("level_end_button.png");
+        so_sprite->setScale(so_sprite->getContentSize().width/
+                              so_sprite->getContentSize().width*label_scale_factor);
+        so_sprite->setColor(ccc3(79,79,79));
+
+        AnimatedMenuItem *so_level_button = AnimatedMenuItem::create(
+                    so_sprite,
+                    this, menu_selector(Me::onSoLevel));
+        so_level_button->setPosition(ccp(x_middle,size.height*0.4));
+
+        CCLabelTTF * so_level_text = CCLabelTTF::create(_("So_level"),
+                                                "fonts/Fredoka One.ttf",
+                                                font_size);
+        so_level_text->setColor(ccc3(79,79,79));
+        so_level_text->setPosition(ccp(so_level_button->getContentSize().width/2,
+                               so_level_button->getContentSize().height/2));
+        so_level_button->addChild(so_level_text);
+        menu->menu()->addChild(so_level_button);
+
+        ////////////////////////////////////////////////////
+
+        CCSprite* bad_sprite = menu_spl->loadSprite("level_end_button.png");
+        bad_sprite->setScale(bad_sprite->getContentSize().width/
+                              bad_sprite->getContentSize().width*label_scale_factor);
+        bad_sprite->setColor(GameInfo::getInstance()->getNegativeColor());
+
+        AnimatedMenuItem *badlevel_button = AnimatedMenuItem::create(
+                    bad_sprite,
+                    this, menu_selector(Me::onSoLevel));
+        badlevel_button->setPosition(ccp(x_middle,size.height*0.2));
+
+        CCLabelTTF * bad_level_text = CCLabelTTF::create(_("Bad_level"),
+                                                "fonts/Fredoka One.ttf",
+                                                font_size);
+        bad_level_text->setColor(GameInfo::getInstance()->getNegativeColor());
+        bad_level_text->setPosition(ccp(badlevel_button->getContentSize().width/2,
+                               badlevel_button->getContentSize().height/2));
+        badlevel_button->addChild(bad_level_text);
+        menu->menu()->addChild(badlevel_button);
+
+    }
+    const JoinyLevel* _level;
+};
+
 
 class LevelScene::BuyHintPopUp : public PopUpWindow::Content
 {
@@ -814,7 +976,7 @@ void LevelScene::onWin()
     {
 
         //if it is a test version - open statistic window
-        static bool test_mode = false;
+        static bool test_mode = true;
 
         if(!test_mode)
         {
@@ -825,7 +987,7 @@ void LevelScene::onWin()
         }
         else
         {
-
+            _pop_up_manager.openWindow(new TesterEndPopUp(this,_current_level),true);
         }
     }
 }
