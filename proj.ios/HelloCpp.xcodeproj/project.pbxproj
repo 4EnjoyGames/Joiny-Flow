@@ -19,6 +19,12 @@
 		8402CE5218A4001400703CF7 /* puzzle_6x6_1.ad in Resources */ = {isa = PBXBuildFile; fileRef = 8402CE4A18A4001400703CF7 /* puzzle_6x6_1.ad */; };
 		8402CE5318A4001400703CF7 /* Translation.en.mo in Resources */ = {isa = PBXBuildFile; fileRef = 8402CE4B18A4001400703CF7 /* Translation.en.mo */; };
 		8402CE5A18A4072500703CF7 /* ADLanguage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE5918A4072500703CF7 /* ADLanguage.mm */; };
+		8402CE6318A40E6100703CF7 /* ADUIThread.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE6218A40E6100703CF7 /* ADUIThread.mm */; };
+		8402CE6818A4118D00703CF7 /* ADStatistics_Flurry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE6518A4118D00703CF7 /* ADStatistics_Flurry.mm */; };
+		8402CE6918A4118D00703CF7 /* libFlurry_4.3.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8402CE6718A4118D00703CF7 /* libFlurry_4.3.1.a */; };
+		8402CE6B18A411BB00703CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8402CE6A18A411B900703CF7 /* Security.framework */; };
+		8402CE6D18A411D000703CF7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */; };
+		8402CE7018A4174800703CF7 /* ADInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE6F18A4174800703CF7 /* ADInfo.mm */; };
 		840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840AE31D18A02F5200189085 /* libcocos2dx.a */; };
 		84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84129DA718A3F27700C24960 /* PlatformEmulator.cpp */; };
 		84C8088418A0230600653977 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C8082B18A0230300653977 /* AppDelegate.cpp */; };
@@ -123,6 +129,14 @@
 		8402CE4A18A4001400703CF7 /* puzzle_6x6_1.ad */ = {isa = PBXFileReference; lastKnownFileType = file; path = puzzle_6x6_1.ad; sourceTree = "<group>"; };
 		8402CE4B18A4001400703CF7 /* Translation.en.mo */ = {isa = PBXFileReference; lastKnownFileType = file; path = Translation.en.mo; sourceTree = "<group>"; };
 		8402CE5918A4072500703CF7 /* ADLanguage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ADLanguage.mm; path = ../libraries/ADLib/platform/iOS/ADLanguage/ADLanguage.mm; sourceTree = "<group>"; };
+		8402CE6118A40E6100703CF7 /* ADUIThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADUIThread.h; sourceTree = "<group>"; };
+		8402CE6218A40E6100703CF7 /* ADUIThread.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADUIThread.mm; sourceTree = "<group>"; };
+		8402CE6518A4118D00703CF7 /* ADStatistics_Flurry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADStatistics_Flurry.mm; sourceTree = "<group>"; };
+		8402CE6618A4118D00703CF7 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		8402CE6718A4118D00703CF7 /* libFlurry_4.3.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.1.a; sourceTree = "<group>"; };
+		8402CE6A18A411B900703CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8402CE6F18A4174800703CF7 /* ADInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADInfo.mm; sourceTree = "<group>"; };
 		840AE31818A02F4D00189085 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		84129DA718A3F27700C24960 /* PlatformEmulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformEmulator.cpp; sourceTree = "<group>"; };
 		84129DA818A3F27700C24960 /* PlatformEmulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformEmulator.h; sourceTree = "<group>"; };
@@ -268,7 +282,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8402CE6D18A411D000703CF7 /* SystemConfiguration.framework in Frameworks */,
+				8402CE6B18A411BB00703CF7 /* Security.framework in Frameworks */,
 				84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */,
+				8402CE6918A4118D00703CF7 /* libFlurry_4.3.1.a in Frameworks */,
 				84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */,
 				84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */,
 				84E80D9D18A2BA860003E3D5 /* libCocosDenshion.a in Frameworks */,
@@ -313,6 +330,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */,
+				8402CE6A18A411B900703CF7 /* Security.framework */,
 				BF492B6912891AC600A09262 /* libz.dylib */,
 				BF137426128A8E4600D9F789 /* QuartzCore.framework */,
 				BF492D4B1289302400A09262 /* OpenGLES.framework */,
@@ -353,9 +372,42 @@
 		8402CE5618A4071700703CF7 /* ADLibImpl */ = {
 			isa = PBXGroup;
 			children = (
+				8402CE6E18A4174800703CF7 /* ADInfo */,
+				8402CE6418A4118D00703CF7 /* ADStatistics_Flurry */,
+				8402CE6018A40E6100703CF7 /* ADUIThread */,
 				8402CE5918A4072500703CF7 /* ADLanguage.mm */,
 			);
 			name = ADLibImpl;
+			sourceTree = "<group>";
+		};
+		8402CE6018A40E6100703CF7 /* ADUIThread */ = {
+			isa = PBXGroup;
+			children = (
+				8402CE6118A40E6100703CF7 /* ADUIThread.h */,
+				8402CE6218A40E6100703CF7 /* ADUIThread.mm */,
+			);
+			name = ADUIThread;
+			path = ../libraries/ADLib/platform/iOS/ADUIThread;
+			sourceTree = "<group>";
+		};
+		8402CE6418A4118D00703CF7 /* ADStatistics_Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				8402CE6518A4118D00703CF7 /* ADStatistics_Flurry.mm */,
+				8402CE6618A4118D00703CF7 /* Flurry.h */,
+				8402CE6718A4118D00703CF7 /* libFlurry_4.3.1.a */,
+			);
+			name = ADStatistics_Flurry;
+			path = ../libraries/ADLib/platform/iOS/ADStatistics_Flurry;
+			sourceTree = "<group>";
+		};
+		8402CE6E18A4174800703CF7 /* ADInfo */ = {
+			isa = PBXGroup;
+			children = (
+				8402CE6F18A4174800703CF7 /* ADInfo.mm */,
+			);
+			name = ADInfo;
+			path = ../libraries/ADLib/platform/iOS/ADInfo;
 			sourceTree = "<group>";
 		};
 		840AE31918A02F4D00189085 /* Products */ = {
@@ -728,8 +780,10 @@
 				84C8088F18A0230600653977 /* FlowRenderer.cpp in Sources */,
 				84C8089018A0230600653977 /* FlowRendererNode.cpp in Sources */,
 				84E6535918A2C10000708286 /* ADColoredSprite.cpp in Sources */,
+				8402CE6318A40E6100703CF7 /* ADUIThread.mm in Sources */,
 				84C808A618A0230600653977 /* SelectLevel.cpp in Sources */,
 				BF365AA812A103F70050DCF4 /* AppController.mm in Sources */,
+				8402CE6818A4118D00703CF7 /* ADStatistics_Flurry.mm in Sources */,
 				84E6535518A2C10000708286 /* ADLanguage.cpp in Sources */,
 				84C808A718A0230600653977 /* SettingScene.cpp in Sources */,
 				84C8089818A0230600653977 /* PopUpWindow.cpp in Sources */,
@@ -756,6 +810,7 @@
 				84C8088618A0230600653977 /* AnimatedMenuItem.cpp in Sources */,
 				84E6535B18A2C10000708286 /* ADShaderSprite.cpp in Sources */,
 				84C8088C18A0230600653977 /* MusicSettings.cpp in Sources */,
+				8402CE7018A4174800703CF7 /* ADInfo.mm in Sources */,
 				84E6535318A2C10000708286 /* ADInApp.cpp in Sources */,
 				84C8089D18A0230600653977 /* Hints.cpp in Sources */,
 				8402CE5A18A4072500703CF7 /* ADLanguage.mm in Sources */,
@@ -816,6 +871,10 @@
 				);
 				INFOPLIST_FILE = "HelloCpp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Admin/cocos2d-x/projects/Joiny/libraries/ADLib/platform/iOS/ADStatistics_Flurry",
+				);
 				PRODUCT_NAME = HelloCpp;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -856,6 +915,10 @@
 				);
 				INFOPLIST_FILE = "HelloCpp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Admin/cocos2d-x/projects/Joiny/libraries/ADLib/platform/iOS/ADStatistics_Flurry",
+				);
 				PRODUCT_NAME = HelloCpp;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
