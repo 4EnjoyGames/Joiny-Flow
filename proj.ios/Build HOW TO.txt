@@ -1,0 +1,6 @@
+How to build broject for iPhone
+=======================
+1. Remove all resources from Xcode
+2. Build updated resources
+3. Copy updated resources to Resources folder
+4. Drag and Drop this files into Xcode as group reference
