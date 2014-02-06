@@ -18,6 +18,7 @@
 		8402CE5118A4001400703CF7 /* puzzle_5x5_2.ad in Resources */ = {isa = PBXBuildFile; fileRef = 8402CE4918A4001400703CF7 /* puzzle_5x5_2.ad */; };
 		8402CE5218A4001400703CF7 /* puzzle_6x6_1.ad in Resources */ = {isa = PBXBuildFile; fileRef = 8402CE4A18A4001400703CF7 /* puzzle_6x6_1.ad */; };
 		8402CE5318A4001400703CF7 /* Translation.en.mo in Resources */ = {isa = PBXBuildFile; fileRef = 8402CE4B18A4001400703CF7 /* Translation.en.mo */; };
+		8402CE5A18A4072500703CF7 /* ADLanguage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE5918A4072500703CF7 /* ADLanguage.mm */; };
 		840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840AE31D18A02F5200189085 /* libcocos2dx.a */; };
 		84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84129DA718A3F27700C24960 /* PlatformEmulator.cpp */; };
 		84C8088418A0230600653977 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84C8082B18A0230300653977 /* AppDelegate.cpp */; };
@@ -121,6 +122,7 @@
 		8402CE4918A4001400703CF7 /* puzzle_5x5_2.ad */ = {isa = PBXFileReference; lastKnownFileType = file; path = puzzle_5x5_2.ad; sourceTree = "<group>"; };
 		8402CE4A18A4001400703CF7 /* puzzle_6x6_1.ad */ = {isa = PBXFileReference; lastKnownFileType = file; path = puzzle_6x6_1.ad; sourceTree = "<group>"; };
 		8402CE4B18A4001400703CF7 /* Translation.en.mo */ = {isa = PBXFileReference; lastKnownFileType = file; path = Translation.en.mo; sourceTree = "<group>"; };
+		8402CE5918A4072500703CF7 /* ADLanguage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ADLanguage.mm; path = ../libraries/ADLib/platform/iOS/ADLanguage/ADLanguage.mm; sourceTree = "<group>"; };
 		840AE31818A02F4D00189085 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		84129DA718A3F27700C24960 /* PlatformEmulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformEmulator.cpp; sourceTree = "<group>"; };
 		84129DA818A3F27700C24960 /* PlatformEmulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformEmulator.h; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				8402CE5618A4071700703CF7 /* ADLibImpl */,
 				84E6532618A2C0FD00708286 /* ADLib */,
 				84E80D9718A2BA000003E3D5 /* CocosDenshion.xcodeproj */,
 				840AE31818A02F4D00189085 /* cocos2dx.xcodeproj */,
@@ -345,6 +348,14 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		8402CE5618A4071700703CF7 /* ADLibImpl */ = {
+			isa = PBXGroup;
+			children = (
+				8402CE5918A4072500703CF7 /* ADLanguage.mm */,
+			);
+			name = ADLibImpl;
 			sourceTree = "<group>";
 		};
 		840AE31918A02F4D00189085 /* Products */ = {
@@ -747,6 +758,7 @@
 				84C8088C18A0230600653977 /* MusicSettings.cpp in Sources */,
 				84E6535318A2C10000708286 /* ADInApp.cpp in Sources */,
 				84C8089D18A0230600653977 /* Hints.cpp in Sources */,
+				8402CE5A18A4072500703CF7 /* ADLanguage.mm in Sources */,
 				84E6535018A2C10000708286 /* ADRandom.cpp in Sources */,
 				84E6535818A2C10000708286 /* ADBlurSprite.cpp in Sources */,
 				84C808A218A0230600653977 /* LevelScene.cpp in Sources */,
