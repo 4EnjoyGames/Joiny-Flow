@@ -60,6 +60,10 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fonts/Fredoka One.ttf</string>
+	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
