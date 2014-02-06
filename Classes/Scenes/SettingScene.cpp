@@ -271,7 +271,7 @@ void SettingScene::onSoundClicked(CCObject*)
 
 void SettingScene::onResetClicked(CCObject*)
 {
-    ADInApp::buyProduct("unlock_full");
+    //ADInApp::buyProduct("unlock_full");
     CCLog("onResetClicked clicked");
 
     //reset progress implementing

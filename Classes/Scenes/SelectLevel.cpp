@@ -6,6 +6,7 @@
 #include "Localization/CCLocalizedString.h"
 #include "ADLib/Device/ADAds.h"
 #include "ADLib/ADString.h"
+#include "Logic/JoinyLevel.h"
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
 {
