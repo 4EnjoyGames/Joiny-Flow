@@ -13,6 +13,8 @@ public:
 
     void onPlayClicked(CCObject*);
 private:
+    PopUpWindowManager _pop_up_manager;
+    class GoOutPopUp;
     bool init();
 
     void onSettingsClicked(CCObject*);

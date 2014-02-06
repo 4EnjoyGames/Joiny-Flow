@@ -39,7 +39,7 @@ private:
         CCLabelTTF* label = CCLabelTTF::create(_("Sure_reset"),
                                                "fonts/Fredoka One.ttf",
                                                48);
-        label->setColor(GameInfo::getInstance()->getTitleColor());
+        label->setColor(ccc3(255,255,255));
         label->setPosition(ccp(x_middle, size.height*0.7f));
         parent->addChild(label);
 
@@ -55,7 +55,7 @@ private:
 
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
         if(parent_rgb)
-            parent_rgb->setColor(GameInfo::getInstance()->getGrayColor());
+            parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
 
 
 
