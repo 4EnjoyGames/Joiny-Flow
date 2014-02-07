@@ -4,6 +4,7 @@
 #include "GameInfo.h"
 #include "Core/MusicSettings.h"
 #include "Logic/RW.h"
+#include "Core/Fonts.h"
 
 DeveloperScene::DeveloperScene()
 {
@@ -63,7 +64,7 @@ bool DeveloperScene::init()
 
     //authors text
     CCLabelTTF * author_diana = CCLabelTTF::create(_("diana"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                72);
     author_diana->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.85));
@@ -71,7 +72,7 @@ bool DeveloperScene::init()
     this->addChild(author_diana);
 
     CCLabelTTF * author_andrii = CCLabelTTF::create(_("andrii"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                72);
     author_andrii->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.75));
@@ -80,7 +81,7 @@ bool DeveloperScene::init()
 
     //thank to logo
     CCLabelTTF * thank = CCLabelTTF::create(_("thank"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                50);
     thank->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.6));
@@ -89,7 +90,7 @@ bool DeveloperScene::init()
 
     //thank list - thank1
     CCLabelTTF * thank1 = CCLabelTTF::create(_("test_list"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                45);
     thank1->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.45));
@@ -116,7 +117,7 @@ bool DeveloperScene::init()
 
     //made in ukraine
     CCLabelTTF * made = CCLabelTTF::create(_("madeInUkraine"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                30);
     made->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.55,
                           ORIGIN.y + 100/SCALE));
@@ -126,13 +127,13 @@ bool DeveloperScene::init()
 
     //copy right
     CCLabelTTF * reight = CCLabelTTF::create(_("copy"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                30);
     reight->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + 50/SCALE));
     reight->setColor(GameInfo::getInstance()->getTitleColor());
     this->addChild(reight);
-    //© 2013
+    //© 2014
 
     return true;
 }

@@ -25,7 +25,9 @@ void GameInfo::setInfo()
     _title_color = ccc3(11,216,224);
 
     _negative_color = ccc3(255,30,99);
-    _positive_color = ccc3(0,255,0);
+
+    _positive_color = ccc3(117,253,51);
+    //_positive_color = ccc3(0,255,0);
 
     _gray_color = ccc3(134,203,226);
 }

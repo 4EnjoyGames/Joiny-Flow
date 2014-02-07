@@ -6,6 +6,7 @@
 #include "Logic/RW.h"
 #include "DeveloperScene.h"
 #include <ADLib/Device/ADInApp.h>
+#include "Core/Fonts.h"
 
 class SettingScene::ResetPopUp : public PopUpWindow::Content
 {
@@ -37,7 +38,7 @@ private:
         float x_middle = size.width / 2;
 
         CCLabelTTF* label = CCLabelTTF::create(_("Sure_reset"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                48);
         label->setColor(ccc3(255,255,255));
         label->setPosition(ccp(x_middle, size.height*0.7f));
@@ -73,7 +74,7 @@ private:
 
 
         CCLabelTTF * yes_reset_text = CCLabelTTF::create(_("Yes"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         yes_reset_text->setColor(GameInfo::getInstance()->getPositiveColor());
         yes_reset_text->setPosition(ccp(yes_reset->getContentSize().width/2,
@@ -95,7 +96,7 @@ private:
 
 
         CCLabelTTF * no_reset_text = CCLabelTTF::create(_("No"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         no_reset_text->setColor(GameInfo::getInstance()->getNegativeColor());
         no_reset_text->setPosition(ccp(no_reset->getContentSize().width/2,
@@ -168,7 +169,9 @@ bool SettingScene::init()
     CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
-    CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),"fonts/Fredoka One.ttf",72);
+    CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),
+                                               Fonts::getFontName(),
+                                               72);
     settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     settings->setColor(GameInfo::getInstance()->getTitleColor());
@@ -296,7 +299,7 @@ void SettingScene::createButton(CCSprite* logo,
     if(button_text[0] != '\0')
     {
         CCLabelTTF * dev = CCLabelTTF::create(button_text,
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 72);
         dev->setPosition(ccp(logo->getContentSize().width/2,
                                logo->getContentSize().height/2));
@@ -380,8 +383,6 @@ void SettingScene::onResetClicked(CCObject*)
 
     //reset progress implementing
     _pop_up_manager.openWindow(new ResetPopUp());
-
-    //bool result = RW::getLevelManager().resetProgress();
 
     //show good result toast
 }

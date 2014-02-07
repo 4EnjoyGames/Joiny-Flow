@@ -5,6 +5,7 @@
 #include "Layers/BackgroundHolder.h"
 #include "Localization/CCLocalizedString.h"
 #include "GameInfo.h"
+#include "Core/Fonts.h"
 
 
 class MainScene::GoOutPopUp : public PopUpWindow::Content
@@ -37,7 +38,7 @@ private:
         float x_middle = size.width / 2;
 
         CCLabelTTF* label = CCLabelTTF::create("Go out?",
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                48);
 
         label->setColor(ccc3(255,255,255));
@@ -74,7 +75,7 @@ private:
 
 
         CCLabelTTF * yes_reset_text = CCLabelTTF::create(_("Yes"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         yes_reset_text->setColor(GameInfo::getInstance()->getPositiveColor());
         yes_reset_text->setPosition(ccp(yes_reset->getContentSize().width/2,
@@ -96,7 +97,7 @@ private:
 
 
         CCLabelTTF * no_reset_text = CCLabelTTF::create(_("No"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         no_reset_text->setColor(GameInfo::getInstance()->getNegativeColor());
         no_reset_text->setPosition(ccp(no_reset->getContentSize().width/2,
@@ -180,9 +181,7 @@ bool MainScene::init()
     main_menu->setPosition(ORIGIN);
 
     //Play Button
-    //CCSize logo_size = main_logo->getContentSize();
     CCSprite* play_logo = CCSprite::create("main-menu/play-button.png");
-    //float play_logo_y_coordinate = play_logo->getPositionY();
 
     AnimatedMenuItem* play_button = AnimatedMenuItem::create(
                 play_logo, this, menu_selector(MainScene::onPlayClicked));

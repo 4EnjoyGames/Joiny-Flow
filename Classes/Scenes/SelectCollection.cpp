@@ -7,6 +7,8 @@
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/Device/ADAds.h>
 #include <ADLib/ADString.h>
+#include "Core/Fonts.h"
+
 SelectCollection::SelectCollection()
 {
 }
@@ -67,14 +69,6 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 {
     float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
 
-//    std::stringstream collection_number;
-//    collection_number << collection->getCollectionID();
-
-//    std::stringstream collection_name;
-//    collection_name << collection->getCollectionName();
-
-    //std::string collection_number = collection->getCollectionID();
-
     std::string collection_name = collection->getCollectionName();
 
     ccColor3B label_color = collection->getCollectionColor();
@@ -100,7 +94,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 
     std::string label_text = collection_name + "  "+ l_curr_str + '/'  + l_num_str ;
     CCLabelTTF* label = CCLabelTTF::create(label_text.c_str(),
-                                           "fonts/Fredoka One.ttf",
+                                           Fonts::getFontName(),
                                            60/scaled);
     item->addChild(label);
 
@@ -111,7 +105,6 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 
 
     label->setColor(working);
-    //label->setColor(working);
 
     return item;
 }
@@ -150,7 +143,7 @@ bool SelectCollection::init()
     //    this->addChild(noise);
 
     CCLabelTTF * collections = CCLabelTTF::create( _("Collection"),
-                                                   "fonts/Fredoka One.ttf",
+                                                   Fonts::getFontName(),
                                                    72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                                  ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));

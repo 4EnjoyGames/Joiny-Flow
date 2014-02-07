@@ -7,6 +7,8 @@
 #include "ADLib/Device/ADAds.h"
 #include "ADLib/ADString.h"
 #include "Logic/JoinyLevel.h"
+#include "Core/Fonts.h"
+
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
 {
@@ -109,7 +111,7 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                     menu_selector(SelectLevel::onLevelSelect));
 
     CCLabelTTF* label = CCLabelTTF::create(AD_to_string(joiny_level_id).c_str(),
-                                           "fonts/Fredoka One.ttf",
+                                           Fonts::getFontName(),
                                            60/SCALE);
     item->addChild(label);
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
@@ -172,7 +174,9 @@ bool SelectLevel::init()
     ccColor3B openLevel = _current_collection->getCollectionColor();
 
     const std::string coll_name = _current_collection->getCollectionName();
-    CCLabelTTF * collections = CCLabelTTF::create( coll_name.c_str(),"fonts/Fredoka One.ttf",72);
+    CCLabelTTF * collections = CCLabelTTF::create( coll_name.c_str(),
+                                                   Fonts::getFontName(),
+                                                   72);
     collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     collections->setColor(openLevel);

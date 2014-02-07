@@ -12,6 +12,7 @@ USING_NS_CC;
 #include <ADLib/ADString.h>
 #include <ADLib/Device/ADInApp.h>
 #include <ADLib/Device/ADStatistics.h>
+#include "Core/Fonts.h"
 
 
 class LevelScene::TesterEndPopUp : public PopUpWindow::Content
@@ -82,10 +83,10 @@ private:
         float x_middle = size.width / 2;
 
         CCLabelTTF* label = CCLabelTTF::create(_("Test_level_end"),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                42);
         label->setPosition(ccp(x_middle, size.height*0.8f));
-        label->setColor(ccc3(0,0,0));
+        label->setColor(ccc3(255,255,255));
         parent->addChild(label);
 
 
@@ -100,7 +101,7 @@ private:
 
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
         if(parent_rgb)
-            parent_rgb->setColor(GameInfo::getInstance()->getGrayColor());
+            parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
 
         /////////////////////////////////////////
 
@@ -118,7 +119,7 @@ private:
         good_level_button->setPosition(ccp(x_middle,size.height*0.6));
 
         CCLabelTTF * good_level_text = CCLabelTTF::create(_("Good_level"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 font_size);
 
         good_level_text->setColor(GameInfo::getInstance()->getPositiveColor());
@@ -132,7 +133,7 @@ private:
         CCSprite* so_sprite = menu_spl->loadSprite("level_end_button.png");
         so_sprite->setScale(so_sprite->getContentSize().width/
                               so_sprite->getContentSize().width*label_scale_factor);
-        so_sprite->setColor(ccc3(79,79,79));
+        so_sprite->setColor(ccc3(255,255,255));
 
         AnimatedMenuItem *so_level_button = AnimatedMenuItem::create(
                     so_sprite,
@@ -140,9 +141,9 @@ private:
         so_level_button->setPosition(ccp(x_middle,size.height*0.4));
 
         CCLabelTTF * so_level_text = CCLabelTTF::create(_("So_level"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 font_size);
-        so_level_text->setColor(ccc3(79,79,79));
+        so_level_text->setColor(ccc3(255,255,255));
         so_level_text->setPosition(ccp(so_level_button->getContentSize().width/2,
                                so_level_button->getContentSize().height/2));
         so_level_button->addChild(so_level_text);
@@ -161,7 +162,7 @@ private:
         badlevel_button->setPosition(ccp(x_middle,size.height*0.2));
 
         CCLabelTTF * bad_level_text = CCLabelTTF::create(_("Bad_level"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 font_size);
         bad_level_text->setColor(GameInfo::getInstance()->getNegativeColor());
         bad_level_text->setPosition(ccp(badlevel_button->getContentSize().width/2,
@@ -205,7 +206,7 @@ private:
 
         //greeting text
         CCLabelTTF * greeting = CCLabelTTF::create(_("BuyHint"),
-                                                   "fonts/Fredoka One.ttf",
+                                                   Fonts::getFontName(),
                                                    72);
         greeting->setPosition(ccp(size.width*0.5,
                                   size.height*0.8));
@@ -225,7 +226,7 @@ private:
         std::string x10_price = ADInApp::getProduct("hints_10")->getPrice();
         std::string x10_for1 = "x10  " + x10_price;
         CCLabelTTF * first_button_text = CCLabelTTF::create(x10_for1.c_str(),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         first_button_text->setColor(ccc3(255,255,255));
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
@@ -244,7 +245,7 @@ private:
         std::string x100_price = ADInApp::getProduct("hints_100")->getPrice();
         std::string x100_for4 = "x100  " + x100_price;
         CCLabelTTF * second_button_text = CCLabelTTF::create(x100_for4.c_str(),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         second_button_text->setColor(ccc3(255,255,255));
         second_button_text->setPosition(ccp(x100_hint->getContentSize().width/2,
@@ -263,7 +264,7 @@ private:
         std::string x1000_price = ADInApp::getProduct("hints_1000")->getPrice();
         std::string x1000_for9 = "x1000  " + x1000_price;
         CCLabelTTF * third_button_text = CCLabelTTF::create(x1000_for9.c_str(),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         third_button_text->setColor(ccc3(255,255,255));
         third_button_text->setPosition(ccp(x1000_hint->getContentSize().width/2,
@@ -331,18 +332,15 @@ private:
        std::string text ="";
         if(_mode==NotEnough)
         {
-            text = _("End_bad");//+'\n';
-                    //+ std::to_string(_score);
+            text = _("End_bad");
         }
         else
         {
-            text =  _("End_good");//+'\n';
-                    //std::to_string(_score)
-                    //+'\n';
+            text =  _("End_good");
         }
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
-                                               "fonts/Fredoka One.ttf",
+                                               Fonts::getFontName(),
                                                62);
 
         if(_mode == NotEnough)
@@ -353,7 +351,7 @@ private:
             std::string score_to_bronze = AD_to_string(_level->getPuzzle()._info.getBronze());
 
             CCLabelTTF* score = CCLabelTTF::create(score_to_bronze.c_str(),
-                                                   "fonts/Fredoka One.ttf",
+                                                   Fonts::getFontName(),
                                                    92);
             score->setPosition(ccp(x_middle, size.height*0.55f));
             parent->addChild(score);
@@ -364,13 +362,11 @@ private:
             label->setPosition(ccp(x_middle, size.height*0.9f));
 
             CCLabelTTF* score = CCLabelTTF::create(AD_to_string(_score).c_str(),
-                                                   "fonts/Fredoka One.ttf",
+                                                   Fonts::getFontName(),
                                                    78);
             score->setPosition(ccp(x_middle, size.height*0.78f));
             parent->addChild(score);
         }
-
-        //label->setPosition(ccp(x_middle, size.height*0.7f));
         parent->addChild(label);
 
         SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
@@ -409,7 +405,6 @@ private:
                 stars_spr = _spl->loadSprite("big_stars_3.png");
 
             stars_spr->setPosition(ccp(x_middle, size.height*0.5f));
-            //parent->addChild(stars_spr);
 
         }
 
@@ -421,7 +416,7 @@ private:
                     this, menu_selector(Me::onPlayMore));
 
         CCLabelTTF * retry_text = CCLabelTTF::create(_("Retry"),
-                                                "fonts/Fredoka One.ttf",
+                                                Fonts::getFontName(),
                                                 48);
         retry_text->setColor(ccc3(255,255,255));
 
@@ -451,7 +446,7 @@ private:
         {
 
             CCLabelTTF * next_level_text = CCLabelTTF::create(_("Next"),
-                                                    "fonts/Fredoka One.ttf",
+                                                    Fonts::getFontName(),
                                                     48);
             next_level_text->setColor(ccc3(255,255,255));
 
@@ -663,13 +658,6 @@ bool LevelScene::init()
         table.addColor(s.getPoints().first, s.getPoints().second, s.getColor());
     }
 
-    //    std::stringstream ss;
-    //    ss << "Bronze: " << task._info.getBronze() << std::endl;
-    //    ss << "Silver: " << task._info.getSilver() << std::endl;
-    //    ss << "Gold: " << task._info.getGold() << std::endl;
-    //    ss << "Highscore: " << _current_level->getHighScore() << std::endl;
-
-
     //Back Button
     CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
@@ -681,13 +669,7 @@ bool LevelScene::init()
     _gold = _current_info.getGold();
     _max_score = _gold + 100;
 
-    //    CCLabelTTF* scores = CCLabelTTF::create(ss.str().c_str(), "fonts/Fredoka One.ttf", 28);
-    //    scores->setAnchorPoint(ccp(1,1));
-    //    scores->setColor(ccc3(0,0,0));
-    //    scores->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width, ORIGIN.y+VISIBLE_SIZE.height));
-    //    this->addChild(scores);
-
-    _score_label = CCLabelTTF::create("0", "fonts/Fredoka One.ttf", 70);
+    _score_label = CCLabelTTF::create("0", Fonts::getFontName(), 70);
 
     _score_label->setAnchorPoint(ccp(0, 1));
     _score_label->setPosition(ccp(ORIGIN.x + back_size.width + (VISIBLE_SIZE.width - back_size.width)*0.25 ,
@@ -785,7 +767,7 @@ bool LevelScene::init()
     unsigned int hints = _hints.getHintNumber();
     std::string hints_str = AD_to_string(hints);
     _hint_number_text = CCLabelTTF::create(hints_str.c_str(),
-                                           "fonts/Fredoka One.ttf",
+                                           Fonts::getFontName(),
                                            55);
     _hint_number_text->setColor(GameInfo::getInstance()->getNegativeColor());
     _hint_number_text->setPosition(hint_text_position);
