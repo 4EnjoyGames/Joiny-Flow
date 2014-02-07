@@ -8,6 +8,7 @@
 #include <ADLib/Device/ADAds.h>
 #include <ADLib/ADString.h>
 #include "Core/Fonts.h"
+#include "Core/Screen.h"
 
 SelectCollection::SelectCollection()
 {
@@ -64,10 +65,42 @@ void SelectCollection::onCollectionSelect(CCObject* sender)
 
     }
 }
+AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
+                              const JoinyCollection* collection)
+{
+    float SCALE = Screen::getScaleFactor();
+
+    unsigned int min_stars_num = RW::getLevelManager().getCollectionMinStars(collection);
+
+    SpritesLoader spl = GraphicsManager::getLoaderFor(item,
+                                                      "level-end/big_stars.plist",
+                                                      "level-end/big_stars.png");
+    spl->inject();
+
+    CCSprite* stars_spr = 0;
+
+    if(min_stars_num == 0)
+        stars_spr = spl->loadSprite("big_stars_0.png");
+    else if(min_stars_num == 1)
+        stars_spr = spl->loadSprite("big_stars_1.png");
+    else if(min_stars_num == 2)
+        stars_spr = spl->loadSprite("big_stars_2.png");
+    else
+        stars_spr = spl->loadSprite("big_stars_3.png");
+
+    CCPoint position = item->getPosition();
+    stars_spr->setPosition(ccp(position.x,
+                               position.y));
+    //stars_spr->setScale(_scale);
+    item->addNephew(stars_spr);
+
+    return item;
+}
+
 AnimatedMenuItem* SelectCollection::createCollectionItem(
         const JoinyCollection* collection, const SpritesLoader& spl)
 {
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
+    float scaled = Screen::getScaleFactor();
 
     std::string collection_name = collection->getCollectionName();
 
@@ -102,8 +135,6 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     label->setPosition(ccp(background->getContentSize().width/2-3*scale, background->getContentSize().height/2));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
-
-
     label->setColor(working);
 
     return item;
@@ -204,11 +235,13 @@ bool SelectCollection::init()
 
         item->setPosition(ccp(working_x, working_y));
 
+        item = createStars(item,l);
+
         _buttons_map[item] = l;
 
         working_x += s.width + margin;
         collection_id_first++;
-        working_y -= s.height + margin_vertical;
+        working_y -= s.height + margin_vertical; 
     }
     newScrolling(_buttons_menu);
 

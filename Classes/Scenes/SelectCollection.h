@@ -21,6 +21,9 @@ private:
     BackButton _back;
     CCMenu* _back_menu;
     void onCollectionSelect(CCObject* sender);
+
+    AnimatedMenuItem* createStars(AnimatedMenuItem* item,
+                                  const JoinyCollection* collection);
     AnimatedMenuItem* createCollectionItem(
             const JoinyCollection* collection, const SpritesLoader& spl);
 
