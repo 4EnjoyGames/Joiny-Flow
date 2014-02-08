@@ -958,7 +958,7 @@ void LevelScene::onWin()
     {
 
         //if it is a test version - open statistic window
-        static bool test_mode = true;
+        static bool test_mode = false;
 
         if(!test_mode)
         {

@@ -88,10 +88,11 @@ AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
     else
         stars_spr = spl->loadSprite("big_stars_3.png");
 
-    CCPoint position = item->getPosition();
-    stars_spr->setPosition(ccp(position.x,
-                               position.y));
-    //stars_spr->setScale(_scale);
+    //CCPoint position = item->getPosition();
+    stars_spr->setPosition(ccp(_item_size.width*0.5,
+                               _item_size.height*0.15));
+    stars_spr->setScale(stars_spr->getContentSize().width/
+                        stars_spr->getContentSize().width*0.85);
     item->addNephew(stars_spr);
 
     return item;
@@ -100,7 +101,7 @@ AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
 AnimatedMenuItem* SelectCollection::createCollectionItem(
         const JoinyCollection* collection, const SpritesLoader& spl)
 {
-    float scaled = Screen::getScaleFactor();
+    //float scaled = Screen::getScaleFactor();
 
     std::string collection_name = collection->getCollectionName();
 
@@ -128,11 +129,16 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     std::string label_text = collection_name + "  "+ l_curr_str + '/'  + l_num_str ;
     CCLabelTTF* label = CCLabelTTF::create(label_text.c_str(),
                                            Fonts::getFontName(),
-                                           60/scaled);
+                                           75/*60/scaled*/);
     item->addChild(label);
 
+    _item_size = background->getContentSize();
+
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
-    label->setPosition(ccp(background->getContentSize().width/2-3*scale, background->getContentSize().height/2));
+    _scale = scale;
+
+    label->setPosition(ccp(background->getContentSize().width*0.5/*-3*scale*/,
+                           background->getContentSize().height*0.6));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
     label->setColor(working);

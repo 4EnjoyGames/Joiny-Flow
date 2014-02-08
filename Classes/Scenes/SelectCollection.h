@@ -20,6 +20,10 @@ public:
 private:
     BackButton _back;
     CCMenu* _back_menu;
+
+    CCSize _item_size;
+    float _scale;
+
     void onCollectionSelect(CCObject* sender);
 
     AnimatedMenuItem* createStars(AnimatedMenuItem* item,
