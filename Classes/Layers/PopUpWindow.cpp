@@ -251,11 +251,6 @@ void PopUpWindowManager::setMenusAvaliablitity(bool enabled)
         m->setTouchEnabled(enabled);
     }
 
-    if(_game)
-    {
-        _game->stopAllActions();
-
-    }
 }
 
 bool PopUpWindowManager::backAction()
