@@ -278,15 +278,18 @@ private:
     {
         //TODO: may be it will be "get free hints button" action
         ADInApp::buyProduct("hints_10");
+        this->closeWindow();
 
     }
     void onSecondButton(CCObject*)
     {
         ADInApp::buyProduct("hints_100");
+        this->closeWindow();
     }
     void onThirdButton(CCObject*)
     {
         ADInApp::buyProduct("hints_1000");
+        this->closeWindow();
     }
 
 };
@@ -957,14 +960,15 @@ void LevelScene::onWin()
     else
     {
 
+        //save the game
+        RW::getLevelManager().onLevelFinished(_current_level, _last_score);
+
         //if it is a test version - open statistic window
-        static bool test_mode = false;
+        static bool test_mode = true;
 
         if(!test_mode)
-        {
-            RW::getLevelManager().onLevelFinished(_current_level, _last_score);
+        {      
             unsigned int stars = _current_level->getStarsNumber(_last_score);
-
             _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
         }
         else

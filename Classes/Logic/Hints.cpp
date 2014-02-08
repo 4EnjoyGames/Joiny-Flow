@@ -151,13 +151,16 @@ void Hints::useHint()
 }
 void Hints::decreaseHintNumber(const unsigned int num)
 {
-    --_hint_number;
-    RW::getLevelManager().decreaseHintNumber(num);
+    if(_hint_number-num >= 0)
+    {
+        _hint_number-=num;
+        RW::getLevelManager().decreaseHintNumber(num);
+    }
 }
 
 void Hints::increaseHintNumber(const unsigned int num)
 {
-    ++_hint_number;
+    _hint_number+=num;
     RW::getLevelManager().increaseHintNumber(num);
 }
 

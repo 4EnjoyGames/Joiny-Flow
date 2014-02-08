@@ -15,6 +15,8 @@
 #include <ADLib/Device/ADInApp.h>
 #include <ADLib/Device/ADNotification.h>
 #include "Localization/CCLocalizedString.h"
+#include "Logic/Hints.h"
+#include "Logic/RW.h"
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -40,6 +42,16 @@ class InAppDelegate : public ADInApp::Delegate
 public:
     void purchaseSuccessful(const ADInApp::ProductID & id)
     {
+        Hints hints;
+        if(id == "hints_10")
+            hints.increaseHintNumber(10);
+        else if(id == "hints_100")
+            hints.increaseHintNumber(100);
+        else if(id == "hints_1000")
+            hints.increaseHintNumber(1000);
+        else if(id == "unlock_full")
+            RW::getLevelManager().makeFullGameVersion();
+
         CCLog("Purchase %s finished successful", id.c_str());
     }
     void purchaseFailed(const ADInApp::ProductID & id,

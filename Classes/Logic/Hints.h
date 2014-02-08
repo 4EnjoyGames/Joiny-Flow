@@ -24,8 +24,7 @@ public:
 
     // hint pathes, which were used
     typedef std::vector < std::vector<FlowPoint> > UsedPathes;
-    bool findSubVector(const UsedPathes &showed_ids,
-                       const std::vector<FlowPoint>& vec) const;
+
 
 private:
     //Hints();
@@ -39,7 +38,7 @@ private:
     const JoinyLevel *_level;
     FlowGame *_flow_game;
 
-    unsigned int _hint_number;
+    int _hint_number;
 
     //save all pathes, which we hinted with their LevelID
     UsedPathes _saves;
@@ -47,6 +46,9 @@ private:
 
     friend class LevelManager;
     void setHintNumber(const unsigned int num);
+
+    bool findSubVector(const UsedPathes &showed_ids,
+                       const std::vector<FlowPoint>& vec) const;
 };
 
 #endif // HINTS_H
