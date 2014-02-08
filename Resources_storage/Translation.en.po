@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-06 21:06+0200\n"
+"POT-Creation-Date: 2014-02-08 16:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,35 +14,35 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../Classes\n"
 
-#: ../Classes/AppDelegate.cpp:51
+#: ../Classes/AppDelegate.cpp:66
 msgid "iap.error.billing_unavaliable"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:56
+#: ../Classes/AppDelegate.cpp:71
 msgid "iap.error.purchase_error"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:64
+#: ../Classes/AppDelegate.cpp:79
 msgid "iap.restore_purchases.success"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:69
+#: ../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.failed"
 msgstr ""
 
-#: ../Classes/Scenes/DeveloperScene.cpp:65
+#: ../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
 msgstr "Diana Sirenko"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:73
+#: ../Classes/Scenes/DeveloperScene.cpp:74
 msgid "andrii"
 msgstr "Andrii Chaika"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:82
+#: ../Classes/Scenes/DeveloperScene.cpp:83
 msgid "thank"
 msgstr "Thanks to:"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:91
+#: ../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
 "Thank1 Thank1, Tahnk2 Thank2 \n"
@@ -51,87 +51,109 @@ msgstr ""
 "Thank1 Thank1, Tahnk2 Thank2 \n"
 "Thank1 Thank1, Tahnk2 Thank2"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:118
+#: ../Classes/Scenes/DeveloperScene.cpp:119
 msgid "madeInUkraine"
 msgstr "made in Ukraine"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:128
+#: ../Classes/Scenes/DeveloperScene.cpp:129
 msgid "copy"
 msgstr "© 2014"
 
-#: ../Classes/Scenes/LevelScene.cpp:49
+#: ../Classes/Scenes/LevelScene.cpp:85
 msgid "Test_level_end"
 msgstr "How do you rate this level?"
 
-#: ../Classes/Scenes/LevelScene.cpp:87
+#: ../Classes/Scenes/LevelScene.cpp:121
 msgid "Good_level"
 msgstr "Good"
 
-#: ../Classes/Scenes/LevelScene.cpp:109
+#: ../Classes/Scenes/LevelScene.cpp:143
 msgid "So_level"
 msgstr "I don`t know"
 
-#: ../Classes/Scenes/LevelScene.cpp:130
+#: ../Classes/Scenes/LevelScene.cpp:164
 msgid "Bad_level"
 msgstr "Bad"
 
-#: ../Classes/Scenes/LevelScene.cpp:174
+#: ../Classes/Scenes/LevelScene.cpp:208
 msgid "BuyHint"
 msgstr "Buy Hints"
 
-#: ../Classes/Scenes/LevelScene.cpp:301
+#: ../Classes/Scenes/LevelScene.cpp:338
 msgid "End_bad"
 msgstr "You need more points"
 
-#: ../Classes/Scenes/LevelScene.cpp:306
+#: ../Classes/Scenes/LevelScene.cpp:342
 msgid "End_good"
 msgstr "Score"
 
-#: ../Classes/Scenes/LevelScene.cpp:390
+#: ../Classes/Scenes/LevelScene.cpp:421
 msgid "Retry"
 msgstr "Retry"
 
-#: ../Classes/Scenes/LevelScene.cpp:420
+#: ../Classes/Scenes/LevelScene.cpp:451
 msgid "Next"
 msgstr "Next"
 
-#: ../Classes/Scenes/SelectCollection.cpp:152
+#: ../Classes/Scenes/MainScene.cpp:40
+msgid "Sure"
+msgstr ""
+"Would you like\n"
+"to leave the game?"
+
+#: ../Classes/Scenes/MainScene.cpp:77 ../Classes/Scenes/SettingScene.cpp:76
+msgid "Yes"
+msgstr "Yes"
+
+#: ../Classes/Scenes/MainScene.cpp:99 ../Classes/Scenes/SettingScene.cpp:98
+msgid "No"
+msgstr "No"
+
+#: ../Classes/Scenes/SelectCollection.cpp:182
 msgid "Collection"
 msgstr "Collections"
 
-#: ../Classes/Scenes/SettingScene.cpp:39
+#: ../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
 "Would you like\n"
 " to delete all saves ?"
 
-#: ../Classes/Scenes/SettingScene.cpp:75
-msgid "Yes"
-msgstr "Yes"
-
-#: ../Classes/Scenes/SettingScene.cpp:97
-msgid "No"
-msgstr "No"
-
-#: ../Classes/Scenes/SettingScene.cpp:171
+#: ../Classes/Scenes/SettingScene.cpp:172
 msgid "Settings"
 msgstr "Settings"
 
-#: ../Classes/Scenes/SettingScene.cpp:243
+#: ../Classes/Scenes/SettingScene.cpp:246
 msgid "Reset"
 msgstr "Reset Progress"
 
-#: ../Classes/Scenes/SettingScene.cpp:253
+#: ../Classes/Scenes/SettingScene.cpp:256
 msgid "Restore"
 msgstr "Restore Purchases"
 
-#: ../Classes/Scenes/SettingScene.cpp:263
+#: ../Classes/Scenes/SettingScene.cpp:266
 msgid "Developers"
 msgstr "Developers"
 
-#: ../Classes/Scenes/SettingScene.cpp:273
+#: ../Classes/Scenes/SettingScene.cpp:276
 msgid "Rate"
 msgstr "Rate Me"
+
+#~ msgid "main.exit.sure"
+#~ msgstr "Are you sure"
+
+#~ msgid "Sure_go_out"
+#~ msgstr "Are you sure?"
+
+#~ msgid "Go_out_the_game"
+#~ msgstr "Would you like to leave the game?"
+
+#~ msgid "Go_out"
+#~ msgstr "Would you like to leave the game?"
+
+#, fuzzy
+#~ msgid "No2"
+#~ msgstr "No"
 
 #~ msgid "thank1"
 #~ msgstr "Test1 Test1"

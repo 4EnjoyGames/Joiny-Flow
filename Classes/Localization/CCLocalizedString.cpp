@@ -17,12 +17,14 @@ static map<std::string,std::string> localizedStrings;
 
 uint32_t swap_le(const char *buf, size_t ofs)
 {
-    return *((uint32_t *)(buf + ofs));
+    uint32_t* res = (uint32_t*)(buf + ofs);
+    return *res;
 }
 
 uint32_t swap_be(const char *buf, size_t ofs)
 {
-    return *((uint32_t *)(buf + ofs));
+    uint32_t* res = (uint32_t*)(buf + ofs);
+    return *res;
 }
 
 void parse_file(const char *filename)
@@ -30,7 +32,7 @@ void parse_file(const char *filename)
     unsigned char * fileContents = NULL;
     unsigned long fileSize = 0;
     fileContents = CCFileUtils::sharedFileUtils()->getFileData( filename,
-                                                                "r",
+                                                                "rb",
                                                                 &fileSize);
     if(fileContents != nullptr)
     {

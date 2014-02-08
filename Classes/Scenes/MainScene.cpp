@@ -37,7 +37,7 @@ private:
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
 
-        CCLabelTTF* label = CCLabelTTF::create("Go out?",
+        CCLabelTTF* label = CCLabelTTF::create(_("Sure"),
                                                Fonts::getFontName(),
                                                48);
 
