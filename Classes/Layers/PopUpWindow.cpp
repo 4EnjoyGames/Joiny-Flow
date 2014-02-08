@@ -233,6 +233,10 @@ void PopUpWindowManager::addScrollViewToAutoDisable(cocos2d::CCScrollView* scrol
 {
     _scroll_views.push_back(scroll_view);
 }
+void PopUpWindowManager::setGameDisable(FlowGame* game)
+{
+    _game=game;
+}
 
 void PopUpWindowManager::setMenusAvaliablitity(bool enabled)
 {
@@ -245,6 +249,12 @@ void PopUpWindowManager::setMenusAvaliablitity(bool enabled)
     {
         CCScrollView* m = _scroll_views[i];
         m->setTouchEnabled(enabled);
+    }
+
+    if(_game)
+    {
+        _game->stopAllActions();
+
     }
 }
 

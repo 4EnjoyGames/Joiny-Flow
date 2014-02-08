@@ -2,6 +2,8 @@
 #define POPUPWINDOW_H
 #include "cocos2d.h"
 #include "Core/CCScrollView.h"
+#include "Flow/FlowGame.h"
+
 class PopUpWindow : public cocos2d::CCLayer
 {
 public:
@@ -51,6 +53,7 @@ public:
     bool backAction();
     void addMenuToAutoDisable(cocos2d::CCMenu* menu);
     void addScrollViewToAutoDisable(cocos2d::CCScrollView* scroll_view);
+    void setGameDisable(FlowGame* game);
 private:
     void onLastClosed();
     void setMenusAvaliablitity(bool enabled);
@@ -58,6 +61,7 @@ private:
                        bool vertical_mode=false);
     PopUpWindow* _opened_window;
     PopUpWindow* _pending_window;
+    FlowGame* _game;
 
     std::vector<cocos2d::CCMenu*> _menus;
     std::vector<cocos2d::CCScrollView*> _scroll_views;

@@ -906,6 +906,11 @@ bool LevelScene::init()
 
     //create hint object
     _hints = Hints(_current_level,_flow_game);
+
+
+    //on what menu do not respond PopUpWindow
+    _pop_up_manager.addMenuToAutoDisable(_buttons_menu->menu());
+    _pop_up_manager.setGameDisable(_flow_game);
     return true;
 }
 
