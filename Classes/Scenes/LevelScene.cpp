@@ -122,7 +122,7 @@ private:
                                                 Fonts::getFontName(),
                                                 font_size);
 
-        good_level_text->setColor(GameInfo::getInstance()->getPositiveColor());
+        good_level_text->setColor(ccc3(255,255,255));
         good_level_text->setPosition(ccp(good_level_button->getContentSize().width/2,
                                good_level_button->getContentSize().height/2));
         good_level_button->addChild(good_level_text);
@@ -164,7 +164,7 @@ private:
         CCLabelTTF * bad_level_text = CCLabelTTF::create(_("Bad_level"),
                                                 Fonts::getFontName(),
                                                 font_size);
-        bad_level_text->setColor(GameInfo::getInstance()->getNegativeColor());
+        bad_level_text->setColor(ccc3(255,255,255));
         bad_level_text->setPosition(ccp(badlevel_button->getContentSize().width/2,
                                badlevel_button->getContentSize().height/2));
         badlevel_button->addChild(bad_level_text);

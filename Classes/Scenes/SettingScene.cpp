@@ -65,7 +65,7 @@ private:
         ///////////////////////////////////////////////////////
 
         CCSprite* button0 = menu_spl->loadSprite("level_end_button.png");
-        button0->setColor(GameInfo::getInstance()->getPositiveColor());
+        button0->setColor(ccc3(255,255,255));
 
         AnimatedMenuItem *yes_reset = AnimatedMenuItem::create(
                     button0,
@@ -76,7 +76,7 @@ private:
         CCLabelTTF * yes_reset_text = CCLabelTTF::create(_("Yes"),
                                                 Fonts::getFontName(),
                                                 48);
-        yes_reset_text->setColor(GameInfo::getInstance()->getPositiveColor());
+        yes_reset_text->setColor(ccc3(255,255,255));
         yes_reset_text->setPosition(ccp(yes_reset->getContentSize().width/2,
                                yes_reset->getContentSize().height/2));
 
@@ -87,7 +87,7 @@ private:
         //////////////////////////////////////////////////////
 
         CCSprite* button1 = menu_spl->loadSprite("level_end_button.png");
-        button1->setColor(GameInfo::getInstance()->getNegativeColor());
+        button1->setColor(ccc3(255,255,255));
 
         AnimatedMenuItem *no_reset = AnimatedMenuItem::create(
                     button1,
@@ -98,7 +98,7 @@ private:
         CCLabelTTF * no_reset_text = CCLabelTTF::create(_("No"),
                                                 Fonts::getFontName(),
                                                 48);
-        no_reset_text->setColor(GameInfo::getInstance()->getNegativeColor());
+        no_reset_text->setColor(ccc3(255,255,255));
         no_reset_text->setPosition(ccp(no_reset->getContentSize().width/2,
                                no_reset->getContentSize().height/2));
 
