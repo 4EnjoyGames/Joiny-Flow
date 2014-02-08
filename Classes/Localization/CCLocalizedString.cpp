@@ -81,7 +81,7 @@ const char* _(const string& key)
     if(!loaded)
     {
         loaded = true;
-        parse_file(ADLanguage::localizeFileName("Translation.mo").c_str());
+        parse_file(ADLanguage::localizeFileName("translations/Translation.mo").c_str());
     }
     auto it = localizedStrings.find(key);
     if(it == localizedStrings.end())
