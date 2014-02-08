@@ -643,11 +643,6 @@ void LevelScene::onReloadLevelClicked(CCObject*)
 
 bool LevelScene::init()
 {
-    //    if ( !CCLayer::init() )
-    //    {
-    //        return false;
-    //    }
-
     if (!DrawLayer::init())
     {
         return false;
@@ -691,24 +686,11 @@ bool LevelScene::init()
     this->addChild(_score_label);
 
     _flow_game = FlowGame::create(table, FlowGame::DelegatePtr(new FlowDelegate(this)));
-    //CCSize render_size = _flow_game->getContentSize();
 
-    //    _flow_game->setScale(MIN(VISIBLE_SIZE.width / (render_size.width),
-    //                         VISIBLE_SIZE.width / (render_size.height+60/SCALE) ));
-    //    //_flow_game->setScale(0.3f);
-    //_flow_game->setAnchorPoint(ccp(0, 0.5f));
-    //    _flow_game->setPosition(ccp(ORIGIN.x + 20/SCALE,
-    //                                ORIGIN.y + VISIBLE_SIZE.height*0.57));
     this->addChild(_flow_game);
 
 
     /////////////////////////////////////////////////////////////////
-
-    //    CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
-    //    //tablo->setPosition(ORIGIN);
-
-    //    CCSize tablo_size = tablo->getContentSize();
-    //    tablo->removeFromParentAndCleanup(true);
 
     SpritesLoader  buttons_spl = GraphicsManager::getLoaderFor(
                 0,
@@ -772,27 +754,20 @@ bool LevelScene::init()
 
 
     //add hints number text with background
-    CCPoint hint_text_position(ccp(hint_button->getContentSize().width*0.9,
-                                   hint_button->getContentSize().height*0.3));
+    CCPoint hint_text_position(ccp(hint_button->getContentSize().width*0.5,
+                                   hint_button->getContentSize().height*0.1));
 
     //number of hints
     unsigned int hints = _hints.getHintNumber();
     std::string hints_str = AD_to_string(hints);
     _hint_number_text = CCLabelTTF::create(hints_str.c_str(),
                                            Fonts::getFontName(),
-                                           55);
+                                           45);
     _hint_number_text->setColor(GameInfo::getInstance()->getNegativeColor());
     _hint_number_text->setPosition(hint_text_position);
     _hint_number_text->setAnchorPoint(ccp(0.5,0.5));
     hint_button->addChild(_hint_number_text);
 
-
-    //white circle background
-//    CCSprite* hint_text_background = buttons_spl->loadSprite("hint_background.png");
-//    hint_text_background->setPosition(ccp(hint_button->getPositionX()+hint_button->getContentSize().width*0.41,
-//                                          hint_button->getContentSize().height*0.4));
-//    hint_text_background->setScale(_hint_number_text->getContentSize().width/_hint_number_text->getContentSize().width*0.5);
-//    hint_button->addNephew(hint_text_background);
 
     this->addChild(_buttons_menu);
 
