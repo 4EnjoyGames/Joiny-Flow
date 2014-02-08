@@ -356,7 +356,7 @@ private:
             CCLabelTTF* score = CCLabelTTF::create(score_to_bronze.c_str(),
                                                    Fonts::getFontName(),
                                                    92);
-            score->setPosition(ccp(x_middle, size.height*0.55f));
+            score->setPosition(ccp(x_middle, size.height*0.45f));
             parent->addChild(score);
         }
         else
@@ -978,7 +978,7 @@ void LevelScene::onWin()
         RW::getLevelManager().onLevelFinished(_current_level, _last_score);
 
         //if it is a test version - open statistic window
-        static bool test_mode = true;
+        static bool test_mode = false;
 
         if(!test_mode)
         {      

@@ -172,7 +172,7 @@ bool SettingScene::init()
     CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),
                                                Fonts::getFontName(),
                                                72);
-    settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+    settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5 + 25/SCALE,
                           ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     settings->setColor(GameInfo::getInstance()->getTitleColor());
     this->addChild(settings);

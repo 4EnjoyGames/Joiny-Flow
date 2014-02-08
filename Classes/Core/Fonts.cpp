@@ -15,8 +15,7 @@ const char* Fonts::getFontName()
         }
         else
         {
-            //TODO: found font for Cyrillic
-            _font_name = "fonts/Fredoka One.ttf";
+            _font_name = "fonts/Ubuntu Bold.ttf";
         }
     }
 
