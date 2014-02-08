@@ -1,6 +1,9 @@
 #include "FlowGame.h"
 #include <algorithm>
+#include "Core/MusicSettings.h"
+
 using namespace cocos2d;
+
 FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
     : _renderer(FlowRenderer::create(table)), _table(0), _is_touch_active(false),
       _active_touch_id(-1), _active_traces(), _submitted_traces(),
@@ -271,6 +274,17 @@ void FlowGame::touchEnded(const FlowPoint& p)
     _submitted_traces = _active_traces;
     _finish_lock = false;
     updateHighlighted();
+
+    //if the point is on the table
+    if((p.x() < _table->getWidth() && p.y() < _table->getHeight()))
+    {
+        FlowPointState st = _table->get(p);
+        if(st.getNodeType() == FlowPointState::Circle)
+        {
+            //play sound effect
+            MusicSettings::playSoundEffect("music/flow_click.wav");
+        }
+    }
 
     updateScore();
     if(checkWinCondition())
