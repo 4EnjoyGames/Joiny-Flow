@@ -59,9 +59,7 @@ int CALLBACK WinMain(
 {
     //UNREFERENCED_PARAMETER(hPrevInstance);
     //UNREFERENCED_PARAMETER(lpCmdLine);
-#ifdef JUNIOR
-    //assert(false);
-#endif
+
     bool portrait_mode = true;
     Mode open_in_mode = IPhone4GS;
 

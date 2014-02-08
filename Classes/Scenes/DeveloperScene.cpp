@@ -111,19 +111,9 @@ bool DeveloperScene::init()
     CCSprite* flag = CCSprite::create("settings-menu/flag.png");
     flag->setScale(flag->getContentSize().width/flag->getContentSize().width*0.25);
 
-    flag->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.35,
+    flag->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                                   ORIGIN.y + 100/SCALE));
     this->addChild(flag);
-
-    //made in ukraine
-    CCLabelTTF * made = CCLabelTTF::create(_("madeInUkraine"),
-                                               Fonts::getFontName(),
-                                               30);
-    made->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.55,
-                          ORIGIN.y + 100/SCALE));
-    made->setColor(GameInfo::getInstance()->getTitleColor());
-    this->addChild(made);
-
 
     //copy right
     CCLabelTTF * reight = CCLabelTTF::create(_("copy"),
