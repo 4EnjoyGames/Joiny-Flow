@@ -90,7 +90,7 @@ AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
 
     //CCPoint position = item->getPosition();
     stars_spr->setPosition(ccp(_item_size.width*0.5,
-                               _item_size.height*0.15));
+                               _item_size.height*0.06));
     stars_spr->setScale(stars_spr->getContentSize().width/
                         stars_spr->getContentSize().width*0.85);
     item->addNephew(stars_spr);
@@ -129,7 +129,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     std::string label_text = collection_name + "  "+ l_curr_str + '/'  + l_num_str ;
     CCLabelTTF* label = CCLabelTTF::create(label_text.c_str(),
                                            Fonts::getFontName(),
-                                           75/*60/scaled*/);
+                                           75);
     item->addChild(label);
 
     _item_size = background->getContentSize();
@@ -137,8 +137,8 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
     _scale = scale;
 
-    label->setPosition(ccp(background->getContentSize().width*0.5/*-3*scale*/,
-                           background->getContentSize().height*0.6));
+    label->setPosition(ccp(background->getContentSize().width*0.5,
+                           background->getContentSize().height*0.5));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
     label->setColor(working);
@@ -218,7 +218,7 @@ bool SelectCollection::init()
     image->removeFromParent();
 
     float margin = s.width * 0.15f;
-    float margin_vertical = s.width * 0.05f;
+    float margin_vertical = s.width * 0.09f;
     float width = s.width*in_row + margin*(in_row - 1);
 
     unsigned int rows = GameInfo::getInstance()->getCollectionNumber();
