@@ -17,6 +17,7 @@
 #include "Localization/CCLocalizedString.h"
 #include "Logic/Hints.h"
 #include "Logic/RW.h"
+#include "Scenes/LevelScene.h"
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -53,6 +54,8 @@ public:
             RW::getLevelManager().makeFullGameVersion();
 
         CCLog("Purchase %s finished successful", id.c_str());
+
+        LevelScene::purchaseUpdateHints();
     }
     void purchaseFailed(const ADInApp::ProductID & id,
                         const ADInApp::ErrorType error)
@@ -116,7 +119,7 @@ void initInAppPurchases()
 
     ADInApp::setDelegate(std::make_shared<InAppDelegate>());
 
-    ADInApp::loadStore(ADInApp::Mode::TestSuccess);
+
 
 
 }

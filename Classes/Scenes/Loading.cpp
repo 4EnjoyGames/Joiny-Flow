@@ -4,7 +4,7 @@
 #include "Core/CCTime.h"
 #include "SimpleAudioEngine.h"
 #include "../Core/MusicSettings.h"
-
+#include <ADLib/Device/ADInApp.h>
 #include "Logic/LevelManager.h"
 
 Loading::Loading() : _sprites_to_load(0), _loaded_sprites(0)
@@ -162,6 +162,8 @@ void Loading::addAll()
 //    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
 	
     RW::getLevelManager().loadSettings();
+    ADInApp::loadStore(ADInApp::Mode::TestSuccess);
+
     //addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
 

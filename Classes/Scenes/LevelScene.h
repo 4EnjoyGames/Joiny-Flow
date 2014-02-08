@@ -34,6 +34,9 @@ private:
         keyBackClicked();
     }
 
+    //for renew hints after purchase
+    static LevelScene* _last_scene;
+    void renewOneHint();
 
     void onScoreChanged(const FlowScore);
     void onWin();
@@ -81,6 +84,7 @@ private:
 public:
     LevelScene(const JoinyLevel *);
 
+    static void purchaseUpdateHints();
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();

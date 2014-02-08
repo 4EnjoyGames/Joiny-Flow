@@ -498,7 +498,7 @@ LevelScene::LevelScene(const JoinyLevel * current_level)
       _current_level(current_level),
       _score_label(0)
 {
-
+    _last_scene = this;
 }
 
 CCScene* LevelScene::scene(const JoinyLevel *current_level)
@@ -602,6 +602,16 @@ void LevelScene::onNextLevelClicked(CCObject*)
 {
     onNextLevel();
 }
+
+LevelScene* LevelScene::_last_scene = 0;
+void LevelScene::purchaseUpdateHints()
+{
+    if(_last_scene)
+    {
+        _last_scene->renewOneHint();
+        _last_scene->_pop_up_manager.closeWindow();
+    }
+}
 void LevelScene::onHintClicked(CCObject*)
 {
     bool succesfull_hint = false;
@@ -614,17 +624,16 @@ void LevelScene::onHintClicked(CCObject*)
         _pop_up_manager.openWindow(new BuyHintPopUp(this),true);
     }
 
-    if(succesfull_hint)
-    {
-        unsigned int hint = _hints.getHintNumber();
-        std::string hint_num = AD_to_string(hint);
-        _hint_number_text->setString(hint_num.c_str());
-    }
-    else
-    {
-        //TODO: if not succesfull hint - show toast: "Showed all hints at the level"
-    }
+    renewOneHint();
 }
+void LevelScene::renewOneHint()
+{
+    //renew hint num
+    unsigned int hint = _hints.getHintNumber();
+    std::string hint_num = AD_to_string(hint);
+    _hint_number_text->setString(hint_num.c_str());
+}
+
 void LevelScene::onReloadLevelClicked(CCObject*)
 {
     this->hideEverything(CCCallFunc::create(
@@ -987,6 +996,7 @@ void LevelScene::hideEverything(cocos2d::CCCallFunc* callback)
 
 void LevelScene::keyBackClicked()
 {
+    _last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverything(CCCallFunc::create(
