@@ -873,10 +873,15 @@ bool LevelScene::init()
     float main_node_scale = main_node_size /
             _flow_game->getContentSize().height;
     _flow_game->setScale(main_node_scale);
-    _flow_game->setAnchorPoint(ccp(0.5, 0));
+    _flow_game->setScaleY(0);
+    _flow_game->setAnchorPoint(ccp(0.5, 0.5));
     _flow_game->setPositionX(ORIGIN.x + VISIBLE_SIZE.width/2);
-    _flow_game->setPositionY(_buttons_menu->getPositionY() + menu_height + main_node_margin);
+    _flow_game->setPositionY(_buttons_menu->getPositionY() + menu_height + main_node_margin
+                             + _flow_game->getContentSize().height*main_node_scale*0.5f);
 
+    _flow_game->runAction(CCEaseElasticOut::create(
+                              CCScaleTo::create(0.4f, main_node_scale),
+                              0.8f));
 
 
     //create hint object
@@ -970,7 +975,20 @@ void LevelScene::onWin()
 void LevelScene::hideEverything(cocos2d::CCCallFunc* callback)
 {
     _flow_game->endGame();
-    this->runAction(callback);
+    //CCFadeTo* game_hide = CCFadeTo::create(0.4f, 0);
+    float animation_time = 0.1f;
+    _flow_game->stopAllActions();
+    _flow_game->runAction(CCScaleTo::create(animation_time, _flow_game->getScaleX(), 0));
+
+    //_pop_up_manager.backAction();
+
+    float delay = animation_time*1.2f;
+    this->runAction(
+                CCSequence::create(
+                    CCDelayTime::create(delay),
+                    callback,
+                    NULL));
+    //this->runAction(callback);
 }
 
 
