@@ -26,6 +26,9 @@ FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
     pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
     CCLog("Game start output");
     traceDebug();
+
+    //add call to hints
+    //_hints = Hints(this);
 }
 
 

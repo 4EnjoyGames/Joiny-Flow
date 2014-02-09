@@ -169,4 +169,48 @@ bool Hints::hasHint()
     _hint_number = RW::getLevelManager().getHintNumber();
     return (_hint_number!=0);
 }
+bool Hints::hasTutorial()
+{
+    std::vector < std::vector<FlowPoint> > hint_path =
+    _level->getPuzzle().getJoinyInfo().getPathes();
 
+    return (hint_path.size() < _tutorial_path_id);
+}
+
+unsigned int Hints::_tutorial_path_id = 0;
+void Hints::showTutorial()
+{
+    //all hints we have to show
+    std::vector < std::vector<FlowPoint> > hint_path =
+    _level->getPuzzle().getJoinyInfo().getPathes();
+
+    //for(unsigned int i=0; i<hint_path.size(); ++i)
+    //{
+        std::vector<FlowPoint> curr_path = hint_path[_tutorial_path_id];
+        FlowColor color = _flow_game->getCellColor(curr_path[0]);
+        bool showed = false;
+
+        //while(!_flow_game->hasUserThisPath(curr_path))
+        //{
+            if(!showed)
+            {
+                //_flow_game->showPath(curr_path);
+
+                for(unsigned int j=1; j<curr_path.size(); ++j)
+                {
+                    //CCLog("Tutorial Hints::(%d, %d) -> (%d, %d)",
+                    //      curr_path[j-1].x(),curr_path[j-1].y(),
+                    //       curr_path[j].x(),curr_path[j].y());
+
+                    _flow_game->connectHintPoints(curr_path[j-1],
+                            curr_path[j],
+                            color);
+                }
+            }
+
+            showed = true;
+        //}
+
+        ++_tutorial_path_id;
+    //}
+}

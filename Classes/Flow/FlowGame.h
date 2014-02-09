@@ -47,6 +47,9 @@ public:
     const FlowColor getCellColor(const FlowPoint& point) const;
 
 private:
+
+
+
     FlowRenderer* _renderer;
     const FlowTable* _table;
 

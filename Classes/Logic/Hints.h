@@ -21,6 +21,10 @@ public:
     void increaseHintNumber(const unsigned int num=1);
     bool hasHint();
 
+    //tutorial
+    bool hasTutorial();
+    void showTutorial();
+
 
     // hint pathes, which were used
     typedef std::vector < std::vector<FlowPoint> > UsedPathes;
@@ -34,6 +38,8 @@ private:
 
 
     //static Hints* _instance;
+    //for tutorial
+    static unsigned int _tutorial_path_id;
 
     const JoinyLevel *_level;
     FlowGame *_flow_game;

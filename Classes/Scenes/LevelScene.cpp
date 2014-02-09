@@ -546,6 +546,11 @@ void LevelScene::onNextLevel()
 //        ADAds::getInstance().showInterstitial();
 //        ADAds::getInstance().prepareInterstitial();
 //    }
+   if (ADAds::getInterstialTimesShowed() < 5)
+   {
+       ADAds::showInterstitial();
+       ADAds::prepareInterstitial();
+   }
 
     const JoinyLevel* next_level = RW::getLevelManager().getNextLevel(_current_level);
     if(next_level != nullptr)
@@ -891,6 +896,14 @@ bool LevelScene::init()
     //on what menu do not respond PopUpWindow
     _pop_up_manager.addMenuToAutoDisable(_buttons_menu->menu());
     _pop_up_manager.setGameDisable(_flow_game);
+
+
+    //if this is the first level of the first collection - show tutorial
+//    if(_current_level->getLevelId()==1 &&
+//            _current_level->getCollection()->getCollectionID()==1)
+//    {
+//        _hints.showTutorial();
+//    }
     return true;
 }
 

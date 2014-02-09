@@ -40,6 +40,19 @@ void LevelManager::onRun()
 {
     loadGame();
 }
+const JoinyLevel* LevelManager::getLevel(const JoinyCollectionID id,
+                                         const JoinyLevelID l_id) const
+{
+    CollectionMap::const_iterator it = _collections.find(id);
+    if(it == _collections.end())
+        return nullptr;
+    else
+    {
+        JoinyCollection*  coll = it->second.get();
+        return coll->getLevel(l_id);
+    }
+
+}
 const JoinyCollection* LevelManager::getCollection(const JoinyCollectionID id) const
 {
     CollectionMap::const_iterator it = _collections.find(id);
