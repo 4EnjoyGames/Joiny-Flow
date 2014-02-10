@@ -421,7 +421,7 @@ private:
 
         CCLabelTTF * retry_text = CCLabelTTF::create(_("Retry"),
                                                 Fonts::getFontName(),
-                                                48);
+                                                40);
         retry_text->setColor(ccc3(255,255,255));
 
 
@@ -451,7 +451,7 @@ private:
 
             CCLabelTTF * next_level_text = CCLabelTTF::create(_("Next"),
                                                     Fonts::getFontName(),
-                                                    48);
+                                                    40);
             next_level_text->setColor(ccc3(255,255,255));
 
             AnimatedMenuItem *next_level = AnimatedMenuItem::create(
