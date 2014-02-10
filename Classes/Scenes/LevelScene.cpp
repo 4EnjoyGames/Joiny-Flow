@@ -191,7 +191,7 @@ private:
 
         //set collor to background
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
-        parent_rgb->setColor(GameInfo::getInstance()->getPositiveColor());
+        parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
 
 
         //create menu for AnimatedSprites
