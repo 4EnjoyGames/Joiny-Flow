@@ -131,7 +131,7 @@ void GenerateLevels(const unsigned int tablo_size,
         FlowTask t = generate(joiny_size,joiny_size);
         std::sort(t.begin(), t.end());
 
-        //if(isGooTask(t))
+        if(isGooTask(t))
         {
             unsigned int colors = max;
 
@@ -149,27 +149,27 @@ void GenerateLevels(const unsigned int tablo_size,
             //std::sort(task.begin(), task.end());
 
 
-            //JoinyInfo info_old = solveJoiny(task,
-            //                                joiny_size,
-            //                                joiny_size);
+            JoinyInfo info_old = solveJoiny(task,
+                                            joiny_size,
+                                            joiny_size);
 
             JoinyTask task_origin = flowToJoinyStaightforward(t);
             JoinyInfo info_origin = solveJoiny(task_origin,
                                                joiny_size,
                                                joiny_size);
 
-            //JoinyInfo info = mergeInfo(info_old, info_origin);
+            JoinyInfo info = mergeInfo(info_old, info_origin);
 
-            if(1>2)//(info.getGold() > 100000)
+            if(info.getGold() > 100000)
             {
                 std::cout << "Bug!!" << endl;
             }
-            else //if(isGoodJoiny(task, info))
+            else if(isGoodJoiny(task, info))
             {
 
                 //std::sort(task.begin(), task.end());
-                //JoinyPuzzle puzzle(task, info);
-                JoinyPuzzle puzzle(task,info_origin);
+                JoinyPuzzle puzzle(task, info);
+                //JoinyPuzzle puzzle(task,info_origin);
 
                 good_tasks.insert(puzzle);
                 ++good;
@@ -248,7 +248,13 @@ void SaveCollection(std::string plan_file,
     uint32_t b_uint = std::stoi(b);
 
 
+    // read is this collection open or close
+    std::getline(infile, line);
+    std::string open_or_close = line;
+    uint32_t open_or_close_i = std::stoi(open_or_close);
 
+    //one more white line
+    std::getline(infile,line);
 
     std::vector<std::string> level_files_name;
     for(unsigned int i=0; i<level_num_i; ++i)
@@ -314,6 +320,9 @@ void SaveCollection(std::string plan_file,
     os << r_uint;
     os << g_uint;
     os << b_uint;
+
+    //open or close
+    os << open_or_close_i;
 
     //levels
     os << good_tasks;

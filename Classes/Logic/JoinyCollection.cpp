@@ -2,7 +2,7 @@
 
 JoinyCollection::JoinyCollection()
     : _id(0), _levels(nullptr), _coll_name("no_name"),
-      _coll_color(ccc3(250,250,250)), _open(true), _min_star_number(3)
+      _coll_color(ccc3(250,250,250)), _open(false), _min_star_number(3)
 {
 }
 

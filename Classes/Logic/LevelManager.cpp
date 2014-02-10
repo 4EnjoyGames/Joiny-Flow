@@ -126,11 +126,18 @@ void LevelManager::loadLevelsInfo()
             is >> g;
             is >> b;
 
+            bool open = false;
+            uint32_t open_or_close = 0;
+            is >> open_or_close;
+            if(open_or_close==1)
+                open = true;
+
 
             std::vector<JoinyPuzzle> inp;
             is >> inp;
 
             CollectionPtr col(new JoinyCollection);
+            col->_open = open;
             col->_id = j+1;
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
                         new JoinyCollection::LevelsVector(level_num,

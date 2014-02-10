@@ -169,7 +169,7 @@ void Loading::addAll()
 
     bool previev_mode = false;
     if(previev_mode)
-        RW::getLevelManager().makePreviews(5,220);
+        RW::getLevelManager().makePreviews(5,200);
 
 //    const CollectionsArr& arr = RW::getCollections();
 //    for(CollectionsArr::const_iterator it = arr.begin(); it != arr.end(); ++it)

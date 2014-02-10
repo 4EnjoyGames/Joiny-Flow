@@ -57,11 +57,16 @@ void SelectCollection::onCollectionSelect(CCObject* sender)
 
 
         _last_selected_collection = selected;
-        hideEverything(
-                    CCCallFunc::create(
-                        this,
-                        callfunc_selector(SelectCollection::doOpenCollection)));
 
+        //if the collection is opened - open it
+        //else show buy window
+        if(_last_selected_collection->isOpenCollection())
+        {
+            hideEverything(
+                        CCCallFunc::create(
+                            this,
+                            callfunc_selector(SelectCollection::doOpenCollection)));
+        }
 
     }
 }
@@ -108,7 +113,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     ccColor3B label_color = collection->getCollectionColor();
 
     static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
-    static ccColor3B working = closeLevel;
+    ccColor3B working = closeLevel;
     if(collection->isOpenCollection())
         working = label_color;
 

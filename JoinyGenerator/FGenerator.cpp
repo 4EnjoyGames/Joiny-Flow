@@ -17,10 +17,6 @@ FlowTask generate(const Cordinate width, const Cordinate height)
     return print(table);
 }
 
-
-
-
-
 bool isFlowHead(const unsigned int x, const unsigned int y, const Table& table);
 void layFlow(int x, int y, Table& table);
 

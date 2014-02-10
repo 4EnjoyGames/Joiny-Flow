@@ -277,7 +277,7 @@ public:
 
     void SaveAllPath()
     {
-        cout<<"Tablo"<<endl;
+        //cout<<"Tablo"<<endl;
 
         _hint_traveled = std::vector<bool>(height_ * width_, false);
         _one_path.clear();//(height_ * width_, 0);
@@ -297,7 +297,7 @@ public:
                     _one_tablo_pathes.push_back(_one_path);
 
 
-                    cout<<endl;
+                    //cout<<endl;
                     _one_path.clear();
 
                     if(result == 0)
@@ -322,9 +322,9 @@ public:
 
         if(path_lenth > 0 && table_[GetCellKey(x, y)])
         {
-            cout << 'l' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+           // cout << 'l' << '(' << x << ',' << y << ')' << " = "
+           //      << static_cast<int>(cell_number)
+           //      << " = " << outCellCordinates(x, y) << endl;
             _one_path.push_back(FlowPoint(x,y));
             return 100;
         }
@@ -336,9 +336,9 @@ public:
         {
             _one_path.push_back(FlowPoint(x,y));
 
-            cout << 'l' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 'l' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
             return saveOnePath(x-1, y, path_lenth+1, cell_number);
         }
@@ -349,9 +349,9 @@ public:
         {
             _one_path.push_back(FlowPoint(x,y));
 
-            cout << 'b' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 'b' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
             return saveOnePath(x, y-1, path_lenth+1, cell_number);
         }
@@ -362,9 +362,9 @@ public:
         {
             _one_path.push_back(FlowPoint(x,y));
 
-            cout << 'r' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 'r' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
             return saveOnePath(x+1, y, path_lenth+1, cell_number);
         }
@@ -375,9 +375,9 @@ public:
         {
             _one_path.push_back(FlowPoint(x,y));
 
-            cout << 't' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 't' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
             return saveOnePath(x, y+1, path_lenth+1, cell_number);
         }
