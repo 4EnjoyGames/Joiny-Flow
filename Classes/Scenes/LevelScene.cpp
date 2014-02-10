@@ -13,6 +13,7 @@ USING_NS_CC;
 #include <ADLib/Device/ADInApp.h>
 #include <ADLib/Device/ADStatistics.h>
 #include "Core/Fonts.h"
+#include "Logic/Tutorial.h"
 
 
 class LevelScene::TesterEndPopUp : public PopUpWindow::Content
@@ -899,11 +900,12 @@ bool LevelScene::init()
 
 
     //if this is the first level of the first collection - show tutorial
-//    if(_current_level->getLevelId()==1 &&
-//            _current_level->getCollection()->getCollectionID()==1)
-//    {
-//        _hints.showTutorial();
-//    }
+    if(_current_level->getLevelId()==1 &&
+            _current_level->getCollection()->getCollectionID()==1)
+    {
+        Tutorial::getInstance()->setInfo(_flow_game);
+        Tutorial::getInstance()->showTutorial();
+    }
     return true;
 }
 

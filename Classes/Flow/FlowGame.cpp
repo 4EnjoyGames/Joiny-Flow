@@ -1,5 +1,6 @@
 #include "FlowGame.h"
 #include <algorithm>
+#include "Logic/Tutorial.h"
 #include "Core/MusicSettings.h"
 
 using namespace cocos2d;
@@ -26,9 +27,6 @@ FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
     pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
     CCLog("Game start output");
     traceDebug();
-
-    //add call to hints
-    //_hints = Hints(this);
 }
 
 
@@ -85,6 +83,13 @@ void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch,
     {
         touchEnded(touchToCellCordinates(touchToLocalCords(pTouch)));
         _renderer->hideActiveCircle();
+    }
+
+    //if the trace is that we would like the user touched
+    if(hasUserThisPath(Tutorial::getInstance()->getCurrentTutorialHintPath()))
+    {
+        if(Tutorial::getInstance()->hasTutorial())
+            Tutorial::getInstance()->showTutorial();
     }
 }
 
