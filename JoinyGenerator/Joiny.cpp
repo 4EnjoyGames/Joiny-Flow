@@ -321,13 +321,14 @@ public:
                              std::vector<int>& _hint_traveled)
     {
         _hint_traveled[GetCellKey(x, y)] = 1;
+        _one_path.push_back(FlowPoint(x,y));
 
         if(path_lenth > 0 && table_[GetCellKey(x, y)]==1)
         {
            // cout << 'l' << '(' << x << ',' << y << ')' << " = "
            //      << static_cast<int>(cell_number)
            //      << " = " << outCellCordinates(x, y) << endl;
-            _one_path.push_back(FlowPoint(x,y));
+//            _one_path.push_back(FlowPoint(x,y));
             return 100;
         }
 
