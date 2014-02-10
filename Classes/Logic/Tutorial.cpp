@@ -40,10 +40,6 @@ void Tutorial::showTutorial()
 
         for(unsigned int j=1; j<curr_path.size(); ++j)
         {
-            //CCLog("Tutorial Hints::(%d, %d) -> (%d, %d)",
-            //      curr_path[j-1].x(),curr_path[j-1].y(),
-            //       curr_path[j].x(),curr_path[j].y());
-
             _flow_game->connectHintPoints(curr_path[j-1],
                     curr_path[j],
                     color);
@@ -71,4 +67,5 @@ const std::vector<FlowPoint> Tutorial::getCurrentTutorialHintPath()
 void Tutorial::deleteTutorialPath()
 {
     _tutorial_path_id = 0;
+    _flow_game=nullptr;
 }

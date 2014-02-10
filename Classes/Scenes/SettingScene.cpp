@@ -300,7 +300,7 @@ void SettingScene::createButton(CCSprite* logo,
     {
         CCLabelTTF * dev = CCLabelTTF::create(button_text,
                                                 Fonts::getFontName(),
-                                                72);
+                                                57);
         dev->setPosition(ccp(logo->getContentSize().width/2,
                                logo->getContentSize().height/2));
         dev->setColor(color);
