@@ -1013,7 +1013,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 {
     //Tutorial::getInstance()->deleteTutorialPath();
     _flow_game->endGame();
-    CCFadeTo* button_hide = CCFadeTo::create(0.2f, 0);
+    auto button_hide = [](){return CCFadeTo::create(0.2f, 0);};
     float animation_time = 0.2f;
     _flow_game->stopAllActions();
     _flow_game->runAction(CCScaleTo::create(animation_time, _flow_game->getScaleX(), 0));
@@ -1024,13 +1024,14 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 
 
 
-    _bronze_star->runAction(button_hide);
-    _silver_star->runAction(button_hide);
-    _gold_star->runAction(button_hide);
+    _bronze_star->runAction(button_hide());
+    _silver_star->runAction(button_hide());
+    _gold_star->runAction(button_hide());
 
     //hints and anothers
     //_buttons_menu->runAction(button_hide);
     CCFadeTo* logo_fade = CCFadeTo::create(0.15f, 0);
+    _buttons_menu->setCascadeOpacityEnabled(true);
     _buttons_menu->runAction(logo_fade);
 
 

@@ -10,6 +10,7 @@ MenuSpriteBatch::MenuSpriteBatch(cocos2d::CCMenu* menu, const SpritesLoader& spl
     }
 
     this->addChild(_menu);
+    _menu->setCascadeOpacityEnabled(true);
     _menu->setAnchorPoint(ccp(0,0));
     _menu->setPosition(ccp(0,0));
 
