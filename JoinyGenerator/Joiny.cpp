@@ -337,7 +337,7 @@ public:
         if(x > 0 && connected_x_[GetCellKey(x, y)] &&
                 _hint_traveled[GetCellKey(x-1, y)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
 //            cout << 'l' << '(' << x << ',' << y << ')' << " = "
 //                 << static_cast<int>(cell_number)
@@ -350,7 +350,7 @@ public:
         if(y > 0 && connected_y_[GetCellKey(x, y)] &&
                 _hint_traveled[GetCellKey(x, y-1)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
 //            cout << 'b' << '(' << x << ',' << y << ')' << " = "
 //                 << static_cast<int>(cell_number)
@@ -363,7 +363,7 @@ public:
         if(x+1 < width_ && connected_x_[GetCellKey(x+1, y)] &&
                 _hint_traveled[GetCellKey(x+1, y)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
 //            cout << 'r' << '(' << x << ',' << y << ')' << " = "
 //                 << static_cast<int>(cell_number)
@@ -376,7 +376,7 @@ public:
         if(y+1 < height_ && connected_y_[GetCellKey(x, y+1)] &&
                 _hint_traveled[GetCellKey(x, y+1)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
 //            cout << 't' << '(' << x << ',' << y << ')' << " = "
 //                 << static_cast<int>(cell_number)
