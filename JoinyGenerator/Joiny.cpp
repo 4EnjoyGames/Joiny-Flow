@@ -227,7 +227,7 @@ public:
     }
 
     std::vector<bool> _traversed;
-    std::vector<bool> _hint_traveled;
+
 
     unsigned int traverse(const unsigned int x,
                           const unsigned int y,
@@ -279,8 +279,9 @@ public:
     {
         //cout<<"Tablo"<<endl;
 
-        _hint_traveled = std::vector<bool>(height_ * width_, false);
+        std::vector<int> _hint_traveled = std::vector<int>(height_ * width_, 0);
         _one_path.clear();//(height_ * width_, 0);
+        _one_tablo_pathes.clear();
 
         unsigned int result = 0;
 
@@ -289,25 +290,25 @@ public:
             for (Distance x = 0; x < width_ && !stop; x++)
             {
                 if (table_[GetCellKey(x, y)] &&
-                        !_hint_traveled[GetCellKey(x, y)])
+                        _hint_traveled[GetCellKey(x, y)] != 1)
                 {
                     CellNumber number = table_[GetCellKey(x, y)];
 
-                    result = saveOnePath(x,y,0,number);
+                    result = saveOnePath(x,y,0,number,_hint_traveled);
                     _one_tablo_pathes.push_back(_one_path);
 
 
                     //cout<<endl;
                     _one_path.clear();
 
-                    if(result == 0)
-                        stop = true;
+                    //if(result == 0)
+                    //    stop = true;
                 }
             }
-        if(result > 0)
-        {
+        //if(result > 0)
+        //{
             //add path to data base
-        }
+        //}
 
 
 
@@ -316,11 +317,12 @@ public:
     unsigned int saveOnePath(const unsigned int x,
                   const unsigned int y,
                   unsigned int path_lenth,
-                  const CellNumber& cell_number)
+                  const CellNumber& cell_number,
+                             std::vector<int>& _hint_traveled)
     {
-        _hint_traveled[GetCellKey(x, y)] = true;
+        _hint_traveled[GetCellKey(x, y)] = 1;
 
-        if(path_lenth > 0 && table_[GetCellKey(x, y)])
+        if(path_lenth > 0 && table_[GetCellKey(x, y)]==1)
         {
            // cout << 'l' << '(' << x << ',' << y << ')' << " = "
            //      << static_cast<int>(cell_number)
@@ -332,7 +334,7 @@ public:
 
         //Next go to left?
         if(x > 0 && connected_x_[GetCellKey(x, y)] &&
-                !_hint_traveled[GetCellKey(x-1, y)])
+                _hint_traveled[GetCellKey(x-1, y)]!=1)
         {
             _one_path.push_back(FlowPoint(x,y));
 
@@ -340,12 +342,12 @@ public:
 //                 << static_cast<int>(cell_number)
 //                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x-1, y, path_lenth+1, cell_number);
+            return saveOnePath(x-1, y, path_lenth+1, cell_number,_hint_traveled);
         }
 
         //Next go to top?
         if(y > 0 && connected_y_[GetCellKey(x, y)] &&
-                !_hint_traveled[GetCellKey(x, y-1)])
+                _hint_traveled[GetCellKey(x, y-1)]!=1)
         {
             _one_path.push_back(FlowPoint(x,y));
 
@@ -353,12 +355,12 @@ public:
 //                 << static_cast<int>(cell_number)
 //                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x, y-1, path_lenth+1, cell_number);
+            return saveOnePath(x, y-1, path_lenth+1, cell_number,_hint_traveled);
         }
 
         //Next go to right?
         if(x+1 < width_ && connected_x_[GetCellKey(x+1, y)] &&
-                !_hint_traveled[GetCellKey(x+1, y)])
+                _hint_traveled[GetCellKey(x+1, y)]!=1)
         {
             _one_path.push_back(FlowPoint(x,y));
 
@@ -366,12 +368,12 @@ public:
 //                 << static_cast<int>(cell_number)
 //                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x+1, y, path_lenth+1, cell_number);
+            return saveOnePath(x+1, y, path_lenth+1, cell_number,_hint_traveled);
         }
 
         //Next go bottom?
         if(y+1 < height_ && connected_y_[GetCellKey(x, y+1)] &&
-                !_hint_traveled[GetCellKey(x, y+1)])
+                _hint_traveled[GetCellKey(x, y+1)]!=1)
         {
             _one_path.push_back(FlowPoint(x,y));
 
@@ -379,7 +381,7 @@ public:
 //                 << static_cast<int>(cell_number)
 //                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x, y+1, path_lenth+1, cell_number);
+            return saveOnePath(x, y+1, path_lenth+1, cell_number,_hint_traveled);
         }
 
         return 0;
@@ -809,7 +811,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
                          clamp((average + max)/2, 500),
                          clamp(max, 500));
         if(has_pathes)
-            info.getPathes() = tablo_pathes;
+            info.setPathes(tablo_pathes);
         return info;
     }
     return JoinyInfo(0,0,0);

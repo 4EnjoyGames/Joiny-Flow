@@ -104,9 +104,9 @@ JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
                   gold);
 
     if(a.getGold() > b.getGold())
-        res.getPathes() = a.getPathes();
+        res.setPathes(a.getPathes());
     else
-        res.getPathes() = b.getPathes();
+        res.setPathes(b.getPathes());
     return res;
 }
 void GenerateLevels(const unsigned int tablo_size,

@@ -69,6 +69,10 @@ public:
     {
         return _hint_pathes;
     }
+    void setPathes(const std::vector < std::vector<FlowPoint> >& pathes)
+    {
+        _hint_pathes = pathes;
+    }
 
 private:
     Score _bronze_score;
