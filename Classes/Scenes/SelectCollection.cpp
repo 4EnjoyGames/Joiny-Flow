@@ -352,10 +352,12 @@ bool SelectCollection::init()
 
 void SelectCollection::keyBackClicked()
 {
-    hideEverything(
-                CCCallFunc::create(
-                    this,
-                    callfunc_selector(SelectCollection::doGoBack)));
+    if(!_pop_up_manager.backAction())
+    {
+        this->hideEverything(CCCallFunc::create(
+                                 this, callfunc_selector(SelectCollection::doGoBack)));
+
+    }
 }
 
 void SelectCollection::doGoBack()
