@@ -26,6 +26,8 @@ private:
     CCLabelTTF* _score_label;
     PopUpWindowManager _pop_up_manager;
     void hideEverything(cocos2d::CCCallFunc *callback);
+    //use to back button clicked
+    void hideEverythingAndBack(cocos2d::CCCallFunc *callback);
 
     //on back clicked
     void keyBackClicked();

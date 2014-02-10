@@ -1009,6 +1009,38 @@ void LevelScene::hideEverything(cocos2d::CCCallFunc* callback)
     //this->runAction(callback);
 }
 
+void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
+{
+    //Tutorial::getInstance()->deleteTutorialPath();
+    _flow_game->endGame();
+    CCFadeTo* button_hide = CCFadeTo::create(0.2f, 0);
+    float animation_time = 0.2f;
+    _flow_game->stopAllActions();
+    _flow_game->runAction(CCScaleTo::create(animation_time, _flow_game->getScaleX(), 0));
+
+
+    _progress_timer;
+    //_back;
+
+
+
+    _bronze_star->runAction(button_hide);
+    _silver_star->runAction(button_hide);
+    _gold_star->runAction(button_hide);
+
+    //hints and anothers
+    //_buttons_menu->runAction(button_hide);
+    CCFadeTo* logo_fade = CCFadeTo::create(0.15f, 0);
+    _buttons_menu->runAction(logo_fade);
+
+
+    float delay = 0.5f;
+    this->runAction(
+                CCSequence::create(
+                    CCDelayTime::create(delay),
+                    callback,
+                    NULL));
+}
 
 void LevelScene::keyBackClicked()
 {
@@ -1016,7 +1048,7 @@ void LevelScene::keyBackClicked()
     _last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
-        this->hideEverything(CCCallFunc::create(
+        this->hideEverythingAndBack(CCCallFunc::create(
                                  this, callfunc_selector(LevelScene::doGoToCollection)));
 
     }
