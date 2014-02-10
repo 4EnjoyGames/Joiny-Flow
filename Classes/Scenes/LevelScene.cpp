@@ -1031,6 +1031,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
     //hints and anothers
     //_buttons_menu->runAction(button_hide);
     CCFadeTo* logo_fade = CCFadeTo::create(0.15f, 0);
+    _buttons_menu->setCascadeOpacityEnabled(true);
     _buttons_menu->runAction(logo_fade);
 
 

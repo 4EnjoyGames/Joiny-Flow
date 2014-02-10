@@ -2,7 +2,7 @@
 #define ANIMATEDMENU_H
 #include "cocos2d.h"
 #include "GraphicsManager.h"
-class MenuSpriteBatch : public cocos2d::CCNode
+class MenuSpriteBatch : public cocos2d::CCNodeRGBA
 {
     MenuSpriteBatch(cocos2d::CCMenu* menu, const SpritesLoader &spl);
 public:
