@@ -113,17 +113,13 @@ cocos2d::CCPoint FlowGame::touchToLocalCords(cocos2d::CCTouch* touch)
 
 FlowPoint FlowGame::touchToCellCordinates(cocos2d::CCPoint local_cords)
 {
-
+    if(local_cords.x < 0 || local_cords.y < 0)
+        return FlowPoint::UNDEFINED;
 
     CCSize cell_size = _renderer->getNodeSize();
 
     int x = static_cast<int>(local_cords.x / cell_size.width);
     int y = static_cast<int>(local_cords.y / cell_size.height);
-
-    if(x < 0)
-        x = _table->getWidth();
-    if(y < 0)
-        y = _table->getHeight();
 
     return FlowPoint(x, y);
 }
