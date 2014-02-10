@@ -12,6 +12,7 @@ public:
     void showTutorial();
     const unsigned int getCurrentTutorialPathId();
     const std::vector<FlowPoint> getCurrentTutorialHintPath();
+    void deleteTutorialPath();
 
 private:
     static Tutorial* _instance;

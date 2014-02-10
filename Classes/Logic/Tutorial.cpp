@@ -68,3 +68,7 @@ const std::vector<FlowPoint> Tutorial::getCurrentTutorialHintPath()
         return hint_path[_tutorial_path_id];
     return hint_path[_tutorial_path_id-1];
 }
+void Tutorial::deleteTutorialPath()
+{
+    _tutorial_path_id = 0;
+}

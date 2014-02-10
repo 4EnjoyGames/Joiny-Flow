@@ -964,6 +964,8 @@ void LevelScene::onScoreChanged(const FlowScore s)
 
 void LevelScene::onWin()
 {
+    Tutorial::getInstance()->deleteTutorialPath();
+
     if(_last_score < _current_info.getBronze())
         _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::NotEnough, _current_info.getBronze()-_last_score, 0, _current_level, this));
     else
@@ -989,6 +991,7 @@ void LevelScene::onWin()
 
 void LevelScene::hideEverything(cocos2d::CCCallFunc* callback)
 {
+    Tutorial::getInstance()->deleteTutorialPath();
     _flow_game->endGame();
     //CCFadeTo* game_hide = CCFadeTo::create(0.4f, 0);
     float animation_time = 0.1f;
@@ -1009,6 +1012,7 @@ void LevelScene::hideEverything(cocos2d::CCCallFunc* callback)
 
 void LevelScene::keyBackClicked()
 {
+    Tutorial::getInstance()->deleteTutorialPath();
     _last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
@@ -1017,9 +1021,3 @@ void LevelScene::keyBackClicked()
 
     }
 }
-
-
-
-
-
-
