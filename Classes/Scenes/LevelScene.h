@@ -19,7 +19,7 @@ private:
     class FlowDelegate;
 
 
-    void onNextLevel();
+    void onNextLevel(const bool show_ads=true);
 
 
     Hints _hints;

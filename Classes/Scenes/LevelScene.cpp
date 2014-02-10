@@ -540,18 +540,16 @@ private:
     LevelScene* _parent;
 };
 
-void LevelScene::onNextLevel()
+void LevelScene::onNextLevel(const bool show_ads)
 {
-//    if(ADAds::getInstance().getInterstialTimesShowed() < 5)
-//    {
-//        ADAds::getInstance().showInterstitial();
-//        ADAds::getInstance().prepareInterstitial();
-//    }
-   if (ADAds::getInterstialTimesShowed() < 5)
-   {
-       ADAds::showInterstitial();
-       ADAds::prepareInterstitial();
-   }
+    if(show_ads)
+    {
+       if (ADAds::getInterstialTimesShowed() < 5)
+       {
+           ADAds::showInterstitial();
+           ADAds::prepareInterstitial();
+       }
+    }
 
     const JoinyLevel* next_level = RW::getLevelManager().getNextLevel(_current_level);
     if(next_level != nullptr)
@@ -606,7 +604,7 @@ void LevelScene::onPreviousLevelClicked(CCObject*)
 }
 void LevelScene::onNextLevelClicked(CCObject*)
 {
-    onNextLevel();
+    onNextLevel(false);
 }
 
 LevelScene* LevelScene::_last_scene = 0;
