@@ -10,7 +10,94 @@
 #include "Core/Fonts.h"
 #include "Core/Screen.h"
 
-SelectCollection::SelectCollection()
+class SelectCollection::BuyFullVerdionPopUp : public PopUpWindow::Content
+{
+public:
+
+    BuyFullVerdionPopUp(
+            SelectCollection* parent=0)
+        : _parent(parent)
+    {}
+private:
+    typedef BuyFullVerdionPopUp Me;
+    SelectCollection* _parent;
+    void onBuy(CCObject*)
+    {
+        //TODO: add functions
+        this->closeWindow();
+    }
+
+    void onCancle(CCObject*)
+    {
+        this->closeWindow();
+    }
+
+
+    void onCreate(CCNode *parent)
+    {
+
+        CCSize size = parent->getContentSize();
+        float x_middle = size.width / 2;
+        float vertical = size.height * 0.18f;
+
+        CCLabelTTF* label = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.BuyTitle"),
+                                               Fonts::getFontName(),
+                                               62);
+        label->setFontSize(48);
+        label->setPosition(ccp(x_middle, size.height*0.7f));
+        parent->addChild(label);
+
+        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
+                                                               "level-end/level_end.plist",
+                                                               "level-end/level_end.png");
+        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
+        menu->setPosition(ccp(0,0));
+        menu->setAnchorPoint(ccp(0,0));
+        menu->setContentSize(size);
+        parent->addChild(menu);
+
+        CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
+        if(parent_rgb)
+            parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
+
+
+        AnimatedMenuItem *no_buy_item = AnimatedMenuItem::create(
+                    menu_spl->loadSprite("level_end_button.png"),
+                    this, menu_selector(Me::onCancle));
+        no_buy_item->setPosition(ccp(size.width*0.25,
+                                        vertical));
+        CCLabelTTF * no_buy_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.No"),
+                                                     Fonts::getFontName(),
+                                                     40);
+        no_buy_text->setColor(ccc3(255,255,255));
+        no_buy_text->setPosition(ccp(no_buy_item->getContentSize().width/2,
+                                    no_buy_item->getContentSize().height/2));
+        no_buy_item->addChild(no_buy_text);
+
+
+
+        AnimatedMenuItem *buy_item = AnimatedMenuItem::create(
+                    menu_spl->loadSprite("level_end_button.png"),
+                    this, menu_selector(Me::onBuy));
+        buy_item->setPosition(ccp(size.width*0.75,
+                                    vertical));
+        CCLabelTTF * buy_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.Yes"),
+                                                          Fonts::getFontName(),
+                                                          40);
+        buy_text->setColor(ccc3(255,255,255));
+        buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
+                                         buy_item->getContentSize().height/2));
+        buy_item->addChild(buy_text);
+        menu->menu()->addChild(buy_item);
+
+
+        menu->menu()->addChild(no_buy_item);
+    }
+};
+
+
+SelectCollection::SelectCollection():
+    _pop_up_manager(this)
 {
 }
 cocos2d::CCScene* SelectCollection::scene()
@@ -67,11 +154,15 @@ void SelectCollection::onCollectionSelect(CCObject* sender)
                             this,
                             callfunc_selector(SelectCollection::doOpenCollection)));
         }
+        else
+        {
+            _pop_up_manager.openWindow(new BuyFullVerdionPopUp(this));
+        }
 
     }
 }
 AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
-                              const JoinyCollection* collection)
+                                                const JoinyCollection* collection)
 {
     float SCALE = Screen::getScaleFactor();
 
@@ -252,7 +343,7 @@ bool SelectCollection::init()
 
         working_x += s.width + margin;
         collection_id_first++;
-        working_y -= s.height + margin_vertical; 
+        working_y -= s.height + margin_vertical;
     }
     newScrolling(_buttons_menu);
 

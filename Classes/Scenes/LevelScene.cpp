@@ -279,18 +279,18 @@ private:
     {
         //TODO: may be it will be "get free hints button" action
         ADInApp::buyProduct("hints_10");
-        this->closeWindow();
+        //this->closeWindow();
 
     }
     void onSecondButton(CCObject*)
     {
         ADInApp::buyProduct("hints_100");
-        this->closeWindow();
+        //this->closeWindow();
     }
     void onThirdButton(CCObject*)
     {
         ADInApp::buyProduct("hints_1000");
-        this->closeWindow();
+        //this->closeWindow();
     }
 
 };
