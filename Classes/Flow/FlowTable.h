@@ -4,6 +4,9 @@
 #include "FlowPointState.h"
 #include <vector>
 
+/**
+ * @brief Represents the table of Flow Game
+ */
 class FlowTable
 {
 public:
