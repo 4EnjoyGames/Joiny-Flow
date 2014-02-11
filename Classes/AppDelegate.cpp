@@ -124,6 +124,29 @@ void initInAppPurchases()
 
 }
 
+/**
+ * @brief Performs init and configuration of AdMob and home ads
+ */
+void initAds()
+{
+    std::string pid = "ca-app-pub-1097233306002326/3272087699";
+    ADAds::registerBannerType("BANNER", pid);
+    ADAds::registerBannerType("IAB_BANNER", pid);
+
+    std::string pid_inter = "ca-app-pub-1097233306002326/5031020099";
+    ADAds::registerInterstitialType(pid_inter);
+
+    ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
+    ADAds::addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
+    ADAds::addTestDevice("C31238A94F2B52E9F4B77E58270A3943"); //Tonya
+
+    ADAds::addCustomBanner(CCSprite::create("banners/mif_kids.png"),
+                           [](){
+        CCLog("banner clicked");
+    },
+    "MiF Kids");
+}
+
 bool AppDelegate::applicationDidFinishLaunching() {
     //Statistics init
     if(ADInfo::getPlatform() == ADPlatform::Android)
@@ -208,16 +231,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
 
-    std::string pid = "ca-app-pub-1097233306002326/3272087699";
-    ADAds::registerBannerType("BANNER", pid);
-    ADAds::registerBannerType("IAB_BANNER", pid);
-
-    std::string pid_inter = "ca-app-pub-1097233306002326/5031020099";
-    ADAds::registerInterstitialType(pid_inter);
-
-    ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
-    ADAds::addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
-    ADAds::addTestDevice("C31238A94F2B52E9F4B77E58270A3943"); //Tonya
+    initAds();
 
     return true;
 }

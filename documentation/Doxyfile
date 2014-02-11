@@ -816,7 +816,7 @@ FILE_PATTERNS          = *.c \
 # be searched for input files as well.
 # The default value is: NO.
 
-RECURSIVE              = YES
+RECURSIVE              = NO
 
 # The EXCLUDE tag can be used to specify files and/or directories that should be
 # excluded from the INPUT source files. This way you can easily exclude a
@@ -2367,3 +2367,9 @@ GENERATE_LEGEND        = YES
 # This tag requires that the tag HAVE_DOT is set to YES.
 
 DOT_CLEANUP            = YES
+
+#GENERATE_QHP           = YES
+#QCH_FILE               = "../joiny.qch"
+#QHP_NAMESPACE          = "Joiny"
+#QHP_VIRTUAL_FOLDER     = "joiny"
+#QHG_LOCATION           =  "C:/Qt/Qt5.1.0/5.1.0/msvc2012/bin/qhelpgenerator.exe"
