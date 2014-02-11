@@ -602,7 +602,7 @@ void LevelScene::onPreviousLevelClicked(CCObject*)
     }
     else
     {
-        this->hideEverything(CCCallFunc::create(
+        this->hideEverythingAndBack(CCCallFunc::create(
                                  this, callfunc_selector(LevelScene::doGoToCollection)));
 
     }
@@ -675,8 +675,8 @@ bool LevelScene::init()
     }
 
     //Back Button
-    CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
-    this->addChild(menu);
+    _back_menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
+    this->addChild(_back_menu);
 
     CCSize back_size = _back.getBackSize();
 
@@ -783,10 +783,10 @@ bool LevelScene::init()
     //////////////////////////////////////////////////////////////////////////
 
     //progress bar title
-    CCSprite* progress = CCSprite::create("level-scene/progress_bar_title.png");
-    progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -200/SCALE,
+    _progress = CCSprite::create("level-scene/progress_bar_title.png");
+    _progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -200/SCALE,
                               ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
-    this->addChild(progress);
+    this->addChild(_progress);
 
 
     _procc = 0;
@@ -813,9 +813,9 @@ bool LevelScene::init()
     _spl->inject();
 
 
-    CCPoint bar_begin = ccp(progress->getPositionX() - progress->getContentSize().width*0.5,
-                            progress->getPositionY());
-    CCSize bar_size = progress->getContentSize();
+    CCPoint bar_begin = ccp(_progress->getPositionX() - _progress->getContentSize().width*0.5,
+                            _progress->getPositionY());
+    CCSize bar_size = _progress->getContentSize();
     //3-d
     _bronze_star = _spl->loadSprite("black_star.png");
     float bronze_proc = (static_cast<float>(_bronze*100)/_max_score)/100.0f;
@@ -1016,15 +1016,19 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 {
     //Tutorial::getInstance()->deleteTutorialPath();
     _flow_game->endGame();
-    auto button_hide = [](){return CCFadeTo::create(0.2f, 0);};
+    auto button_hide = [](){return CCFadeTo::create(0.15f, 0);};
+
     float animation_time = 0.2f;
     _flow_game->stopAllActions();
     _flow_game->runAction(CCScaleTo::create(animation_time, _flow_game->getScaleX(), 0));
 
 
-    _progress_timer;
-    //_back;
+    _progress_timer->runAction(button_hide());
+    _progress->runAction(button_hide());
 
+    _score_label->runAction(button_hide());
+
+    _back_menu->runAction(button_hide());
 
 
     _bronze_star->runAction(button_hide());
@@ -1038,7 +1042,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
     _buttons_menu->runAction(logo_fade);
 
 
-    float delay = 0.5f;
+    float delay = 0.25f;
     this->runAction(
                 CCSequence::create(
                     CCDelayTime::create(delay),

@@ -83,6 +83,12 @@ private:
     MenuSpriteBatch* _buttons_menu;
 
     CCLabelTTF* _hint_number_text;
+
+    CCMenu* _back_menu;
+
+    //progress bar title
+    CCSprite* _progress ;
+
 public:
     LevelScene(const JoinyLevel *);
 
