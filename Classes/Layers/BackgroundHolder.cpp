@@ -27,29 +27,41 @@ BackgroundHolder& BackgroundHolder::getHolder()
 }
 void BackgroundHolder::backgroundSwitchTo(cocos2d::CCNode* node,
                                           cocos2d::CCCallFunc* back_button_callback,
+                                          const std::string& scene_name,
                                           const bool play_music)
 {
     BackgroundHolder& bgh = getHolder();
     bgh.storeClose();
-    bgh.do_backgroundSwitchTo(node, back_button_callback, play_music);
+    bgh.do_backgroundSwitchTo(node, back_button_callback, scene_name, play_music);
 }
 
 void BackgroundHolder::do_backgroundSwitchTo(cocos2d::CCNode* node,
                                              cocos2d::CCCallFunc* back_button_callback,
+                                             const std::string& scene_name,
                                              const bool play_music)
 {
     //turn on the audio if we just open the game
     if (play_music==true && _firstly==true)
     {
 
-        MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
+        if (scene_name == "level")
+        {
+            MusicSettings::playMusic(MusicSettings::LEVEL_SCENE_MUSIC);
+        }
+        else
+            MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
         _firstly=false;
     }
     else if (play_music==true && MusicSettings::isBackgrHolderMusic()==true)//false)
     {
         //MusicSettings::turnOnMusic();
        // MusicSettings::isBackgrHolderMusic()==true;
-        MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
+        if (scene_name == "level")
+        {
+            MusicSettings::playMusic(MusicSettings::LEVEL_SCENE_MUSIC);
+        }
+        else
+            MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
     }
     else if (play_music==false)
     {

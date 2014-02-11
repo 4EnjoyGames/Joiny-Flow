@@ -111,15 +111,15 @@ msgstr "Ні"
 
 #: ../../Classes/Scenes/SelectCollection.cpp:43
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
-msgstr ""
+msgstr "Купити повну версію?"
 
 #: ../../Classes/Scenes/SelectCollection.cpp:69
 msgid "SelectColection.BuyFullVerdionPopUp.No"
-msgstr ""
+msgstr "Відмінити"
 
 #: ../../Classes/Scenes/SelectCollection.cpp:84
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr ""
+msgstr "Купити"
 
 #: ../../Classes/Scenes/SelectCollection.cpp:278
 msgid "Collection"

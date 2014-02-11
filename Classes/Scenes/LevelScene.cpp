@@ -489,6 +489,7 @@ LevelScene* LevelScene::create(const JoinyLevel *level)
         pRet = 0;
         return 0;
     }
+
 }
 
 
@@ -500,6 +501,7 @@ LevelScene::LevelScene(const JoinyLevel * current_level)
       _score_label(0)
 {
     _last_scene = this;
+    this->setTag(123456);
 }
 
 CCScene* LevelScene::scene(const JoinyLevel *current_level)
@@ -510,8 +512,11 @@ CCScene* LevelScene::scene(const JoinyLevel *current_level)
     // 'layer' is an autorelease object
     LevelScene *layer = LevelScene::create(current_level);
 
+    CCCallFunc* back = CCCallFunc::create(layer,
+                                          callfunc_selector(LevelScene::keyBackClicked));
+
     // add layer as a child to scene
-    BackgroundHolder::backgroundSwitchTo(scene, 0);
+    BackgroundHolder::backgroundSwitchTo(scene, back, "level", true);
     //scene->addChild(backgorund);
     scene->addChild(layer);
 
