@@ -5,7 +5,9 @@
 #include "Logic/JoinyCollection.h"
 #include "BackButton.h"
 #include "Core/DrawLayer.h"
-class SelectCollection: public  DrawLayer//CCLayer
+#include "Layers/YesNoDialog.h"
+
+class SelectCollection: public  DrawLayer
 {
 public:
     SelectCollection();
@@ -18,6 +20,9 @@ public:
     }
 
 private:
+    class BuyFullVerdionPopUp;
+    PopUpWindowManager _pop_up_manager;
+
     BackButton _back;
     CCMenu* _back_menu;
 

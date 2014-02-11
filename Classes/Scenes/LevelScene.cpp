@@ -191,7 +191,7 @@ private:
 
         //set collor to background
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
-        parent_rgb->setColor(GameInfo::getInstance()->getPositiveColor());
+        parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
 
 
         //create menu for AnimatedSprites
@@ -279,18 +279,18 @@ private:
     {
         //TODO: may be it will be "get free hints button" action
         ADInApp::buyProduct("hints_10");
-        this->closeWindow();
+        //this->closeWindow();
 
     }
     void onSecondButton(CCObject*)
     {
         ADInApp::buyProduct("hints_100");
-        this->closeWindow();
+        //this->closeWindow();
     }
     void onThirdButton(CCObject*)
     {
         ADInApp::buyProduct("hints_1000");
-        this->closeWindow();
+        //this->closeWindow();
     }
 
 };

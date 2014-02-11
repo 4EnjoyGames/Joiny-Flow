@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-08 16:39+0200\n"
+"POT-Creation-Date: 2014-02-10 22:02+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,37 +12,37 @@ msgstr ""
 "X-Generator: Poedit 1.6.3\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ../Classes\n"
+"X-Poedit-SearchPath-0: ../../Classes\n"
 
-#: ../Classes/AppDelegate.cpp:66
+#: ../../Classes/AppDelegate.cpp:66
 msgid "iap.error.billing_unavaliable"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:71
+#: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.purchase_error"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:79
+#: ../../Classes/AppDelegate.cpp:79
 msgid "iap.restore_purchases.success"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:84
+#: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.failed"
 msgstr ""
 
-#: ../Classes/Scenes/DeveloperScene.cpp:66
+#: ../../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
 msgstr "Діана Сіренко"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:74
+#: ../../Classes/Scenes/DeveloperScene.cpp:74
 msgid "andrii"
 msgstr "Андрій Чайка"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:83
+#: ../../Classes/Scenes/DeveloperScene.cpp:83
 msgid "thank"
 msgstr "Дякуємо:"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:92
+#: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
 "Thank1 Thank1, Tahnk2 Thank2 \n"
@@ -51,95 +51,108 @@ msgstr ""
 "Thank1 Thank1, Tahnk2 Thank2 \n"
 "Thank1 Thank1, Tahnk2 Thank2"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:119
-msgid "madeInUkraine"
-msgstr "зроблено в Україні"
-
-#: ../Classes/Scenes/DeveloperScene.cpp:129
+#: ../../Classes/Scenes/DeveloperScene.cpp:119
 msgid "copy"
 msgstr "© 2014"
 
-#: ../Classes/Scenes/LevelScene.cpp:85
+#: ../../Classes/Scenes/LevelScene.cpp:86
 msgid "Test_level_end"
 msgstr "Як тобі рівень?"
 
-#: ../Classes/Scenes/LevelScene.cpp:121
+#: ../../Classes/Scenes/LevelScene.cpp:122
 msgid "Good_level"
 msgstr "Добре"
 
-#: ../Classes/Scenes/LevelScene.cpp:143
+#: ../../Classes/Scenes/LevelScene.cpp:144
 msgid "So_level"
 msgstr "Не знаю"
 
-#: ../Classes/Scenes/LevelScene.cpp:164
+#: ../../Classes/Scenes/LevelScene.cpp:165
 msgid "Bad_level"
 msgstr "Погано"
 
-#: ../Classes/Scenes/LevelScene.cpp:208
+#: ../../Classes/Scenes/LevelScene.cpp:209
 msgid "BuyHint"
 msgstr "Купити підказки"
 
-#: ../Classes/Scenes/LevelScene.cpp:338
+#: ../../Classes/Scenes/LevelScene.cpp:339
 msgid "End_bad"
 msgstr ""
 "Потрбіно набрати\n"
 "більше очків"
 
-#: ../Classes/Scenes/LevelScene.cpp:342
+#: ../../Classes/Scenes/LevelScene.cpp:343
 msgid "End_good"
 msgstr "Очки"
 
-#: ../Classes/Scenes/LevelScene.cpp:421
+#: ../../Classes/Scenes/LevelScene.cpp:422
 msgid "Retry"
 msgstr "Зіграти ще"
 
-#: ../Classes/Scenes/LevelScene.cpp:451
+#: ../../Classes/Scenes/LevelScene.cpp:452
 msgid "Next"
 msgstr "Наступний"
 
-#: ../Classes/Scenes/MainScene.cpp:40
+#: ../../Classes/Scenes/MainScene.cpp:40
 msgid "Sure"
 msgstr ""
 "Ви впевнені,\n"
 "що хочете вийти з гри?"
 
-#: ../Classes/Scenes/MainScene.cpp:77 ../Classes/Scenes/SettingScene.cpp:76
+#: ../../Classes/Scenes/MainScene.cpp:77
+#: ../../Classes/Scenes/SettingScene.cpp:76
 msgid "Yes"
 msgstr "Так"
 
-#: ../Classes/Scenes/MainScene.cpp:99 ../Classes/Scenes/SettingScene.cpp:98
+#: ../../Classes/Scenes/MainScene.cpp:99
+#: ../../Classes/Scenes/SettingScene.cpp:98
 msgid "No"
 msgstr "Ні"
 
-#: ../Classes/Scenes/SelectCollection.cpp:182
+#: ../../Classes/Scenes/SelectCollection.cpp:43
+msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
+msgstr ""
+
+#: ../../Classes/Scenes/SelectCollection.cpp:69
+msgid "SelectColection.BuyFullVerdionPopUp.No"
+msgstr ""
+
+#: ../../Classes/Scenes/SelectCollection.cpp:84
+msgid "SelectColection.BuyFullVerdionPopUp.Yes"
+msgstr ""
+
+#: ../../Classes/Scenes/SelectCollection.cpp:278
 msgid "Collection"
 msgstr "Колекції"
 
-#: ../Classes/Scenes/SettingScene.cpp:40
+#: ../../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
 "Ви дійсно хочете\n"
 "видалити усі збереження ?"
 
-#: ../Classes/Scenes/SettingScene.cpp:172
+#: ../../Classes/Scenes/SettingScene.cpp:172
 msgid "Settings"
 msgstr "Налаштування"
 
-#: ../Classes/Scenes/SettingScene.cpp:246
+#: ../../Classes/Scenes/SettingScene.cpp:246
 msgid "Reset"
 msgstr "Скинути прогрес"
 
-#: ../Classes/Scenes/SettingScene.cpp:256
+#: ../../Classes/Scenes/SettingScene.cpp:256
 msgid "Restore"
 msgstr "Відновити покупки"
 
-#: ../Classes/Scenes/SettingScene.cpp:266
+#: ../../Classes/Scenes/SettingScene.cpp:266
 msgid "Developers"
 msgstr "Розробники"
 
-#: ../Classes/Scenes/SettingScene.cpp:276
+#: ../../Classes/Scenes/SettingScene.cpp:276
 msgid "Rate"
 msgstr "Оцінити гру"
+
+#~ msgid "madeInUkraine"
+#~ msgstr "зроблено в Україні"
 
 #~ msgid "main.exit.sure"
 #~ msgstr "Are you sure"
