@@ -42,4 +42,5 @@ __pycache__
 environment.py
 
 documentation/html
+documentation/latex
 *.pyc
