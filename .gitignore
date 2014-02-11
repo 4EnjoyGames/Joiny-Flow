@@ -40,3 +40,6 @@ debug
 proj.androi*/*
 __pycache__
 environment.py
+
+documentation/html
+*.pyc
