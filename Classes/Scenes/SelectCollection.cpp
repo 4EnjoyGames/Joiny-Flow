@@ -9,6 +9,7 @@
 #include <ADLib/ADString.h>
 #include "Core/Fonts.h"
 #include "Core/Screen.h"
+#include <ADLib/Device/ADInApp.h>
 
 class SelectCollection::BuyFullVerdionPopUp : public PopUpWindow::Content
 {
@@ -38,18 +39,20 @@ private:
 
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
-        float vertical = size.height * 0.18f;
+        float vertical = size.height * 0.25f;
 
         CCLabelTTF* label = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.BuyTitle"),
                                                Fonts::getFontName(),
                                                62);
         label->setFontSize(48);
-        label->setPosition(ccp(x_middle, size.height*0.7f));
+        label->setPosition(ccp(x_middle, size.height*0.8f));
         parent->addChild(label);
 
+        //add 3 stars
+
         SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
-                                                               "level-end/level_end.plist",
-                                                               "level-end/level_end.png");
+                                                               "collection-menu/collection_button.plist",
+                                                               "collection-menu/collection_button.png");
         MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
         menu->setPosition(ccp(0,0));
         menu->setAnchorPoint(ccp(0,0));
@@ -58,40 +61,30 @@ private:
 
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
         if(parent_rgb)
-            parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
+            parent_rgb->setColor(GameInfo::getInstance()->getNegativeColor());
 
+        CCSprite* coll_button = menu_spl->loadSprite("collection_button.png");
 
-        AnimatedMenuItem *no_buy_item = AnimatedMenuItem::create(
-                    menu_spl->loadSprite("level_end_button.png"),
-                    this, menu_selector(Me::onCancle));
-        no_buy_item->setPosition(ccp(size.width*0.25,
-                                        vertical));
-        CCLabelTTF * no_buy_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.No"),
-                                                     Fonts::getFontName(),
-                                                     40);
-        no_buy_text->setColor(ccc3(255,255,255));
-        no_buy_text->setPosition(ccp(no_buy_item->getContentSize().width/2,
-                                    no_buy_item->getContentSize().height/2));
-        no_buy_item->addChild(no_buy_text);
-
-
-
+        //coll_button->setScale(coll_button->getContentSize().width/
+         //           parent->getContentSize().width*0.6);
         AnimatedMenuItem *buy_item = AnimatedMenuItem::create(
-                    menu_spl->loadSprite("level_end_button.png"),
+                    coll_button,
                     this, menu_selector(Me::onBuy));
-        buy_item->setPosition(ccp(size.width*0.75,
+        buy_item->setPosition(ccp(size.width*0.5,
                                     vertical));
-        CCLabelTTF * buy_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.Yes"),
+        buy_item->setBaseScale(coll_button->getContentSize().width/
+                           parent->getContentSize().width*0.8);
+
+        std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes")
+                + ADInApp::getProduct("unlock_full")->getPrice();
+        CCLabelTTF * buy_text = CCLabelTTF::create(text.c_str(),
                                                           Fonts::getFontName(),
-                                                          40);
+                                                          55);
         buy_text->setColor(ccc3(255,255,255));
         buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
                                          buy_item->getContentSize().height/2));
         buy_item->addChild(buy_text);
         menu->menu()->addChild(buy_item);
-
-
-        menu->menu()->addChild(no_buy_item);
     }
 };
 
