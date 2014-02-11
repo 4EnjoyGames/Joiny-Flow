@@ -663,6 +663,7 @@ bool LevelScene::init()
 
     this->setKeypadEnabled(true);
 
+
     unsigned int N = _current_level->getBoardSize().x();
     FlowTable table(N,N);
     JoinyPuzzle task = _current_level->getPuzzle();
@@ -1018,7 +1019,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
     _flow_game->endGame();
     auto button_hide = [](){return CCFadeTo::create(0.15f, 0);};
 
-    float animation_time = 0.2f;
+    float animation_time = 0.1f;
     _flow_game->stopAllActions();
     _flow_game->runAction(CCScaleTo::create(animation_time, _flow_game->getScaleX(), 0));
 
@@ -1028,7 +1029,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 
     _score_label->runAction(button_hide());
 
-    _back_menu->runAction(button_hide());
+    //_back_menu->runAction(button_hide());
 
 
     _bronze_star->runAction(button_hide());
@@ -1042,7 +1043,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
     _buttons_menu->runAction(logo_fade);
 
 
-    float delay = 0.25f;
+    float delay = 0.3f;
     this->runAction(
                 CCSequence::create(
                     CCDelayTime::create(delay),

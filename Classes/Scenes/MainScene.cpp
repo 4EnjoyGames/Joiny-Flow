@@ -153,15 +153,6 @@ bool MainScene::init()
 {
     if(!DrawLayer::init())
         return false;
-//    if (!CCLayer::init() )
-//    {
-//        return false;
-//    }
-//    if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
-//    {
-//        return false;
-//    }
-
     this->setKeypadEnabled(true);
 
     //Get the screen start of cordinates
@@ -170,12 +161,20 @@ bool MainScene::init()
     const float SCALE = Screen::getScaleFactor();
 
     //game logo
-    CCSprite* main_logo = CCSprite::create("main-menu/main-logo.png");
-    main_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                          ORIGIN.y + VISIBLE_SIZE.height*0.80));
+    _main_logo = CCSprite::create("main-menu/main-logo.png");
+
+    //animation
+    CCPoint logo_target_position = ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                                       ORIGIN.y + VISIBLE_SIZE.height*0.80);
+    _main_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                           2*VISIBLE_SIZE.height));
+
+    CCMoveTo* logo_move = CCMoveTo::create(0.35f, logo_target_position);
+    _main_logo->runAction(logo_move);
+
     //this->addChild(main_logo);
-    this->addChild(main_logo);
-    float logo_y_coordinate = main_logo->getPositionY();
+    this->addChild(_main_logo);
+    float logo_y_coordinate = ORIGIN.y + VISIBLE_SIZE.height*0.80;
 
     CCMenu* main_menu = CCMenu::create();
     main_menu->setPosition(ORIGIN);
@@ -183,35 +182,52 @@ bool MainScene::init()
     //Play Button
     CCSprite* play_logo = CCSprite::create("main-menu/play-button.png");
 
-    AnimatedMenuItem* play_button = AnimatedMenuItem::create(
+    _play_button = AnimatedMenuItem::create(
                 play_logo, this, menu_selector(MainScene::onPlayClicked));
 
-    play_button->addChild(play_logo);
+    _play_button->addChild(play_logo);
 
     CCPoint position(VISIBLE_SIZE.width*0.5,
                      logo_y_coordinate - 400/SCALE );
 
-    play_button->setPosition(position);
+    _play_button->setPosition(position);
     play_logo->setPosition(ccp(play_logo->getContentSize().width/2,
                                play_logo->getContentSize().height/2));
 
-    main_menu->addChild(play_button);
+    //animation
+    float scale_play_button = _play_button->getScale();
+    _play_button->setScale(scale_play_button*0.9);
+    _play_button->setAnchorPoint(ccp(0.5, 0.5));
+    _play_button->runAction(CCEaseElasticOut::create(
+                              CCScaleTo::create(0.5f, scale_play_button),
+                              0.4f));
+
+
+    main_menu->addChild(_play_button);
 
     //Settings Button
     CCSprite* settings_logo = CCSprite::create("main-menu/settings-button.png");
 
-    AnimatedMenuItem* settings_button = AnimatedMenuItem::create(
+    _settings_button = AnimatedMenuItem::create(
                 settings_logo, this, menu_selector(MainScene::onSettingsClicked));
 
-    settings_button->addChild(settings_logo);
+    _settings_button->addChild(settings_logo);
 
     CCPoint position_settings(VISIBLE_SIZE.width*0.5,
                               logo_y_coordinate - 650/SCALE  );
-    settings_button->setPosition(position_settings);
+    _settings_button->setPosition(position_settings);
     settings_logo->setPosition(ccp(settings_logo->getContentSize().width/2,
                                settings_logo->getContentSize().height/2));
 
-    main_menu->addChild(settings_button);
+    //animation
+    float scale_setting_button = _play_button->getScale();
+    _settings_button->setScale(scale_setting_button*0.9);
+    //_play_button->setScaleY(0);
+    _settings_button->setAnchorPoint(ccp(0.5, 0.5));
+    _settings_button->runAction(CCEaseElasticOut::create(
+                              CCScaleTo::create(0.5f, scale_setting_button),
+                              0.4f));
+    main_menu->addChild(_settings_button);
 
 
     this->addChild(main_menu);
@@ -220,10 +236,25 @@ bool MainScene::init()
 
 void MainScene::onPlayClicked(CCObject*)
 {
+    hideEverything(
+                CCCallFunc::create(
+                    this,
+                    callfunc_selector(MainScene::doOnPlayClicked)));
+}
+void MainScene::doOnPlayClicked()
+{
     CCDirector::sharedDirector()->replaceScene(SelectCollection::scene());
     CCLog("Play clicked");
 }
+
 void MainScene::onSettingsClicked(CCObject*)
+{
+    hideEverything(
+                CCCallFunc::create(
+                    this,
+                    callfunc_selector(MainScene::doOnSettingsClicked)));
+}
+void MainScene::doOnSettingsClicked()
 {
     CCDirector::sharedDirector()->replaceScene(SettingScene::scene());
     CCLog("Settings clicked");
@@ -236,7 +267,6 @@ void MainScene::doGoBack()
 }
 void MainScene::keyBackClicked()
 {
-
     hideEverything(
                 CCCallFunc::create(
                     this,
@@ -245,9 +275,20 @@ void MainScene::keyBackClicked()
 }
 void MainScene::hideEverything(CCCallFunc *callback)
 {
+
+    float duration = 0.15f;
+    CCFadeTo* settings_move = CCFadeTo::create(duration, 0);
+    CCFadeTo* play_move = CCFadeTo::create(duration, 0);
+    CCFadeTo* logo_move = CCFadeTo::create(duration, 0);
+    _settings_button->runAction(settings_move);
+    _play_button->runAction(play_move);
+    _main_logo->runAction(logo_move);
+
+
+    float delay = 0.2;
     this->runAction(
                 CCSequence::create(
-                    CCDelayTime::create(0),
+                    CCDelayTime::create(delay),
                     callback,
                     NULL));
 
