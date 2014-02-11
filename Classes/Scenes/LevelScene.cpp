@@ -899,7 +899,12 @@ bool LevelScene::init()
 
     //on what menu do not respond PopUpWindow
     _pop_up_manager.addMenuToAutoDisable(_buttons_menu->menu());
-    _pop_up_manager.setGameDisable(_flow_game);
+    _pop_up_manager.addOnShowWindowAction([this](){
+        this->_flow_game->stopTrackingTouch();
+    });
+    _pop_up_manager.addOnHideWindowAction([this](){
+        this->_flow_game->startTrackingTouch();
+    });
 
 
     //if this is the first level of the first collection - show tutorial

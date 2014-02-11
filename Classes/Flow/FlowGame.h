@@ -46,8 +46,21 @@ public:
     //return the cell color
     const FlowColor getCellColor(const FlowPoint& point) const;
 
+    /**
+     * @brief The user input is tracked. The CCTouchDelegate is attached
+     * to CCDirector
+     */
+    void startTrackingTouch();
+    /**
+     * @brief The user input is no more tracked. The CCTouchDelegate is
+     * removed from CCDirector
+     */
+    void stopTrackingTouch();
 private:
-
+    /**
+     * @brief If true than the TouchDelegate is attached to CCDirector
+     */
+    bool _is_tracking_touch;
 
 
     FlowRenderer* _renderer;

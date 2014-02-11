@@ -452,4 +452,12 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     menu->setPosition(ccp(0,
                           0));
 
+    _pop_up_manager.addOnHideWindowAction([_collections_scroll_view](){
+        _collections_scroll_view->setTouchEnabled(true);
+    });
+    _pop_up_manager.addOnShowWindowAction([_collections_scroll_view](){
+        _collections_scroll_view->setTouchEnabled(false);
+    });
+    _pop_up_manager.addMenuToAutoDisable(menu->menu());
+
 }
