@@ -2,8 +2,8 @@
 #define POPUPWINDOW_H
 #include "cocos2d.h"
 #include "Core/CCScrollView.h"
-#include "Flow/FlowGame.h"
 
+#include <functional>
 class PopUpWindow : public cocos2d::CCLayer
 {
 public:
@@ -53,19 +53,48 @@ public:
     bool backAction();
     void addMenuToAutoDisable(cocos2d::CCMenu* menu);
     void addScrollViewToAutoDisable(cocos2d::CCScrollView* scroll_view);
-    void setGameDisable(FlowGame* game);
+
+
+    /**
+     * @brief Type for planned actions
+     */
+    typedef std::function<void ()> Action;
+
+    /**
+     * @brief The given action will be performed just before first window is showed
+     * @param action functor with action to perform
+     */
+    void addOnShowWindowAction(const Action& action);
+    /**
+     * @brief The action will be performed just after the last window was hidden
+     * @param action functor with action to perform
+     */
+    void addOnHideWindowAction(const Action& action);
 private:
+    /**
+     * @brief Runs all actions added by addOnShowWindowAction in the same
+     * order as they were added
+     */
+    void runOnShowWindowActions();
+    /**
+     * @brief Runs all actions added by addOnHideWindowAction in the same
+     * order as they were added
+     */
+    void runOnHideWindowActions();
+
     void onLastClosed();
     void setMenusAvaliablitity(bool enabled);
     void do_openWindow(PopUpWindow* window,
                        bool vertical_mode=false);
     PopUpWindow* _opened_window;
     PopUpWindow* _pending_window;
-    FlowGame* _game;
 
     std::vector<cocos2d::CCMenu*> _menus;
     std::vector<cocos2d::CCScrollView*> _scroll_views;
     cocos2d::CCNode* _parent;
+
+    std::vector<Action> _show_window_action;
+    std::vector<Action> _hide_window_action;
 };
 
 class PopUpWindow::Content : public CCObject

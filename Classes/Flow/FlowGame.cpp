@@ -6,7 +6,9 @@
 using namespace cocos2d;
 
 FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
-    : _renderer(FlowRenderer::create(table)), _table(0), _is_touch_active(false),
+    : _is_tracking_touch(false),
+      _renderer(FlowRenderer::create(table)),
+      _table(0), _is_touch_active(false),
       _active_touch_id(-1), _active_traces(), _submitted_traces(),
       _working_color(-1), _finish_lock(false), _delegate(delegate),
       _last_point(0,0), _working_trace_id(0,0), _score(0)
@@ -23,12 +25,29 @@ FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
     _submitted_traces = _active_traces;
 
     //Start listening for touch
-    CCDirector* pDirector = CCDirector::sharedDirector();
-    pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
+    startTrackingTouch();
     CCLog("Game start output");
     traceDebug();
 }
+void FlowGame::startTrackingTouch()
+{
+    if(!_is_tracking_touch)
+    {
+        _is_tracking_touch = true;
+        CCDirector* pDirector = CCDirector::sharedDirector();
+        pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
 
+    }
+}
+
+void FlowGame::stopTrackingTouch()
+{
+    if(_is_tracking_touch)
+    {
+        _is_tracking_touch = false;
+        CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    }
+}
 
 FlowGame* FlowGame::create(const FlowTable& table, DelegatePtr delegate)
 {
@@ -267,7 +286,7 @@ void FlowGame::touchMoved(const FlowPoint& p)
 }
 void FlowGame::endGame()
 {
-    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    stopTrackingTouch();
 }
 
 void FlowGame::touchEnded(const FlowPoint& p)
@@ -293,7 +312,7 @@ void FlowGame::touchEnded(const FlowPoint& p)
     updateScore();
     if(checkWinCondition())
     {
-        //CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+        //stopTrackingTouch();
         if(_delegate.get() != 0)
         {
             _delegate->onWin();
