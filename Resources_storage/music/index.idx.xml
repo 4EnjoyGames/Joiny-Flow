@@ -3,9 +3,27 @@
 	<file>
 		<name>choose.wav</name>
 	</file>
-	<file>
+	
+		<file>
 		<name>flow_click.wav</name>
 	</file>
+	
+	
+	
+	<file>
+		<name>demain_je_change.mp3</name>
+		<platform>ios</platform>
+	</file>
+	<file>
+		<name>demain_je_change.wav</name>
+		<platform>android_win</platform>
+		<platform>windows</platform>
+	</file>
+	<file>
+		<name>demain_je_change.ogg</name>
+		<platform>android</platform>
+	</file>
+	
 	
 	<file>
 		<name>silly_fun.mp3</name>
