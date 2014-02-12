@@ -91,7 +91,7 @@ bool DeveloperScene::init()
     //thank list - thank1
     CCLabelTTF * thank1 = CCLabelTTF::create(_("test_list"),
                                                Fonts::getFontName(),
-                                               45);
+                                               40);
     thank1->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.45));
     thank1->setColor(GameInfo::getInstance()->getTitleColor());

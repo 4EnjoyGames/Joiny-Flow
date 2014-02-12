@@ -39,7 +39,7 @@ private:
 
         CCLabelTTF* label = CCLabelTTF::create(_("Sure_reset"),
                                                Fonts::getFontName(),
-                                               48);
+                                               40);
         label->setColor(ccc3(255,255,255));
         label->setPosition(ccp(x_middle, size.height*0.7f));
         parent->addChild(label);
@@ -171,7 +171,7 @@ bool SettingScene::init()
 
     CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),
                                                Fonts::getFontName(),
-                                               72);
+                                               60);
     settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5 + 25/SCALE,
                           ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
     settings->setColor(GameInfo::getInstance()->getTitleColor());

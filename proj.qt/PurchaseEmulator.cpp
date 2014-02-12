@@ -9,7 +9,7 @@ cocos2d::CCSize ADAds::Platform::getBannerSize(const BannerType& type)
     float density = 1;
     return cocos2d::CCSize(base.width*density, base.height*density);
 }
-#define AD_LANGUAGE_CURRENT "en"
+#define AD_LANGUAGE_CURRENT "uk"
 
 #include <ADLib/PlatformImpl/ADBrowser_None.hpp>
 #include <ADLib/PlatformImpl/ADStatistics_None.hpp>
