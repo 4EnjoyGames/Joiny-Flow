@@ -267,7 +267,10 @@ void MainScene::doGoBack()
 }
 void MainScene::keyBackClicked()
 {
-    doGoBack();
+    if(!_pop_up_manager.backAction())
+    {
+        doGoBack();
+    }
 }
 void MainScene::hideEverything(CCCallFunc *callback)
 {
