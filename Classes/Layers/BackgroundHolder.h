@@ -10,8 +10,8 @@ class BackgroundHolder
 public:
     static void backgroundSwitchTo(cocos2d::CCNode*,
                                    cocos2d::CCCallFunc* back_button_callback=0,
-                                   const std::string& scene_name ="",
-                                   const bool play_music=true);
+                                   const bool play_music=true,
+                                   const std::string& scene_name ="");
     static void storeOpen();
     static void storeClose();
     static void resetMusic();

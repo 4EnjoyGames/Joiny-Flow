@@ -27,8 +27,8 @@ BackgroundHolder& BackgroundHolder::getHolder()
 }
 void BackgroundHolder::backgroundSwitchTo(cocos2d::CCNode* node,
                                           cocos2d::CCCallFunc* back_button_callback,
-                                          const std::string& scene_name,
-                                          const bool play_music)
+                                          const bool play_music,
+                                          const std::string& scene_name)
 {
     BackgroundHolder& bgh = getHolder();
     bgh.storeClose();
@@ -52,7 +52,7 @@ void BackgroundHolder::do_backgroundSwitchTo(cocos2d::CCNode* node,
             MusicSettings::playMusic(MusicSettings::BACKGROUND_MUSIC);
         _firstly=false;
     }
-    else if (play_music==true && MusicSettings::isBackgrHolderMusic()==true)//false)
+    else if (play_music==true && MusicSettings::isMusicOn())//MusicSettings::isBackgrHolderMusic()==true)//false)
     {
         //MusicSettings::turnOnMusic();
        // MusicSettings::isBackgrHolderMusic()==true;
