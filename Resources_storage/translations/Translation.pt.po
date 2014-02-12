@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-08 16:39+0200\n"
+"POT-Creation-Date: 2014-02-12 16:25+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,37 +12,42 @@ msgstr ""
 "X-Generator: Poedit 1.6.3\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ../Classes\n"
+"X-Poedit-SearchPath-0: ../../Classes\n"
 
-#: ../Classes/AppDelegate.cpp:66
+# Error
+#: ../../Classes/AppDelegate.cpp:66
 msgid "iap.error.billing_unavaliable"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:71
+# Restore Purchase error
+#: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.purchase_error"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:79
+# Successfully restored purchases
+#: ../../Classes/AppDelegate.cpp:79
 msgid "iap.restore_purchases.success"
 msgstr ""
 
-#: ../Classes/AppDelegate.cpp:84
+# Restore Purchase failed
+#: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.failed"
 msgstr ""
 
-#: ../Classes/Scenes/DeveloperScene.cpp:66
+#: ../../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
 msgstr "Diana Sirenko"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:74
+#: ../../Classes/Scenes/DeveloperScene.cpp:74
 msgid "andrii"
 msgstr "Andrii Chaika"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:83
+# Thanks to:
+#: ../../Classes/Scenes/DeveloperScene.cpp:83
 msgid "thank"
 msgstr "Obrigado:"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:92
+#: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
 "Thank1 Thank1, Tahnk2 Thank2 \n"
@@ -51,93 +56,119 @@ msgstr ""
 "Thank1 Thank1, Tahnk2 Thank2 \n"
 "Thank1 Thank1, Tahnk2 Thank2"
 
-#: ../Classes/Scenes/DeveloperScene.cpp:119
-msgid "madeInUkraine"
-msgstr "made in Ukraine"
-
-#: ../Classes/Scenes/DeveloperScene.cpp:129
+#: ../../Classes/Scenes/DeveloperScene.cpp:119
 msgid "copy"
 msgstr "© 2014"
 
-#: ../Classes/Scenes/LevelScene.cpp:85
+#: ../../Classes/Scenes/LevelScene.cpp:86
 msgid "Test_level_end"
 msgstr "How do you rate this level?"
 
-#: ../Classes/Scenes/LevelScene.cpp:121
+#: ../../Classes/Scenes/LevelScene.cpp:122
 msgid "Good_level"
 msgstr "Good"
 
-#: ../Classes/Scenes/LevelScene.cpp:143
+#: ../../Classes/Scenes/LevelScene.cpp:144
 msgid "So_level"
 msgstr "I don`t know"
 
-#: ../Classes/Scenes/LevelScene.cpp:164
+#: ../../Classes/Scenes/LevelScene.cpp:165
 msgid "Bad_level"
 msgstr "Bad"
 
-#: ../Classes/Scenes/LevelScene.cpp:208
+# Buy Hints
+#: ../../Classes/Scenes/LevelScene.cpp:209
 msgid "BuyHint"
 msgstr "Comprar Dicas"
 
-#: ../Classes/Scenes/LevelScene.cpp:338
+# You need more points
+#: ../../Classes/Scenes/LevelScene.cpp:339
 msgid "End_bad"
 msgstr "Você precisa de mais pontos"
 
-#: ../Classes/Scenes/LevelScene.cpp:342
+# Score
+#: ../../Classes/Scenes/LevelScene.cpp:343
 msgid "End_good"
 msgstr "Contagem"
 
-#: ../Classes/Scenes/LevelScene.cpp:421
+# Retry
+#: ../../Classes/Scenes/LevelScene.cpp:422
 msgid "Retry"
 msgstr ""
 "Tentar \n"
 "novamente"
 
-#: ../Classes/Scenes/LevelScene.cpp:451
+# Next
+#: ../../Classes/Scenes/LevelScene.cpp:452
 msgid "Next"
 msgstr "Próximo"
 
-#: ../Classes/Scenes/MainScene.cpp:40
+# Would you like\n to leave the game?"
+#: ../../Classes/Scenes/MainScene.cpp:40
 msgid "Sure"
 msgstr "Gostaria de deixar o jogo?"
 
-#: ../Classes/Scenes/MainScene.cpp:77 ../Classes/Scenes/SettingScene.cpp:76
+# Yes
+#: ../../Classes/Scenes/MainScene.cpp:77
+#: ../../Classes/Scenes/SettingScene.cpp:76
 msgid "Yes"
 msgstr "Sim"
 
-#: ../Classes/Scenes/MainScene.cpp:99 ../Classes/Scenes/SettingScene.cpp:98
+# No
+#: ../../Classes/Scenes/MainScene.cpp:99
+#: ../../Classes/Scenes/SettingScene.cpp:98
 msgid "No"
 msgstr "Não"
 
-#: ../Classes/Scenes/SelectCollection.cpp:182
+# Get 3 stars everywhere
+#: ../../Classes/Scenes/SelectCollection.cpp:44
+msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
+msgstr ""
+
+# Unlock full game 
+#: ../../Classes/Scenes/SelectCollection.cpp:78
+msgid "SelectColection.BuyFullVerdionPopUp.Yes"
+msgstr ""
+
+# Collections
+#: ../../Classes/Scenes/SelectCollection.cpp:271
 msgid "Collection"
 msgstr "Coleções"
 
-#: ../Classes/Scenes/SettingScene.cpp:40
+# Would you like\n to delete all saves ?"
+#: ../../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
 "Gostaria de apagar\n"
 "todas as salva?"
 
-#: ../Classes/Scenes/SettingScene.cpp:172
+# Settings
+#: ../../Classes/Scenes/SettingScene.cpp:172
 msgid "Settings"
 msgstr "Configurações"
 
-#: ../Classes/Scenes/SettingScene.cpp:246
+# Reset Progress
+#: ../../Classes/Scenes/SettingScene.cpp:246
 msgid "Reset"
 msgstr "Redefinição de Progresso"
 
-#: ../Classes/Scenes/SettingScene.cpp:256
+# Restore Purchases
+#: ../../Classes/Scenes/SettingScene.cpp:256
 msgid "Restore"
 msgstr "Restaurar Compras"
 
-#: ../Classes/Scenes/SettingScene.cpp:266
+# Developers
+#: ../../Classes/Scenes/SettingScene.cpp:266
 msgid "Developers"
 msgstr "Desenvolvedores"
 
-#: ../Classes/Scenes/SettingScene.cpp:276
+# Rate Me
+#: ../../Classes/Scenes/SettingScene.cpp:276
 msgid "Rate"
 msgstr "Classifique-me"
+
+#~ msgid "madeInUkraine"
+#~ msgstr "made in Ukraine"
 
 #~ msgid "main.exit.sure"
 #~ msgstr "Are you sure"
