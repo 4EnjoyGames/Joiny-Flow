@@ -87,7 +87,7 @@ msgstr "Очки"
 
 #: ../../Classes/Scenes/LevelScene.cpp:422
 msgid "Retry"
-msgstr "Зіграти ще"
+msgstr "Грати ще"
 
 #: ../../Classes/Scenes/LevelScene.cpp:452
 msgid "Next"
