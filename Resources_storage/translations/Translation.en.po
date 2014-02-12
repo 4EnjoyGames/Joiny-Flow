@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-11 21:50+0200\n"
+"POT-Creation-Date: 2014-02-12 17:25+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -107,15 +107,19 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:43
+#: ../../Classes/Scenes/SelectCollection.cpp:44
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
 msgstr "Get 3 stars everywhere"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:68
-msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr "Unlock full game "
+#: ../../Classes/Scenes/SelectCollection.cpp:62
+msgid "SelectColection.BuyFullVerdionPopUp.OrText"
+msgstr "or"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:259
+#: ../../Classes/Scenes/SelectCollection.cpp:97
+msgid "SelectColection.BuyFullVerdionPopUp.Yes"
+msgstr "Unlock full game now"
+
+#: ../../Classes/Scenes/SelectCollection.cpp:290
 msgid "Collection"
 msgstr "Collections"
 
