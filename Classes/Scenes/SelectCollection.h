@@ -24,6 +24,8 @@ public:
 
 
 private:
+    SpritesLoader _stars_spl;
+
     class BuyFullVerdionPopUp;
     PopUpWindowManager _pop_up_manager;
 
