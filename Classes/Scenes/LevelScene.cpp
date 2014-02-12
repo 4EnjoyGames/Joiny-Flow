@@ -554,7 +554,12 @@ void LevelScene::onNextLevel(const bool show_ads)
            ADAds::showInterstitial();
            ADAds::prepareInterstitial();
        }
+
+       _last_scene->_pop_up_manager.closeWindow();
+
     }
+
+
 
     const JoinyLevel* next_level = RW::getLevelManager().getNextLevel(_current_level);
     if(next_level != nullptr)
