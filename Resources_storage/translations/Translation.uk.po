@@ -16,19 +16,19 @@ msgstr ""
 
 #: ../../Classes/AppDelegate.cpp:66
 msgid "iap.error.billing_unavaliable"
-msgstr ""
+msgstr "Помилка"
 
 #: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.purchase_error"
-msgstr ""
+msgstr "Помилка під час відновлення покупок"
 
 #: ../../Classes/AppDelegate.cpp:79
 msgid "iap.restore_purchases.success"
-msgstr ""
+msgstr "Покупки відновлені успішно"
 
 #: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.failed"
-msgstr ""
+msgstr "Відновити покупки невдалося"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
