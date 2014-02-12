@@ -267,11 +267,7 @@ void MainScene::doGoBack()
 }
 void MainScene::keyBackClicked()
 {
-    hideEverything(
-                CCCallFunc::create(
-                    this,
-                    callfunc_selector(MainScene::doGoBack)));
-
+    doGoBack();
 }
 void MainScene::hideEverything(CCCallFunc *callback)
 {
