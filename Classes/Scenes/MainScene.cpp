@@ -39,7 +39,7 @@ private:
 
         CCLabelTTF* label = CCLabelTTF::create(_("Sure"),
                                                Fonts::getFontName(),
-                                               48);
+                                               40);
 
         label->setColor(ccc3(255,255,255));
         label->setPosition(ccp(x_middle, size.height*0.7f));

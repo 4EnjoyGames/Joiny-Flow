@@ -45,11 +45,30 @@ private:
                                                Fonts::getFontName(),
                                                62);
         label->setFontSize(48);
-        label->setPosition(ccp(x_middle, size.height*0.8f));
+        label->setPosition(ccp(x_middle, size.height*0.85f));
         parent->addChild(label);
 
         //add 3 stars
+        SpritesLoader spl = GraphicsManager::getLoaderFor(parent,
+                                                          "level-end/big_stars.plist",
+                                                          "level-end/big_stars.png");
+        spl->inject();
+        CCSprite* stars_spr = spl->loadSprite("big_stars_3.png");
+        stars_spr->setScale(0.75f);
+        stars_spr->setPosition(ccp(x_middle, size.height*0.65f));
 
+
+        //add "or" text
+        CCLabelTTF* or_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.OrText"),
+                                               Fonts::getFontName(),
+                                               50);
+        or_text->setFontSize(48);
+        or_text->setPosition(ccp(x_middle, size.height*0.5f));
+        parent->addChild(or_text);
+
+        /**
+         * @brief menu_spl
+         */
         SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
                                                                "collection-menu/collection_button.plist",
                                                                "collection-menu/collection_button.png");
@@ -75,11 +94,20 @@ private:
         buy_item->setBaseScale(coll_button->getContentSize().width/
                                parent->getContentSize().width*0.8);
 
+<<<<<<< HEAD
         std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes")
                 + ADInApp::getProduct("unlock_full")->getPrice();
         CCLabelTTF * buy_text = CCLabelTTF::create(text.c_str(),
                                                    Fonts::getFontName(),
                                                    55);
+=======
+        std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes");
+        std::string price = ADInApp::getProduct("unlock_full")->getPrice();
+        std::string button_buy_text = text +'\n' + price;
+        CCLabelTTF * buy_text = CCLabelTTF::create(button_buy_text.c_str(),
+                                                          Fonts::getFontName(),
+                                                          55);
+>>>>>>> 839a68481cdf4426220cb3a37efe5a77e53056a1
         buy_text->setColor(ccc3(255,255,255));
         buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
                                   buy_item->getContentSize().height/2));

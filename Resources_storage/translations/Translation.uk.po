@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-10 22:02+0200\n"
+"POT-Creation-Date: 2014-02-12 16:08+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,30 +14,37 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../../Classes\n"
 
+# Error
 #: ../../Classes/AppDelegate.cpp:66
 msgid "iap.error.billing_unavaliable"
-msgstr ""
+msgstr "Помилка"
 
+# Restore Purchase error
 #: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.purchase_error"
-msgstr ""
+msgstr "Помилка під час відновлення покупок"
 
+# Successfully restored purchases
 #: ../../Classes/AppDelegate.cpp:79
 msgid "iap.restore_purchases.success"
-msgstr ""
+msgstr "Покупки відновлені успішно"
 
+# Restore Purchase failed
 #: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.failed"
-msgstr ""
+msgstr "Відновити покупки невдалося"
 
+# Diana Sirenko
 #: ../../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
 msgstr "Діана Сіренко"
 
+# Andrii Chaika
 #: ../../Classes/Scenes/DeveloperScene.cpp:74
 msgid "andrii"
 msgstr "Андрій Чайка"
 
+# Thanks to:
 #: ../../Classes/Scenes/DeveloperScene.cpp:83
 msgid "thank"
 msgstr "Дякуємо:"
@@ -55,101 +62,121 @@ msgstr ""
 msgid "copy"
 msgstr "© 2014"
 
+# How do you rate this level?
 #: ../../Classes/Scenes/LevelScene.cpp:86
 msgid "Test_level_end"
 msgstr "Як тобі рівень?"
 
+# Good
 #: ../../Classes/Scenes/LevelScene.cpp:122
 msgid "Good_level"
 msgstr "Добре"
 
+# I don`t know
 #: ../../Classes/Scenes/LevelScene.cpp:144
 msgid "So_level"
 msgstr "Не знаю"
 
+# Bad
 #: ../../Classes/Scenes/LevelScene.cpp:165
 msgid "Bad_level"
 msgstr "Погано"
 
+# Buy Hints
 #: ../../Classes/Scenes/LevelScene.cpp:209
 msgid "BuyHint"
 msgstr "Купити підказки"
 
+# You need more points
 #: ../../Classes/Scenes/LevelScene.cpp:339
 msgid "End_bad"
 msgstr ""
 "Потрбіно набрати\n"
 "більше очків"
 
+# Score
 #: ../../Classes/Scenes/LevelScene.cpp:343
 msgid "End_good"
 msgstr "Очки"
 
+# Retry
 #: ../../Classes/Scenes/LevelScene.cpp:422
 msgid "Retry"
-msgstr "Зіграти ще"
+msgstr "Грати ще"
 
+# Next
 #: ../../Classes/Scenes/LevelScene.cpp:452
 msgid "Next"
 msgstr "Наступний"
 
+# Would you like\n to leave the game?
 #: ../../Classes/Scenes/MainScene.cpp:40
 msgid "Sure"
 msgstr ""
 "Ви впевнені,\n"
 "що хочете вийти з гри?"
 
+# Yes
 #: ../../Classes/Scenes/MainScene.cpp:77
 #: ../../Classes/Scenes/SettingScene.cpp:76
 msgid "Yes"
 msgstr "Так"
 
+# No
 #: ../../Classes/Scenes/MainScene.cpp:99
 #: ../../Classes/Scenes/SettingScene.cpp:98
 msgid "No"
 msgstr "Ні"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:43
+# Get 3 stars everywhere
+#: ../../Classes/Scenes/SelectCollection.cpp:44
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
 msgstr "Купити повну версію?"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:69
-msgid "SelectColection.BuyFullVerdionPopUp.No"
-msgstr "Відмінити"
-
-#: ../../Classes/Scenes/SelectCollection.cpp:84
+# Unlock full game 
+#: ../../Classes/Scenes/SelectCollection.cpp:78
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
 msgstr "Купити"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:278
+# Collections
+#: ../../Classes/Scenes/SelectCollection.cpp:271
 msgid "Collection"
 msgstr "Колекції"
 
+# "Would you like\n to delete all saves ?"
 #: ../../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
 "Ви дійсно хочете\n"
 "видалити усі збереження ?"
 
+# Settings
 #: ../../Classes/Scenes/SettingScene.cpp:172
 msgid "Settings"
 msgstr "Налаштування"
 
+# Reset Progress
 #: ../../Classes/Scenes/SettingScene.cpp:246
 msgid "Reset"
 msgstr "Скинути прогрес"
 
+# Restore Purchases
 #: ../../Classes/Scenes/SettingScene.cpp:256
 msgid "Restore"
 msgstr "Відновити покупки"
 
+# Developers
 #: ../../Classes/Scenes/SettingScene.cpp:266
 msgid "Developers"
 msgstr "Розробники"
 
+# Rate Me
 #: ../../Classes/Scenes/SettingScene.cpp:276
 msgid "Rate"
 msgstr "Оцінити гру"
+
+#~ msgid "SelectColection.BuyFullVerdionPopUp.No"
+#~ msgstr "Відмінити"
 
 #~ msgid "madeInUkraine"
 #~ msgstr "зроблено в Україні"
