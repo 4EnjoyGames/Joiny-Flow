@@ -18,6 +18,7 @@
 #include "Logic/Hints.h"
 #include "Logic/RW.h"
 #include "Scenes/LevelScene.h"
+#include "Scenes/SelectCollection.h"
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -55,7 +56,10 @@ public:
 
         CCLog("Purchase %s finished successful", id.c_str());
 
-        LevelScene::purchaseUpdateHints();
+        if(id != "unlock_full")
+            LevelScene::purchaseUpdateHints();
+        else
+            SelectCollection::purchaseUpdateFullGame();
     }
     void purchaseFailed(const ADInApp::ProductID & id,
                         const ADInApp::ErrorType error)

@@ -25,7 +25,7 @@ private:
     void onBuy(CCObject*)
     {
         //TODO: add functions
-        this->closeWindow();
+        ADInApp::buyProduct("unlock_full");
     }
 
     void onCancle(CCObject*)
@@ -112,6 +112,7 @@ private:
 SelectCollection::SelectCollection():
     _pop_up_manager(this)
 {
+    _last_scene = this;
 }
 cocos2d::CCScene* SelectCollection::scene()
 {
@@ -210,8 +211,6 @@ AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
 AnimatedMenuItem* SelectCollection::createCollectionItem(
         const JoinyCollection* collection, const SpritesLoader& spl)
 {
-    //float scaled = Screen::getScaleFactor();
-
     std::string collection_name = collection->getCollectionName();
 
     ccColor3B label_color = collection->getCollectionColor();
@@ -219,9 +218,17 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
     ccColor3B working = closeLevel;
     if(collection->isOpenCollection())
+    {
         working = label_color;
+    }
+    else if (isFreeOpenFullGame())
+    {
+        RW::getLevelManager().makeFullGameVersion();
+        working = label_color;
+    }
 
     CCSprite* background = spl->loadSprite("collection_button.png");
+    background->setTag(123);
     background->setColor(working);
     AnimatedMenuItem* item = AnimatedMenuItem::create(
                 background,
@@ -256,10 +263,6 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 }
 bool SelectCollection::init()
 {
-    //    if (!CCLayer::init() )
-    //    {
-    //        return false;
-    //    }
     if (!DrawLayer::init())
     {
         return false;
@@ -267,26 +270,6 @@ bool SelectCollection::init()
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
-
-    //    CCMenu* main_menu = CCMenu::create();
-    //    main_menu->setPosition(ccp(0,0));
-
-
-    //    //Load one piece
-    //    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
-
-    //    //Take the texture from sprite
-    //    CCTexture2D *texture = sp_noise->getTexture();
-
-    //    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
-    //    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-    //    texture->setTexParameters(&params);
-
-    //    //Final sprite
-    //    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
-    //    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-    //                           ORIGIN.y + VISIBLE_SIZE.height/2));
-    //    this->addChild(noise);
 
     CCLabelTTF * collections = CCLabelTTF::create( _("Collection"),
                                                    Fonts::getFontName(),
@@ -365,6 +348,7 @@ bool SelectCollection::init()
 
 void SelectCollection::keyBackClicked()
 {
+    _last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverything(CCCallFunc::create(
@@ -473,4 +457,50 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     });
     _pop_up_manager.addMenuToAutoDisable(menu->menu());
 
+}
+SelectCollection* SelectCollection::_last_scene = 0;
+void SelectCollection::purchaseUpdateFullGame()
+{
+    if(_last_scene)
+    {
+        //updateItems();
+        //_last_scene->renewOneHint();
+        _last_scene->_pop_up_manager.closeWindow();
+    }
+}
+void SelectCollection::updateItems()
+{
+//    for(auto & i: _buttons_map)
+//    {
+//        AnimatedMenuItem* item = i.first;
+//        const JoinyCollection* col = i.second;
+
+//        CCNode* node = item->getChildByTag(123);
+//        ccColor3B coll_color = col->getCollectionColor();
+//        node->setScale(2.0);
+//    }
+}
+/**
+ * @brief SelectCollection::isFreeOpenFullGame
+ *if the player has min 3 stars in all Collections
+ *return true - and open full game
+ * @return
+ */
+bool SelectCollection::isFreeOpenFullGame()
+{
+    bool result = true;
+    unsigned int coll_num = GameInfo::getInstance()->getCollectionNumber();
+    unsigned int min_stars = 0;
+
+    for(unsigned int i=0; i<coll_num; ++i)
+    {
+        min_stars = RW::getLevelManager().getCollectionMinStars(RW::getLevelManager().getCollection(i));
+        if(min_stars<3)
+        {
+            result = false;
+            break;
+        }
+    }
+
+    return result;
 }

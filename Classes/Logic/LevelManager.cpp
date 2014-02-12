@@ -10,7 +10,7 @@
 
 LevelManager::LevelManager()
     : _hints_number(10),
-      _full_version(0),
+      _full_version(false),
       _full_version_path(FileUtils::getStorageFilePath("full_version.ad")),
       _save_path(FileUtils::getStorageFilePath("save.ad")),
       _settings_path(FileUtils::getStorageFilePath("settings.ad")),
@@ -20,8 +20,9 @@ LevelManager::LevelManager()
 
 void LevelManager::onInit()
 {
-    loadLevelsInfo();
     loadSettings();
+    loadLevelsInfo();
+
 }
 
 void LevelManager::onDestroy()
@@ -126,11 +127,17 @@ void LevelManager::loadLevelsInfo()
             is >> g;
             is >> b;
 
-            bool open = false;
-            uint32_t open_or_close = 0;
-            is >> open_or_close;
-            if(open_or_close==1)
-                open = true;
+            //TODO: improve
+            //read info
+            uint32_t open_coll = 0;
+            is >> open_coll;
+
+            bool open = true;
+            if(!isFullGameVersion())
+            {
+                if (j==1)
+                    open = false;
+            }
 
 
             std::vector<JoinyPuzzle> inp;
@@ -195,8 +202,8 @@ void LevelManager::saveSettings()
     std::stringstream ss3(std::ios::out | std::ios::binary);
     OutputBinaryStream os3(ss3,BinaryStream::MaxProtocolVersion);
 
-    bool full_version = false;
-    if(full_version)
+
+    if(_full_version)
         os3 << uint16_t(1);
     else
         os3 << uint16_t(0);
@@ -458,4 +465,9 @@ bool LevelManager::isFullGameVersion() const
 void LevelManager::makeFullGameVersion()
 {
     _full_version = true;
+
+    for(auto& i : _collections)
+    {
+        (i.second)->openCollection();
+    }
 }

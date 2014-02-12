@@ -19,6 +19,10 @@ public:
         keyBackClicked();
     }
 
+    static SelectCollection* _last_scene;
+    static void purchaseUpdateFullGame();
+
+
 private:
     class BuyFullVerdionPopUp;
     PopUpWindowManager _pop_up_manager;
@@ -30,6 +34,9 @@ private:
     float _scale;
 
     void onCollectionSelect(CCObject* sender);
+    static void updateItems();
+
+    bool isFreeOpenFullGame();
 
     AnimatedMenuItem* createStars(AnimatedMenuItem* item,
                                   const JoinyCollection* collection);
