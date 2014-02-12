@@ -500,7 +500,7 @@ bool SelectCollection::isFreeOpenFullGame()
     unsigned int coll_num = GameInfo::getInstance()->getCollectionNumber();
     unsigned int min_stars = 0;
 
-    for(unsigned int i=0; i<coll_num; ++i)
+    for(unsigned int i=1; i<=coll_num; ++i)
     {
         min_stars = RW::getLevelManager().getCollectionMinStars(RW::getLevelManager().getCollection(i));
         if(min_stars<3)
