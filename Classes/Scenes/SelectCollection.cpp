@@ -10,7 +10,7 @@
 #include "Core/Fonts.h"
 #include "Core/Screen.h"
 #include <ADLib/Device/ADInApp.h>
-
+#include <ADLib/Rendering/ADBMFont.h>
 class SelectCollection::BuyFullVerdionPopUp : public PopUpWindow::Content
 {
 public:
@@ -66,23 +66,23 @@ private:
         CCSprite* coll_button = menu_spl->loadSprite("collection_button.png");
 
         //coll_button->setScale(coll_button->getContentSize().width/
-         //           parent->getContentSize().width*0.6);
+        //           parent->getContentSize().width*0.6);
         AnimatedMenuItem *buy_item = AnimatedMenuItem::create(
                     coll_button,
                     this, menu_selector(Me::onBuy));
         buy_item->setPosition(ccp(size.width*0.5,
-                                    vertical));
+                                  vertical));
         buy_item->setBaseScale(coll_button->getContentSize().width/
-                           parent->getContentSize().width*0.8);
+                               parent->getContentSize().width*0.8);
 
         std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes")
                 + ADInApp::getProduct("unlock_full")->getPrice();
         CCLabelTTF * buy_text = CCLabelTTF::create(text.c_str(),
-                                                          Fonts::getFontName(),
-                                                          55);
+                                                   Fonts::getFontName(),
+                                                   55);
         buy_text->setColor(ccc3(255,255,255));
         buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
-                                         buy_item->getContentSize().height/2));
+                                  buy_item->getContentSize().height/2));
         buy_item->addChild(buy_text);
         menu->menu()->addChild(buy_item);
     }
@@ -161,25 +161,26 @@ AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
 
     unsigned int min_stars_num = RW::getLevelManager().getCollectionMinStars(collection);
 
-    SpritesLoader spl = GraphicsManager::getLoaderFor(item,
-                                                      "level-end/big_stars.plist",
-                                                      "level-end/big_stars.png");
-    spl->inject();
+
 
     CCSprite* stars_spr = 0;
 
     if(min_stars_num == 0)
-        stars_spr = spl->loadSprite("big_stars_0.png");
+        stars_spr = _stars_spl->loadSprite("big_stars_0.png");
     else if(min_stars_num == 1)
-        stars_spr = spl->loadSprite("big_stars_1.png");
+        stars_spr = _stars_spl->loadSprite("big_stars_1.png");
     else if(min_stars_num == 2)
-        stars_spr = spl->loadSprite("big_stars_2.png");
+        stars_spr = _stars_spl->loadSprite("big_stars_2.png");
     else
-        stars_spr = spl->loadSprite("big_stars_3.png");
+        stars_spr = _stars_spl->loadSprite("big_stars_3.png");
 
     //CCPoint position = item->getPosition();
-    stars_spr->setPosition(ccp(_item_size.width*0.5,
-                               _item_size.height*0.06));
+    stars_spr->setPosition(item->getPosition());
+    ADBMFont::setPositionByChangingAnchorPoint(
+                stars_spr,
+                ccp(item->getPositionX(),
+                    item->getPositionY() - _item_size.height*0.5));
+
     stars_spr->setScale(stars_spr->getContentSize().width/
                         stars_spr->getContentSize().width*0.85);
     item->addNephew(stars_spr);
@@ -315,6 +316,10 @@ bool SelectCollection::init()
 
     _buttons_menu->setContentSize(CCSize(width+margin*2, height+margin*2));
 
+    _stars_spl = GraphicsManager::getLoaderFor(_buttons_menu,
+                                               "level-end/big_stars.plist",
+                                               "level-end/big_stars.png");
+    _stars_spl->inject();
 
     unsigned int collection_id_first = 1;
     float working_y = height-s.height/2+margin;
@@ -338,6 +343,9 @@ bool SelectCollection::init()
         collection_id_first++;
         working_y -= s.height + margin_vertical;
     }
+
+
+
     newScrolling(_buttons_menu);
 
     return true;
