@@ -16,7 +16,7 @@ const char* Fonts::getFontName()
         }
         else
         {
-            _font_name = "fonts/Ubuntu Bold.ttf";
+            _font_name = "fonts/Lasco-Bold.ttf";
         }
     }
 
