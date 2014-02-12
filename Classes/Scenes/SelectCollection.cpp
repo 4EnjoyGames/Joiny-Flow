@@ -94,20 +94,12 @@ private:
         buy_item->setBaseScale(coll_button->getContentSize().width/
                                parent->getContentSize().width*0.8);
 
-<<<<<<< HEAD
-        std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes")
-                + ADInApp::getProduct("unlock_full")->getPrice();
-        CCLabelTTF * buy_text = CCLabelTTF::create(text.c_str(),
-                                                   Fonts::getFontName(),
-                                                   55);
-=======
         std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes");
         std::string price = ADInApp::getProduct("unlock_full")->getPrice();
         std::string button_buy_text = text +'\n' + price;
         CCLabelTTF * buy_text = CCLabelTTF::create(button_buy_text.c_str(),
                                                           Fonts::getFontName(),
                                                           55);
->>>>>>> 839a68481cdf4426220cb3a37efe5a77e53056a1
         buy_text->setColor(ccc3(255,255,255));
         buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
                                   buy_item->getContentSize().height/2));
