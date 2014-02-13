@@ -345,24 +345,14 @@ private:
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
                                                Fonts::getFontName(),
-                                               62);
+                                               48);
 
         if(_mode == NotEnough)
         {
-            label->setFontSize(48);
-            label->setPosition(ccp(x_middle, size.height*0.7f));
-
-            std::string score_to_bronze = AD_to_string(_level->getPuzzle()._info.getBronze());
-
-            CCLabelTTF* score = CCLabelTTF::create(score_to_bronze.c_str(),
-                                                   Fonts::getFontName(),
-                                                   92);
-            score->setPosition(ccp(x_middle, size.height*0.45f));
-            parent->addChild(score);
+            label->setPosition(ccp(x_middle, size.height*0.8f));
         }
         else
         {
-            label->setFontSize(48);
             label->setPosition(ccp(x_middle, size.height*0.9f));
 
             CCLabelTTF* score = CCLabelTTF::create(AD_to_string(_score).c_str(),
@@ -392,15 +382,14 @@ private:
         }
 
         //add stars
+        SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
+                                                          "level-end/big_stars.plist",
+                                                          "level-end/big_stars.png");
+        _spl->inject();
+
+        CCSprite* stars_spr = 0;
         if(_mode==LevelEnd)
         {
-            SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
-                                                              "level-end/big_stars.plist",
-                                                              "level-end/big_stars.png");
-            _spl->inject();
-
-            CCSprite* stars_spr = 0;
-
             if(_stars==1)
                 stars_spr = _spl->loadSprite("big_stars_1.png");
             else if(_stars==2)
@@ -410,6 +399,11 @@ private:
 
             stars_spr->setPosition(ccp(x_middle, size.height*0.5f));
 
+        }
+        else
+        {
+            stars_spr = _spl->loadSprite("big_stars_0.png");
+            stars_spr->setPosition(ccp(x_middle, size.height*0.5f));
         }
 
         float vertical = size.height * 0.18f;

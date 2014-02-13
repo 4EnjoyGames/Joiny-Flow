@@ -90,9 +90,7 @@ msgstr "Купити підказки"
 # You need more points
 #: ../../Classes/Scenes/LevelScene.cpp:339
 msgid "End_bad"
-msgstr ""
-"Потрбіно набрати\n"
-"більше очків"
+msgstr "Рівень програно!"
 
 # Score
 #: ../../Classes/Scenes/LevelScene.cpp:343
@@ -133,7 +131,7 @@ msgstr "Ні"
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
 msgstr "Купити повну версію?"
 
-# Unlock full game 
+# Unlock full game
 #: ../../Classes/Scenes/SelectCollection.cpp:78
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
 msgstr "Купити"

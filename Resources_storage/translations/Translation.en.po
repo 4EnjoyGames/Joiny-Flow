@@ -77,7 +77,7 @@ msgstr "Buy Hints"
 
 #: ../../Classes/Scenes/LevelScene.cpp:339
 msgid "End_bad"
-msgstr "You need more points"
+msgstr "Level failed!"
 
 #: ../../Classes/Scenes/LevelScene.cpp:343
 msgid "End_good"
