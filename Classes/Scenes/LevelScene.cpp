@@ -494,7 +494,7 @@ LevelScene::LevelScene(const JoinyLevel * current_level)
       _current_level(current_level),
       _score_label(0)
 {
-    _last_scene = this;
+    //_last_scene = this;
     this->setTag(123456);
 }
 
@@ -552,7 +552,7 @@ void LevelScene::onNextLevel(const bool show_ads)
             ADAds::prepareInterstitial();
         }
 
-       _last_scene->_pop_up_manager.closeWindow();
+       _last_scene->_pop_up_manager.backAction();
 
     }
 
@@ -620,7 +620,7 @@ void LevelScene::purchaseUpdateHints()
     if(_last_scene)
     {
         _last_scene->renewOneHint();
-        _last_scene->_pop_up_manager.closeWindow();
+        _last_scene->_pop_up_manager.backAction();
     }
 }
 void LevelScene::onHintClicked(CCObject*)
@@ -650,6 +650,17 @@ void LevelScene::onReloadLevelClicked(CCObject*)
     this->hideEverything(CCCallFunc::create(
                              this, callfunc_selector(LevelScene::doReloadLevel)));
 
+}
+void LevelScene::onEnter()
+{
+    _last_scene = this;
+    DrawLayer::onEnter();
+}
+
+void LevelScene::onExit()
+{
+    _last_scene = 0;
+    DrawLayer::onExit();
 }
 
 bool LevelScene::init()
@@ -1061,7 +1072,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 void LevelScene::keyBackClicked()
 {
     Tutorial::getInstance()->deleteTutorialPath();
-    _last_scene = 0;
+    //_last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverythingAndBack(CCCallFunc::create(

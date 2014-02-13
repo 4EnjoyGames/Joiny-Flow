@@ -112,7 +112,6 @@ private:
 SelectCollection::SelectCollection():
     _pop_up_manager(this)
 {
-    _last_scene = this;
 }
 cocos2d::CCScene* SelectCollection::scene()
 {
@@ -262,6 +261,18 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 
     return item;
 }
+void SelectCollection::onEnter()
+{
+    _last_scene = this;
+    DrawLayer::onEnter();
+}
+
+void SelectCollection::onExit()
+{
+    _last_scene = 0;
+    DrawLayer::onExit();
+}
+
 bool SelectCollection::init()
 {
     if (!DrawLayer::init())
@@ -356,7 +367,6 @@ bool SelectCollection::init()
 
 void SelectCollection::keyBackClicked()
 {
-    _last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverything(CCCallFunc::create(
@@ -473,7 +483,7 @@ void SelectCollection::purchaseUpdateFullGame()
     {
         //updateItems();
         //_last_scene->renewOneHint();
-        _last_scene->_pop_up_manager.closeWindow();
+        _last_scene->_pop_up_manager.backAction();
     }
 }
 void SelectCollection::updateItems()

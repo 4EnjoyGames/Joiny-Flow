@@ -46,6 +46,8 @@ private:
             const JoinyCollection* collection, const SpritesLoader& spl);
 
     virtual bool init();
+    void onEnter();
+    void onExit();
 
     void keyBackClicked();
 
