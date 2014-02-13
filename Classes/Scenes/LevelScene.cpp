@@ -543,11 +543,14 @@ void LevelScene::onNextLevel(const bool show_ads)
 {
     if(show_ads)
     {
-       if (ADAds::getInterstialTimesShowed() < 5)
-       {
-           ADAds::showInterstitial();
-           ADAds::prepareInterstitial();
-       }
+        if(ADAds::getInterstialTimesShowed() < 5)
+        {
+            if(rand() % 3 == 0)
+            {
+                ADAds::showInterstitial();
+            }
+            ADAds::prepareInterstitial();
+        }
 
        _last_scene->_pop_up_manager.closeWindow();
 
