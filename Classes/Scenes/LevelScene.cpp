@@ -516,7 +516,7 @@ CCScene* LevelScene::scene(const JoinyLevel *current_level)
                                           callfunc_selector(LevelScene::keyBackClicked));
 
     // add layer as a child to scene
-    BackgroundHolder::backgroundSwitchTo(scene, back, false);
+    BackgroundHolder::backgroundSwitchTo(scene, back, true,"level");
     //scene->addChild(backgorund);
     scene->addChild(layer);
 
