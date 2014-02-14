@@ -345,24 +345,14 @@ private:
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
                                                Fonts::getFontName(),
-                                               62);
+                                               48);
 
         if(_mode == NotEnough)
         {
-            label->setFontSize(48);
-            label->setPosition(ccp(x_middle, size.height*0.7f));
-
-            std::string score_to_bronze = AD_to_string(_level->getPuzzle()._info.getBronze());
-
-            CCLabelTTF* score = CCLabelTTF::create(score_to_bronze.c_str(),
-                                                   Fonts::getFontName(),
-                                                   92);
-            score->setPosition(ccp(x_middle, size.height*0.45f));
-            parent->addChild(score);
+            label->setPosition(ccp(x_middle, size.height*0.8f));
         }
         else
         {
-            label->setFontSize(48);
             label->setPosition(ccp(x_middle, size.height*0.9f));
 
             CCLabelTTF* score = CCLabelTTF::create(AD_to_string(_score).c_str(),
@@ -392,15 +382,14 @@ private:
         }
 
         //add stars
+        SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
+                                                          "level-end/big_stars.plist",
+                                                          "level-end/big_stars.png");
+        _spl->inject();
+
+        CCSprite* stars_spr = 0;
         if(_mode==LevelEnd)
         {
-            SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
-                                                              "level-end/big_stars.plist",
-                                                              "level-end/big_stars.png");
-            _spl->inject();
-
-            CCSprite* stars_spr = 0;
-
             if(_stars==1)
                 stars_spr = _spl->loadSprite("big_stars_1.png");
             else if(_stars==2)
@@ -410,6 +399,11 @@ private:
 
             stars_spr->setPosition(ccp(x_middle, size.height*0.5f));
 
+        }
+        else
+        {
+            stars_spr = _spl->loadSprite("big_stars_0.png");
+            stars_spr->setPosition(ccp(x_middle, size.height*0.5f));
         }
 
         float vertical = size.height * 0.18f;
@@ -500,7 +494,7 @@ LevelScene::LevelScene(const JoinyLevel * current_level)
       _current_level(current_level),
       _score_label(0)
 {
-    _last_scene = this;
+    //_last_scene = this;
     this->setTag(123456);
 }
 
@@ -516,7 +510,7 @@ CCScene* LevelScene::scene(const JoinyLevel *current_level)
                                           callfunc_selector(LevelScene::keyBackClicked));
 
     // add layer as a child to scene
-    BackgroundHolder::backgroundSwitchTo(scene, back, false);
+    BackgroundHolder::backgroundSwitchTo(scene, back, true,"level");
     //scene->addChild(backgorund);
     scene->addChild(layer);
 
@@ -549,13 +543,16 @@ void LevelScene::onNextLevel(const bool show_ads)
 {
     if(show_ads)
     {
-       if (ADAds::getInterstialTimesShowed() < 5)
-       {
-           ADAds::showInterstitial();
-           ADAds::prepareInterstitial();
-       }
+        if(ADAds::getInterstialTimesShowed() < 5)
+        {
+            if(rand() % 3 == 0)
+            {
+                ADAds::showInterstitial();
+            }
+            ADAds::prepareInterstitial();
+        }
 
-       _last_scene->_pop_up_manager.closeWindow();
+       _last_scene->_pop_up_manager.backAction();
 
     }
 
@@ -623,7 +620,7 @@ void LevelScene::purchaseUpdateHints()
     if(_last_scene)
     {
         _last_scene->renewOneHint();
-        _last_scene->_pop_up_manager.closeWindow();
+        _last_scene->_pop_up_manager.backAction();
     }
 }
 void LevelScene::onHintClicked(CCObject*)
@@ -653,6 +650,17 @@ void LevelScene::onReloadLevelClicked(CCObject*)
     this->hideEverything(CCCallFunc::create(
                              this, callfunc_selector(LevelScene::doReloadLevel)));
 
+}
+void LevelScene::onEnter()
+{
+    _last_scene = this;
+    DrawLayer::onEnter();
+}
+
+void LevelScene::onExit()
+{
+    _last_scene = 0;
+    DrawLayer::onExit();
 }
 
 bool LevelScene::init()
@@ -1064,7 +1072,7 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 void LevelScene::keyBackClicked()
 {
     Tutorial::getInstance()->deleteTutorialPath();
-    _last_scene = 0;
+    //_last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverythingAndBack(CCCallFunc::create(

@@ -25,6 +25,7 @@ public:
 
 private:
     SpritesLoader _stars_spl;
+    CCLabelTTF * _collections;
 
     class BuyFullVerdionPopUp;
     PopUpWindowManager _pop_up_manager;
@@ -46,6 +47,8 @@ private:
             const JoinyCollection* collection, const SpritesLoader& spl);
 
     virtual bool init();
+    void onEnter();
+    void onExit();
 
     void keyBackClicked();
 
@@ -57,7 +60,7 @@ private:
     void doOpenCollection();
 
     void hideEverything(cocos2d::CCCallFunc *callback);
-    void buildCollectionTiles();
+
     void newScrolling(MenuSpriteBatch* menu);
 
     typedef std::map<AnimatedMenuItem*, const JoinyCollection*> ButtonsMap;

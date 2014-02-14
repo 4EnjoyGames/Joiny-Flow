@@ -112,7 +112,6 @@ private:
 SelectCollection::SelectCollection():
     _pop_up_manager(this)
 {
-    _last_scene = this;
 }
 cocos2d::CCScene* SelectCollection::scene()
 {
@@ -262,6 +261,18 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 
     return item;
 }
+void SelectCollection::onEnter()
+{
+    _last_scene = this;
+    DrawLayer::onEnter();
+}
+
+void SelectCollection::onExit()
+{
+    _last_scene = 0;
+    DrawLayer::onExit();
+}
+
 bool SelectCollection::init()
 {
     if (!DrawLayer::init())
@@ -272,13 +283,19 @@ bool SelectCollection::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
-    CCLabelTTF * collections = CCLabelTTF::create( _("Collection"),
+    _collections = CCLabelTTF::create( _("Collection"),
                                                    Fonts::getFontName(),
                                                    72);
-    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                 ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
-    collections->setColor(GameInfo::getInstance()->getTitleColor());
-    this->addChild(collections);
+
+    auto button_show = [](){return CCFadeTo::create(0.1f, 255);};
+    _collections->setOpacity(0);
+    _collections->runAction(button_show());
+
+
+    _collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                               ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
+    _collections->setColor(GameInfo::getInstance()->getTitleColor());
+    this->addChild(_collections);
 
 
     //Back Button
@@ -351,12 +368,24 @@ bool SelectCollection::init()
 
     newScrolling(_buttons_menu);
 
+    for(auto& i:_buttons_map)
+    {
+        AnimatedMenuItem* item = i.first;
+
+        //animation
+        float scale_button = item->getScale();
+        item->setScale(scale_button*0.9);
+        item->setAnchorPoint(ccp(0.5, 0.5));
+        item->runAction(CCEaseElasticOut::create(
+                                  CCScaleTo::create(0.7f, scale_button),
+                                  0.4f));
+    }
+
     return true;
 }
 
 void SelectCollection::keyBackClicked()
 {
-    _last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverything(CCCallFunc::create(
@@ -376,17 +405,25 @@ void SelectCollection::doOpenCollection()
 }
 
 void SelectCollection::hideEverything(cocos2d::CCCallFunc *callback)
-{
+{   
+    float duration = 0.15f;
+    CCFadeTo* logo_move = CCFadeTo::create(duration, 0);
+    _collections->runAction(logo_move);
+    auto button_hide = [](){return CCFadeTo::create(0.15f, 0);};
+
+    for(auto & i: _buttons_map)
+    {
+        AnimatedMenuItem* item = i.first;
+        item->runAction(button_hide());
+    }
+
+
+    float delay = 0.2;
     this->runAction(
                 CCSequence::create(
-                    CCDelayTime::create(0),
+                    CCDelayTime::create(delay),
                     callback,
                     NULL));
-}
-
-void SelectCollection::buildCollectionTiles()
-{
-
 }
 
 void SelectCollection::newScrolling(MenuSpriteBatch* menu)
@@ -473,7 +510,7 @@ void SelectCollection::purchaseUpdateFullGame()
     {
         //updateItems();
         //_last_scene->renewOneHint();
-        _last_scene->_pop_up_manager.closeWindow();
+        _last_scene->_pop_up_manager.backAction();
     }
 }
 void SelectCollection::updateItems()
