@@ -228,7 +228,6 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     }
 
     CCSprite* background = spl->loadSprite("collection_button.png");
-    background->setTag(123);
     background->setColor(working);
     AnimatedMenuItem* item = AnimatedMenuItem::create(
                 background,
@@ -246,6 +245,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     CCLabelTTF* label = CCLabelTTF::create(label_text.c_str(),
                                            Fonts::getFontName(),
                                            75);
+    label->setTag(123);
     item->addChild(label);
 
     _item_size = background->getContentSize();
@@ -508,22 +508,26 @@ void SelectCollection::purchaseUpdateFullGame()
 {
     if(_last_scene)
     {
-        //updateItems();
-        //_last_scene->renewOneHint();
+        updateItems();
         _last_scene->_pop_up_manager.backAction();
     }
 }
 void SelectCollection::updateItems()
 {
-//    for(auto & i: _buttons_map)
-//    {
-//        AnimatedMenuItem* item = i.first;
-//        const JoinyCollection* col = i.second;
+    for(auto & i: (_last_scene->_buttons_map) )
+    {
+        AnimatedMenuItem* item = i.first;
+        const JoinyCollection* col = i.second;
+        ccColor3B coll_color = col->getCollectionColor();
 
-//        CCNode* node = item->getChildByTag(123);
-//        ccColor3B coll_color = col->getCollectionColor();
-//        node->setScale(2.0);
-//    }
+        CCLabelTTF* label = dynamic_cast<CCLabelTTF*>(item->getChildByTag(123));
+        if(label)
+        {
+            label->setColor(coll_color);
+        }
+
+        item->setColor(coll_color);
+    }
 }
 /**
  * @brief SelectCollection::isFreeOpenFullGame

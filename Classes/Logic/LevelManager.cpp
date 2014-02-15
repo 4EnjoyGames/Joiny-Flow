@@ -135,6 +135,7 @@ void LevelManager::loadLevelsInfo()
             bool open = true;
             if(!isFullGameVersion())
             {
+                //TODO: write here which coll must be closed
                 if (j==1)
                     open = false;
             }
