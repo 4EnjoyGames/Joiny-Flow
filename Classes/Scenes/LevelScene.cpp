@@ -120,12 +120,12 @@ private:
         good_level_button->setPosition(ccp(x_middle,size.height*0.6));
 
         CCLabelTTF * good_level_text = CCLabelTTF::create(_("Good_level"),
-                                                Fonts::getFontName(),
-                                                font_size);
+                                                          Fonts::getFontName(),
+                                                          font_size);
 
         good_level_text->setColor(ccc3(255,255,255));
         good_level_text->setPosition(ccp(good_level_button->getContentSize().width/2,
-                               good_level_button->getContentSize().height/2));
+                                         good_level_button->getContentSize().height/2));
         good_level_button->addChild(good_level_text);
         menu->menu()->addChild(good_level_button);
 
@@ -133,7 +133,7 @@ private:
 
         CCSprite* so_sprite = menu_spl->loadSprite("level_end_button.png");
         so_sprite->setScale(so_sprite->getContentSize().width/
-                              so_sprite->getContentSize().width*label_scale_factor);
+                            so_sprite->getContentSize().width*label_scale_factor);
         so_sprite->setColor(ccc3(255,255,255));
 
         AnimatedMenuItem *so_level_button = AnimatedMenuItem::create(
@@ -142,11 +142,11 @@ private:
         so_level_button->setPosition(ccp(x_middle,size.height*0.4));
 
         CCLabelTTF * so_level_text = CCLabelTTF::create(_("So_level"),
-                                                Fonts::getFontName(),
-                                                font_size);
+                                                        Fonts::getFontName(),
+                                                        font_size);
         so_level_text->setColor(ccc3(255,255,255));
         so_level_text->setPosition(ccp(so_level_button->getContentSize().width/2,
-                               so_level_button->getContentSize().height/2));
+                                       so_level_button->getContentSize().height/2));
         so_level_button->addChild(so_level_text);
         menu->menu()->addChild(so_level_button);
 
@@ -154,7 +154,7 @@ private:
 
         CCSprite* bad_sprite = menu_spl->loadSprite("level_end_button.png");
         bad_sprite->setScale(bad_sprite->getContentSize().width/
-                              bad_sprite->getContentSize().width*label_scale_factor);
+                             bad_sprite->getContentSize().width*label_scale_factor);
         bad_sprite->setColor(GameInfo::getInstance()->getNegativeColor());
 
         AnimatedMenuItem *badlevel_button = AnimatedMenuItem::create(
@@ -163,11 +163,11 @@ private:
         badlevel_button->setPosition(ccp(x_middle,size.height*0.2));
 
         CCLabelTTF * bad_level_text = CCLabelTTF::create(_("Bad_level"),
-                                                Fonts::getFontName(),
-                                                font_size);
+                                                         Fonts::getFontName(),
+                                                         font_size);
         bad_level_text->setColor(ccc3(255,255,255));
         bad_level_text->setPosition(ccp(badlevel_button->getContentSize().width/2,
-                               badlevel_button->getContentSize().height/2));
+                                        badlevel_button->getContentSize().height/2));
         badlevel_button->addChild(bad_level_text);
         menu->menu()->addChild(badlevel_button);
 
@@ -221,17 +221,17 @@ private:
                     menu_spl->loadSprite("buy_button.png"),
                     this, menu_selector(Me::onFirstButton));
         x5_hint->setPosition(ccp(size.width*0.5,
-                                    size.height*0.6));
+                                 size.height*0.6));
 
 
         std::string x10_price = ADInApp::getProduct("hints_10")->getPrice();
         std::string x10_for1 = "x10  " + x10_price;
         CCLabelTTF * first_button_text = CCLabelTTF::create(x10_for1.c_str(),
-                                                Fonts::getFontName(),
-                                                48);
+                                                            Fonts::getFontName(),
+                                                            48);
         first_button_text->setColor(ccc3(255,255,255));
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
-                               x5_hint->getContentSize().height/2));
+                                           x5_hint->getContentSize().height/2));
         x5_hint->addChild(first_button_text);
         menu->menu()->addChild(x5_hint);
 
@@ -246,11 +246,11 @@ private:
         std::string x100_price = ADInApp::getProduct("hints_100")->getPrice();
         std::string x100_for4 = "x100  " + x100_price;
         CCLabelTTF * second_button_text = CCLabelTTF::create(x100_for4.c_str(),
-                                                Fonts::getFontName(),
-                                                48);
+                                                             Fonts::getFontName(),
+                                                             48);
         second_button_text->setColor(ccc3(255,255,255));
         second_button_text->setPosition(ccp(x100_hint->getContentSize().width/2,
-                               x100_hint->getContentSize().height/2));
+                                            x100_hint->getContentSize().height/2));
         x100_hint->addChild(second_button_text);
 
         menu->menu()->addChild(x100_hint);
@@ -265,11 +265,11 @@ private:
         std::string x1000_price = ADInApp::getProduct("hints_1000")->getPrice();
         std::string x1000_for9 = "x1000  " + x1000_price;
         CCLabelTTF * third_button_text = CCLabelTTF::create(x1000_for9.c_str(),
-                                                Fonts::getFontName(),
-                                                48);
+                                                            Fonts::getFontName(),
+                                                            48);
         third_button_text->setColor(ccc3(255,255,255));
         third_button_text->setPosition(ccp(x1000_hint->getContentSize().width/2,
-                               x100_hint->getContentSize().height/2));
+                                           x100_hint->getContentSize().height/2));
         x1000_hint->addChild(third_button_text);
 
 
@@ -333,7 +333,7 @@ private:
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
 
-       std::string text ="";
+        std::string text ="";
         if(_mode==NotEnough)
         {
             text = _("End_bad");
@@ -383,8 +383,8 @@ private:
 
         //add stars
         SpritesLoader _spl = GraphicsManager::getLoaderFor(parent,
-                                                          "level-end/big_stars.plist",
-                                                          "level-end/big_stars.png");
+                                                           "level-end/big_stars.plist",
+                                                           "level-end/big_stars.png");
         _spl->inject();
 
         CCSprite* stars_spr = 0;
@@ -414,8 +414,8 @@ private:
                     this, menu_selector(Me::onPlayMore));
 
         CCLabelTTF * retry_text = CCLabelTTF::create(_("Retry"),
-                                                Fonts::getFontName(),
-                                                40);
+                                                     Fonts::getFontName(),
+                                                     40);
         retry_text->setColor(ccc3(255,255,255));
 
 
@@ -423,17 +423,17 @@ private:
         if(_mode==LevelEnd)
         {
             play_more_item->setPosition(ccp(size.width*0.25,
-                                        vertical));
+                                            vertical));
 
             retry_text->setPosition(ccp(play_more_item->getContentSize().width/2,
-                                   play_more_item->getContentSize().height/2));
+                                        play_more_item->getContentSize().height/2));
         }
         else
         {
             play_more_item->setPosition(ccp(size.width*0.5,
-                                        vertical));
+                                            vertical));
             retry_text->setPosition(ccp(play_more_item->getContentSize().width/2,
-                                   play_more_item->getContentSize().height/2));
+                                        play_more_item->getContentSize().height/2));
 
         }
 
@@ -444,8 +444,8 @@ private:
         {
 
             CCLabelTTF * next_level_text = CCLabelTTF::create(_("Next"),
-                                                    Fonts::getFontName(),
-                                                    40);
+                                                              Fonts::getFontName(),
+                                                              40);
             next_level_text->setColor(ccc3(255,255,255));
 
             AnimatedMenuItem *next_level = AnimatedMenuItem::create(
@@ -455,7 +455,7 @@ private:
                                         vertical));
 
             next_level_text->setPosition(ccp(next_level->getContentSize().width/2,
-                                   next_level->getContentSize().height/2));
+                                             next_level->getContentSize().height/2));
             next_level->addChild(next_level_text);
             menu->menu()->addChild(next_level);
         }
@@ -552,7 +552,7 @@ void LevelScene::onNextLevel(const bool show_ads)
             ADAds::prepareInterstitial();
         }
 
-       _last_scene->_pop_up_manager.backAction();
+        _last_scene->_pop_up_manager.backAction();
 
     }
 
@@ -605,7 +605,7 @@ void LevelScene::onPreviousLevelClicked(CCObject*)
     else
     {
         this->hideEverythingAndBack(CCCallFunc::create(
-                                 this, callfunc_selector(LevelScene::doGoToCollection)));
+                                        this, callfunc_selector(LevelScene::doGoToCollection)));
 
     }
 }
@@ -625,6 +625,9 @@ void LevelScene::purchaseUpdateHints()
 }
 void LevelScene::onHintClicked(CCObject*)
 {
+    this->stopAction(_hint_action);
+    this->runAction(createHintAction());
+
     bool succesfull_hint = false;
     CCLog("Hint clicked in LevelScene");
     if(_hints.hasHint())
@@ -766,19 +769,19 @@ bool LevelScene::init()
 
     //hint
     CCSprite* hint_logo = buttons_spl->loadSprite("hint.png");
-    AnimatedMenuItem* hint_button = AnimatedMenuItem::create(
+    _hint_button = AnimatedMenuItem::create(
                 hint_logo,
                 this,
                 menu_selector(LevelScene::onHintClicked));
 
-    hint_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 300/SCALE,
-                                       menu_height/2));
-    _buttons_menu->menu()->addChild(hint_button);
+    _hint_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 300/SCALE,
+                                  menu_height/2));
+    _buttons_menu->menu()->addChild(_hint_button);
 
 
     //add hints number text with background
-    CCPoint hint_text_position(ccp(hint_button->getContentSize().width*0.5,
-                                   hint_button->getContentSize().height*0.1));
+    CCPoint hint_text_position(ccp(_hint_button->getContentSize().width*0.5,
+                                   _hint_button->getContentSize().height*0.1));
 
     //number of hints
     unsigned int hints = _hints.getHintNumber();
@@ -789,7 +792,7 @@ bool LevelScene::init()
     _hint_number_text->setColor(GameInfo::getInstance()->getNegativeColor());
     _hint_number_text->setPosition(hint_text_position);
     _hint_number_text->setAnchorPoint(ccp(0.5,0.5));
-    hint_button->addChild(_hint_number_text);
+    _hint_button->addChild(_hint_number_text);
 
 
     this->addChild(_buttons_menu);
@@ -799,7 +802,7 @@ bool LevelScene::init()
     //progress bar title
     _progress = CCSprite::create("level-scene/progress_bar_title.png");
     _progress->setPosition(ccp(ORIGIN.x+VISIBLE_SIZE.width -200/SCALE,
-                              ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
+                               ORIGIN.y+VISIBLE_SIZE.height-70/SCALE));
     this->addChild(_progress);
 
 
@@ -928,11 +931,52 @@ bool LevelScene::init()
         Tutorial::getInstance()->setInfo(_flow_game);
         Tutorial::getInstance()->showTutorial();
     }
+
+
+    //
+    // set up the time delay
+    createHintAction();
+    // run the action
+    this->runAction(_hint_action);
     return true;
+}
+CCSequence* LevelScene::createHintAction()
+{
+    CCDelayTime *delayAction = CCDelayTime::create(20.0f);
+    // perform the selector call
+    CCCallFunc *callAction = CCCallFunc::create(this,
+                                                callfunc_selector(LevelScene::hintBlink));
+    _hint_action = CCSequence::create(delayAction,
+                                      callAction,
+                                      NULL);
+    return _hint_action;
+}
+
+void LevelScene::hintBlink()
+{
+    //animation
+    float scale_button = _hint_button->getScale();
+    _hint_button->setAnchorPoint(ccp(0.5, 0.5));
+    _hint_button->runAction(CCRepeat::create(CCSequence::createWithTwoActions(
+                                CCScaleTo::create(0.2f, scale_button*0.85),
+                                CCEaseElasticOut::create(
+                                    CCScaleTo::create(0.9f, scale_button),
+                                    0.3f)
+                                ), 3));
+
+    this->runAction(createHintAction());
 }
 
 void LevelScene::onScoreChanged(const FlowScore s)
 {
+    //if the score changed - we tuched
+    //stop the old action
+    this->stopAction(_hint_action);
+    //create new
+    this->runAction(createHintAction());
+
+
+
     std::stringstream ss;
     ss << s;
     _score_label->setString(ss.str().c_str());
@@ -986,11 +1030,16 @@ void LevelScene::onScoreChanged(const FlowScore s)
 
 void LevelScene::onWin()
 {
+    this->stopAction(_hint_action);
+
     Tutorial::getInstance()->deleteTutorialPath();
 
     if(_last_score < _current_info.getBronze())
+    {
         _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::NotEnough, _current_info.getBronze()-_last_score, 0, _current_level, this));
-    else
+        this->runAction(createHintAction());
+    }
+        else
     {
 
         //save the game
@@ -1000,7 +1049,7 @@ void LevelScene::onWin()
         static bool test_mode = false;
 
         if(!test_mode)
-        {      
+        {
             unsigned int stars = _current_level->getStarsNumber(_last_score);
             _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
         }
@@ -1071,12 +1120,14 @@ void LevelScene::hideEverythingAndBack(cocos2d::CCCallFunc *callback)
 
 void LevelScene::keyBackClicked()
 {
+
+    this->stopAction(_hint_action);
     Tutorial::getInstance()->deleteTutorialPath();
     //_last_scene = 0;
     if(!_pop_up_manager.backAction())
     {
         this->hideEverythingAndBack(CCCallFunc::create(
-                                 this, callfunc_selector(LevelScene::doGoToCollection)));
+                                        this, callfunc_selector(LevelScene::doGoToCollection)));
 
     }
 }

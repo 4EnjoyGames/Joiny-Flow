@@ -19,6 +19,11 @@ private:
     class FlowDelegate;
 
 
+    CCSequence* createHintAction();
+    CCSequence* _hint_action;
+    AnimatedMenuItem* _hint_button;
+
+
     void onNextLevel(const bool show_ads=true);
 
 
@@ -39,6 +44,8 @@ private:
     //for renew hints after purchase
     static LevelScene* _last_scene;
     void renewOneHint();
+
+    void hintBlink();
 
     void onScoreChanged(const FlowScore);
     void onWin();
