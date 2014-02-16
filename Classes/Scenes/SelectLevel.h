@@ -23,6 +23,7 @@ public:
     }
 private:
     ADBMFont* _font;
+    CCLabelTTF * _collections;
 
     BackButton _back;
     CCMenu* _back_menu;
