@@ -88,14 +88,14 @@ void SelectLevel::onLevelSelect(CCObject* sender)
 AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                                                const SpritesLoader& spl)
 {
-    const float SCALE = Screen::getScaleFactor();
-    JoinyLevelID joiny_level_id = level->getLevelId();
+    //const float SCALE = Screen::getScaleFactor();
+    //JoinyLevelID joiny_level_id = level->getLevelId();
 
 
     ccColor3B openLevel = _current_collection->getCollectionColor();
     static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
 
-    static ccColor3B labelColor(ccc3(255,255,255));
+    //static ccColor3B labelColor(ccc3(255,255,255));
 
     ccColor3B working = openLevel;
     unsigned int stars = level->getStarsNumber(level->getHighScore());

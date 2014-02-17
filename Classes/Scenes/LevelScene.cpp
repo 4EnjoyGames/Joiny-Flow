@@ -469,9 +469,9 @@ private:
     const JoinyLevel* _level;
 };
 
-LevelScene* LevelScene::create(const JoinyLevel *level)
+LevelScene* LevelScene::create(const JoinyLevel *level,bool show_animation)
 {
-    LevelScene *pRet = new LevelScene(level);
+    LevelScene *pRet = new LevelScene(level,show_animation);
     if (pRet && pRet->init())
     {
         pRet->autorelease();
@@ -487,8 +487,8 @@ LevelScene* LevelScene::create(const JoinyLevel *level)
 }
 
 
-LevelScene::LevelScene(const JoinyLevel * current_level)
-    :
+LevelScene::LevelScene(const JoinyLevel * current_level, bool show_animation)
+    :_show_open_animation(show_animation),
       _pop_up_manager(this),
       _last_score(0),
       _current_level(current_level),
@@ -498,13 +498,13 @@ LevelScene::LevelScene(const JoinyLevel * current_level)
     this->setTag(123456);
 }
 
-CCScene* LevelScene::scene(const JoinyLevel *current_level)
+CCScene* LevelScene::scene(const JoinyLevel *current_level, bool show_animation)
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
 
     // 'layer' is an autorelease object
-    LevelScene *layer = LevelScene::create(current_level);
+    LevelScene *layer = LevelScene::create(current_level,show_animation);
 
     CCCallFunc* back = CCCallFunc::create(layer,
                                           callfunc_selector(LevelScene::keyBackClicked));
@@ -933,11 +933,15 @@ bool LevelScene::init()
     }
 
 
-    //
     // set up the time delay
     createHintAction();
     // run the action
     this->runAction(_hint_action);
+
+    if(_show_open_animation)
+        showAnimation();
+
+
     return true;
 }
 CCSequence* LevelScene::createHintAction()
@@ -1058,6 +1062,10 @@ void LevelScene::onWin()
             _pop_up_manager.openWindow(new TesterEndPopUp(this,_current_level),true);
         }
     }
+}
+void LevelScene::showAnimation()
+{
+
 }
 
 void LevelScene::hideEverything(cocos2d::CCCallFunc* callback)

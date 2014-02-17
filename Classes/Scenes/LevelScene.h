@@ -60,6 +60,9 @@ private:
     void onReloadLevelClicked(CCObject*);
     void onHintClicked(CCObject*);
 
+    bool _show_open_animation;
+    void showAnimation();
+
     FlowScore _last_score;
     FlowScore _bronze;
     FlowScore _silver;
@@ -97,7 +100,7 @@ private:
     CCSprite* _progress ;
 
 public:
-    LevelScene(const JoinyLevel *);
+    LevelScene(const JoinyLevel *l, bool show_animation);
 
     static void purchaseUpdateHints();
 
@@ -107,10 +110,10 @@ public:
     void onExit();
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene(const JoinyLevel *current_level);
+    static cocos2d::CCScene* scene(const JoinyLevel *current_level, bool show_animation=false);
 
 
-    static LevelScene* create(const JoinyLevel *level);
+    static LevelScene* create(const JoinyLevel *level,bool show_animation);
 
 };
 
