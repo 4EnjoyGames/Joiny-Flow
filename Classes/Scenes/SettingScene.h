@@ -41,7 +41,9 @@ private:
     void onDevelopersClicked(CCObject*);
     void onRateMeClicked(CCObject*);
 
-    void createButton(CCSprite *sprite,
+    void showAnimation();
+
+    AnimatedMenuItem *createButton(CCSprite *sprite,
                       SEL_MenuHandler ptr,
                       CCPoint &position,
                       const char* button_text, const ccColor3B &color);
@@ -49,10 +51,12 @@ private:
     const ccColor3B getSoundColor() const;
     const ccColor3B getMusicColor() const;
 
-    CCSprite* _music_logo;
-    CCSprite* _sound_logo;
+    CCMenu* _main_menu;
 
-     CCMenu* _main_menu;
+    //buttons vector
+    std::vector<AnimatedMenuItem*> _buttons;
+    AnimatedMenuItem* _sound_button;
+    AnimatedMenuItem* _music_button;
 };
 
 #endif // SETTINGSCENE_H

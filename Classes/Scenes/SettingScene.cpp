@@ -148,10 +148,6 @@ SettingScene* SettingScene::create()
 
 bool SettingScene::init()
 {
-//    if (!CCLayer::init() )
-//    {
-//        return false;
-//    }
     if (!DrawLayer::init())
     {
         return false;
@@ -169,13 +165,13 @@ bool SettingScene::init()
     CCMenu* menu = _back.start(this, [this](){this->onButtonBackClicked(0);});
     this->addChild(menu);
 
-    CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),
-                                               Fonts::getFontName(),
-                                               60);
-    settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5 + 25/SCALE,
-                          ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
-    settings->setColor(GameInfo::getInstance()->getTitleColor());
-    this->addChild(settings);
+//    CCLabelTTF * settings = CCLabelTTF::create(_("Settings"),
+//                                               Fonts::getFontName(),
+//                                               60);
+//    settings->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5 + 25/SCALE,
+//                          ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
+//    settings->setColor(GameInfo::getInstance()->getTitleColor());
+//    this->addChild(settings);
 
 
     float up_ellements = 120/SCALE;
@@ -215,10 +211,8 @@ bool SettingScene::init()
     ///////////////////////////////////////////////////////////////////
 
     //Music Button
-    _music_logo = CCSprite::create("settings-menu/music.png");
-    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35,music_position_y));
-
-    createButton(_music_logo,
+    CCPoint position_music(ccp(VISIBLE_SIZE.width*0.35, music_position_y));
+    _music_button = createButton(CCSprite::create("settings-menu/music.png"),
                  menu_selector(SettingScene::onMusicClicked),
                  position_music,
                  "",
@@ -227,11 +221,8 @@ bool SettingScene::init()
     //////////////////////////////////////////////////////////////////
 
     //Sound Button
-    _sound_logo = CCSprite::create("settings-menu/sound.png");
-
     CCPoint position_sound(ccp(VISIBLE_SIZE.width*0.65, music_position_y));
-
-    createButton(_sound_logo,
+    _sound_button = createButton(CCSprite::create("settings-menu/sound.png"),
                  menu_selector(SettingScene::onSoundClicked),
                  position_sound,
                  "",
@@ -240,47 +231,53 @@ bool SettingScene::init()
     //////////////////////////////////////////////////////////////////
 
     CCPoint position_reset(ccp(VISIBLE_SIZE.width*0.5,reset_position_y));
-    createButton(CCSprite::create("settings-menu/node.png"),
+    AnimatedMenuItem* reset_button = createButton(CCSprite::create("settings-menu/node.png"),
                  menu_selector(SettingScene::onResetClicked),
                  position_reset,
                  _("Reset"),
                  GameInfo::getInstance()->getTitleColor());
+    _buttons.push_back(reset_button);
+
 
     //////////////////////////////////////////////////////////////////
 
     CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,restore_position_y));
 
-    createButton(CCSprite::create("settings-menu/node.png"),
+    AnimatedMenuItem* restor_button = createButton(CCSprite::create("settings-menu/node.png"),
                  menu_selector(SettingScene::onRestorClicked),
                  position_restor,
                  _("Restore"),
                  GameInfo::getInstance()->getTitleColor());
+    _buttons.push_back(restor_button);
 
     //////////////////////////////////////////////////////////////////
 
     CCPoint position_dev(ccp(VISIBLE_SIZE.width*0.5,dev_position_y));
-
-    createButton(CCSprite::create("settings-menu/node.png"),
+    AnimatedMenuItem* developers_button = createButton(CCSprite::create("settings-menu/node.png"),
                  menu_selector(SettingScene::onDevelopersClicked),
                  position_dev,
                  _("Developers"),
                  GameInfo::getInstance()->getTitleColor());
+    _buttons.push_back(developers_button);
 
     //////////////////////////////////////////////////////////////////
 
     CCPoint position_rate(ccp(VISIBLE_SIZE.width*0.5,rate_position_y));
-
-    createButton(CCSprite::create("settings-menu/node.png"),
+    AnimatedMenuItem* rate_button = createButton(CCSprite::create("settings-menu/node.png"),
                  menu_selector(SettingScene::onRateMeClicked),
                  position_rate,
                  _("Rate"),
                  GameInfo::getInstance()->getNegativeColor());
+    _buttons.push_back(rate_button);
 
 
     this->addChild(_main_menu);
+
+    showAnimation();
+
     return true;
 }
-void SettingScene::createButton(CCSprite* logo,
+AnimatedMenuItem* SettingScene::createButton(CCSprite* logo,
                                 SEL_MenuHandler ptr,
                                 CCPoint& position,
                                 const char* button_text,
@@ -312,6 +309,36 @@ void SettingScene::createButton(CCSprite* logo,
     }
 
     _main_menu->addChild(button);
+
+    return button;
+}
+void SettingScene::showAnimation()
+{
+    auto button_show = [](){return CCFadeTo::create(0.1f, 255);};
+
+    for(unsigned int i=0; i<_buttons.size(); ++i)
+    {
+        AnimatedMenuItem* curr = _buttons[i];
+        curr->setOpacity(0);
+        curr->runAction(button_show());
+    }
+
+    //animation
+    float m_scale_button = _music_button->getScale();
+    _music_button->setScale(m_scale_button*0.9);
+    _music_button->setAnchorPoint(ccp(0.5, 0.5));
+    _music_button->runAction(CCEaseElasticOut::create(
+                              CCScaleTo::create(0.7f, m_scale_button),
+                              0.4f));
+
+    //animation
+    float s_scale_button = _sound_button->getScale();
+    _sound_button->setScale(s_scale_button*0.9);
+    _sound_button->setAnchorPoint(ccp(0.5, 0.5));
+    _sound_button->runAction(CCEaseElasticOut::create(
+                              CCScaleTo::create(0.7f, s_scale_button),
+                              0.4f));
+
 }
 
 #include <ADLib/Device/ADBrowser.h>
@@ -337,9 +364,24 @@ void SettingScene::keyBackClicked()
 }
 void SettingScene::hideEverything(cocos2d::CCCallFunc *callback)
 {
+    float duration = 0.15f;
+    CCFadeTo* music_move = CCFadeTo::create(duration, 0);
+    _music_button->runAction(music_move);
+
+    CCFadeTo* sound_move = CCFadeTo::create(duration, 0);
+    _sound_button->runAction(sound_move);
+
+    auto button_hide = [](){return CCFadeTo::create(0.15f, 0);};
+    for(AnimatedMenuItem* item: _buttons)
+    {
+        item->runAction(button_hide());
+    }
+
+
+    float delay = 0.2;
     this->runAction(
                 CCSequence::create(
-                    CCDelayTime::create(0),
+                    CCDelayTime::create(delay),
                     callback,
                     NULL));
 }
@@ -354,7 +396,7 @@ void SettingScene::onMusicClicked(CCObject*)
         MusicSettings::turnOnMusic();
     }
 
-    _music_logo->setColor(getMusicColor());
+    _music_button->setColor(getMusicColor());
 
 
     RW::getLevelManager().saveSettings();
@@ -371,7 +413,7 @@ void SettingScene::onSoundClicked(CCObject*)
         MusicSettings::turnOnSoundEffect();
     }
 
-    _sound_logo->setColor(getSoundColor());
+    _sound_button->setColor(getSoundColor());
 
     RW::getLevelManager().saveSettings();
 }
