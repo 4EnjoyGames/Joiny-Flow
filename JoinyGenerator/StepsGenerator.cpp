@@ -32,11 +32,18 @@ bool operator<(const JoinyPair& a, const JoinyPair& b)
 
 bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info)
 {
-    Score precision = info.getGold()/20;
-    if(info.getBronze() + precision <= info.getSilver() &&
-            info.getSilver() <= info.getGold())
+    bool result = false;
+    Score precision = info.getGold()/25;
+    if(info.getBronze()!=0 && info.getSilver()!=0 &&
+            info.getGold()!=0)
     {
-        return true;
+        if(info.getBronze() + precision <= info.getSilver() &&
+                info.getSilver() <= info.getGold())
+        {
+            return true;
+        }
+        else
+            return false;
     }
     else
         return false;
@@ -48,8 +55,8 @@ bool isGooTask(const FlowTask& task)
     for(FlowTask::const_iterator it = task.begin(); it!=task.end(); ++it)
     {
         const FlowStartEnd& s = *it;
-//        if(s.size() != 2)
-//            return false;
+        //        if(s.size() != 2)
+        //            return false;
         if(areNeighboors(s.first, s.second))
             return false;
     }
@@ -110,9 +117,9 @@ JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
     return res;
 }
 void GenerateLevels(const unsigned int tablo_size,
-                const unsigned int level_number,
-                const unsigned int min_colors,
-                const unsigned int max_colors)
+                    const unsigned int level_number,
+                    const unsigned int min_colors,
+                    const unsigned int max_colors)
 {
 
     srand(time(0));
@@ -293,7 +300,7 @@ void SaveCollection(std::string plan_file,
         if(_past_palete == _curr_palete)
         {
             recolorJoiny(puzzle_ptr->getJoinyTask(),
-                                              _curr_palete);
+                         _curr_palete);
             _curr_palete = getPalete(*it);
         }
 

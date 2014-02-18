@@ -41,6 +41,8 @@ public:
     typedef map<unsigned int, OneTabloPathes > AllTablosPathes;
     AllTablosPathes _all_pathes;
 
+    bool _find_full_table_solution;
+
 
     NumberLink(const Distance width,
                const Distance height):
@@ -55,7 +57,9 @@ public:
         start_(size_ + 1),
         connected_x_(size_),
         connected_y_(size_),
-        memo_(size_) {}
+        memo_(size_),
+        _find_full_table_solution(false)
+    {}
 
     void Initialize()
     {
@@ -150,7 +154,7 @@ public:
         if (cell_key == size_)
         {
             Print();
-            return 1.0;
+            _find_full_table_solution = true;
         }
         else
         {
@@ -161,11 +165,26 @@ public:
         const vector<CellKey> mate_tuple(mates_.begin() + start_[cell_key],
                                          mates_.begin() + cell_key);
         const Hash mate_hash = GetHash(mate_tuple);
-        if (!memo_[cell_key].count(mate_hash))
+        if(cell_key < (width_ * height_) )
         {
-            memo_[cell_key][mate_hash] = Connect(cell_key);
+            if (!memo_[cell_key].count(mate_hash))
+            {
+                memo_[cell_key][mate_hash] = Connect(cell_key);
+            }
         }
-        return memo_[cell_key][mate_hash];
+
+        if(cell_key < (width_ * height_) )
+            return memo_[cell_key][mate_hash];
+        else
+        {
+            return 2.0;
+        }
+
+    }
+
+    bool findFullTableSolution()
+    {
+        return _find_full_table_solution;
     }
 
     double Connect(const CellKey cell_key)
@@ -744,6 +763,12 @@ unsigned int clamp(const unsigned int num, const unsigned int clamper)
 {
     return (num / clamper) * clamper;
 }
+std::vector<NumberLink::Scores> getScores(const JoinyTask& task,
+                                          const unsigned int width,
+                                          const unsigned int height)
+{
+    return std::vector<NumberLink::Scores>();
+}
 
 JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
@@ -764,10 +789,11 @@ JoinyInfo solveJoiny(const JoinyTask& task,
 
     }
 
-    unsigned int solution_count = nl.Solve();
+    int solution_count = nl.Solve();
     //cout << "Solutions found: " << solution_count << endl;
 
-    if(solution_count > 0)
+//    if(solution_count > 0)
+    if(solution_count >0 && nl.findFullTableSolution())
     {
 
         NumberLink::Scores& sc = nl._scores;
@@ -811,7 +837,8 @@ JoinyInfo solveJoiny(const JoinyTask& task,
         JoinyInfo info = JoinyInfo(clamp(average, 500),
                          clamp((average + max)/2, 500),
                          clamp(max, 500));
-        if(has_pathes)
+
+        if(nl.findFullTableSolution())
             info.setPathes(tablo_pathes);
         return info;
     }
