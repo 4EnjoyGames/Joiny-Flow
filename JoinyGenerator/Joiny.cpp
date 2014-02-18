@@ -769,7 +769,15 @@ std::vector<NumberLink::Scores> getScores(const JoinyTask& task,
 {
     return std::vector<NumberLink::Scores>();
 }
-
+unsigned int getPathesSize(const NumberLink::OneTabloPathes& tablo_pathes)
+{
+    unsigned int result = 0;
+    for(unsigned int i=0; i<tablo_pathes.size(); ++i)
+    {
+        result += tablo_pathes[i].size();
+    }
+    return result;
+}
 JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
                      const unsigned int height)
@@ -790,9 +798,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
     }
 
     int solution_count = nl.Solve();
-    //cout << "Solutions found: " << solution_count << endl;
 
-//    if(solution_count > 0)
     if(solution_count >0 && nl.findFullTableSolution())
     {
 
@@ -833,14 +839,23 @@ JoinyInfo solveJoiny(const JoinyTask& task,
             has_pathes = true;
         }
 
-        unsigned int average = sum/n;
-        JoinyInfo info = JoinyInfo(clamp(average, 500),
-                         clamp((average + max)/2, 500),
-                         clamp(max, 500));
+        //firstly see is corect info abou "full table solution"
+        unsigned int tablo_size = width*height;
+        unsigned int solution_size = getPathesSize(tablo_pathes);
 
-        if(nl.findFullTableSolution())
-            info.setPathes(tablo_pathes);
-        return info;
+        if(tablo_size==solution_size)
+        {
+            unsigned int average = sum/n;
+            JoinyInfo info = JoinyInfo(clamp(average, 500),
+                             clamp((average + max)/2, 500),
+                             clamp(max, 500));
+
+            if(nl.findFullTableSolution())
+                info.setPathes(tablo_pathes);
+            return info;
+        }
+        else
+            return JoinyInfo(0,0,0);
     }
     return JoinyInfo(0,0,0);
 }
