@@ -311,7 +311,7 @@ bool SelectLevel::init()
 
 void SelectLevel::doOpenLevel()
 {
-    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_last_selected_level));
+    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_last_selected_level,true));
 }
 
 void SelectLevel::newScrolling(MenuSpriteBatch* menu)

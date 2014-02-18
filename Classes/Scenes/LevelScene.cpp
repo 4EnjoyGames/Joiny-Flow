@@ -742,6 +742,7 @@ bool LevelScene::init()
     prev_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 - 100/SCALE,
                                        menu_height/2));
     _buttons_menu->menu()->addChild(prev_level_button);
+    _buttons.push_back(prev_level_button);
 
     //reload
     CCSprite* reload_level_logo = buttons_spl->loadSprite("reload_level.png");
@@ -753,6 +754,7 @@ bool LevelScene::init()
     reload_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 ,
                                          menu_height/2));
     _buttons_menu->menu()->addChild(reload_level_button);
+    _buttons.push_back(reload_level_button);
 
 
     //next level
@@ -765,6 +767,7 @@ bool LevelScene::init()
     next_level_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 100/SCALE,
                                        menu_height/2));
     _buttons_menu->menu()->addChild(next_level_button);
+    _buttons.push_back(next_level_button);
 
 
     //hint
@@ -777,6 +780,7 @@ bool LevelScene::init()
     _hint_button->setPosition(ccp(VISIBLE_SIZE.width/2 + 300/SCALE,
                                   menu_height/2));
     _buttons_menu->menu()->addChild(_hint_button);
+    _buttons.push_back(_hint_button);
 
 
     //add hints number text with background
@@ -1065,6 +1069,57 @@ void LevelScene::onWin()
 }
 void LevelScene::showAnimation()
 {
+    CCArray* buttons = _buttons_menu->getChildren();
+    unsigned int num = buttons->capacity();
+    for(auto& item:_buttons)
+    {
+        float scale_button = item->getScale();
+        item->setScale(scale_button*0.9);
+        item->setAnchorPoint(ccp(0.5, 0.5));
+        item->runAction(CCEaseElasticOut::create(
+                                  CCScaleTo::create(0.7f, scale_button),
+                                  0.4f));
+    }
+
+    float scale_bronze = _bronze_star->getScale();
+    _bronze_star->setScale(scale_bronze*0.9);
+    _bronze_star->runAction(CCEaseElasticOut::create(
+                                CCScaleTo::create(0.7f, scale_bronze),
+                                0.4f));
+
+    float scale_silver = _silver_star->getScale();
+    _silver_star->setScale(scale_silver*0.9);
+    _silver_star->runAction(CCEaseElasticOut::create(
+                                CCScaleTo::create(0.7f, scale_silver),
+                                0.4f));
+
+    float scale_gold = _gold_star->getScale();
+    _gold_star->setScale(scale_gold*0.9);
+    _gold_star->runAction(CCEaseElasticOut::create(
+                                CCScaleTo::create(0.7f, scale_gold),
+                                0.4f));
+
+    auto button_show = [](){return CCFadeTo::create(0.15f, 255);};
+
+
+    float scale_score = _score_label->getScale();
+    _score_label->setScale(scale_score*0.9);
+    _score_label->runAction(CCEaseElasticOut::create(
+                                CCScaleTo::create(0.7f, scale_score),
+                                0.4f));
+
+    float scale_hint = _hint_number_text->getScale();
+    _hint_number_text->setScale(scale_hint*0.9);
+    _hint_number_text->runAction(CCEaseElasticOut::create(
+                                CCScaleTo::create(0.7f, scale_hint),
+                                0.4f));
+
+
+    _progress->setOpacity(0);
+    _progress->runAction(button_show());
+    _progress_timer->setOpacity(0);
+    _progress_timer->runAction(button_show());
+
 
 }
 

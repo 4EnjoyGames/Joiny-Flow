@@ -99,6 +99,9 @@ private:
     //progress bar title
     CCSprite* _progress ;
 
+    //buttons
+    std::vector<AnimatedMenuItem*> _buttons;
+
 public:
     LevelScene(const JoinyLevel *l, bool show_animation);
 
