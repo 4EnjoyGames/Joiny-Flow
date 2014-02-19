@@ -892,9 +892,10 @@ void JoinyColorSchemeInit()
 {
     palete2(0,1);
     palete2(2,6);
+    palete2(7,5);
 
-    palete3(2,5,6);
-    palete3(0,2,1);
+    palete3(3,5,6);
+    palete3(4,2,1);
 
     palete4(0,1,3,2);
     palete4(2,7,5,3);
@@ -911,11 +912,21 @@ const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
 
 
     auto& paletes = _paletes[bad_palete.size()];
-    for(unsigned int i=0; i<paletes.size(); ++i)
+//    for(unsigned int i=0; i<paletes.size(); ++i)
+//    {
+//        if(paletes[i]!=bad_palete)
+//            return paletes[i];
+//    }
+
+    int min = 0;
+    int max = paletes.size();
+    int num =  min + (rand() % (int)(max - min + 1));
+
+    while(paletes[num]!=bad_palete)
     {
-        if(paletes[i]!=bad_palete)
-            return paletes[i];
+        num =  min + (rand() % (int)(max - min + 1));
     }
+    return paletes[num];
 
 }
 
