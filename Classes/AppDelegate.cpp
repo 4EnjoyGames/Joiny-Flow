@@ -163,7 +163,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     //Language init
     ADLanguage::addSupportedLanguage("en");
     ADLanguage::addSupportedLanguage("uk");
-    ADLanguage::addSupportedLanguage("pt");
+    //ADLanguage::addSupportedLanguage("pt");
     //ADLanguage::addSupportedLanguage("ru");
     //ADLanguage::addSupportedLanguage("hu");
     //ADLanguage::addSupportedLanguage("fr");

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-12 16:08+0200\n"
+"POT-Creation-Date: 2014-02-19 22:55+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,22 +15,22 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../Classes\n"
 
 # Error
-#: ../../Classes/AppDelegate.cpp:66
+#: ../../Classes/AppDelegate.cpp:70
 msgid "iap.error.billing_unavaliable"
 msgstr "Помилка"
 
 # Restore Purchase error
-#: ../../Classes/AppDelegate.cpp:71
+#: ../../Classes/AppDelegate.cpp:75
 msgid "iap.error.purchase_error"
 msgstr "Помилка під час відновлення покупок"
 
 # Successfully restored purchases
-#: ../../Classes/AppDelegate.cpp:79
+#: ../../Classes/AppDelegate.cpp:83
 msgid "iap.restore_purchases.success"
 msgstr "Покупки відновлені успішно"
 
 # Restore Purchase failed
-#: ../../Classes/AppDelegate.cpp:84
+#: ../../Classes/AppDelegate.cpp:88
 msgid "iap.restore_purchases.failed"
 msgstr "Відновити покупки невдалося"
 
@@ -98,12 +98,12 @@ msgid "End_good"
 msgstr "Очки"
 
 # Retry
-#: ../../Classes/Scenes/LevelScene.cpp:422
+#: ../../Classes/Scenes/LevelScene.cpp:416
 msgid "Retry"
 msgstr "Грати ще"
 
 # Next
-#: ../../Classes/Scenes/LevelScene.cpp:452
+#: ../../Classes/Scenes/LevelScene.cpp:446
 msgid "Next"
 msgstr "Наступний"
 
@@ -132,12 +132,18 @@ msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
 msgstr "Купити повну версію?"
 
 # Unlock full game
-#: ../../Classes/Scenes/SelectCollection.cpp:78
+#: ../../Classes/Scenes/SelectCollection.cpp:62
+#, fuzzy
+msgid "SelectColection.BuyFullVerdionPopUp.OrText"
+msgstr "Купити"
+
+# Unlock full game
+#: ../../Classes/Scenes/SelectCollection.cpp:97
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
 msgstr "Купити"
 
 # Collections
-#: ../../Classes/Scenes/SelectCollection.cpp:271
+#: ../../Classes/Scenes/SelectCollection.cpp:286
 msgid "Collection"
 msgstr "Колекції"
 
@@ -148,30 +154,29 @@ msgstr ""
 "Ви дійсно хочете\n"
 "видалити усі збереження ?"
 
-# Settings
-#: ../../Classes/Scenes/SettingScene.cpp:172
-msgid "Settings"
-msgstr "Налаштування"
-
 # Reset Progress
-#: ../../Classes/Scenes/SettingScene.cpp:246
+#: ../../Classes/Scenes/SettingScene.cpp:237
 msgid "Reset"
 msgstr "Скинути прогрес"
 
 # Restore Purchases
-#: ../../Classes/Scenes/SettingScene.cpp:256
+#: ../../Classes/Scenes/SettingScene.cpp:249
 msgid "Restore"
 msgstr "Відновити покупки"
 
 # Developers
-#: ../../Classes/Scenes/SettingScene.cpp:266
+#: ../../Classes/Scenes/SettingScene.cpp:259
 msgid "Developers"
 msgstr "Розробники"
 
 # Rate Me
-#: ../../Classes/Scenes/SettingScene.cpp:276
+#: ../../Classes/Scenes/SettingScene.cpp:269
 msgid "Rate"
 msgstr "Оцінити гру"
+
+# Settings
+#~ msgid "Settings"
+#~ msgstr "Налаштування"
 
 #~ msgid "SelectColection.BuyFullVerdionPopUp.No"
 #~ msgstr "Відмінити"

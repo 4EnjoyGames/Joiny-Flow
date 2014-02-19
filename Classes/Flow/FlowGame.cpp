@@ -288,6 +288,13 @@ void FlowGame::endGame()
 {
     stopTrackingTouch();
 }
+void FlowGame::playMusic(const FlowPoint& p)
+{
+    FlowColor color = getCellColor(p)+1;
+    std::stringstream file_name;
+    file_name << "music/flow_game/note" << color << ".wav";
+    MusicSettings::playSoundEffect(file_name.str().c_str());
+}
 
 void FlowGame::touchEnded(const FlowPoint& p)
 {
@@ -301,12 +308,8 @@ void FlowGame::touchEnded(const FlowPoint& p)
     //if the point is on the table
     if((p.x() < _table->getWidth() && p.y() < _table->getHeight()))
     {
-        FlowPointState st = _table->get(p);
-        if(st.getNodeType() == FlowPointState::Circle)
-        {
-            //play sound effect
-            MusicSettings::playSoundEffect("music/flow_click.wav");
-        }
+        //play sound effect
+        playMusic(p);
     }
 
     updateScore();
