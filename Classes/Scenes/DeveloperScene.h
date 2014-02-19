@@ -13,6 +13,21 @@ public:
     static DeveloperScene* create();
 
 private:
+    CCLabelTTF * _author_diana;
+    CCLabelTTF * _author_andrii;
+
+    CCLabelTTF * _thank;
+    CCLabelTTF * _thank1;
+
+    //x4enjoy logo
+    CCSprite* _x4enjoy_logo;
+
+    //ukraine flag
+    CCSprite* _flag;
+
+    //copy right
+    CCLabelTTF * _reight;
+
     BackButton _back;
     bool init();
 
@@ -28,6 +43,8 @@ private:
     }
     void doGoBack();
     void hideEverything(cocos2d::CCCallFunc *callback);
+
+    void showAnimation();
 
 };
 
