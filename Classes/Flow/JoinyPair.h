@@ -45,6 +45,11 @@ public:
 
     }
 
+    void setBronze(const Score& score)
+    {
+        _bronze_score = score;
+    }
+
     const Score getBronze() const
     {
         return _bronze_score;

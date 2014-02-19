@@ -28,7 +28,7 @@ private:
 bool areNeighboors(const FlowPoint& a, const FlowPoint& b);
 bool operator<(const FlowTask& a, const FlowTask& b);
 bool operator<(const JoinyPair& a, const JoinyPair& b);
-bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info);
+bool isGoodJoiny(const JoinyTask& task, JoinyInfo &info);
 bool isGooTask(const FlowTask& task);
 bool isGooTask(const FlowTask& task, unsigned int N);
 void tabulate(unsigned int generated, unsigned int good, unsigned int unique);

@@ -30,9 +30,8 @@ bool operator<(const JoinyPair& a, const JoinyPair& b)
     return false;
 }
 
-bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info)
+bool isGoodJoiny(const JoinyTask& task,JoinyInfo& info)
 {
-    bool result = false;
     Score precision = info.getGold()/25;
     if(info.getBronze()!=0 && info.getSilver()!=0 &&
             info.getGold()!=0)
@@ -40,6 +39,7 @@ bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info)
         if(info.getBronze() + precision <= info.getSilver() &&
                 info.getSilver() <= info.getGold())
         {
+            info.setBronze(info.getBronze()*0.8);
             return true;
         }
         else
