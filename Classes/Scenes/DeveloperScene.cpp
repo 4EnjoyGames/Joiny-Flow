@@ -82,7 +82,7 @@ bool DeveloperScene::init()
     //thank to logo
     _thank = CCLabelTTF::create(_("thank"),
                                                Fonts::getFontName(),
-                                               35);
+                                               30);
     _thank->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.6));
     _thank->setColor(GameInfo::getInstance()->getTitleColor());
@@ -91,7 +91,7 @@ bool DeveloperScene::init()
     //thank list - thank1
     _thank1 = CCLabelTTF::create(_("test_list"),
                                                Fonts::getFontName(),
-                                               35);
+                                               30);
     _thank1->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                               ORIGIN.y + VISIBLE_SIZE.height*0.45));
     _thank1->setColor(GameInfo::getInstance()->getTitleColor());

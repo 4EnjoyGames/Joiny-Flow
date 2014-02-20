@@ -900,6 +900,21 @@ void JoinyColorSchemeInit()
     palete4(0,1,3,2);
     palete4(2,7,5,3);
 }
+
+bool equalPalete(const Palete& p1, const Palete& p2)
+{
+    bool res = true;
+    for(unsigned int i=0; i<p1.size(); ++i)
+    {
+        if(p1[i]!=p2[i])
+        {
+            res = false;
+            break;
+        }
+    }
+    return res;
+}
+
 const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
 {
     static bool init = false;
@@ -919,10 +934,10 @@ const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
 //    }
 
     int min = 0;
-    int max = paletes.size();
+    int max = paletes.size()-1;
     int num =  min + (rand() % (int)(max - min + 1));
 
-    while(paletes[num]!=bad_palete)
+    while(equalPalete(paletes[num],bad_palete))
     {
         num =  min + (rand() % (int)(max - min + 1));
     }

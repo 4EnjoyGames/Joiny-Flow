@@ -39,7 +39,7 @@ bool isGoodJoiny(const JoinyTask& task,JoinyInfo& info)
         if(info.getBronze() + precision <= info.getSilver() &&
                 info.getSilver() <= info.getGold())
         {
-            info.setBronze(info.getBronze()*0.8);
+            info.setBronze(info.getBronze()*0.7);
             return true;
         }
         else
@@ -287,6 +287,7 @@ void SaveCollection(std::string plan_file,
     }
 
     //recolor puzzle
+    int i=0;
     for(std::vector<JoinyPuzzle>::iterator it = good_tasks.begin();
         it != good_tasks.end();
         ++it)
@@ -303,7 +304,8 @@ void SaveCollection(std::string plan_file,
                          _curr_palete);
             _curr_palete = getPalete(*it);
         }
-
+        cout<<"recolored "<<i<<endl;
+        i++;
 
     }
 
