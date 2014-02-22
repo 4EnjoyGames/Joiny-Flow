@@ -145,12 +145,12 @@ msgstr "Відкрити повну версію"
 msgid "Collection"
 msgstr "Колекції"
 
-# "Would you like\n to delete all saves ?"
+# "Would you like\n to delete all progress?"
 #: ../../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
 "Ви дійсно хочете\n"
-"видалити усі збереження ?"
+"видалити весь прогрес?"
 
 # Reset Progress
 #: ../../Classes/Scenes/SettingScene.cpp:237
