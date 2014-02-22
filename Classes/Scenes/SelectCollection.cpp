@@ -61,8 +61,7 @@ private:
         //add "or" text
         CCLabelTTF* or_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.OrText"),
                                                Fonts::getFontName(),
-                                               50);
-        or_text->setFontSize(48);
+                                               40);
         or_text->setPosition(ccp(x_middle, size.height*0.5f));
         parent->addChild(or_text);
 
@@ -99,7 +98,7 @@ private:
         std::string button_buy_text = text +'\n' + price;
         CCLabelTTF * buy_text = CCLabelTTF::create(button_buy_text.c_str(),
                                                           Fonts::getFontName(),
-                                                          55);
+                                                          45);
         buy_text->setColor(ccc3(255,255,255));
         buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
                                   buy_item->getContentSize().height/2));

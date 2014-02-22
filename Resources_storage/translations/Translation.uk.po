@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-19 22:55+0200\n"
+"POT-Creation-Date: 2014-02-22 11:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -52,11 +52,10 @@ msgstr "Дякуємо:"
 #: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
-"Thank1 Thank1, Tahnk2 Thank2 \n"
-"Thank1 Thank1, Tahnk2 Thank2 \n"
-"Thank1 Thank1, Tahnk2 Thank2 \n"
-"Thank1 Thank1, Tahnk2 Thank2 \n"
-"Thank1 Thank1, Tahnk2 Thank2"
+"музика та звуки : Aziyan Nasir - \"Silly Fun\"\n"
+"Löhstana David - \"Demain je change de vie\"\n"
+"testers: Tester1, Tester1, Tester1, Tester1, Tester1\n"
+"Tester1, Tester1, Tester1, Tester1, Tester1, Tester1"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:119
 msgid "copy"
@@ -129,18 +128,17 @@ msgstr "Ні"
 # Get 3 stars everywhere
 #: ../../Classes/Scenes/SelectCollection.cpp:44
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
-msgstr "Купити повну версію?"
+msgstr "Зібрати 3 зірки усюди"
 
-# Unlock full game
+# or
 #: ../../Classes/Scenes/SelectCollection.cpp:62
-#, fuzzy
 msgid "SelectColection.BuyFullVerdionPopUp.OrText"
-msgstr "Купити"
+msgstr "або"
 
 # Unlock full game
 #: ../../Classes/Scenes/SelectCollection.cpp:97
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr "Купити"
+msgstr "Відкрити повну версію"
 
 # Collections
 #: ../../Classes/Scenes/SelectCollection.cpp:286

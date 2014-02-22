@@ -116,7 +116,7 @@ msgstr "or"
 
 #: ../../Classes/Scenes/SelectCollection.cpp:97
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr "Unlock full game now"
+msgstr "Unlock full game"
 
 #: ../../Classes/Scenes/SelectCollection.cpp:290
 msgid "Collection"

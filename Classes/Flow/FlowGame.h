@@ -27,7 +27,7 @@ public:
     void endGame();
 
     //play click sound - diff for all colors
-    void playMusic(const FlowPoint& p);
+    //void playMusic(const FlowPoint& p);
 
     FlowGame(const FlowTable& table, DelegatePtr delegate);
     static FlowGame* create(const FlowTable& table, DelegatePtr delegate);

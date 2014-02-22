@@ -208,7 +208,7 @@ private:
         //greeting text
         CCLabelTTF * greeting = CCLabelTTF::create(_("BuyHint"),
                                                    Fonts::getFontName(),
-                                                   72);
+                                                   50);
         greeting->setPosition(ccp(size.width*0.5,
                                   size.height*0.8));
         greeting->setColor(ccc3(255,255,255));
@@ -415,7 +415,7 @@ private:
 
         CCLabelTTF * retry_text = CCLabelTTF::create(_("Retry"),
                                                      Fonts::getFontName(),
-                                                     40);
+                                                     35);
         retry_text->setColor(ccc3(255,255,255));
 
 
@@ -445,7 +445,7 @@ private:
 
             CCLabelTTF * next_level_text = CCLabelTTF::create(_("Next"),
                                                               Fonts::getFontName(),
-                                                              40);
+                                                              35);
             next_level_text->setColor(ccc3(255,255,255));
 
             AnimatedMenuItem *next_level = AnimatedMenuItem::create(
