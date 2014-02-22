@@ -184,7 +184,7 @@ void GenerateLevels(const unsigned int tablo_size,
             }
         }
         generated++;
-        if(generated % 10 == 0)
+        if(generated % 100 == 0)
             tabulate(generated, good, good_tasks.size());
     }
 
