@@ -551,8 +551,8 @@ void LevelScene::onNextLevel(const bool show_ads)
             }
             ADAds::prepareInterstitial();
         }
-
-        _last_scene->_pop_up_manager.backAction();
+        if(_last_scene)
+            _last_scene->_pop_up_manager.backAction();
 
     }
 
@@ -663,6 +663,7 @@ void LevelScene::onEnter()
 void LevelScene::onExit()
 {
     _last_scene = 0;
+    _flow_game->stopTrackingTouch();
     DrawLayer::onExit();
 }
 
@@ -921,10 +922,12 @@ bool LevelScene::init()
     //on what menu do not respond PopUpWindow
     _pop_up_manager.addMenuToAutoDisable(_buttons_menu->menu());
     _pop_up_manager.addOnShowWindowAction([this](){
-        this->_flow_game->stopTrackingTouch();
+        if(this == _last_scene)
+            this->_flow_game->stopTrackingTouch();
     });
     _pop_up_manager.addOnHideWindowAction([this](){
-        this->_flow_game->startTrackingTouch();
+        if(this == _last_scene)
+            this->_flow_game->startTrackingTouch();
     });
 
 
