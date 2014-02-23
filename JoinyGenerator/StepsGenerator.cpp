@@ -32,18 +32,19 @@ bool operator<(const JoinyPair& a, const JoinyPair& b)
 
 bool isGoodJoiny(const JoinyTask& task,JoinyInfo& info)
 {
-    Score precision = info.getGold()/25;
+    //Score precision = info.getGold()/25;
     if(info.getBronze()!=0 && info.getSilver()!=0 &&
             info.getGold()!=0)
     {
-        if(info.getBronze() + precision <= info.getSilver() &&
-                info.getSilver() <= info.getGold())
-        {
-            info.setBronze(info.getBronze()*0.7);
-            return true;
-        }
-        else
-            return false;
+//        if(info.getBronze() + precision <= info.getSilver() &&
+//                info.getSilver() <= info.getGold())
+//        {
+//            info.setBronze(info.getBronze()*0.7);
+//            return true;
+//        }
+//        else
+//            return false;
+        return true;
     }
     else
         return false;
@@ -102,12 +103,30 @@ bool operator<(const JoinyPuzzle& a, const JoinyPuzzle& b)
 JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
 {
     assert(a.getSilver() >= a.getBronze());
-    unsigned int step = a.getSilver() - a.getBronze();
-    if(step >= 1000)
-        step /= 2;
+
     unsigned int gold = std::max(a.getGold(), b.getGold());
-    JoinyInfo res(gold - 2*step,
-                  gold - step,
+    Score precision = gold/10;
+
+//    unsigned int step = a.getSilver() - a.getBronze();
+//    if(step >= 1000)
+//        step /= 2;
+
+    unsigned int bronze1 = std::min(a.getBronze(), b.getBronze());
+    unsigned int bronze2 = gold*0.7;
+
+    unsigned int silver1 = std::min(a.getSilver(), b.getSilver());
+    unsigned int silver2 = gold - precision;
+
+    unsigned int bronze = std::min(bronze1, bronze2);
+    unsigned int silver = std::min(silver1, silver2);
+
+    if(silver - bronze < precision ||
+            gold - silver < precision)
+    {
+        silver = (gold + bronze)/2;
+    }
+    JoinyInfo res(bronze,
+                  silver,
                   gold);
 
     if(a.getGold() > b.getGold())
@@ -158,29 +177,39 @@ void GenerateLevels(const unsigned int tablo_size,
 
             JoinyInfo info_old = solveJoiny(task,
                                             joiny_size,
-                                            joiny_size);
+                                            joiny_size,
+                                            false);
 
             JoinyTask task_origin = flowToJoinyStaightforward(t);
             JoinyInfo info_origin = solveJoiny(task_origin,
                                                joiny_size,
-                                               joiny_size);
+                                               joiny_size,
+                                               true);
 
-            JoinyInfo info = mergeInfo(info_old, info_origin);
-
-            if(info.getGold() > 100000)
+            if(info_origin.getGold() == 0)
             {
-                std::cout << "Bug!!" << endl;
+                std::cout << "No solution" << std::endl;
             }
-            else if(isGoodJoiny(task, info))
+            else
             {
 
-                //std::sort(task.begin(), task.end());
-                JoinyPuzzle puzzle(task, info);
-                //JoinyPuzzle puzzle(task,info_origin);
+                JoinyInfo info = mergeInfo(info_old, info_origin);
 
-                good_tasks.insert(puzzle);
-                ++good;
+                if(info.getGold() > 1000000)
+                {
+                    std::cout << "Bug!!" << endl;
+                }
+                else if(isGoodJoiny(task, info))
+                {
 
+                    //std::sort(task.begin(), task.end());
+                    JoinyPuzzle puzzle(task, info);
+                    //JoinyPuzzle puzzle(task,info_origin);
+
+                    good_tasks.insert(puzzle);
+                    ++good;
+
+                }
             }
         }
         generated++;

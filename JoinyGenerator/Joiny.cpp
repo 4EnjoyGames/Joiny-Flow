@@ -780,7 +780,8 @@ unsigned int getPathesSize(const NumberLink::OneTabloPathes& tablo_pathes)
 }
 JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
-                     const unsigned int height)
+                     const unsigned int height,
+                     bool full_board_solution)
 {
     NumberLink nl((int)width, (int)height);
     nl.Initialize();
@@ -799,7 +800,7 @@ JoinyInfo solveJoiny(const JoinyTask& task,
 
     int solution_count = nl.Solve();
 
-    if(solution_count >0 && nl.findFullTableSolution())
+    if(solution_count >0 /*&& nl.findFullTableSolution()*/)
     {
 
         NumberLink::Scores& sc = nl._scores;
@@ -843,15 +844,15 @@ JoinyInfo solveJoiny(const JoinyTask& task,
         unsigned int tablo_size = width*height;
         unsigned int solution_size = getPathesSize(tablo_pathes);
 
-        if(tablo_size==solution_size)
+        if(tablo_size==solution_size || !full_board_solution)
         {
             unsigned int average = sum/n;
             JoinyInfo info = JoinyInfo(clamp(average, 500),
                              clamp((average + max)/2, 500),
                              clamp(max, 500));
 
-            if(nl.findFullTableSolution())
-                info.setPathes(tablo_pathes);
+            //if(nl.findFullTableSolution())
+            info.setPathes(tablo_pathes);
             return info;
         }
         else

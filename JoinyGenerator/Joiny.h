@@ -22,7 +22,7 @@ JoinyTask flowToJoinyStaightforward(const FlowTask& task);
 
 JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
-                     const unsigned int height);
+                     const unsigned int height, bool full_board_solution=false);
 
 JoinyTask recolorJoiny(JoinyTask &joiny_task,
                        const Palete &bad_palete);
