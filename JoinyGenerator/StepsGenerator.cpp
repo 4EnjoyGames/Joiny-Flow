@@ -217,11 +217,15 @@ void GenerateLevels(const unsigned int tablo_size,
             tabulate(generated, good, good_tasks.size());
     }
 
+    //suffle levels
+    std::vector<JoinyPuzzle> puzzle_vector(good_tasks.begin(),
+                                           good_tasks.end());
+    std::random_shuffle(puzzle_vector.begin(),puzzle_vector.end());
 
     //write in file all ell from the set
     unsigned int num = 0;
-    for(std::set<JoinyPuzzle>::iterator it = good_tasks.begin();
-        it != good_tasks.end();
+    for(std::vector<JoinyPuzzle>::iterator it = puzzle_vector.begin();
+        it != puzzle_vector.end();
         ++it)
     {
         JoinyPuzzle puzzle = *it;

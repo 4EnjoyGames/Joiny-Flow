@@ -7,9 +7,9 @@ int main()
 {
     if(!SetCurrentDirectoryA("../../JoinyGenerator/levels"))
         return 1;
-    GenerateLevels(10,50,2,4);
-    //SaveCollection("collection_9x9_1.txt","puzzle_9x9_1.ad");
-    SaveCollection("collection_10x10_1.txt","puzzle_10x10_1.ad");
+    GenerateLevels(5,120,2,4);
+    SaveCollection("collection_5x5_1.txt","puzzle_5x5_1.ad");
+    SaveCollection("collection_5x5_2.txt","puzzle_5x5_2.ad");
 
     return 0;
 }
