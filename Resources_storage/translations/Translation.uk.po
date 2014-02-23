@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-22 11:38+0200\n"
+"POT-Creation-Date: 2014-02-23 21:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -60,52 +60,60 @@ msgstr ""
 "Tester1, Tester1, Tester1, Tester1\n"
 "Tester1, Tester1, Tester1, Tester1, Tester1"
 
-#: ../../Classes/Scenes/DeveloperScene.cpp:119
+#: ../../Classes/Scenes/DeveloperScene.cpp:143
 msgid "copy"
 msgstr "© 2014"
 
+#: ../../Classes/Scenes/LevelScene.cpp:42
+msgid "RateMePopUp.RateLabel"
+msgstr "Як тобі гра?"
+
+#: ../../Classes/Scenes/LevelScene.cpp:88
+msgid "RateMePopUp.RateText"
+msgstr "Оцінити гру"
+
 # How do you rate this level?
-#: ../../Classes/Scenes/LevelScene.cpp:86
+#: ../../Classes/Scenes/LevelScene.cpp:169
 msgid "Test_level_end"
 msgstr "Як тобі рівень?"
 
 # Good
-#: ../../Classes/Scenes/LevelScene.cpp:122
+#: ../../Classes/Scenes/LevelScene.cpp:205
 msgid "Good_level"
 msgstr "Добре"
 
 # I don`t know
-#: ../../Classes/Scenes/LevelScene.cpp:144
+#: ../../Classes/Scenes/LevelScene.cpp:227
 msgid "So_level"
 msgstr "Не знаю"
 
 # Bad
-#: ../../Classes/Scenes/LevelScene.cpp:165
+#: ../../Classes/Scenes/LevelScene.cpp:248
 msgid "Bad_level"
 msgstr "Погано"
 
 # Buy Hints
-#: ../../Classes/Scenes/LevelScene.cpp:209
+#: ../../Classes/Scenes/LevelScene.cpp:292
 msgid "BuyHint"
 msgstr "Купити підказки"
 
 # You need more points
-#: ../../Classes/Scenes/LevelScene.cpp:339
+#: ../../Classes/Scenes/LevelScene.cpp:422
 msgid "End_bad"
 msgstr "Рівень програно!"
 
 # Score
-#: ../../Classes/Scenes/LevelScene.cpp:343
+#: ../../Classes/Scenes/LevelScene.cpp:426
 msgid "End_good"
 msgstr "Очки"
 
 # Retry
-#: ../../Classes/Scenes/LevelScene.cpp:416
+#: ../../Classes/Scenes/LevelScene.cpp:499
 msgid "Retry"
 msgstr "Грати ще"
 
 # Next
-#: ../../Classes/Scenes/LevelScene.cpp:446
+#: ../../Classes/Scenes/LevelScene.cpp:529
 msgid "Next"
 msgstr "Наступний"
 
@@ -139,12 +147,12 @@ msgid "SelectColection.BuyFullVerdionPopUp.OrText"
 msgstr "або"
 
 # Unlock full game
-#: ../../Classes/Scenes/SelectCollection.cpp:97
+#: ../../Classes/Scenes/SelectCollection.cpp:96
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
 msgstr "Відкрити повну версію"
 
 # Collections
-#: ../../Classes/Scenes/SelectCollection.cpp:286
+#: ../../Classes/Scenes/SelectCollection.cpp:285
 msgid "Collection"
 msgstr "Колекції"
 

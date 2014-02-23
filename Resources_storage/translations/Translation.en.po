@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-22 11:40+0200\n"
+"POT-Creation-Date: 2014-02-23 21:02+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,43 +53,51 @@ msgstr ""
 "Tester1, Tester1, Tester1, Tester1, Tester1\n"
 "Tester1, Tester1, Tester1, Tester1, Tester1, Tester1"
 
-#: ../../Classes/Scenes/DeveloperScene.cpp:119
+#: ../../Classes/Scenes/DeveloperScene.cpp:143
 msgid "copy"
 msgstr "© 2014"
 
-#: ../../Classes/Scenes/LevelScene.cpp:86
+#: ../../Classes/Scenes/LevelScene.cpp:42
+msgid "RateMePopUp.RateLabel"
+msgstr "Is the game good?"
+
+#: ../../Classes/Scenes/LevelScene.cpp:88
+msgid "RateMePopUp.RateText"
+msgstr "Rate the game"
+
+#: ../../Classes/Scenes/LevelScene.cpp:169
 msgid "Test_level_end"
 msgstr "How do you rate this level?"
 
-#: ../../Classes/Scenes/LevelScene.cpp:122
+#: ../../Classes/Scenes/LevelScene.cpp:205
 msgid "Good_level"
 msgstr "Good"
 
-#: ../../Classes/Scenes/LevelScene.cpp:144
+#: ../../Classes/Scenes/LevelScene.cpp:227
 msgid "So_level"
 msgstr "I don`t know"
 
-#: ../../Classes/Scenes/LevelScene.cpp:165
+#: ../../Classes/Scenes/LevelScene.cpp:248
 msgid "Bad_level"
 msgstr "Bad"
 
-#: ../../Classes/Scenes/LevelScene.cpp:209
+#: ../../Classes/Scenes/LevelScene.cpp:292
 msgid "BuyHint"
 msgstr "Buy Hints"
 
-#: ../../Classes/Scenes/LevelScene.cpp:339
+#: ../../Classes/Scenes/LevelScene.cpp:422
 msgid "End_bad"
 msgstr "Level failed!"
 
-#: ../../Classes/Scenes/LevelScene.cpp:343
+#: ../../Classes/Scenes/LevelScene.cpp:426
 msgid "End_good"
 msgstr "Score"
 
-#: ../../Classes/Scenes/LevelScene.cpp:416
+#: ../../Classes/Scenes/LevelScene.cpp:499
 msgid "Retry"
 msgstr "Retry"
 
-#: ../../Classes/Scenes/LevelScene.cpp:446
+#: ../../Classes/Scenes/LevelScene.cpp:529
 msgid "Next"
 msgstr "Next"
 
@@ -117,11 +125,11 @@ msgstr "Get 3 stars everywhere"
 msgid "SelectColection.BuyFullVerdionPopUp.OrText"
 msgstr "or"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:97
+#: ../../Classes/Scenes/SelectCollection.cpp:96
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
 msgstr "Unlock full game"
 
-#: ../../Classes/Scenes/SelectCollection.cpp:286
+#: ../../Classes/Scenes/SelectCollection.cpp:285
 msgid "Collection"
 msgstr "Collections"
 

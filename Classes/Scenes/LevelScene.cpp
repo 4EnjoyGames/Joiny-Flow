@@ -14,7 +14,91 @@ USING_NS_CC;
 #include <ADLib/Device/ADStatistics.h>
 #include "Core/Fonts.h"
 #include "Logic/Tutorial.h"
+#include "GameInfo.h"
+#include <ADLib/Device/ADBrowser.h>
 
+class LevelScene::RateMePopUp : public PopUpWindow::Content
+{
+public:
+    RateMePopUp(LevelScene* parent=0)
+        : _parent(parent)
+    {}
+private:
+    typedef RateMePopUp Me;
+    LevelScene* _parent;
+
+    void onRateLevel(CCObject*)
+    {
+        CCLog("on Rate Level clicked");
+        ADBrowser::openApplicationPage(GameInfo::getPackageName());
+        this->closeWindow();
+    }
+
+    void onCreate(CCNode *parent)
+    {
+        CCSize size = parent->getContentSize();
+        float x_middle = size.width / 2;
+
+        //create welcome text
+        CCLabelTTF* label = CCLabelTTF::create(_("RateMePopUp.RateLabel"),
+                                               Fonts::getFontName(),
+                                               55);
+        label->setPosition(ccp(x_middle, size.height*0.8f));
+        label->setColor(ccc3(255,255,255));
+        parent->addChild(label);
+
+
+        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
+                                                               "level-end/level_end.plist",
+                                                               "level-end/level_end.png");
+        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
+        menu->setPosition(ccp(0,0));
+        menu->setAnchorPoint(ccp(0,0));
+        menu->setContentSize(size);
+        parent->addChild(menu);
+
+        CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
+        if(parent_rgb)
+            parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
+
+        //TODO: add 5 stars
+        SpritesLoader spl = GraphicsManager::getLoaderFor(parent,
+                                                           "level-end/big_stars.plist",
+                                                           "level-end/big_stars.png");
+        spl->inject();
+        CCSprite* stars_spr = spl->loadSprite("rate_stars.png");
+        stars_spr->setPosition(ccp(x_middle, size.height*0.55f));
+
+
+        //create rate button
+        /////////////////////////////////////////
+
+        int font_size = 35;
+        float label_scale_factor = 0.1f;
+
+        CCSprite* rate_sprite = menu_spl->loadSprite("level_end_button.png");
+        rate_sprite->setScale(rate_sprite->getContentSize().width/
+                              rate_sprite->getContentSize().width*label_scale_factor);
+        rate_sprite->setColor(ccc3(255,255,255));
+
+        AnimatedMenuItem *rate_button = AnimatedMenuItem::create(
+                    rate_sprite,
+                    this, menu_selector(Me::onRateLevel));
+        rate_button->setPosition(ccp(x_middle,size.height*0.25));
+
+        CCLabelTTF * rate_text = CCLabelTTF::create(_("RateMePopUp.RateText"),
+                                                          Fonts::getFontName(),
+                                                          font_size);
+
+        rate_text->setColor(ccc3(255,255,255));
+        rate_text->setPosition(ccp(rate_button->getContentSize().width/2,
+                                         rate_button->getContentSize().height/2));
+        rate_button->addChild(rate_text);
+        menu->menu()->addChild(rate_button);
+
+        ////////////////////////////////////////////////////
+    }
+};
 
 class LevelScene::TesterEndPopUp : public PopUpWindow::Content
 {
@@ -469,9 +553,11 @@ private:
     const JoinyLevel* _level;
 };
 
-LevelScene* LevelScene::create(const JoinyLevel *level,bool show_animation)
+LevelScene* LevelScene::create(const JoinyLevel *level,
+                               bool show_animation,
+                               bool show_rate_me)
 {
-    LevelScene *pRet = new LevelScene(level,show_animation);
+    LevelScene *pRet = new LevelScene(level,show_animation,show_rate_me);
     if (pRet && pRet->init())
     {
         pRet->autorelease();
@@ -487,24 +573,28 @@ LevelScene* LevelScene::create(const JoinyLevel *level,bool show_animation)
 }
 
 
-LevelScene::LevelScene(const JoinyLevel * current_level, bool show_animation)
+LevelScene::LevelScene(const JoinyLevel * current_level,
+                       bool show_animation,
+                       bool show_rate_me)
     :_show_open_animation(show_animation),
       _pop_up_manager(this),
       _last_score(0),
       _current_level(current_level),
-      _score_label(0)
+      _score_label(0),
+      _showed_ads(false),
+      _show_rate_me(show_rate_me)
 {
     //_last_scene = this;
     this->setTag(123456);
 }
 
-CCScene* LevelScene::scene(const JoinyLevel *current_level, bool show_animation)
+CCScene* LevelScene::scene(const JoinyLevel *current_level, bool show_animation, bool show_rate_me)
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
 
     // 'layer' is an autorelease object
-    LevelScene *layer = LevelScene::create(current_level,show_animation);
+    LevelScene *layer = LevelScene::create(current_level,show_animation,show_rate_me);
 
     CCCallFunc* back = CCCallFunc::create(layer,
                                           callfunc_selector(LevelScene::keyBackClicked));
@@ -538,9 +628,30 @@ public:
 private:
     LevelScene* _parent;
 };
+void LevelScene::doShowRateMe()
+{
+    _pop_up_manager.openWindow(new RateMePopUp(this));
+}
+
+bool LevelScene::showRateMe()
+{
+    bool res = false;
+    const JoinyCollection* coll = _current_level->getCollection();
+    if((coll->getCollectionID() == 2 &&
+        _current_level->getLevelId() == 45) ||
+            (coll->getCollectionID() == 3 &&
+             _current_level->getLevelId() == 30) ||
+            (coll->getCollectionID() == 4 &&
+             _current_level->getLevelId() == 35))
+    {
+        res = true;
+    }
+    return res;
+}
 
 void LevelScene::onNextLevel(const bool show_ads)
 {
+    _showed_ads = false;
     if(show_ads)
     {
         if(ADAds::getInterstialTimesShowed() < 5)
@@ -548,6 +659,7 @@ void LevelScene::onNextLevel(const bool show_ads)
             if(rand() % 3 == 0)
             {
                 ADAds::showInterstitial();
+                _showed_ads = true;
             }
             ADAds::prepareInterstitial();
         }
@@ -555,8 +667,6 @@ void LevelScene::onNextLevel(const bool show_ads)
             _last_scene->_pop_up_manager.backAction();
 
     }
-
-
 
     const JoinyLevel* next_level = RW::getLevelManager().getNextLevel(_current_level);
     if(next_level != nullptr)
@@ -585,8 +695,10 @@ void LevelScene::doGoToCollection()
 
 void LevelScene::doOpenNextLevel()
 {
-    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_next_level));
-
+    if(!_showed_ads && showRateMe())
+        CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_next_level,false,true));
+    else
+        CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_next_level));
 }
 void LevelScene::doOpenPreviousLevel()
 {
@@ -948,6 +1060,8 @@ bool LevelScene::init()
     if(_show_open_animation)
         showAnimation();
 
+    if(_show_rate_me)
+        doShowRateMe();
 
     return true;
 }
@@ -1050,7 +1164,7 @@ void LevelScene::onWin()
         _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::NotEnough, _current_info.getBronze()-_last_score, 0, _current_level, this));
         this->runAction(createHintAction());
     }
-        else
+    else
     {
 
         //save the game
@@ -1062,7 +1176,8 @@ void LevelScene::onWin()
         if(!test_mode)
         {
             unsigned int stars = _current_level->getStarsNumber(_last_score);
-            _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
+             _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
+
         }
         else
         {
