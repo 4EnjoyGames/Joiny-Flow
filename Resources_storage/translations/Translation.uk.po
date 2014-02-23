@@ -52,10 +52,13 @@ msgstr "Дякуємо:"
 #: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
-"музика та звуки : Aziyan Nasir - \"Silly Fun\"\n"
+"музика та звуки:\n"
+"Aziyan Nasir - \"Silly Fun\"\n"
 "Löhstana David - \"Demain je change de vie\"\n"
-"testers: Tester1, Tester1, Tester1, Tester1, Tester1\n"
-"Tester1, Tester1, Tester1, Tester1, Tester1, Tester1"
+"\n"
+"testers:\n"
+"Tester1, Tester1, Tester1, Tester1\n"
+"Tester1, Tester1, Tester1, Tester1, Tester1"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:119
 msgid "copy"

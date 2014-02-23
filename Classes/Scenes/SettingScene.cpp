@@ -295,9 +295,14 @@ AnimatedMenuItem* SettingScene::createButton(CCSprite* logo,
 
     if(button_text[0] != '\0')
     {
+        const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
         CCLabelTTF * dev = CCLabelTTF::create(button_text,
                                                 Fonts::getFontName(),
-                                                57);
+                                                60);
+
+        if(dev->getContentSize().width >= VISIBLE_SIZE.width)
+            dev->setFontSize(40);
+
         dev->setPosition(ccp(logo->getContentSize().width/2,
                                logo->getContentSize().height/2));
         dev->setColor(color);
