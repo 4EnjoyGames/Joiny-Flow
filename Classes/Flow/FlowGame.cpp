@@ -306,7 +306,7 @@ void FlowGame::touchEnded(const FlowPoint& p)
     updateHighlighted();
 
     //if the point is on the table
-    if((p.x() < _table->getWidth() && p.y() < _table->getHeight()))
+    //if((p.x() < _table->getWidth() && p.y() < _table->getHeight()))
     {
         //play sound effect
         MusicSettings::playSoundEffect("music/flow_click.wav");
