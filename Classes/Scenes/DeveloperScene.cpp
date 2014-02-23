@@ -155,7 +155,7 @@ bool DeveloperScene::init()
 #include <ADLib/Device/ADBrowser.h>
 void DeveloperScene::onSiteClick(CCObject*)
 {
-    ADBrowser::openWebURL("4enjoy.com");
+    ADBrowser::openWebURL("http://4enjoy.com/");
 }
 void DeveloperScene::doGoBack()
 {
