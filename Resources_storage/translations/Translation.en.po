@@ -45,13 +45,14 @@ msgstr "Thanks to:"
 #: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
-"music and sounds:\n"
+"Music\n"
 "Aziyan Nasir - \"Silly Fun\"\n"
-"Löhstana David - \"Demain je change de vie\"\n"
+"Löhstana David - \n"
+"\"Demain je change de vie\"\n"
 "\n"
-"testers:\n"
+"Thanks to\n"
 "Tester1, Tester1, Tester1, Tester1, Tester1\n"
-"Tester1, Tester1, Tester1, Tester1, Tester1, Tester1"
+"Tester1, Tester1, Tester1, Tester1"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:143
 msgid "copy"

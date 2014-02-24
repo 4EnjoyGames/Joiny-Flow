@@ -79,15 +79,6 @@ bool DeveloperScene::init()
     _author_andrii->setColor(GameInfo::getInstance()->getNegativeColor());
     this->addChild(_author_andrii);
 
-    //thank to logo
-    _thank = CCLabelTTF::create(_("thank"),
-                                               Fonts::getFontName(),
-                                               30);
-    _thank->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                              ORIGIN.y + VISIBLE_SIZE.height*0.6));
-    _thank->setColor(GameInfo::getInstance()->getTitleColor());
-    this->addChild(_thank);
-
     //thank list - thank1
     _thank1 = CCLabelTTF::create(_("test_list"),
                                                Fonts::getFontName(),
@@ -163,7 +154,6 @@ void DeveloperScene::hideEverything(cocos2d::CCCallFunc *callback)
     _author_diana->runAction(button_hide());
     _author_andrii->runAction(button_hide());
 
-    _thank->runAction(button_hide());
     _thank1->runAction(button_hide());
 
     //_x4enjoy_button->runAction(button_hide());
@@ -196,9 +186,6 @@ void DeveloperScene::showAnimation()
 
 
     auto button_show = [](){return CCFadeTo::create(0.1f, 255);};
-
-    _thank->setOpacity(0);
-    _thank->runAction(button_show());
 
     _thank1->setOpacity(0);
     _thank1->runAction(button_show());

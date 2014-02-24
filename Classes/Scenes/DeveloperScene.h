@@ -15,8 +15,6 @@ public:
 private:
     CCLabelTTF * _author_diana;
     CCLabelTTF * _author_andrii;
-
-    CCLabelTTF * _thank;
     CCLabelTTF * _thank1;
 
     //x4enjoy logo

@@ -656,7 +656,7 @@ void LevelScene::onNextLevel(const bool show_ads)
     {
         if(ADAds::getInterstialTimesShowed() < 5)
         {
-            if(rand() % 3 == 0)
+            if(rand() % 7 == 0)
             {
                 ADAds::showInterstitial();
                 _showed_ads = true;
