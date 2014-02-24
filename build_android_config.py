@@ -19,6 +19,7 @@ project.addModule('android_ADStatistics_Flurry')
 project.addModule('android_ADLanguage')
 project.addModule('android_ADNotification')
 project.addModule('android_ADBrowser')
+project.addModule('android_ADVirtualCurrency_TapJoy')
 
 project.project_name = 'Joiny'
 project.package_name = 'com.x4enjoy.joiny'
