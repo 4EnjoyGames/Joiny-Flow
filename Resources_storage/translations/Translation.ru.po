@@ -56,13 +56,14 @@ msgstr "Спасибо:"
 #: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
-"музыка и звуки:\n"
+"Музыка\n"
 "Aziyan Nasir - \"Silly Fun\"\n"
-"Löhstana David - \"Demain je change de vie\"\n"
+"Löhstana David - \n"
+"\"Demain je change de vie\"\n"
 "\n"
-"testers:\n"
+"Дякуємо\n"
 "Tester1, Tester1, Tester1, Tester1\n"
-"Tester1, Tester1, Tester1, Tester1, Tester1"
+"Tester1, Tester1, Tester1"
 
 # © 2014
 #: ../../Classes/Scenes/DeveloperScene.cpp:119
@@ -135,7 +136,7 @@ msgstr "Нет"
 # Get 3 stars everywhere
 #: ../../Classes/Scenes/SelectCollection.cpp:44
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
-msgstr "Получить 3 звезды везде"
+msgstr "3 звезды везде"
 
 # or
 #: ../../Classes/Scenes/SelectCollection.cpp:62
@@ -145,7 +146,7 @@ msgstr "или"
 # Unlock full game
 #: ../../Classes/Scenes/SelectCollection.cpp:97
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr "Открыть полную версию"
+msgstr "Открыть сейчас"
 
 # Collections
 #: ../../Classes/Scenes/SelectCollection.cpp:290
