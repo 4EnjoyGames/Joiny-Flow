@@ -61,7 +61,7 @@ int CALLBACK WinMain(
     //UNREFERENCED_PARAMETER(lpCmdLine);
 
     bool portrait_mode = true;
-    Mode open_in_mode = IPad4;
+    Mode open_in_mode = Google_Nexus_10;
 
 
     int swidth = 0;

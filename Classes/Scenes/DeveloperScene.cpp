@@ -97,17 +97,6 @@ bool DeveloperScene::init()
     _thank1->setColor(GameInfo::getInstance()->getTitleColor());
     this->addChild(_thank1);
 
-
-    //x4enjoy logo
-//    _x4enjoy_logo = CCSprite::create("universal/x4Enjoy.png");
-//    CCSize x4enjoy_size = _x4enjoy_logo->getContentSize();
-//    _x4enjoy_logo->setScale(x4enjoy_size.width/x4enjoy_size.width*0.4);
-
-//    _x4enjoy_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-//                                  ORIGIN.y + 220/SCALE));
-//    this->addChild(_x4enjoy_logo);
-
-
     CCMenu* logo_menu = CCMenu::create();
     logo_menu->setPosition(ORIGIN);
 
@@ -121,8 +110,8 @@ bool DeveloperScene::init()
                 menu_selector(DeveloperScene::onSiteClick));
 
     _x4enjoy_button->addChild(x4enjoy_logo);
-    _x4enjoy_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                     ORIGIN.y + 220/SCALE));
+    _x4enjoy_button->setPosition(ccp(VISIBLE_SIZE.width*0.5,
+                                     220/SCALE));
     x4enjoy_logo->setPosition(ccp(x4enjoy_logo->getContentSize().width/2,
                                x4enjoy_logo->getContentSize().height/2));
 
