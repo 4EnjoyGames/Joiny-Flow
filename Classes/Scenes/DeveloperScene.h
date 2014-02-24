@@ -20,7 +20,7 @@ private:
     CCLabelTTF * _thank1;
 
     //x4enjoy logo
-    CCSprite* _x4enjoy_logo;
+    AnimatedMenuItem* _x4enjoy_button;
 
     //ukraine flag
     CCSprite* _flag;
@@ -42,6 +42,8 @@ private:
         keyBackClicked();
     }
     void doGoBack();
+    void onSiteClick(CCObject*);
+
     void hideEverything(cocos2d::CCCallFunc *callback);
 
     void showAnimation();

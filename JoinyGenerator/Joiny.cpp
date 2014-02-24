@@ -891,15 +891,25 @@ void palete4(unsigned int c1, unsigned int c2,
 }
 void JoinyColorSchemeInit()
 {
-    palete2(0,1);
+    //palete2(0,1);
     palete2(2,6);
     palete2(7,5);
 
-    palete3(3,5,6);
+    palete2(4,1);
+    palete2(7,6);
+    palete2(2,3);
+
+    //palete3(3,5,6);
     palete3(4,2,1);
+
+    palete3(6,7,2);
+    palete3(0,3,2);
 
     palete4(0,1,3,2);
     palete4(2,7,5,3);
+
+    palete4(0,5,6,7);
+    palete4(4,1,2,5);
 }
 
 bool equalPalete(const Palete& p1, const Palete& p2)

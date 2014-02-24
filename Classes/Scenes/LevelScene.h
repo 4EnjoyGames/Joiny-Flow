@@ -13,6 +13,7 @@
 class LevelScene : public DrawLayer //cocos2d::CCLayer
 {
 private:
+    class RateMePopUp;
     class TesterEndPopUp;
     class BuyHintPopUp;
     class LevelEndPopUp;
@@ -23,7 +24,8 @@ private:
     CCSequence* _hint_action;
     AnimatedMenuItem* _hint_button;
 
-
+    void doShowRateMe();
+    bool showRateMe();
     void onNextLevel(const bool show_ads=true);
 
 
@@ -76,6 +78,9 @@ private:
     const JoinyLevel* _next_level;
     const JoinyLevel* _previous_level;
 
+    bool _showed_ads;
+    bool _show_rate_me;
+
     CCProgressTimer* _progress_timer;
     float _procc;
 
@@ -103,7 +108,9 @@ private:
     std::vector<AnimatedMenuItem*> _buttons;
 
 public:
-    LevelScene(const JoinyLevel *l, bool show_animation);
+    LevelScene(const JoinyLevel *l,
+               bool show_animation,
+               bool show_rate_me);
 
     static void purchaseUpdateHints();
 
@@ -113,10 +120,14 @@ public:
     void onExit();
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene(const JoinyLevel *current_level, bool show_animation=false);
+    static cocos2d::CCScene* scene(const JoinyLevel *current_level,
+                                   bool show_animation = false,
+                                   bool show_rate_me = false);
 
 
-    static LevelScene* create(const JoinyLevel *level,bool show_animation);
+    static LevelScene* create(const JoinyLevel *level,
+                              bool show_animation,
+                              bool show_rate_me);
 
 };
 

@@ -229,6 +229,28 @@ bool MainScene::init()
                               0.4f));
     main_menu->addChild(_settings_button);
 
+    //facebook logo
+    CCSprite* _facebook = CCSprite::create("main-menu/facebook_logo.png");
+    _facebook_button = AnimatedMenuItem::create(
+                _facebook,
+                this,
+                menu_selector(MainScene::onFacebookClicked));
+    _facebook_button->addChild(_facebook);
+
+    CCPoint position_facebook(VISIBLE_SIZE.width - 100/SCALE,
+                              100/SCALE);
+    _facebook_button->setPosition(position_facebook);
+    _facebook->setPosition(ccp(_facebook->getContentSize().width/2,
+                               _facebook->getContentSize().height/2));
+    //animation
+    float scale_facebook_button = _facebook_button->getScale();
+    _facebook_button->setScale(scale_facebook_button*0.9);
+    _facebook_button->setAnchorPoint(ccp(0.5, 0.5));
+    _facebook_button->runAction(CCEaseElasticOut::create(
+                              CCScaleTo::create(0.5f, scale_facebook_button),
+                              0.4f));
+    main_menu->addChild(_facebook_button);
+
 
     this->addChild(main_menu);
     return true;
@@ -245,6 +267,12 @@ void MainScene::doOnPlayClicked()
 {
     CCDirector::sharedDirector()->replaceScene(SelectCollection::scene());
     CCLog("Play clicked");
+}
+#include "ADLib/Device/ADBrowser.h"
+void MainScene::onFacebookClicked(CCObject*)
+{
+    CCLog("On facebook clicked");
+    ADBrowser::openWebURL("http://4enjoy.com/r/auto/100/");
 }
 
 void MainScene::onSettingsClicked(CCObject*)
@@ -279,9 +307,11 @@ void MainScene::hideEverything(CCCallFunc *callback)
     CCFadeTo* settings_move = CCFadeTo::create(duration, 0);
     CCFadeTo* play_move = CCFadeTo::create(duration, 0);
     CCFadeTo* logo_move = CCFadeTo::create(duration, 0);
+    CCFadeTo* facebook_move = CCFadeTo::create(duration, 0);
     _settings_button->runAction(settings_move);
     _play_button->runAction(play_move);
     _main_logo->runAction(logo_move);
+    _facebook_button->runAction(facebook_move);
 
 
     float delay = 0.2;

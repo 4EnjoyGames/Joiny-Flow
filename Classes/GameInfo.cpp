@@ -18,11 +18,14 @@ void GameInfo::setInfo()
     _coll_files.push_back("levels/puzzle_8x8_1.ad");
 
 
-    _coll_files.push_back("levels/puzzle_9x9_1.ad");
+
     //_coll_files.push_back("levels/puzzle_10x10_1.ad");
-    _coll_files.push_back("levels/puzzle_6x6_2.ad");
-    _coll_files.push_back("levels/puzzle_7x7_2.ad");
+    _coll_files.push_back("levels/puzzle_9x9_1.ad");
     _coll_files.push_back("levels/puzzle_8x8_2.ad");
+    _coll_files.push_back("levels/puzzle_7x7_2.ad");
+    _coll_files.push_back("levels/puzzle_6x6_2.ad");
+
+
 
     _close_color = ccc3(170,170,170);
 

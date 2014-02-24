@@ -15,6 +15,7 @@ private:
     CCSprite* _main_logo;
     AnimatedMenuItem* _play_button;
     AnimatedMenuItem* _settings_button;
+    AnimatedMenuItem* _facebook_button;
 
     PopUpWindowManager _pop_up_manager;
     class GoOutPopUp;
@@ -22,6 +23,8 @@ private:
 
     void onPlayClicked(CCObject*);
     void doOnPlayClicked();
+
+    void onFacebookClicked(CCObject*);
 
     void onSettingsClicked(CCObject*);
     void doOnSettingsClicked();

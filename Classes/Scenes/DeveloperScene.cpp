@@ -99,13 +99,37 @@ bool DeveloperScene::init()
 
 
     //x4enjoy logo
-    _x4enjoy_logo = CCSprite::create("universal/x4Enjoy.png");
-    CCSize x4enjoy_size = _x4enjoy_logo->getContentSize();
-    _x4enjoy_logo->setScale(x4enjoy_size.width/x4enjoy_size.width*0.4);
+//    _x4enjoy_logo = CCSprite::create("universal/x4Enjoy.png");
+//    CCSize x4enjoy_size = _x4enjoy_logo->getContentSize();
+//    _x4enjoy_logo->setScale(x4enjoy_size.width/x4enjoy_size.width*0.4);
 
-    _x4enjoy_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                  ORIGIN.y + 220/SCALE));
-    this->addChild(_x4enjoy_logo);
+//    _x4enjoy_logo->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+//                                  ORIGIN.y + 220/SCALE));
+//    this->addChild(_x4enjoy_logo);
+
+
+    CCMenu* logo_menu = CCMenu::create();
+    logo_menu->setPosition(ORIGIN);
+
+    //animated item
+    CCSprite* x4enjoy_logo = CCSprite::create("settings-menu/settings_4Enjoy.png");
+    //CCSize x4enjoy_size = x4enjoy_logo->getContentSize();
+
+    _x4enjoy_button = AnimatedMenuItem::create(
+                x4enjoy_logo,
+                this,
+                menu_selector(DeveloperScene::onSiteClick));
+
+    _x4enjoy_button->addChild(x4enjoy_logo);
+    _x4enjoy_button->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                                     ORIGIN.y + 220/SCALE));
+    x4enjoy_logo->setPosition(ccp(x4enjoy_logo->getContentSize().width/2,
+                               x4enjoy_logo->getContentSize().height/2));
+
+    logo_menu->addChild(_x4enjoy_button);
+    this->addChild(logo_menu);
+
+
 
     //ukraine flag
     _flag = CCSprite::create("settings-menu/flag.png");
@@ -128,7 +152,11 @@ bool DeveloperScene::init()
     showAnimation();
     return true;
 }
-
+#include <ADLib/Device/ADBrowser.h>
+void DeveloperScene::onSiteClick(CCObject*)
+{
+    ADBrowser::openWebURL("http://4enjoy.com/");
+}
 void DeveloperScene::doGoBack()
 {
     CCDirector::sharedDirector()->replaceScene(SettingScene::scene());
@@ -149,7 +177,7 @@ void DeveloperScene::hideEverything(cocos2d::CCCallFunc *callback)
     _thank->runAction(button_hide());
     _thank1->runAction(button_hide());
 
-    _x4enjoy_logo->runAction(button_hide());
+    //_x4enjoy_button->runAction(button_hide());
     _flag->runAction(button_hide());
     _reight->runAction(button_hide());
 
@@ -187,10 +215,10 @@ void DeveloperScene::showAnimation()
     _thank1->runAction(button_show());
 
     //x4enjoy logo
-    float x4enjoy_logo_scale = _x4enjoy_logo->getScale();
-    _x4enjoy_logo->setScale(x4enjoy_logo_scale*0.9);
-    _x4enjoy_logo->setAnchorPoint(ccp(0.5, 0.5));
-    _x4enjoy_logo->runAction(CCEaseElasticOut::create(
+    float x4enjoy_logo_scale = _x4enjoy_button->getScale();
+    _x4enjoy_button->setScale(x4enjoy_logo_scale*0.9);
+    _x4enjoy_button->setAnchorPoint(ccp(0.5, 0.5));
+    _x4enjoy_button->runAction(CCEaseElasticOut::create(
                               CCScaleTo::create(0.7f, x4enjoy_logo_scale),
                               0.4f));
 
