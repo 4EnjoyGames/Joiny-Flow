@@ -4,6 +4,7 @@
 
 void mainMenuTest(TestInfo);
 void selectCollectionTest(TestInfo info);
+void developersTest(TestInfo info);
 
 int CALLBACK WinMain(
         _In_  HINSTANCE,
@@ -26,6 +27,7 @@ int CALLBACK WinMain(
     //Test cases
     emulator->addTestCase(&mainMenuTest);
     emulator->addTestCase(&selectCollectionTest);
+    emulator->addTestCase(&developersTest);
 
     return emulator->run();
 }
@@ -38,7 +40,7 @@ int CALLBACK WinMain(
 void mainMenuTest(TestInfo info)
 {
     CCDirector::sharedDirector()->replaceScene(MainScene::scene());
-    ADDeviceEmulator::runLater(1.0f, [info](){
+    ADDeviceEmulator::runLater(1.5f, [info](){
 
         ADDeviceEmulator::createScreenShoot(info);
         info.finish();
@@ -48,8 +50,18 @@ void mainMenuTest(TestInfo info)
 
 void selectCollectionTest(TestInfo info)
 {
+    CCDirector::sharedDirector()->replaceScene(SelectCollection::scene());
+    ADDeviceEmulator::runLater(1.5f, [info](){
+
+        ADDeviceEmulator::createScreenShoot(info);
+        info.finish();
+    });
+}
+
+void developersTest(TestInfo info)
+{
     CCDirector::sharedDirector()->replaceScene(DeveloperScene::scene());
-    ADDeviceEmulator::runLater(1.0f, [info](){
+    ADDeviceEmulator::runLater(1.5f, [info](){
 
         ADDeviceEmulator::createScreenShoot(info);
         info.finish();
