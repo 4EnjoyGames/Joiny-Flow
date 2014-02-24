@@ -20,7 +20,7 @@ int CALLBACK WinMain(
 
     emulator->setFitTheScreen(true);
     emulator->setDevice(Device::IPad2);
-    emulator->setLanguage("uk");
+    emulator->setLanguage("en");
     emulator->setOrientation(Orientation::Portrait);
 
     //Test cases
