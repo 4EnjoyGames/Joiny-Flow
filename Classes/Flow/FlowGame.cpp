@@ -405,20 +405,32 @@ void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
     }
 
 }
+bool FlowGame::connectedFlowPoints(FlowPointState st_current,
+                                   FlowPointState st_previous) const
+{
+    bool result = false;
+    if(st_current.hasNext() || st_current.hasPrevious())
+    {
+        if(st_previous.getLineColor() == st_current.getLineColor())
+            result = true;
+    }
+    return result;
+}
+
 //verify has the user drow this path
 bool FlowGame::hasUserThisPath(
         const std::vector< FlowPoint>& path) const
 {
 
     bool result = true;
+    FlowPointState st_current;
+    FlowPointState st_previous;
     for(unsigned int i=0; i< path.size(); ++i)
     {
-        FlowPointState st = _table->get(path[i]);
+        st_previous = st_current;
+        st_current = _table->get(path[i]);
 
-        if(st.hasNext() || st.hasPrevious())
-        {
-        }
-        else
+        if(!connectedFlowPoints(st_current, st_previous))
         {
             result = false;
             break;

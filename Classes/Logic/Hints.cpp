@@ -49,7 +49,7 @@ bool Hints::showHint()
     {
         if (findSubVector(showed_ids,hint_path[j]))
         {
-            //we find hint[j] in showed ides
+            //we find hint[j] in showed_ides
             //delete this ellement
             hint_path.erase(hint_path.begin()+j);
             --j;

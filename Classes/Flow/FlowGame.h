@@ -65,6 +65,9 @@ private:
      */
     bool _is_tracking_touch;
 
+    bool connectedFlowPoints(FlowPointState st1,
+                             FlowPointState st_previous) const;
+
 
     FlowRenderer* _renderer;
     const FlowTable* _table;
