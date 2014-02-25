@@ -656,7 +656,7 @@ void LevelScene::onNextLevel(const bool show_ads)
     {
         if(ADAds::getInterstialTimesShowed() < 5)
         {
-            if(rand() % 7 == 0)
+            if(rand() % 25 == 0)
             {
                 ADAds::showInterstitial();
                 _showed_ads = true;
@@ -1171,7 +1171,7 @@ void LevelScene::onWin()
         RW::getLevelManager().onLevelFinished(_current_level, _last_score);
 
         //if it is a test version - open statistic window
-        static bool test_mode = false;
+        static bool test_mode = true;
 
         if(!test_mode)
         {
