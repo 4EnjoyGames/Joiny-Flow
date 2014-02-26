@@ -430,10 +430,14 @@ bool FlowGame::hasUserThisPath(
         st_previous = st_current;
         st_current = _table->get(path[i]);
 
-        if(!connectedFlowPoints(st_current, st_previous))
+        //if we have previous
+        if(i!=0)
         {
-            result = false;
-            break;
+            if(!connectedFlowPoints(st_current, st_previous))
+            {
+                result = false;
+                break;
+            }
         }
     }
 

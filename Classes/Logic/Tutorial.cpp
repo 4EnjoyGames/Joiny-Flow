@@ -3,6 +3,7 @@
 
 Tutorial* Tutorial::_instance = nullptr;
 unsigned int Tutorial::_tutorial_path_id = 0;
+unsigned int Tutorial::_hint_ell_index = 1;
 
 Tutorial::Tutorial():_flow_game(nullptr),_level(nullptr)
 {
@@ -27,6 +28,29 @@ bool Tutorial::hasTutorial()
     return (_tutorial_path_id < hint_path.size());
 }
 
+//void Tutorial::showTutorial()
+//{
+//    if (_level!=nullptr && _flow_game!=nullptr)
+//    {
+//        std::vector < std::vector<FlowPoint> > hint_path =
+//        _level->getPuzzle().getJoinyInfo().getPathes();
+
+//        std::vector<FlowPoint> curr_path = hint_path[_tutorial_path_id];
+//        FlowColor color = _flow_game->getCellColor(curr_path[0]);
+
+
+//        for(unsigned int j=1; j<curr_path.size(); ++j)
+//        {
+//            _flow_game->connectHintPoints(curr_path[j-1],
+//                    curr_path[j],
+//                    color);
+//        }
+
+//        ++_tutorial_path_id;
+//    }
+
+//}
+
 void Tutorial::showTutorial()
 {
     if (_level!=nullptr && _flow_game!=nullptr)
@@ -38,17 +62,35 @@ void Tutorial::showTutorial()
         FlowColor color = _flow_game->getCellColor(curr_path[0]);
 
 
-        for(unsigned int j=1; j<curr_path.size(); ++j)
+        if (_hint_ell_index < curr_path.size())
         {
-            _flow_game->connectHintPoints(curr_path[j-1],
-                    curr_path[j],
-                    color);
-        }
+            _flow_game->connectHintPoints(curr_path[_hint_ell_index-1],
+                                          curr_path[_hint_ell_index],
+                                          color);
+            ++_hint_ell_index;
 
-        ++_tutorial_path_id;
+            //show the next tutorial
+            // call hint in 1 seconds
+            CCCallFunc *callAction = CCCallFunc::create(this,
+                                              callfunc_selector(
+                                                Tutorial::showTutorial));
+
+            CCSequence* action = CCSequence::create(
+                        CCDelayTime::create(0.4f),
+                                              callAction,
+                                              NULL);
+            CCDirector::sharedDirector()->getRunningScene()->runAction(action);
+
+        }
+        else
+        {
+            ++_tutorial_path_id;
+            _hint_ell_index = 1;
+        }
     }
 
 }
+
 const unsigned int Tutorial::getCurrentTutorialPathId()
 {
     if(_tutorial_path_id==0)

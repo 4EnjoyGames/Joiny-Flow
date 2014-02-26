@@ -1048,7 +1048,16 @@ bool LevelScene::init()
             _current_level->getCollection()->getCollectionID()==1)
     {
         Tutorial::getInstance()->setInfo(_flow_game);
-        Tutorial::getInstance()->showTutorial();
+
+        // call hint in 4 seconds
+        CCCallFunc *callAction = CCCallFunc::create(Tutorial::getInstance(),
+                                                    callfunc_selector(
+                                                    Tutorial::showTutorial));
+
+        CCSequence* action = CCSequence::create(CCDelayTime::create(0.4f),
+                                          callAction,
+                                          NULL);
+        this->runAction(action);
     }
 
 
@@ -1171,7 +1180,7 @@ void LevelScene::onWin()
         RW::getLevelManager().onLevelFinished(_current_level, _last_score);
 
         //if it is a test version - open statistic window
-        static bool test_mode = true;
+        static bool test_mode = false;
 
         if(!test_mode)
         {
