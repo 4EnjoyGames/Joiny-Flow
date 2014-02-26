@@ -77,16 +77,37 @@ const ccColor3B& GameInfo::getPositiveColor()
  }
 #include <ADLib/Device/ADInfo.h>
 
-std::string doGetPackageName()
+const std::string GameInfo::doGetPackageName(const std::string game_name)
 {
-    if(ADInfo::getPlatform() == ADPlatform::iOS)
-        return "id657095501";
+    if(game_name =="mif")
+    {
+        if(ADInfo::getPlatform() == ADPlatform::iOS)
+            return "id657095501";
+        else
+            return "com.x4enjoy.mathisfun";
+    }
+    if(game_name == "junior")
+    {
+        if(ADInfo::getPlatform() == ADPlatform::iOS)
+            return "id657096722";
+        else
+            return "com.x4enjoy.mathisfunjunior";
+    }
     else
-        return "com.x4enjoy.joiny";
+    {
+        //TODO: put real package name
+        if(ADInfo::getPlatform() == ADPlatform::iOS)
+            return "id657095501";
+        else
+            return "com.x4enjoy.joiny";
+    }
+
+
+
 }
 
-const std::string& GameInfo::getPackageName()
+const std::string& GameInfo::getPackageName(std::string game_name)
 {
-    static std::string package_name = doGetPackageName();
+    static std::string package_name = doGetPackageName(game_name);
     return package_name;
 }

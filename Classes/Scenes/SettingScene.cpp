@@ -349,7 +349,7 @@ void SettingScene::showAnimation()
 #include <ADLib/Device/ADBrowser.h>
 void SettingScene::onRateMeClicked(CCObject*)
 {
-    ADBrowser::openApplicationPage(GameInfo::getPackageName());
+    ADBrowser::openApplicationPage(GameInfo::getPackageName("joiny"));
 }
 
 void SettingScene::doGoBack()

@@ -30,7 +30,7 @@ private:
     void onRateLevel(CCObject*)
     {
         CCLog("on Rate Level clicked");
-        ADBrowser::openApplicationPage(GameInfo::getPackageName());
+        ADBrowser::openApplicationPage(GameInfo::getPackageName("joiny"));
         this->closeWindow();
     }
 
