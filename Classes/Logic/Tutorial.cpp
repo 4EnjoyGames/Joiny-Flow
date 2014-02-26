@@ -19,6 +19,11 @@ void Tutorial::setInfo(FlowGame* game)
 {
     _flow_game = game;
 }
+void Tutorial::setLevel(JoinyCollectionID coll_id,
+              JoinyLevelID level_id)
+{
+    _level = RW::getLevelManager().getLevel(coll_id,level_id);
+}
 
 bool Tutorial::hasTutorial()
 {

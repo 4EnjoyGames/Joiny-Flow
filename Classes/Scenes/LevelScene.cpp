@@ -1044,10 +1044,14 @@ bool LevelScene::init()
 
 
     //if this is the first level of the first collection - show tutorial
-    if(_current_level->getLevelId()==1 &&
+    if( (_current_level->getLevelId()==1 ||
+         _current_level->getLevelId()==2)
+            &&
             _current_level->getCollection()->getCollectionID()==1)
     {
         Tutorial::getInstance()->setInfo(_flow_game);
+        Tutorial::getInstance()->setLevel(_current_level->getCollection()->getCollectionID(),
+                                          _current_level->getLevelId());
 
         // call hint in 4 seconds
         CCCallFunc *callAction = CCCallFunc::create(Tutorial::getInstance(),

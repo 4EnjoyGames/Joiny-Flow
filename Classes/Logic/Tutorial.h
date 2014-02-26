@@ -3,12 +3,15 @@
 #include "Flow/FlowGame.h"
 #include "Logic/JoinyLevel.h"
 #include "cocos2d-A.h"
+#include "JoinyCollection.h"
 
 class Tutorial: public CCObject
 {
 public:
     static Tutorial* getInstance( );
     void setInfo(FlowGame* game);
+    void setLevel(JoinyCollectionID coll_id,
+                  JoinyLevelID level_id);
     bool hasTutorial();
     void showTutorial();
     const unsigned int getCurrentTutorialPathId();
