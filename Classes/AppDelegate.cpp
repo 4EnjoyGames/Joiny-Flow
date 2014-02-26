@@ -19,6 +19,7 @@
 #include "Logic/RW.h"
 #include "Scenes/LevelScene.h"
 #include "Scenes/SelectCollection.h"
+#include "ADLib/Device/ADBrowser.h"
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -146,7 +147,10 @@ void initAds()
 
     ADAds::addCustomBanner(CCSprite::create("banners/mif_kids.png"),
                            [](){
-        CCLog("banner clicked");
+
+        CCLog("banner MiF Kids clicked");
+        //TODO: select which game baner is it
+        ADBrowser::openApplicationPage(GameInfo::getPackageName("junior"));
     },
     "MiF Kids");
 }
