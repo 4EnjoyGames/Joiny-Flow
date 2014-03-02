@@ -411,6 +411,7 @@ bool FlowGame::connectedFlowPoints(FlowPointState st_current,
     bool result = false;
     if(st_current.hasNext() || st_current.hasPrevious())
     {
+        FlowPoint coordinate = st_current.getHintNextCordinate();
         if(st_previous.getLineColor() == st_current.getLineColor())
             result = true;
     }
