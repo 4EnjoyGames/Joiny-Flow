@@ -106,8 +106,7 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
 
 }
 
-const std::string& GameInfo::getPackageName(std::string game_name)
+const std::string GameInfo::getPackageName(std::string game_name)
 {
-    static std::string package_name = doGetPackageName(game_name);
-    return package_name;
+    return doGetPackageName(game_name);
 }

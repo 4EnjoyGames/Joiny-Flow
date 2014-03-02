@@ -24,7 +24,7 @@ class GameInfo
 
        const ccColor3B& getGrayColor();
 
-       static const std::string& getPackageName(std::string game_name);
+       static const std::string getPackageName(std::string game_name);
 
 
    private:
