@@ -27,12 +27,12 @@ msgstr "Ошибка  восстановление покупок"
 # Successfully restored purchases
 #: ../../Classes/AppDelegate.cpp:79
 msgid "iap.restore_purchases.success"
-msgstr "Успешно восстановленные покупок"
+msgstr "Успешно восстановленные покупки"
 
 # Restore Purchase failed
 #: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.failed"
-msgstr "Неуспешно восстановленные покупок"
+msgstr "Неуспешно восстановленные покупки"
 
 # Diana Sirenko
 #: ../../Classes/Scenes/DeveloperScene.cpp:66
@@ -62,8 +62,8 @@ msgstr ""
 "\"Demain je change de vie\"\n"
 "\n"
 "Дякуємо\n"
-"Tester1, Tester1, Tester1, Tester1\n"
-"Tester1, Tester1, Tester1"
+"Andrew Afonin\n"
+"Illya Spas"
 
 # © 2014
 #: ../../Classes/Scenes/DeveloperScene.cpp:119

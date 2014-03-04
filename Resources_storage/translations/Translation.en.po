@@ -51,8 +51,8 @@ msgstr ""
 "\"Demain je change de vie\"\n"
 "\n"
 "Thanks to\n"
-"Tester1, Tester1, Tester1, Tester1, Tester1\n"
-"Tester1, Tester1, Tester1, Tester1"
+"Andrew Afonin\n"
+"Illya Spas"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:143
 msgid "copy"
