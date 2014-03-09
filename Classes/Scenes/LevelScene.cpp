@@ -310,9 +310,13 @@ private:
 
         std::string x10_price = ADInApp::getProduct("hints_10")->getPrice();
         std::string x10_for1 = "x10  " + x10_price;
-        CCLabelTTF * first_button_text = CCLabelTTF::create(x10_for1.c_str(),
+//        CCLabelTTF * first_button_text = CCLabelTTF::create(x10_for1.c_str(),
+//                                                            Fonts::getFontName(),
+//                                                            48);
+        CCLabelTTF * first_button_text = CCLabelTTF::create(_("buyHint_free"),
                                                             Fonts::getFontName(),
                                                             48);
+
         first_button_text->setColor(ccc3(255,255,255));
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
                                            x5_hint->getContentSize().height/2));
@@ -1324,4 +1328,9 @@ void LevelScene::keyBackClicked()
                                         this, callfunc_selector(LevelScene::doGoToCollection)));
 
     }
+}
+void LevelScene::onHintClickedHelper()
+{
+    CCObject* obj;
+    onHintClicked(obj);
 }

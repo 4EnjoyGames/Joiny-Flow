@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-23 21:02+0200\n"
+"POT-Creation-Date: 2014-03-09 13:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,19 +14,19 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../../Classes\n"
 
-#: ../../Classes/AppDelegate.cpp:70
+#: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.billing_unavaliable"
 msgstr "Error"
 
-#: ../../Classes/AppDelegate.cpp:75
+#: ../../Classes/AppDelegate.cpp:76
 msgid "iap.error.purchase_error"
 msgstr "Restore Purchase error"
 
-#: ../../Classes/AppDelegate.cpp:83
+#: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.success"
 msgstr "Successfully restored purchases"
 
-#: ../../Classes/AppDelegate.cpp:88
+#: ../../Classes/AppDelegate.cpp:89
 msgid "iap.restore_purchases.failed"
 msgstr "Restore Purchase failed"
 
@@ -39,10 +39,6 @@ msgid "andrii"
 msgstr "Andrii Chaika"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:83
-msgid "thank"
-msgstr "Thanks to:"
-
-#: ../../Classes/Scenes/DeveloperScene.cpp:92
 msgid "test_list"
 msgstr ""
 "Music\n"
@@ -54,51 +50,55 @@ msgstr ""
 "Andrew Afonin\n"
 "Illya Spas"
 
-#: ../../Classes/Scenes/DeveloperScene.cpp:143
+#: ../../Classes/Scenes/DeveloperScene.cpp:123
 msgid "copy"
 msgstr "© 2014"
 
-#: ../../Classes/Scenes/LevelScene.cpp:42
+#: ../../Classes/Scenes/LevelScene.cpp:43
 msgid "RateMePopUp.RateLabel"
 msgstr "Is the game good?"
 
-#: ../../Classes/Scenes/LevelScene.cpp:88
+#: ../../Classes/Scenes/LevelScene.cpp:89
 msgid "RateMePopUp.RateText"
 msgstr "Rate the game"
 
-#: ../../Classes/Scenes/LevelScene.cpp:169
+#: ../../Classes/Scenes/LevelScene.cpp:170
 msgid "Test_level_end"
 msgstr "How do you rate this level?"
 
-#: ../../Classes/Scenes/LevelScene.cpp:205
+#: ../../Classes/Scenes/LevelScene.cpp:206
 msgid "Good_level"
 msgstr "Good"
 
-#: ../../Classes/Scenes/LevelScene.cpp:227
+#: ../../Classes/Scenes/LevelScene.cpp:228
 msgid "So_level"
 msgstr "I don`t know"
 
-#: ../../Classes/Scenes/LevelScene.cpp:248
+#: ../../Classes/Scenes/LevelScene.cpp:249
 msgid "Bad_level"
 msgstr "Bad"
 
-#: ../../Classes/Scenes/LevelScene.cpp:292
+#: ../../Classes/Scenes/LevelScene.cpp:293
 msgid "BuyHint"
 msgstr "Buy Hints"
 
-#: ../../Classes/Scenes/LevelScene.cpp:422
+#: ../../Classes/Scenes/LevelScene.cpp:316
+msgid "buyHint_free"
+msgstr "Free"
+
+#: ../../Classes/Scenes/LevelScene.cpp:427
 msgid "End_bad"
 msgstr "Level failed!"
 
-#: ../../Classes/Scenes/LevelScene.cpp:426
+#: ../../Classes/Scenes/LevelScene.cpp:431
 msgid "End_good"
 msgstr "Score"
 
-#: ../../Classes/Scenes/LevelScene.cpp:499
+#: ../../Classes/Scenes/LevelScene.cpp:504
 msgid "Retry"
 msgstr "Retry"
 
-#: ../../Classes/Scenes/LevelScene.cpp:529
+#: ../../Classes/Scenes/LevelScene.cpp:534
 msgid "Next"
 msgstr "Next"
 
@@ -155,6 +155,9 @@ msgstr "Developers"
 #: ../../Classes/Scenes/SettingScene.cpp:269
 msgid "Rate"
 msgstr "Rate Me"
+
+#~ msgid "thank"
+#~ msgstr "Thanks to:"
 
 #~ msgid "Settings"
 #~ msgstr "Settings"

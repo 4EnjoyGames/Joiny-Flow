@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-02-12 17:25+0200\n"
+"POT-Creation-Date: 2014-03-09 21:19+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,22 +15,22 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../../Classes\n"
 
 # Error
-#: ../../Classes/AppDelegate.cpp:66
+#: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.billing_unavaliable"
 msgstr "Ошибка"
 
 # Restore Purchase error
-#: ../../Classes/AppDelegate.cpp:71
+#: ../../Classes/AppDelegate.cpp:76
 msgid "iap.error.purchase_error"
 msgstr "Ошибка  восстановление покупок"
 
 # Successfully restored purchases
-#: ../../Classes/AppDelegate.cpp:79
+#: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.success"
 msgstr "Успешно восстановленные покупки"
 
 # Restore Purchase failed
-#: ../../Classes/AppDelegate.cpp:84
+#: ../../Classes/AppDelegate.cpp:89
 msgid "iap.restore_purchases.failed"
 msgstr "Неуспешно восстановленные покупки"
 
@@ -44,16 +44,11 @@ msgstr "Diana Sirenko"
 msgid "andrii"
 msgstr "Andrii Chaika"
 
-# Thanks to:
-#: ../../Classes/Scenes/DeveloperScene.cpp:83
-msgid "thank"
-msgstr "Спасибо:"
-
 # music and sounds: Aziyan Nasir - \"Silly Fun\"\n
 # Löhstana David - \"Demain je change de vie\"\n
 # testers: Tester1, Tester1, Tester1, Tester1, Tester1\n
 # Tester1, Tester1, Tester1, Tester1, Tester1, Tester1
-#: ../../Classes/Scenes/DeveloperScene.cpp:92
+#: ../../Classes/Scenes/DeveloperScene.cpp:83
 msgid "test_list"
 msgstr ""
 "Музыка\n"
@@ -61,57 +56,70 @@ msgstr ""
 "Löhstana David - \n"
 "\"Demain je change de vie\"\n"
 "\n"
-"Дякуємо\n"
+"Спасибо\n"
 "Andrew Afonin\n"
 "Illya Spas"
 
 # © 2014
-#: ../../Classes/Scenes/DeveloperScene.cpp:119
+#: ../../Classes/Scenes/DeveloperScene.cpp:123
 msgid "copy"
 msgstr "© 2014"
 
+#: ../../Classes/Scenes/LevelScene.cpp:43
+msgid "RateMePopUp.RateLabel"
+msgstr "Игра хорошая?"
+
+#: ../../Classes/Scenes/LevelScene.cpp:89
+msgid "RateMePopUp.RateText"
+msgstr "Оценить игру"
+
 # How do you rate this level?
-#: ../../Classes/Scenes/LevelScene.cpp:86
+#: ../../Classes/Scenes/LevelScene.cpp:170
 msgid "Test_level_end"
 msgstr "How do you rate this level?"
 
 # Good
-#: ../../Classes/Scenes/LevelScene.cpp:122
+#: ../../Classes/Scenes/LevelScene.cpp:206
 msgid "Good_level"
 msgstr "Good"
 
 # I don`t know
-#: ../../Classes/Scenes/LevelScene.cpp:144
+#: ../../Classes/Scenes/LevelScene.cpp:228
 msgid "So_level"
 msgstr "I don`t know"
 
 # Bad
-#: ../../Classes/Scenes/LevelScene.cpp:165
+#: ../../Classes/Scenes/LevelScene.cpp:249
 msgid "Bad_level"
 msgstr "Bad"
 
 # Buy Hints
-#: ../../Classes/Scenes/LevelScene.cpp:209
+#: ../../Classes/Scenes/LevelScene.cpp:293
 msgid "BuyHint"
 msgstr "Купить Подсказки"
 
+# Buy Hints
+#: ../../Classes/Scenes/LevelScene.cpp:316
+msgid "buyHint_free"
+msgstr "Бесплатно"
+
 # Level failed!
-#: ../../Classes/Scenes/LevelScene.cpp:339
+#: ../../Classes/Scenes/LevelScene.cpp:427
 msgid "End_bad"
 msgstr "Уровень проиграно!"
 
 # Score
-#: ../../Classes/Scenes/LevelScene.cpp:343
+#: ../../Classes/Scenes/LevelScene.cpp:431
 msgid "End_good"
 msgstr "Очки"
 
 # Retry
-#: ../../Classes/Scenes/LevelScene.cpp:422
+#: ../../Classes/Scenes/LevelScene.cpp:504
 msgid "Retry"
 msgstr "Повторить"
 
 # Next
-#: ../../Classes/Scenes/LevelScene.cpp:452
+#: ../../Classes/Scenes/LevelScene.cpp:534
 msgid "Next"
 msgstr "Следующий"
 
@@ -144,12 +152,12 @@ msgid "SelectColection.BuyFullVerdionPopUp.OrText"
 msgstr "или"
 
 # Unlock full game
-#: ../../Classes/Scenes/SelectCollection.cpp:97
+#: ../../Classes/Scenes/SelectCollection.cpp:96
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
 msgstr "Открыть сейчас"
 
 # Collections
-#: ../../Classes/Scenes/SelectCollection.cpp:290
+#: ../../Classes/Scenes/SelectCollection.cpp:285
 msgid "Collection"
 msgstr "Коллекции"
 
@@ -161,30 +169,33 @@ msgstr ""
 "Хотите удалить \n"
 "весь прогресс?"
 
-# Settings
-#: ../../Classes/Scenes/SettingScene.cpp:172
-msgid "Settings"
-msgstr "Настройки"
-
 # Reset Progress
-#: ../../Classes/Scenes/SettingScene.cpp:246
+#: ../../Classes/Scenes/SettingScene.cpp:237
 msgid "Reset"
 msgstr "Сброс Прогресса"
 
 # Restore Purchases
-#: ../../Classes/Scenes/SettingScene.cpp:256
+#: ../../Classes/Scenes/SettingScene.cpp:249
 msgid "Restore"
 msgstr "Восстановить Покупки"
 
 # Developers
-#: ../../Classes/Scenes/SettingScene.cpp:266
+#: ../../Classes/Scenes/SettingScene.cpp:259
 msgid "Developers"
 msgstr "Разработчики"
 
 # Rate Me
-#: ../../Classes/Scenes/SettingScene.cpp:276
+#: ../../Classes/Scenes/SettingScene.cpp:269
 msgid "Rate"
-msgstr "Оценить меня"
+msgstr "Оценить игру"
+
+# Thanks to:
+#~ msgid "thank"
+#~ msgstr "Спасибо:"
+
+# Settings
+#~ msgid "Settings"
+#~ msgstr "Настройки"
 
 #~ msgid "SelectColection.BuyFullVerdionPopUp.No"
 #~ msgstr "Cancel"

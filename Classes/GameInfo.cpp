@@ -97,7 +97,7 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
     {
         //TODO: put real package name
         if(ADInfo::getPlatform() == ADPlatform::iOS)
-            return "id657095501";
+            return "id816101116";
         else
             return "com.x4enjoy.joiny";
     }

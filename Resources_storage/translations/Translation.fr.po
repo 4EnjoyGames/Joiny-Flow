@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Joiny\n"
-"POT-Creation-Date: 2014-03-09 21:41+0200\n"
+"POT-Creation-Date: 2014-03-09 13:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,45 +14,39 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ../../Classes\n"
 
-# Error
 #: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.billing_unavaliable"
-msgstr "Помилка"
+msgstr "Erreur"
 
-# Restore Purchase error
 #: ../../Classes/AppDelegate.cpp:76
 msgid "iap.error.purchase_error"
-msgstr "Помилка під час відновлення покупок"
+msgstr "Restaurer erreur d'achat"
 
-# Successfully restored purchases
 #: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.success"
-msgstr "Покупки відновлені успішно"
+msgstr "Achats succès restaurés"
 
-# Restore Purchase failed
 #: ../../Classes/AppDelegate.cpp:89
 msgid "iap.restore_purchases.failed"
-msgstr "Відновити покупки невдалося"
+msgstr "Restaurer Achat échoué"
 
-# Diana Sirenko
 #: ../../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
-msgstr "Діана Сіренко"
+msgstr "Diana Sirenko"
 
-# Andrii Chaika
 #: ../../Classes/Scenes/DeveloperScene.cpp:74
 msgid "andrii"
-msgstr "Андрій Чайка"
+msgstr "Andrii Chaika"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:83
 msgid "test_list"
 msgstr ""
-"Музика \n"
+"Musique\n"
 "Aziyan Nasir - \"Silly Fun\"\n"
 "Löhstana David - \n"
 "\"Demain je change de vie\"\n"
 "\n"
-"Дякуємо\n"
+"Merci\n"
 "Andrew Afonin\n"
 "Illya Spas"
 
@@ -62,141 +56,117 @@ msgstr "© 2014"
 
 #: ../../Classes/Scenes/LevelScene.cpp:43
 msgid "RateMePopUp.RateLabel"
-msgstr "Як тобі гра?"
+msgstr "Le jeu est bon?"
 
 #: ../../Classes/Scenes/LevelScene.cpp:89
 msgid "RateMePopUp.RateText"
-msgstr "Оцінити гру"
+msgstr "Noter le jeu"
 
-# How do you rate this level?
 #: ../../Classes/Scenes/LevelScene.cpp:170
 msgid "Test_level_end"
-msgstr "Як тобі рівень?"
+msgstr "Quelle note donneriez-vous à ce niveau?"
 
-# Good
 #: ../../Classes/Scenes/LevelScene.cpp:206
 msgid "Good_level"
-msgstr "Добре"
+msgstr "Good"
 
-# I don`t know
 #: ../../Classes/Scenes/LevelScene.cpp:228
 msgid "So_level"
-msgstr "Не знаю"
+msgstr "I don`t know"
 
-# Bad
 #: ../../Classes/Scenes/LevelScene.cpp:249
 msgid "Bad_level"
-msgstr "Погано"
+msgstr "Bad"
 
-# Buy Hints
 #: ../../Classes/Scenes/LevelScene.cpp:293
 msgid "BuyHint"
-msgstr "Купити підказки"
+msgstr "Acheter Conseils"
 
-# Buy Hints
 #: ../../Classes/Scenes/LevelScene.cpp:316
 msgid "buyHint_free"
-msgstr "Безкоштовно"
+msgstr "Gratuit"
 
-# You need more points
 #: ../../Classes/Scenes/LevelScene.cpp:427
 msgid "End_bad"
-msgstr "Рівень програно!"
+msgstr "Niveau a échoué!"
 
-# Score
 #: ../../Classes/Scenes/LevelScene.cpp:431
 msgid "End_good"
-msgstr "Очки"
+msgstr "Score"
 
-# Retry
 #: ../../Classes/Scenes/LevelScene.cpp:504
 msgid "Retry"
-msgstr "Грати ще"
+msgstr "Refaire"
 
-# Next
 #: ../../Classes/Scenes/LevelScene.cpp:534
 msgid "Next"
-msgstr "Наступний"
+msgstr "Suivant"
 
-# Would you like\n to leave the game?
 #: ../../Classes/Scenes/MainScene.cpp:40
 msgid "Sure"
 msgstr ""
-"Ви впевнені,\n"
-"що хочете вийти з гри?"
+"Voulez-vous\n"
+"quitter le jeu?"
 
-# Yes
 #: ../../Classes/Scenes/MainScene.cpp:77
 #: ../../Classes/Scenes/SettingScene.cpp:76
 msgid "Yes"
-msgstr "Так"
+msgstr "Oui"
 
-# No
 #: ../../Classes/Scenes/MainScene.cpp:99
 #: ../../Classes/Scenes/SettingScene.cpp:98
 msgid "No"
-msgstr "Ні"
+msgstr "Aucun"
 
-# Get 3 stars everywhere
 #: ../../Classes/Scenes/SelectCollection.cpp:44
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
-msgstr "3 зірки усюди"
+msgstr "Obtenez 3 étoiles partout"
 
-# or
 #: ../../Classes/Scenes/SelectCollection.cpp:62
 msgid "SelectColection.BuyFullVerdionPopUp.OrText"
-msgstr "або"
+msgstr "ou"
 
-# Unlock now
 #: ../../Classes/Scenes/SelectCollection.cpp:96
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr "Відкрити зараз"
+msgstr "Déverrouillez maintenant"
 
-# Collections
 #: ../../Classes/Scenes/SelectCollection.cpp:285
 msgid "Collection"
-msgstr "Колекції"
+msgstr "Collections"
 
-# "Would you like\n to delete all progress?"
 #: ../../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
-"Ви дійсно хочете\n"
-"видалити весь прогрес?"
+"Voulez-vous supprimer\n"
+"tous les progrès?"
 
-# Reset Progress
 #: ../../Classes/Scenes/SettingScene.cpp:237
 msgid "Reset"
-msgstr "Скинути прогрес"
+msgstr "Enlever les progrès"
 
-# Restore Purchases
 #: ../../Classes/Scenes/SettingScene.cpp:249
 msgid "Restore"
-msgstr "Відновити покупки"
+msgstr "Restaurer Achats"
 
-# Developers
 #: ../../Classes/Scenes/SettingScene.cpp:259
 msgid "Developers"
-msgstr "Розробники"
+msgstr "Développeurs"
 
-# Rate Me
 #: ../../Classes/Scenes/SettingScene.cpp:269
 msgid "Rate"
-msgstr "Оцінити гру"
+msgstr "Noter le jeu"
 
-# Thanks to:
 #~ msgid "thank"
-#~ msgstr "Дякуємо:"
+#~ msgstr "Thanks to:"
 
-# Settings
 #~ msgid "Settings"
-#~ msgstr "Налаштування"
+#~ msgstr "Settings"
 
 #~ msgid "SelectColection.BuyFullVerdionPopUp.No"
-#~ msgstr "Відмінити"
+#~ msgstr "Cancel"
 
 #~ msgid "madeInUkraine"
-#~ msgstr "зроблено в Україні"
+#~ msgstr "made in Ukraine"
 
 #~ msgid "main.exit.sure"
 #~ msgstr "Are you sure"

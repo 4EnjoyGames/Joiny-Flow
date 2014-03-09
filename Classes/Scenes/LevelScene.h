@@ -60,7 +60,7 @@ private:
     void onPreviousLevelClicked(CCObject*);
     void onNextLevelClicked(CCObject*);
     void onReloadLevelClicked(CCObject*);
-    void onHintClicked(CCObject*);
+
 
     bool _show_open_animation;
     void showAnimation();
@@ -113,7 +113,7 @@ public:
                bool show_rate_me);
 
     static void purchaseUpdateHints();
-
+    void onHintClicked(CCObject*);
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
     void onEnter();
@@ -128,6 +128,8 @@ public:
     static LevelScene* create(const JoinyLevel *level,
                               bool show_animation,
                               bool show_rate_me);
+
+    void onHintClickedHelper();
 
 };
 
