@@ -77,7 +77,20 @@ void Tutorial::showTutorial()
         _level->getPuzzle().getJoinyInfo().getPathes();
 
         if(_tutorial_path_id >= hint_path.size())
-            return;
+        {
+            //Find path which user has ignored
+            for(int i = 0; i < hint_path.size(); ++i)
+            {
+                if(!_flow_game->hasUserThisPath(hint_path[i]))
+                {
+                    _tutorial_path_id = i;
+                    break;
+                }
+            }
+
+            if(_tutorial_path_id >= hint_path.size())
+                return;
+        }
 
         std::vector<FlowPoint> curr_path = hint_path[_tutorial_path_id];
         FlowColor color = _flow_game->getCellColor(curr_path[0]);
@@ -91,12 +104,26 @@ void Tutorial::showTutorial()
         }
         else
         {
+
+
             if (_hint_ell_index < curr_path.size())
             {
-                _flow_game->connectHintPoints(curr_path[_hint_ell_index-1],
-                                              curr_path[_hint_ell_index],
-                                              color);
-                ++_hint_ell_index;
+                bool not_connected_found = false;
+                do
+                {
+                    if(!_flow_game->areFlowPointsConnected(curr_path[_hint_ell_index-1],
+                                                          curr_path[_hint_ell_index]))
+                    {
+                        not_connected_found = true;
+                    }
+                    _flow_game->connectHintPoints(curr_path[_hint_ell_index-1],
+                                                  curr_path[_hint_ell_index],
+                                                  color);
+                    ++_hint_ell_index;
+
+                } while(!not_connected_found &&
+                        _hint_ell_index < curr_path.size());
+
                 plan_action = true;
 
             }

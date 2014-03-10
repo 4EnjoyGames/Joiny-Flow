@@ -59,6 +59,14 @@ public:
      * removed from CCDirector
      */
     void stopTrackingTouch();
+
+    /**
+     * @brief returns position where path is broken
+     * @return
+     */
+    int getHintPathBreakPosition(const std::vector< FlowPoint>& path);
+
+    bool areFlowPointsConnected(const FlowPoint& a, const FlowPoint& b);
 private:
     /**
      * @brief If true than the TouchDelegate is attached to CCDirector

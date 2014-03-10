@@ -402,7 +402,7 @@ void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
     else
     {
         CCLog("ERROR: Points are not connected");
-        assert(false);
+        //assert(false);
     }
 
 }
@@ -435,6 +435,36 @@ bool FlowGame::connectedFlowPoints(FlowPointState st_current,
         }
     }
     return result;
+}
+bool FlowGame::areFlowPointsConnected(const FlowPoint& a, const FlowPoint& b)
+{
+    FlowPointState st_current = _table->get(a);
+    FlowPointState st_previous = _table->get(b);
+    return connectedFlowPoints(st_current, st_previous);
+}
+
+int FlowGame::getHintPathBreakPosition(const std::vector< FlowPoint>& path)
+{
+    int i = 0;
+    FlowPointState st_current;
+    FlowPointState st_previous;
+
+    for(i=0; i< path.size(); ++i)
+    {
+        st_previous = st_current;
+        st_current = _table->get(path[i]);
+
+        //if we have previous
+        if(i!=0)
+        {
+            if(!connectedFlowPoints(st_current, st_previous))
+            {
+
+                break;
+            }
+        }
+    }
+    return i;
 }
 
 //verify has the user drow this path
