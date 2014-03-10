@@ -7,6 +7,7 @@
 #include "Flow/FlowRenderer.h"
 #include "ADLib/ADString.h"
 #include "Logic/Hints.h"
+#include "ADLib/Device/ADAds.h"
 
 LevelManager::LevelManager()
     : _hints_number(10),
@@ -102,6 +103,9 @@ void LevelManager::loadLevelsInfo()
     GameInfo* info = GameInfo::getInstance();
 
     std::vector<std::string> coll_files = info->getCollectionFiles();
+
+    if(isFullGameVersion())
+        ADAds::disableAds();
 
     for(unsigned int j=0; j<coll_files.size(); ++j)
     {
