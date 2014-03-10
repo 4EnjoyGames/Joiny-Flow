@@ -27,7 +27,7 @@ int CALLBACK WinMain(
 
     emulator->setFitTheScreen(true);
     emulator->setDevice(Device::Galaxy_Ace2);
-    emulator->setLanguage("hu");
+    emulator->setLanguage("en");
     emulator->setOrientation(Orientation::Portrait);
 
     //Test cases

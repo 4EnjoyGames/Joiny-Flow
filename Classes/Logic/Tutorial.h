@@ -17,12 +17,13 @@ public:
     const unsigned int getCurrentTutorialPathId();
     const std::vector<FlowPoint> getCurrentTutorialHintPath();
     void deleteTutorialPath();
-
+    void setIsActive(bool is_active);
+    bool isActive();
 private:
     static Tutorial* _instance;
     static unsigned int _tutorial_path_id;
     static unsigned int _hint_ell_index;
-
+    bool _is_active;
     FlowGame* _flow_game;
     const JoinyLevel *_level;
 

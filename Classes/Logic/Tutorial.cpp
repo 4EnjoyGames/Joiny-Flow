@@ -5,10 +5,20 @@ Tutorial* Tutorial::_instance = nullptr;
 unsigned int Tutorial::_tutorial_path_id = 0;
 unsigned int Tutorial::_hint_ell_index = 1;
 
-Tutorial::Tutorial():_flow_game(nullptr),_level(nullptr)
+Tutorial::Tutorial():_flow_game(nullptr),_level(nullptr),
+    _is_active(false)
 {
     _level = RW::getLevelManager().getLevel(1,1);
 }
+void Tutorial::setIsActive(bool is_active)
+{
+    _is_active = is_active;
+}
+bool Tutorial::isActive()
+{
+    return _is_active;
+}
+
 Tutorial* Tutorial::getInstance( )
 {
       if (_instance == nullptr)

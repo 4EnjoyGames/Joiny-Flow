@@ -1065,6 +1065,7 @@ bool LevelScene::init()
             &&
             _current_level->getCollection()->getCollectionID()==1)
     {
+        Tutorial::getInstance()->setIsActive(true);
         Tutorial::getInstance()->setInfo(_flow_game);
         Tutorial::getInstance()->setLevel(_current_level->getCollection()->getCollectionID(),
                                           _current_level->getLevelId());
@@ -1078,6 +1079,10 @@ bool LevelScene::init()
                                                 callAction,
                                                 NULL);
         this->runAction(action);
+    }
+    else
+    {
+        Tutorial::getInstance()->setIsActive(false);
     }
 
 

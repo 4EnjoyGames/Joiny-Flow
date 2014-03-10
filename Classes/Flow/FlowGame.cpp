@@ -105,7 +105,8 @@ void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch,
     }
 
     //if the trace is that we would like the user touched
-    if(hasUserThisPath(Tutorial::getInstance()->getCurrentTutorialHintPath()))
+    if(Tutorial::getInstance()->isActive() &&
+            hasUserThisPath(Tutorial::getInstance()->getCurrentTutorialHintPath()))
     {
         if(Tutorial::getInstance()->hasTutorial())
             Tutorial::getInstance()->showTutorial();
@@ -409,11 +410,29 @@ bool FlowGame::connectedFlowPoints(FlowPointState st_current,
                                    FlowPointState st_previous) const
 {
     bool result = false;
-    if(st_current.hasNext() || st_current.hasPrevious())
+
+    if(st_previous.getLineColor() == st_current.getLineColor())
     {
-        FlowPoint coordinate = st_current.getHintNextCordinate();
-        if(st_previous.getLineColor() == st_current.getLineColor())
-            result = true;
+        if(st_current.hasPrevious())
+        {
+            if(st_current.getPreviousCordinates() == st_previous.getCordinates())
+                result = true;
+        }
+        if(st_current.hasNext())
+        {
+            if(st_current.getNextCordinates() == st_previous.getCordinates())
+                result = true;
+        }
+        if(st_previous.hasNext())
+        {
+            if(st_previous.getNextCordinates() == st_current.getCordinates())
+                result = true;
+        }
+        if(st_previous.hasPrevious())
+        {
+            if(st_previous.getPreviousCordinates() == st_current.getCordinates())
+                result = true;
+        }
     }
     return result;
 }
