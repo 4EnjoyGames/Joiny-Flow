@@ -104,13 +104,13 @@ void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch,
         _renderer->hideActiveCircle();
     }
 
-    //if the trace is that we would like the user touched
-    if(Tutorial::getInstance()->isActive() &&
-            hasUserThisPath(Tutorial::getInstance()->getCurrentTutorialHintPath()))
-    {
-        if(Tutorial::getInstance()->hasTutorial())
-            Tutorial::getInstance()->showTutorial();
-    }
+//    //if the trace is that we would like the user touched
+//    if(Tutorial::getInstance()->isActive() &&
+//            hasUserThisPath(Tutorial::getInstance()->getCurrentTutorialHintPath()))
+//    {
+//        if(Tutorial::getInstance()->hasTutorial())
+//            Tutorial::getInstance()->showTutorial();
+//    }
 }
 
 void FlowGame::ccTouchCancelled(cocos2d::CCTouch *pTouch,

@@ -28,6 +28,8 @@ Tutorial* Tutorial::getInstance( )
 void Tutorial::setInfo(FlowGame* game)
 {
     _flow_game = game;
+    _tutorial_path_id = 0;
+    _hint_ell_index = 1;
 }
 void Tutorial::setLevel(JoinyCollectionID coll_id,
               JoinyLevelID level_id)
@@ -68,40 +70,58 @@ bool Tutorial::hasTutorial()
 
 void Tutorial::showTutorial()
 {
-    if (_level!=nullptr && _flow_game!=nullptr)
+    bool plan_action = false;
+    if (_is_active && _level!=nullptr && _flow_game!=nullptr)
     {
         std::vector < std::vector<FlowPoint> > hint_path =
         _level->getPuzzle().getJoinyInfo().getPathes();
 
+        if(_tutorial_path_id >= hint_path.size())
+            return;
+
         std::vector<FlowPoint> curr_path = hint_path[_tutorial_path_id];
         FlowColor color = _flow_game->getCellColor(curr_path[0]);
 
-
-        if (_hint_ell_index < curr_path.size())
+        if(_flow_game->hasUserThisPath(curr_path))
         {
-            _flow_game->connectHintPoints(curr_path[_hint_ell_index-1],
-                                          curr_path[_hint_ell_index],
-                                          color);
-            ++_hint_ell_index;
-
-            //show the next tutorial
-            // call hint in 1 seconds
-            CCCallFunc *callAction = CCCallFunc::create(this,
-                                              callfunc_selector(
-                                                Tutorial::showTutorial));
-
-            CCSequence* action = CCSequence::create(
-                        CCDelayTime::create(0.4f),
-                                              callAction,
-                                              NULL);
-            CCDirector::sharedDirector()->getRunningScene()->runAction(action);
-
+            _flow_game->deleteHintPath(curr_path);
+            ++_tutorial_path_id;
+            _hint_ell_index = 1;
+            plan_action = true;
         }
         else
         {
-            ++_tutorial_path_id;
-            _hint_ell_index = 1;
+            if (_hint_ell_index < curr_path.size())
+            {
+                _flow_game->connectHintPoints(curr_path[_hint_ell_index-1],
+                                              curr_path[_hint_ell_index],
+                                              color);
+                ++_hint_ell_index;
+                plan_action = true;
+
+            }
+            else
+            {
+                _flow_game->deleteHintPath(curr_path);
+                _hint_ell_index = 1;
+                plan_action = true;
+            }
         }
+    }
+
+    if(plan_action)
+    {
+        //show the next tutorial
+        // call hint in 1 seconds
+        CCCallFunc *callAction = CCCallFunc::create(this,
+                                          callfunc_selector(
+                                            Tutorial::showTutorial));
+
+        CCSequence* action = CCSequence::create(
+                    CCDelayTime::create(0.2f),
+                                          callAction,
+                                          NULL);
+        CCDirector::sharedDirector()->getRunningScene()->runAction(action);
     }
 
 }

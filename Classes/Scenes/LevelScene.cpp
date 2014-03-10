@@ -1075,7 +1075,7 @@ bool LevelScene::init()
                                                     callfunc_selector(
                                                         Tutorial::showTutorial));
 
-        CCSequence* action = CCSequence::create(CCDelayTime::create(0.4f),
+        CCSequence* action = CCSequence::create(CCDelayTime::create(0.1f),
                                                 callAction,
                                                 NULL);
         this->runAction(action);
