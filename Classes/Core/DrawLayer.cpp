@@ -53,7 +53,7 @@ void DrawLayer::createDrawingNodes()
     CCSize win_size = Screen::getFrameSize();
 
     //Create sprite for background
-    CCSprite* background_piece = CCSprite::create("universal/game_background.png");
+    CCSprite* background_piece = CCSprite::create("universal/game_background.jpg");
     CCTexture2D *texture = background_piece->getTexture();
     ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
     texture->setTexParameters(&params);
