@@ -91,6 +91,17 @@ public:
     }
 };
 
+class VirtualCurrencyDelegate : public ADVirtualCurrency::Delegate
+{
+    void onCurrencyAdded(const unsigned int number)
+    {
+        Hints hints;
+        cocos2d::CCLog("Hints recieved: %d", number);
+        hints.increaseHintNumber(number);
+        LevelScene::purchaseUpdateHints();
+    }
+};
+
 
 void initInAppPurchases()
 {
@@ -204,6 +215,8 @@ void initTapJoy()
         ss << "f1041413-201e-443d-b03a-82b0bdb941b1" << "|" << "QZdV7bkpyvZiGxiwBDw2";
         ADVirtualCurrency::initProvider(ss.str());
     }
+
+    ADVirtualCurrency::setDelegate(std::make_shared<VirtualCurrencyDelegate>());
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {

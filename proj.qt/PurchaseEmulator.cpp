@@ -18,6 +18,8 @@ cocos2d::CCSize ADAds::Platform::getBannerSize(const BannerType& type)
 #include <ADLib/PlatformImpl/ADNotification_None.hpp>
 #include <ADLib/PlatformImpl/ADInfo_Default.hpp>
 #include <ADLib/PlatformImpl/ADInApp_Emulator.hpp>
+#include <ADLib/PlatformImpl/ADVirtualCurrency_None.hpp>
+
 
 #include <ADLib/Device/ADLanguage.h>
 std::string ADLanguage::platformGetDeviceLanguage()
