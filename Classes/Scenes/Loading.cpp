@@ -162,7 +162,7 @@ void Loading::addAll()
 //    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
 	
     RW::getLevelManager().loadSettings();
-    ADInApp::loadStore(ADInApp::Mode::TestSuccess);
+    ADInApp::loadStore(ADInApp::Mode::Production);
 
     //addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
