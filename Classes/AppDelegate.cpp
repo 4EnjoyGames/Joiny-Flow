@@ -338,5 +338,5 @@ void AppDelegate::applicationWillEnterForeground() {
     ADVirtualCurrency::onResume();
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-    DrawLayer::registerUpdateDrawingNodes();
+
 }
