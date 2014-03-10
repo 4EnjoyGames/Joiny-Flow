@@ -134,12 +134,49 @@ void initInAppPurchases()
  */
 void initAds()
 {
-    std::string pid = "ca-app-pub-1097233306002326/3272087699";
-    ADAds::registerBannerType("BANNER", pid);
-    ADAds::registerBannerType("IAB_BANNER", pid);
+    std::stringstream pid_banner;
+    std::stringstream pid_interstitial;
 
-    std::string pid_inter = "ca-app-pub-1097233306002326/5031020099";
-    ADAds::registerInterstitialType(pid_inter);
+    pid_banner << "ca-app-pub-" << 16126979 << 60946304 << "/";
+    pid_interstitial << "ca-app-pub-" << 16126979 << 60946304 << "/";
+
+    if(platform == ADPlatform::Android)
+    {
+        if(store == ADStore::SamsungStore)
+        {
+            //ca-app-pub-1612697960946304/8892739877
+            pid_banner  << 8892739877;
+            //ca-app-pub-1612697960946304/4322939475
+            pid_interstitial << 4322939475;
+        }
+        else if(store == ADStore::GooglePlay)
+        {
+            //ca-app-pub-1612697960946304/5939273474
+            pid_banner << 5939273474;
+            //ca-app-pub-1612697960946304/1369473073
+            pid_interstitial << 1369473073;
+        }
+        else
+        {
+            //ca-app-pub-1612697960946304/7416006677
+            pid_banner << 7416006677;
+            //ca-app-pub-1612697960946304/2846206274
+            pid_interstitial << 2846206274;
+        }
+    }
+    else if(platform == ADPlatform::iOS)
+    {
+        //            //ca-app-pub-1097233306002326/5693181292
+        //            pid_banner << 5693181292;
+
+        //            //ca-app-pub-1097233306002326/7169914499
+        //            pid_interstitial << 7169914499;
+    }
+
+    ADAds::registerBannerType("BANNER", pid_banner.str());
+    ADAds::registerBannerType("IAB_BANNER", pid_banner.str());
+
+    ADAds::registerInterstitialType(pid_interstitial.str());
 
     ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
     ADAds::addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
