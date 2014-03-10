@@ -7,6 +7,7 @@
 #include "Flow/FlowRenderer.h"
 #include "ADLib/ADString.h"
 #include "Logic/Hints.h"
+#include "ADLib/Device/ADAds.h"
 
 LevelManager::LevelManager()
     : _hints_number(10),
@@ -103,6 +104,9 @@ void LevelManager::loadLevelsInfo()
 
     std::vector<std::string> coll_files = info->getCollectionFiles();
 
+    if(isFullGameVersion())
+        ADAds::disableAds();
+
     for(unsigned int j=0; j<coll_files.size(); ++j)
     {
         std::string file = coll_files[j];
@@ -133,7 +137,7 @@ void LevelManager::loadLevelsInfo()
             is >> open_coll;
 
             bool open = true;
-            //if(!isFullGameVersion())
+            if(!isFullGameVersion())
             {
                 //which coll must be closed
                 if (j>=5)
