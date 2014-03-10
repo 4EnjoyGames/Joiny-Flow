@@ -59,9 +59,14 @@ public:
         CCLog("Purchase %s finished successful", id.c_str());
 
         if(id != "unlock_full")
+        {
+            RW::getLevelManager().saveSettings();
             LevelScene::purchaseUpdateHints();
+        }
         else
             SelectCollection::purchaseUpdateFullGame();
+
+        //
     }
     void purchaseFailed(const ADInApp::ProductID & id,
                         const ADInApp::ErrorType error)
@@ -99,6 +104,8 @@ class VirtualCurrencyDelegate : public ADVirtualCurrency::Delegate
         cocos2d::CCLog("Hints recieved: %d", number);
         hints.increaseHintNumber(number);
         LevelScene::purchaseUpdateHints();
+
+        RW::getLevelManager().saveSettings();
     }
 };
 
@@ -220,6 +227,8 @@ void initTapJoy()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    RW::onInit();
+
     //Statistics init
     if(ADInfo::getPlatform() == ADPlatform::Android)
         ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
