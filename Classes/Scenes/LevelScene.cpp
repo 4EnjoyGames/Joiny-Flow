@@ -16,6 +16,7 @@ USING_NS_CC;
 #include "Logic/Tutorial.h"
 #include "GameInfo.h"
 #include <ADLib/Device/ADBrowser.h>
+#include <ADLib/Device/ADVirtualCurrency.h>
 
 class LevelScene::RateMePopUp : public PopUpWindow::Content
 {
@@ -63,8 +64,8 @@ private:
 
         //TODO: add 5 stars
         SpritesLoader spl = GraphicsManager::getLoaderFor(parent,
-                                                           "level-end/big_stars.plist",
-                                                           "level-end/big_stars.png");
+                                                          "level-end/big_stars.plist",
+                                                          "level-end/big_stars.png");
         spl->inject();
         CCSprite* stars_spr = spl->loadSprite("rate_stars.png");
         stars_spr->setPosition(ccp(x_middle, size.height*0.55f));
@@ -87,12 +88,12 @@ private:
         rate_button->setPosition(ccp(x_middle,size.height*0.25));
 
         CCLabelTTF * rate_text = CCLabelTTF::create(_("RateMePopUp.RateText"),
-                                                          Fonts::getFontName(),
-                                                          font_size);
+                                                    Fonts::getFontName(),
+                                                    font_size);
 
         rate_text->setColor(ccc3(255,255,255));
         rate_text->setPosition(ccp(rate_button->getContentSize().width/2,
-                                         rate_button->getContentSize().height/2));
+                                   rate_button->getContentSize().height/2));
         rate_button->addChild(rate_text);
         menu->menu()->addChild(rate_button);
 
@@ -310,12 +311,20 @@ private:
 
         std::string x10_price = ADInApp::getProduct("hints_10")->getPrice();
         std::string x10_for1 = "x10  " + x10_price;
-//        CCLabelTTF * first_button_text = CCLabelTTF::create(x10_for1.c_str(),
-//                                                            Fonts::getFontName(),
-//                                                            48);
-        CCLabelTTF * first_button_text = CCLabelTTF::create(_("buyHint_free"),
-                                                            Fonts::getFontName(),
-                                                            48);
+
+        CCLabelTTF * first_button_text = nullptr;
+        if(ADVirtualCurrency::isSupported())
+        {
+            first_button_text = CCLabelTTF::create(_("buyHint_free"),
+                                                   Fonts::getFontName(),
+                                                   48);
+        }
+        else
+        {
+            first_button_text = CCLabelTTF::create(x10_for1.c_str(),
+                                                   Fonts::getFontName(),
+                                                   48);
+        }
 
         first_button_text->setColor(ccc3(255,255,255));
         first_button_text->setPosition(ccp(x5_hint->getContentSize().width/2,
@@ -366,7 +375,10 @@ private:
     void onFirstButton(CCObject*)
     {
         //TODO: may be it will be "get free hints button" action
-        ADInApp::buyProduct("hints_10");
+        if(ADVirtualCurrency::isSupported())
+            ADVirtualCurrency::showVirtualCurrencyShop();
+        else
+            ADInApp::buyProduct("hints_10");
         //this->closeWindow();
 
     }
@@ -1060,11 +1072,11 @@ bool LevelScene::init()
         // call hint in 4 seconds
         CCCallFunc *callAction = CCCallFunc::create(Tutorial::getInstance(),
                                                     callfunc_selector(
-                                                    Tutorial::showTutorial));
+                                                        Tutorial::showTutorial));
 
         CCSequence* action = CCSequence::create(CCDelayTime::create(0.4f),
-                                          callAction,
-                                          NULL);
+                                                callAction,
+                                                NULL);
         this->runAction(action);
     }
 
@@ -1100,11 +1112,11 @@ void LevelScene::hintBlink()
     float scale_button = _hint_button->getScale();
     _hint_button->setAnchorPoint(ccp(0.5, 0.5));
     _hint_button->runAction(CCRepeat::create(CCSequence::createWithTwoActions(
-                                CCScaleTo::create(0.2f, scale_button*0.85),
-                                CCEaseElasticOut::create(
-                                    CCScaleTo::create(0.9f, scale_button),
-                                    0.3f)
-                                ), 3));
+                                                 CCScaleTo::create(0.2f, scale_button*0.85),
+                                                 CCEaseElasticOut::create(
+                                                     CCScaleTo::create(0.9f, scale_button),
+                                                     0.3f)
+                                                 ), 3));
 
     this->runAction(createHintAction());
 }
@@ -1193,7 +1205,7 @@ void LevelScene::onWin()
         if(!test_mode)
         {
             unsigned int stars = _current_level->getStarsNumber(_last_score);
-             _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
+            _pop_up_manager.openWindow(new LevelEndPopUp(LevelEndPopUp::LevelEnd, _last_score, stars, _current_level, this));
 
         }
         else
@@ -1212,8 +1224,8 @@ void LevelScene::showAnimation()
         item->setScale(scale_button*0.9);
         item->setAnchorPoint(ccp(0.5, 0.5));
         item->runAction(CCEaseElasticOut::create(
-                                  CCScaleTo::create(0.7f, scale_button),
-                                  0.4f));
+                            CCScaleTo::create(0.7f, scale_button),
+                            0.4f));
     }
 
     float scale_bronze = _bronze_star->getScale();
@@ -1231,8 +1243,8 @@ void LevelScene::showAnimation()
     float scale_gold = _gold_star->getScale();
     _gold_star->setScale(scale_gold*0.9);
     _gold_star->runAction(CCEaseElasticOut::create(
-                                CCScaleTo::create(0.7f, scale_gold),
-                                0.4f));
+                              CCScaleTo::create(0.7f, scale_gold),
+                              0.4f));
 
     auto button_show = [](){return CCFadeTo::create(0.15f, 255);};
 
@@ -1246,8 +1258,8 @@ void LevelScene::showAnimation()
     float scale_hint = _hint_number_text->getScale();
     _hint_number_text->setScale(scale_hint*0.9);
     _hint_number_text->runAction(CCEaseElasticOut::create(
-                                CCScaleTo::create(0.7f, scale_hint),
-                                0.4f));
+                                     CCScaleTo::create(0.7f, scale_hint),
+                                     0.4f));
 
 
     _progress->setOpacity(0);

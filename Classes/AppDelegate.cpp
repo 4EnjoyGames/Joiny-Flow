@@ -20,6 +20,7 @@
 #include "Scenes/LevelScene.h"
 #include "Scenes/SelectCollection.h"
 #include "ADLib/Device/ADBrowser.h"
+#include <ADLib/Device/ADVirtualCurrency.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -134,6 +135,9 @@ void initInAppPurchases()
  */
 void initAds()
 {
+    ADStore store = ADInfo::getStore();
+    ADPlatform platform = ADInfo::getPlatform();
+
     std::stringstream pid_banner;
     std::stringstream pid_interstitial;
 
@@ -192,6 +196,16 @@ void initAds()
     "MiF Kids");
 }
 
+void initTapJoy()
+{
+    if(ADInfo::getPlatform() == ADPlatform::Android)
+    {
+        std::stringstream ss;
+        ss << "f1041413-201e-443d-b03a-82b0bdb941b1" << "|" << "QZdV7bkpyvZiGxiwBDw2";
+        ADVirtualCurrency::initProvider(ss.str());
+    }
+}
+
 bool AppDelegate::applicationDidFinishLaunching() {
     //Statistics init
     if(ADInfo::getPlatform() == ADPlatform::Android)
@@ -214,6 +228,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     ADLanguage::getLanguage();
 
     initInAppPurchases();
+    initTapJoy();
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();
@@ -286,7 +301,7 @@ void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
 
     ADStatistics::stopSession();
-
+    ADVirtualCurrency::onPause();
     // if you use SimpleAudioEngine, it must be pause
     CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
     RW::onPause();
@@ -298,7 +313,7 @@ void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
 
     ADStatistics::startSession();
-
+    ADVirtualCurrency::onResume();
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
     DrawLayer::registerUpdateDrawingNodes();
