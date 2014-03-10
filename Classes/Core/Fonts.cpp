@@ -11,7 +11,9 @@ const char* Fonts::getFontName()
 
         if(curr_language =="en" || curr_language =="hu" ||
                 curr_language =="fr" || curr_language =="de" ||
-                curr_language == "pt")
+                curr_language == "pt" || curr_language == "es" ||
+                curr_language == "it" || curr_language == "pl" ||
+                curr_language == "tr")
         {
             _font_name = "fonts/Fredoka One.ttf";
         }

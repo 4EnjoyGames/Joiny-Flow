@@ -16,19 +16,22 @@ msgstr ""
 
 #: ../../Classes/AppDelegate.cpp:71
 msgid "iap.error.billing_unavaliable"
-msgstr "Erreur"
+msgstr "Hiba"
 
+# Restore Purchase error
 #: ../../Classes/AppDelegate.cpp:76
 msgid "iap.error.purchase_error"
-msgstr "Une erreur de restauration achat"
+msgstr "Probléma a vásárlás visszaállításaval"
 
+# Successfully restored purchases
 #: ../../Classes/AppDelegate.cpp:84
 msgid "iap.restore_purchases.success"
-msgstr "Achats succès restaurés"
+msgstr "Sikeres vásárlás visszaállítása"
 
+# Restore Purchase failed
 #: ../../Classes/AppDelegate.cpp:89
 msgid "iap.restore_purchases.failed"
-msgstr "Restaurer Achat échoué"
+msgstr "Sikertelen vásárlás visszaállítása"
 
 #: ../../Classes/Scenes/DeveloperScene.cpp:66
 msgid "diana"
@@ -41,12 +44,12 @@ msgstr "Andrii Chaika"
 #: ../../Classes/Scenes/DeveloperScene.cpp:83
 msgid "test_list"
 msgstr ""
-"Musique\n"
+"Zene\n"
 "Aziyan Nasir - \"Silly Fun\"\n"
 "Löhstana David - \n"
 "\"Demain je change de vie\"\n"
 "\n"
-"Merci\n"
+"Köszönet\n"
 "Andrew Afonin\n"
 "Illya Spas"
 
@@ -54,17 +57,19 @@ msgstr ""
 msgid "copy"
 msgstr "© 2014"
 
+# Is the game good?
 #: ../../Classes/Scenes/LevelScene.cpp:43
 msgid "RateMePopUp.RateLabel"
-msgstr "Le jeu est bon?"
+msgstr "Jó a játék?"
 
+# Rate the game
 #: ../../Classes/Scenes/LevelScene.cpp:89
 msgid "RateMePopUp.RateText"
-msgstr "Noter le jeu"
+msgstr "Szavazzni"
 
 #: ../../Classes/Scenes/LevelScene.cpp:170
 msgid "Test_level_end"
-msgstr "Quelle note donneriez-vous à ce niveau?"
+msgstr "How do you rate this level?"
 
 #: ../../Classes/Scenes/LevelScene.cpp:206
 msgid "Good_level"
@@ -78,83 +83,102 @@ msgstr "I don`t know"
 msgid "Bad_level"
 msgstr "Bad"
 
+# Buy Hints
 #: ../../Classes/Scenes/LevelScene.cpp:293
 msgid "BuyHint"
-msgstr "Acheter Conseils"
+msgstr "Tippek vásárlása "
 
+# Free
 #: ../../Classes/Scenes/LevelScene.cpp:316
 msgid "buyHint_free"
-msgstr "Gratuit"
+msgstr "Ingyenes"
 
+# Level failed!
 #: ../../Classes/Scenes/LevelScene.cpp:427
 msgid "End_bad"
-msgstr "Niveau a échoué!"
+msgstr "Nem sikerült a szint !"
 
+# Score
 #: ../../Classes/Scenes/LevelScene.cpp:431
 msgid "End_good"
-msgstr "Score"
+msgstr "Pontszám"
 
+# Retry
 #: ../../Classes/Scenes/LevelScene.cpp:504
 msgid "Retry"
-msgstr "Refaire"
+msgstr "Újra"
 
+# Next
 #: ../../Classes/Scenes/LevelScene.cpp:534
 msgid "Next"
-msgstr "Suivant"
+msgstr "Következő"
 
+# Would you like\n
+# to leave the game?
 #: ../../Classes/Scenes/MainScene.cpp:40
 msgid "Sure"
 msgstr ""
-"Voulez-vous\n"
-"quitter le jeu?"
+"Szeretné elhagyni \n"
+"a játékot?"
 
+# Yes
 #: ../../Classes/Scenes/MainScene.cpp:77
 #: ../../Classes/Scenes/SettingScene.cpp:76
 msgid "Yes"
-msgstr "Oui"
+msgstr "Igen"
 
+# No
 #: ../../Classes/Scenes/MainScene.cpp:99
 #: ../../Classes/Scenes/SettingScene.cpp:98
 msgid "No"
-msgstr "Aucun"
+msgstr "Nem"
 
+# Get 3 stars everywhere
 #: ../../Classes/Scenes/SelectCollection.cpp:44
 msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
-msgstr "Obtenez 3 étoiles partout"
+msgstr "3 csillag mindenhol"
 
+# or
 #: ../../Classes/Scenes/SelectCollection.cpp:62
 msgid "SelectColection.BuyFullVerdionPopUp.OrText"
-msgstr "ou"
+msgstr "vagy"
 
+# Unlock now
 #: ../../Classes/Scenes/SelectCollection.cpp:96
 msgid "SelectColection.BuyFullVerdionPopUp.Yes"
-msgstr "Déverrouillez maintenant"
+msgstr "Kinyitni most"
 
+# Collections
 #: ../../Classes/Scenes/SelectCollection.cpp:285
 msgid "Collection"
-msgstr "Collections"
+msgstr "Gyűjtemények"
 
+# Would you like\n
+#  to delete all progress ?
 #: ../../Classes/Scenes/SettingScene.cpp:40
 msgid "Sure_reset"
 msgstr ""
-"Voulez-vous supprimer\n"
-"tous les progrès?"
+"Szeretné letörölni \n"
+"az összes haladást?"
 
 #: ../../Classes/Scenes/SettingScene.cpp:237
 msgid "Reset"
-msgstr "Enlever les progrès"
+msgstr "Törölni a haladást"
 
+# Restore Purchases
 #: ../../Classes/Scenes/SettingScene.cpp:249
 msgid "Restore"
-msgstr "Restaurer Achats"
+msgstr "Helyreállítani a vásárlást"
 
+# Developers
 #: ../../Classes/Scenes/SettingScene.cpp:259
 msgid "Developers"
-msgstr "Développeurs"
+msgstr "Fejlesztők"
 
+# Rate Me
 #: ../../Classes/Scenes/SettingScene.cpp:269
 msgid "Rate"
-msgstr "Noter le jeu"
+msgstr "Értékelni a játékot"
 
 #~ msgid "thank"
 #~ msgstr "Thanks to:"
