@@ -23,6 +23,8 @@ public:
     void showActiveCircle(const cocos2d::CCPoint& p, const FlowColor color);
     void hideActiveCircle();
 
+    void drawTable(float scale, cocos2d::CCSize tablo_size);
+
     static FlowRenderer* create(const FlowTable&);
 private:
     void createBackground();

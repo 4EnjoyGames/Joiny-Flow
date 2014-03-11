@@ -200,18 +200,16 @@ void initAds()
 
     ADAds::registerInterstitialType(pid_interstitial.str());
 
-    ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
+    //ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
     ADAds::addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
     ADAds::addTestDevice("C31238A94F2B52E9F4B77E58270A3943"); //Tonya
 
     ADAds::addCustomBanner(CCSprite::create("banners/mif_kids.png"),
                            [](){
-
-        CCLog("banner MiF Kids clicked");
         //TODO: select which game baner is it
-        ADBrowser::openApplicationPage(GameInfo::getPackageName("junior"));
+        ADBrowser::openApplicationPage(GameInfo::getPackageName("mif"));
     },
-    "MiF Kids");
+    "MiF");
 }
 
 void initTapJoy()
@@ -338,5 +336,5 @@ void AppDelegate::applicationWillEnterForeground() {
     ADVirtualCurrency::onResume();
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-    DrawLayer::registerUpdateDrawingNodes();
+
 }
