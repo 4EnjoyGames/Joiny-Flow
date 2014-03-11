@@ -1032,6 +1032,8 @@ bool LevelScene::init()
     float main_node_scale = main_node_size /
             _flow_game->getContentSize().height;
     _flow_game->setScale(main_node_scale);
+    _flow_game->drawTable();
+
     _flow_game->setScaleY(0);
     _flow_game->setAnchorPoint(ccp(0.5, 0.5));
     _flow_game->setPositionX(ORIGIN.x + VISIBLE_SIZE.width/2);

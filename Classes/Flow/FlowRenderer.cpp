@@ -25,8 +25,8 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
 
     //Get the sprites loader
     _spl_layer0 = GraphicsManager::getLoaderFor(this,
-                                                      "level-scene/flow.plist",
-                                                      "level-scene/flow.png");
+                                                "level-scene/flow.plist",
+                                                "level-scene/flow.png");
     _spl_layer0->inject();
 
 
@@ -42,8 +42,8 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
     _textures_size = test_texture->getContentSize().width;
     test_texture->removeFromParent();
 
-   this->setContentSize(CCSize(_textures_size * table.getWidth(),
-                               _textures_size * table.getHeight()));
+    this->setContentSize(CCSize(_textures_size * table.getWidth(),
+                                _textures_size * table.getHeight()));
 
 
 
@@ -60,7 +60,7 @@ FlowRenderer::FlowRenderer(const FlowTable& table)
 }
 
 void FlowRenderer::updateCell(const FlowPoint cordinates,
-                const FlowPointState& new_state)
+                              const FlowPointState& new_state)
 {
     _nodes_renderers[cordinates.x()][cordinates.y()].update(new_state);
     _table.get(cordinates) = new_state;
@@ -81,12 +81,10 @@ const cocos2d::CCPoint FlowRenderer::getNodePosition(const FlowPoint& pos)
     float half = _textures_size / 2;
     return CCPoint(half + _textures_size * pos.x(),
                    half + _textures_size * pos.y());
-//    return CCPoint( _textures_size * pos.x(),
-//                    _textures_size * pos.y());
+    //    return CCPoint( _textures_size * pos.x(),
+    //                    _textures_size * pos.y());
 }
-
-
-void FlowRenderer::createBackground()
+void FlowRenderer::drawTable(float scale, CCSize tablo_size)
 {
     //const CCPoint ORIGIN = Screen::getOrigin();
     //const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
@@ -95,69 +93,102 @@ void FlowRenderer::createBackground()
     unsigned int width = _table.getWidth();
     unsigned int height = _table.getHeight();
 
-    CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
+    //CCSprite* tablo = CCSprite::create("level-scene/tablo.png");
     //tablo->setPosition(ORIGIN);
 
-    CCSize tablo_size = tablo->getContentSize();
-    CCRenderTexture* render = CCRenderTexture::create(tablo_size.width,
-                                                      tablo_size.height,
-                                                      kTexture2DPixelFormat_RGBA8888);
+    const float DESIGN_SCALE = Screen::getDesignResourceScale();
+    const CCSize FRAME_SIZE = Screen::getFrameSize();
+    const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
+    const float SCALE = Screen::getScaleFactor();
+    float cocos_to_screen_coef = FRAME_SIZE.width / (VISIBLE_SIZE.width);
+
+
+    float line_width = 1.0f;
+
+
+    //CCSize tablo_size = tablo->getContentSize();
+
+    CCLog("Table size = ");
+    CCSize tablo_size_real = tablo_size * scale * cocos_to_screen_coef;
+
+    tablo_size_real.width = (int)(tablo_size_real.width);
+    tablo_size_real.height = (int)(tablo_size_real.height);
+
+    float base_mutiply = 420;
+    if(tablo_size_real.width > base_mutiply)
+    {
+        line_width = (tablo_size_real.width / base_mutiply);
+    }
+    CCLog("Line width: %f", line_width);
+    CCLog("Tablo size: %f, Screen_width: %f, Design scale: %f, Scale: %f",
+          tablo_size_real.width,
+          FRAME_SIZE.width, DESIGN_SCALE, SCALE);
+
+    CCRenderTexture* render = CCRenderTexture::createNoScale(
+                tablo_size_real.width,
+                tablo_size_real.height,
+                kTexture2DPixelFormat_RGBA8888);
 
     render->beginWithClear(0,0,0,0);
 
-    CCSprite* line = CCSprite::create("level-scene/line.png");
-    float cell_width = tablo_size.width / width;
+    float cell_width = tablo_size_real.width / width;
 
-    line->setPositionX(0);
+
+
+    CCSprite* line = CCSprite::create("level-scene/line.png");
+    line->setScale(line_width/SCALE);
+    line->setScaleX(tablo_size_real.width / line->getContentSize().width);
 
     for(unsigned int y=0; y<=width; ++y)
     {
-        float anchor = 0.5f;
+        float anchor = 0.0f;
 
-        if(y == 0)
-            anchor = 0;
-        else if(y == width)
+        if(y == width)
             anchor = 1;
 
         line->setAnchorPoint(ccp(0,anchor));
 
-        line->setPositionY(y*cell_width);
+        line->setPositionY((int)(y*cell_width));
         line->visit();
     }
 
     line = CCSprite::create("level-scene/line_v.png");
     line->setPositionY(0);
 
+    line->setScale(line_width/SCALE);
+    line->setScaleY(tablo_size_real.height / line->getContentSize().height);
+    //line->setScaleY(tablo_size.height * scale / line->getContentSize().height);
+
 
     for(unsigned int y=0; y<=height; ++y)
     {
-        float anchor = 0.5f;
+        float anchor = 0.0f;
 
-        if(y == 0)
-            anchor = 0;
-        else if(y == height)
+        if(y == height)
             anchor = 1;
 
         line->setAnchorPoint(ccp(anchor,0));
 
-        line->setPositionX(y*cell_width);
+        line->setPositionX((int)(y*cell_width));
         line->visit();
     }
 
 
-    tablo->setPosition(ccp(0,0));
-    tablo->setAnchorPoint(ccp(0,0));
-    //tablo->visit();
 
     //Finish rendering
     render->end();
 
     //Create sprite with drawing result
     CCSprite* res = CCSprite::createWithTexture(render->getSprite()->getTexture());
-    res->setAnchorPoint(ccp(0,0));
+    res->setAnchorPoint(ccp(0,1-DESIGN_SCALE));
     res->setPosition(ccp(0,0));
-    res->setScale(this->getContentSize().width / tablo_size.width);
-    this->addChild(res);
+    res->setScale(tablo_size.width / tablo_size_real.width );
+    this->addChild(res, -1);
+}
+
+void FlowRenderer::createBackground()
+{
+
 }
 
 void FlowRenderer::createNodes()

@@ -45,7 +45,7 @@ public:
     void deleteInterferePathes(const std::vector< FlowPoint>& path);
 
     void showPath(const std::vector< FlowPoint>& path);
-
+    void drawTable();
     //return the cell color
     const FlowColor getCellColor(const FlowPoint& point) const;
 

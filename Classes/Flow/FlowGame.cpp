@@ -112,6 +112,10 @@ void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch,
 //            Tutorial::getInstance()->showTutorial();
 //    }
 }
+void FlowGame::drawTable()
+{
+    _renderer->drawTable(this->getScale(), this->getContentSize());
+}
 
 void FlowGame::ccTouchCancelled(cocos2d::CCTouch *pTouch,
                                 cocos2d::CCEvent *)

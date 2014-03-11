@@ -26,7 +26,7 @@ int CALLBACK WinMain(
     ADDeviceEmulator* emulator = ADDeviceEmulator::getInstance();
 
     emulator->setFitTheScreen(true);
-    emulator->setDevice(Device::Galaxy_Ace2);
+    emulator->setDevice(Device::IPhone5);
     emulator->setLanguage("en");
     emulator->setOrientation(Orientation::Portrait);
 
