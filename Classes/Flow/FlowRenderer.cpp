@@ -117,7 +117,8 @@ void FlowRenderer::drawTable(float scale, CCSize tablo_size)
     float base_mutiply = 420;
     if(tablo_size_real.width > base_mutiply)
     {
-        line_width = (tablo_size_real.width / base_mutiply);
+        line_width = ((int)(tablo_size_real.width*2 / base_mutiply + 0.5));
+        line_width /= 2;
     }
     CCLog("Line width: %f", line_width);
     CCLog("Tablo size: %f, Screen_width: %f, Design scale: %f, Scale: %f",
@@ -148,7 +149,7 @@ void FlowRenderer::drawTable(float scale, CCSize tablo_size)
 
         line->setAnchorPoint(ccp(0,anchor));
 
-        line->setPositionY((int)(y*cell_width));
+        line->setPositionY((int)(y*cell_width/SCALE));
         line->visit();
     }
 
@@ -169,7 +170,7 @@ void FlowRenderer::drawTable(float scale, CCSize tablo_size)
 
         line->setAnchorPoint(ccp(anchor,0));
 
-        line->setPositionX((int)(y*cell_width));
+        line->setPositionX((int)(y*cell_width/SCALE));
         line->visit();
     }
 
@@ -182,7 +183,7 @@ void FlowRenderer::drawTable(float scale, CCSize tablo_size)
     CCSprite* res = CCSprite::createWithTexture(render->getSprite()->getTexture());
     res->setAnchorPoint(ccp(0,1-DESIGN_SCALE));
     res->setPosition(ccp(0,0));
-    res->setScale(tablo_size.width / tablo_size_real.width );
+    res->setScale(tablo_size.width / tablo_size_real.width * SCALE);
     this->addChild(res, -1);
 }
 
