@@ -86,86 +86,65 @@ void Loading::initRW()
 }
 void Loading::addAll()
 {
+    addSpriteToLoad("banners/mif_kids.png");
 
-//	addSpriteToLoad("common.png");
-//	addPlistToLoad("common.plist");
+    addSpriteToLoad("collection-menu/collection_button.png");
+    addPlistToLoad("collection-menu/collection_button.plist");
 
-//    addSpriteToLoad("loading_screen.png");
-//	addPlistToLoad("loading_screen.plist");
+    addSpriteToLoad("level-end/big_stars.png");
+    addPlistToLoad("level-end/big_stars.plist");
 
+    addSpriteToLoad("level-end/level_end.png");
+    addPlistToLoad("level-end/level_end.plist");
 
+    addSpriteToLoad("level-menu/level_buttons.png");
+    addPlistToLoad("level-menu/level_buttons.plist");
 
+    addSpriteToLoad("level-menu/save_stars.png");
+    addPlistToLoad("level-menu/save_stars.plist");
 
-//	addSpriteToLoad("font/mathisfun.png");
-//	addSpriteToLoad("font/mathisfun_digits.png");
-//	addPlistToLoad("font/mathisfun_digits.plist");
+    addSpriteToLoad("level-scene/flow.png");
+    addPlistToLoad("level-scene/flow.plist");
 
-//	addSpriteToLoad("level/input_space.png");
-//	addPlistToLoad("level/input_space.plist");
+    addSpriteToLoad("level-scene/level_stars.png");
+    addPlistToLoad("level-scene/level_stars.plist");
 
-//	addSpriteToLoad("level/keyboard.png");
-//	addPlistToLoad("level/keyboard.plist");
+    addSpriteToLoad("level-scene/level_novigation.png");
+    addPlistToLoad("level-scene/level_novigation.plist");
 
-//    addSpriteToLoad(Language::localizeFileName("level/level_end.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("level/level_end.plist").c_str());
-
-//	addSpriteToLoad("level/level_end_menu.png");
-//	addPlistToLoad("level/level_end_menu.plist");
-
-//    addSpriteToLoad(Language::localizeFileName("level/found_solutions.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("level/found_solutions.plist").c_str());
-
-//	addSpriteToLoad("level/stamps.png");
-//	addPlistToLoad("level/stamps.plist");
-
-//	addSpriteToLoad("level_scene/ellements.png");
-//	addPlistToLoad("level_scene/ellements.plist");
-
-//	addSpriteToLoad("main_menu/images.png");
-//	addPlistToLoad("main_menu/images.plist");
-
-//    addSpriteToLoad(Language::localizeFileName("main_menu/menu.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("main_menu/menu.plist").c_str());
-
-//    addSpriteToLoad("sheet_menu.png");
-//    addPlistToLoad("sheet_menu.plist");
+    addSpriteToLoad("level-scene/line.png");
+    addSpriteToLoad("level-scene/line_v.png");
+    addSpriteToLoad("level-scene/progress_bar.png");
+    addSpriteToLoad("level-scene/progress_bar_title.png");
 
 
-//    addSpriteToLoad("select_collection/new_collection.png");
-//    addPlistToLoad("select_collection/new_collection.plist");
+    addSpriteToLoad("main-menu/facebook_logo.png");
+    addSpriteToLoad("main-menu/main-logo.png");
+    addSpriteToLoad("main-menu/play-button.png");
+    addSpriteToLoad("main-menu/settings-button.png");
 
-//    addSpriteToLoad(Language::localizeFileName("select_collection/images.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("select_collection/images.plist").c_str());
+    addSpriteToLoad("pop-up/background.png");
 
-//	addSpriteToLoad("select_level/marks.png");
-//	addPlistToLoad("select_level/marks.plist");
+    addSpriteToLoad("settings-menu/flag.png");
+    addSpriteToLoad("settings-menu/music.png");
+    addSpriteToLoad("settings-menu/node.png");
+    addSpriteToLoad("settings-menu/settings_4Enjoy.png");
+    addSpriteToLoad("settings-menu/sound.png");
 
-//    addSpriteToLoad(Language::localizeFileName("select_level/menu_name.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("select_level/menu_name.plist").c_str());
+    addSpriteToLoad("universal/back_button.png");
+    addSpriteToLoad("universal/game_background.jpg");
+    addSpriteToLoad("universal/white-background.png");
+    addSpriteToLoad("universal/x4Enjoy.png");
 
-//    addSpriteToLoad(Language::localizeFileName("settings/developers_menu_name.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("settings/developers_menu_name.plist").c_str());
 
-//	addSpriteToLoad("settings/settings_developers_ad.png");
-//	addPlistToLoad("settings/settings_developers_ad.plist");
-
-//    addSpriteToLoad(Language::localizeFileName("settings/settings_menu.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("settings/settings_menu.plist").c_str());
-
-//    addSpriteToLoad(Language::localizeFileName("settings/settings_name.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("settings/settings_name.plist").c_str());
-
-////	addSpriteToLoad("stop_level/sheet.png");
-////	addPlistToLoad("stop_level/sheet.plist");
-
-//    addSpriteToLoad(Language::localizeFileName("stop_level/stop_level_menu.png").c_str());
-//    addPlistToLoad(Language::localizeFileName("stop_level/stop_level_menu.plist").c_str());
-	
     //RW::getLevelManager().loadSettings();
     ADInApp::loadStore(ADInApp::Mode::Production);
 
     //addSoundToLoad("music/silly_fun.mp3");
     addMusicToLoad(MusicSettings::BACKGROUND_MUSIC);
+    addMusicToLoad(MusicSettings::LEVEL_SCENE_MUSIC);
+    addSoundToLoad("music/choose.wav");
+    addSoundToLoad("music/flow_click.wav");
 
     bool previev_mode = false;
     if(previev_mode)
