@@ -265,7 +265,8 @@ FlowRenderer::ColorVec FlowRenderer::getDefaultColors()
 
     v[5] = ccc3(255,142,0); //Orange
 
-    v[6] = ccc3(255,0,233); //Pink
+    //v[6] = ccc3(255,0,233); //Pink
+    v[6] = ccc3(234, 255, 0); //Lime Yellow
 
     v[7] = ccc3(0,155,255); //Light blue
 

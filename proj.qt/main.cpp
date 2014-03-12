@@ -10,7 +10,7 @@ void openSelectLevelScene(TestInfo info, int collection_number);
 void openPlayLevel(TestInfo info,
                     int collection_number,
                     int level_number,
-                    int use_hints, bool no_ads);
+                    int use_hints, bool no_ads=true);
 
 int CALLBACK WinMain(
         _In_  HINSTANCE,
@@ -32,7 +32,7 @@ int CALLBACK WinMain(
 //    emulator->setCustomDevice(custom);
 
     emulator->setFitTheScreen(true);
-    emulator->setDevice(Device::IPhone5);
+    emulator->setDevice(Device::Galaxy_Y);
     emulator->setLanguage("en");
     emulator->setOrientation(Orientation::Portrait);
 
@@ -59,13 +59,13 @@ int CALLBACK WinMain(
         openPlayLevel(info, 1, 23, 2);
     });
     emulator->addTestCase([](TestInfo info){
-        openPlayLevel(info, 10, 3, 5);
+        openPlayLevel(info, 10, 4, 4);
     });
     emulator->addTestCase([](TestInfo info){
         openPlayLevel(info, 4, 5, 6);
     });
     emulator->addTestCase([](TestInfo info){
-        openPlayLevel(info, 10, 22, 8);
+        openPlayLevel(info, 10, 25, 5);
     });
     emulator->addTestCase([](TestInfo info){
         openPlayLevel(info, 5, 11, 6);
@@ -146,7 +146,7 @@ void openPlayLevel(TestInfo info,
                     int collection_number,
                     int level_number,
                     int use_hints,
-                   bool no_ads=true)
+                   bool no_ads)
 {
     if(no_ads)
         ADAds::disableAds();
