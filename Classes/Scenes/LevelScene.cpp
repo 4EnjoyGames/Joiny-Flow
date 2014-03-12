@@ -269,9 +269,17 @@ private:
 
     typedef BuyHintPopUp Me;
     LevelScene* _parent;
+    void onClose()
+    {
+        if(_parent->_banner)
+            _parent->_banner->showAds();
+    }
 
     void onCreate(CCNode *parent)
     {
+        if(_parent->_banner)
+            _parent->_banner->hideAds();
+
         CCSize size = parent->getContentSize();
 
         //set collor to background
@@ -598,7 +606,8 @@ LevelScene::LevelScene(const JoinyLevel * current_level,
       _current_level(current_level),
       _score_label(0),
       _showed_ads(false),
-      _show_rate_me(show_rate_me)
+      _show_rate_me(show_rate_me),
+      _banner(nullptr)
 {
     //_last_scene = this;
     this->setTag(123456);
@@ -670,7 +679,7 @@ void LevelScene::onNextLevel(const bool show_ads)
     _showed_ads = false;
     if(show_ads)
     {
-        if(ADAds::getInterstialTimesShowed() < 5)
+        if(ADAds::getInterstialTimesShowed() < 10)
         {
             if(rand() % 15 == 0)
             {
@@ -990,7 +999,7 @@ bool LevelScene::init()
 
     ////////////////////////////////////////////////////////////////////
 
-    const float TOP_MARGIN = 120/SCALE;
+    const float TOP_MARGIN = 130/SCALE;
 
     float main_zone_height = VISIBLE_SIZE.height - TOP_MARGIN*2 - menu_height;
 
@@ -1001,23 +1010,39 @@ bool LevelScene::init()
             menu_height - main_zone_height;
 
     const float BANNER_MARGIN = 10/SCALE;
-    CCSize banner_zone(VISIBLE_SIZE.width - BANNER_MARGIN*2,
+    CCSize banner_zone(VISIBLE_SIZE.width,
                        banner_zone_height - BANNER_MARGIN);
 
 
     ADAds::Banner* banner = ADAds::getBanner(banner_zone);
 
     banner_zone_height = 0;
+    float after_banner_spacing = 35/SCALE;
+
     if(banner)
     {
-        banner->setAnchorPoint(ccp(0.5f, 0));
+        banner->setAnchorPoint(ccp(0.5f, 1));
         banner->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width/2,
-                                ORIGIN.y + BANNER_MARGIN));
-        banner_zone_height = banner->getContentSize().height + BANNER_MARGIN;
+                                ORIGIN.y + VISIBLE_SIZE.height - TOP_MARGIN - BANNER_MARGIN));
+        banner_zone_height = banner->getContentSize().height;
         this->addChild(banner);
-    }
 
-    main_zone_height = VISIBLE_SIZE.height - TOP_MARGIN - banner_zone_height - menu_height;
+        _banner = banner;
+//        _pop_up_manager.addOnShowWindowAction([banner](){
+//            banner->hideAds();
+//        });
+
+//        _pop_up_manager.addOnHideWindowAction([banner](){
+//            banner->showAds();
+//        });
+    }
+    menu_height += 25/SCALE;
+
+    float empty_space = VISIBLE_SIZE.height - TOP_MARGIN -
+            banner_zone_height - after_banner_spacing - menu_height;
+
+
+    main_zone_height = empty_space;
     if(main_zone_height > VISIBLE_SIZE.width)
         main_zone_height = VISIBLE_SIZE.width;
 
@@ -1026,7 +1051,12 @@ bool LevelScene::init()
     float main_node_margin = (VISIBLE_SIZE.height - TOP_MARGIN -
                               banner_zone_height - menu_height - main_zone_height)/3;
 
-    _buttons_menu->setPositionY(ORIGIN.y + banner_zone_height + main_node_margin);
+    float empty_space_for_buttons =
+            VISIBLE_SIZE.height - TOP_MARGIN - banner_zone_height
+            - after_banner_spacing - main_zone_height;
+
+    _buttons_menu->setAnchorPoint(ccp(0, 0.5f));
+    _buttons_menu->setPositionY(ORIGIN.y + empty_space_for_buttons/2);
 
 
     float main_node_scale = main_node_size /
@@ -1037,8 +1067,8 @@ bool LevelScene::init()
     _flow_game->setScaleY(0);
     _flow_game->setAnchorPoint(ccp(0.5, 0.5));
     _flow_game->setPositionX(ORIGIN.x + VISIBLE_SIZE.width/2);
-    _flow_game->setPositionY(_buttons_menu->getPositionY() + menu_height + main_node_margin
-                             + _flow_game->getContentSize().height*main_node_scale*0.5f);
+    _flow_game->setPositionY(ORIGIN.y + VISIBLE_SIZE.height -
+                             TOP_MARGIN - banner_zone_height - after_banner_spacing - main_zone_height/2);
 
     _flow_game->runAction(CCEaseElasticOut::create(
                               CCScaleTo::create(0.4f, main_node_scale),

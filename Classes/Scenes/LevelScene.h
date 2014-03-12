@@ -9,6 +9,7 @@
 #include "BackButton.h"
 #include "Core/DrawLayer.h"
 #include "Logic/Hints.h"
+#include <ADLib/Device/ADAds.h>
 
 class LevelScene : public DrawLayer //cocos2d::CCLayer
 {
@@ -106,7 +107,7 @@ private:
 
     //buttons
     std::vector<AnimatedMenuItem*> _buttons;
-
+    ADAds::Banner* _banner;
 public:
     LevelScene(const JoinyLevel *l,
                bool show_animation,

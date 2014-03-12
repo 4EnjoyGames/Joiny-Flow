@@ -475,4 +475,5 @@ void LevelManager::makeFullGameVersion()
     {
         (i.second)->openCollection();
     }
+    ADAds::disableAds();
 }

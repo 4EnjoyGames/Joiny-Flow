@@ -10,7 +10,7 @@ void openSelectLevelScene(TestInfo info, int collection_number);
 void openPlayLevel(TestInfo info,
                     int collection_number,
                     int level_number,
-                    int use_hints);
+                    int use_hints, bool no_ads);
 
 int CALLBACK WinMain(
         _In_  HINSTANCE,
@@ -36,7 +36,9 @@ int CALLBACK WinMain(
     emulator->setLanguage("en");
     emulator->setOrientation(Orientation::Portrait);
 
-
+//    emulator->addTestCase([](TestInfo info){
+//        openPlayLevel(info, 1, 5, 5, false);
+//    });
 
     //Test cases
     //emulator->addTestCase(&mainMenuTest);
@@ -143,9 +145,14 @@ void openSelectLevelScene(TestInfo info,
 void openPlayLevel(TestInfo info,
                     int collection_number,
                     int level_number,
-                    int use_hints)
+                    int use_hints,
+                   bool no_ads=true)
 {
-    ADAds::disableAds();
+    if(no_ads)
+        ADAds::disableAds();
+    Hints hints;
+    hints.increaseHintNumber(use_hints);
+
     LevelScene* level = LevelScene::create(
                 RW::getLevelManager().getLevel(collection_number,level_number),
                                            false,
