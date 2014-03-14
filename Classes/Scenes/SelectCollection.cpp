@@ -542,11 +542,15 @@ bool SelectCollection::isFreeOpenFullGame()
 
     for(unsigned int i=1; i<=coll_num; ++i)
     {
-        min_stars = RW::getLevelManager().getCollectionMinStars(RW::getLevelManager().getCollection(i));
-        if(min_stars<3)
+        const JoinyCollection* col = RW::getLevelManager().getCollection(i);
+        if(col->isOpenCollection())
         {
-            result = false;
-            break;
+            min_stars = RW::getLevelManager().getCollectionMinStars(col);
+            if(min_stars<3)
+            {
+                result = false;
+                break;
+            }
         }
     }
 

@@ -30,6 +30,7 @@ private:
 
     void onRateLevel(CCObject*)
     {
+        ADStatistics::logEvent("Rate Me Clicked");
         CCLog("on Rate Level clicked");
         ADBrowser::openApplicationPage(GameInfo::getPackageName("joiny"));
         this->closeWindow();
@@ -37,6 +38,7 @@ private:
 
     void onCreate(CCNode *parent)
     {
+        ADStatistics::logEvent("Rate Me Shown");
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
 
@@ -100,6 +102,17 @@ private:
         ////////////////////////////////////////////////////
     }
 };
+ADStatistics::Params getLevelInfo(const JoinyLevel* _level)
+{
+    ADStatistics::Params level_info;
+    int col_id = _level->getCollection()->getCollectionID();
+    int lev_id = _level->getLevelId();
+    level_info.add("collection", col_id);
+    level_info.add("level", lev_id);
+    level_info.add("id", AD_to_string(col_id)+"_"+AD_to_string(lev_id));
+
+    return level_info;
+}
 
 class LevelScene::TesterEndPopUp : public PopUpWindow::Content
 {
@@ -281,7 +294,7 @@ private:
             _parent->_banner->hideAds();
 
         CCSize size = parent->getContentSize();
-
+        ADStatistics::logEvent("Buy Hints Shown");
         //set collor to background
         CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
         parent_rgb->setColor(GameInfo::getInstance()->getTitleColor());
@@ -326,6 +339,8 @@ private:
             first_button_text = CCLabelTTF::create(_("buyHint_free"),
                                                    Fonts::getFontName(),
                                                    48);
+
+            ADStatistics::logEvent("Free Hints Shown");
         }
         else
         {
@@ -384,20 +399,28 @@ private:
     {
         //TODO: may be it will be "get free hints button" action
         if(ADVirtualCurrency::isSupported())
+        {
+            ADStatistics::logEvent("Free Hints Clicked");
             ADVirtualCurrency::showVirtualCurrencyShop();
+        }
         else
+        {
             ADInApp::buyProduct("hints_10");
+            ADStatistics::logEvent("Buy Hints Clicked", ADStatistics::Params().add("volume", 10));
+        }
         //this->closeWindow();
 
     }
     void onSecondButton(CCObject*)
     {
         ADInApp::buyProduct("hints_100");
+        ADStatistics::logEvent("Buy Hints Clicked", ADStatistics::Params().add("volume", 100));
         //this->closeWindow();
     }
     void onThirdButton(CCObject*)
     {
         ADInApp::buyProduct("hints_1000");
+        ADStatistics::logEvent("Buy Hints Clicked", ADStatistics::Params().add("volume", 1000));
         //this->closeWindow();
     }
 
@@ -437,7 +460,7 @@ private:
 
     void onCreate(CCNode *parent)
     {
-
+        ADStatistics::Params level_info = getLevelInfo(_level);
         CCSize size = parent->getContentSize();
         float x_middle = size.width / 2;
 
@@ -445,10 +468,12 @@ private:
         if(_mode==NotEnough)
         {
             text = _("End_bad");
+            ADStatistics::logEvent("Level Failed", level_info);
         }
         else
         {
             text =  _("End_good");
+            ADStatistics::logEvent("Level Failed", level_info.add("stars", _stars));
         }
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
@@ -768,7 +793,11 @@ void LevelScene::onHintClicked(CCObject*)
     bool succesfull_hint = false;
     CCLog("Hint clicked in LevelScene");
     if(_hints.hasHint())
+    {
+        ADStatistics::Params level_info = getLevelInfo(_current_level);
+        ADStatistics::logEvent("Hint Used", level_info.add("Hints", _hints.getHintNumber()));
         succesfull_hint = _hints.showHint();
+    }
     else
     {
         //show hint purchase window
