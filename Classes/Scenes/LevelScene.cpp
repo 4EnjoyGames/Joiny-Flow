@@ -468,12 +468,12 @@ private:
         if(_mode==NotEnough)
         {
             text = _("End_bad");
-            ADStatistics::logEvent("Level Failed", level_info);
+            ADStatistics::logEvent("Level Failed2", level_info);
         }
         else
         {
             text =  _("End_good");
-            ADStatistics::logEvent("Level Failed", level_info.add("stars", _stars));
+            ADStatistics::logEvent("Level Success", level_info.add("stars", _stars));
         }
 
         CCLabelTTF* label = CCLabelTTF::create(text.c_str(),
