@@ -18,6 +18,7 @@ ard_mode = sys.argv[1]
 from build_android_config import *
 project.addModule('android_ADInfo_Store_SamsungStore')
 project.addModule('android_ADInApp_SamsungStore')
+project.addModule('android_ADVirtualCurrency_None')
 project.output_name = 'proj.android.samsung'
 
 if ard_mode == 'debug':
