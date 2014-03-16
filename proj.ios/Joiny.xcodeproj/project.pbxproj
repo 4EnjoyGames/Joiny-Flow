@@ -94,6 +94,10 @@
 		84F198C418D59E85006A5221 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198BA18D59E85006A5221 /* Icon-120.png */; };
 		84F198C518D59E85006A5221 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198BB18D59E85006A5221 /* Icon-144.png */; };
 		84F198C618D59E85006A5221 /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198BC18D59E85006A5221 /* Icon-152.png */; };
+		84F198CE18D5A9C9006A5221 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198CA18D5A9C9006A5221 /* Default-Portrait.png */; };
+		84F198CF18D5A9C9006A5221 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 84F198CB18D5A9C9006A5221 /* iTunesArtwork */; };
+		84F198D018D5A9C9006A5221 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 84F198CC18D5A9C9006A5221 /* iTunesArtwork@2x */; };
+		84F198DC18D5ACB2006A5221 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F198DB18D5ACB2006A5221 /* StoreKit.framework */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
 		BF1373F1128A899E00D9F789 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492B6912891AC600A09262 /* libz.dylib */; };
@@ -122,7 +126,7 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* HelloCpp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloCpp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Joiny.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Joiny.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		781C33B11547F06B00633F88 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -285,6 +289,10 @@
 		84F198BA18D59E85006A5221 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = SOURCE_ROOT; };
 		84F198BB18D59E85006A5221 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = SOURCE_ROOT; };
 		84F198BC18D59E85006A5221 /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = SOURCE_ROOT; };
+		84F198CA18D5A9C9006A5221 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = SOURCE_ROOT; };
+		84F198CB18D5A9C9006A5221 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = SOURCE_ROOT; };
+		84F198CC18D5A9C9006A5221 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = SOURCE_ROOT; };
+		84F198DB18D5ACB2006A5221 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BF137426128A8E4600D9F789 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BF365AA612A103F70050DCF4 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		BF365AA712A103F70050DCF4 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
@@ -304,6 +312,7 @@
 				8402CE6D18A411D000703CF7 /* SystemConfiguration.framework in Frameworks */,
 				8402CE6B18A411BB00703CF7 /* Security.framework in Frameworks */,
 				84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */,
+				84F198DC18D5ACB2006A5221 /* StoreKit.framework in Frameworks */,
 				8402CE6918A4118D00703CF7 /* libFlurry_4.3.1.a in Frameworks */,
 				84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */,
 				84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */,
@@ -325,7 +334,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* HelloCpp.app */,
+				1D6058910D05DD3D006BFB54 /* Joiny.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -349,6 +358,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84F198DB18D5ACB2006A5221 /* StoreKit.framework */,
 				8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */,
 				8402CE6A18A411B900703CF7 /* Security.framework */,
 				BF492B6912891AC600A09262 /* libz.dylib */,
@@ -368,6 +378,9 @@
 		784521C214EBA449009D533B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84F198CA18D5A9C9006A5221 /* Default-Portrait.png */,
+				84F198CB18D5A9C9006A5221 /* iTunesArtwork */,
+				84F198CC18D5A9C9006A5221 /* iTunesArtwork@2x */,
 				84F198B318D59E85006A5221 /* Default-568h@2x.png */,
 				84F198B418D59E85006A5221 /* Default.png */,
 				84F198B518D59E85006A5221 /* Default@2x.png */,
@@ -744,7 +757,7 @@
 			);
 			name = Joiny;
 			productName = HelloWorld;
-			productReference = 1D6058910D05DD3D006BFB54 /* HelloCpp.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Joiny.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -757,6 +770,11 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 6H55SE7C63;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -817,6 +835,7 @@
 				84F198C418D59E85006A5221 /* Icon-120.png in Resources */,
 				84F1986F18D598A0006A5221 /* banners in Resources */,
 				84F1987518D598A0006A5221 /* translations in Resources */,
+				84F198CE18D5A9C9006A5221 /* Default-Portrait.png in Resources */,
 				84F1987118D598A0006A5221 /* images-normal in Resources */,
 				84F198C118D59E85006A5221 /* Icon-72.png in Resources */,
 				84F198BD18D59E85006A5221 /* Default-568h@2x.png in Resources */,
@@ -825,7 +844,9 @@
 				84F198C618D59E85006A5221 /* Icon-152.png in Resources */,
 				84F1985A18D5986F006A5221 /* Localized_en in Resources */,
 				84F198C318D59E85006A5221 /* Icon-114.png in Resources */,
+				84F198D018D5A9C9006A5221 /* iTunesArtwork@2x in Resources */,
 				84F1985B18D5986F006A5221 /* Localized_zh in Resources */,
+				84F198CF18D5A9C9006A5221 /* iTunesArtwork in Resources */,
 				84F1987418D598A0006A5221 /* music in Resources */,
 				84F1987018D598A0006A5221 /* fonts in Resources */,
 				84F198C518D59E85006A5221 /* Icon-144.png in Resources */,
@@ -910,10 +931,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -940,12 +962,12 @@
 					"$(SRCROOT)/../../../CocosDenshion/include",
 				);
 				INFOPLIST_FILE = "HelloCpp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Admin/cocos2d-x/projects/Joiny/libraries/ADLib/platform/iOS/ADStatistics_Flurry",
 				);
-				PRODUCT_NAME = HelloCpp;
+				PRODUCT_NAME = Joiny;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -957,10 +979,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -984,12 +1007,12 @@
 					"$(SRCROOT)/../../../CocosDenshion/include",
 				);
 				INFOPLIST_FILE = "HelloCpp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/Admin/cocos2d-x/projects/Joiny/libraries/ADLib/platform/iOS/ADStatistics_Flurry",
 				);
-				PRODUCT_NAME = HelloCpp;
+				PRODUCT_NAME = Joiny;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
