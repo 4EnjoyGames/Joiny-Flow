@@ -188,11 +188,11 @@ void initAds()
     }
     else if(platform == ADPlatform::iOS)
     {
-        //            //ca-app-pub-1097233306002326/5693181292
-        //            pid_banner << 5693181292;
+            //ca-app-pub-1612697960946304/4238554272
+            pid_banner << 4238554272;
 
-        //            //ca-app-pub-1097233306002326/7169914499
-        //            pid_interstitial << 7169914499;
+            //ca-app-pub-1612697960946304/5715287478
+            pid_interstitial << 5715287478;
     }
 
     ADAds::registerBannerType("BANNER", pid_banner.str());
