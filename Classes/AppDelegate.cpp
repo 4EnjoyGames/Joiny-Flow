@@ -148,6 +148,15 @@ void initInAppPurchases()
             hints_1000.setParameter("samsung-id", "000001016103");
         }
     }
+    else if(store == ADStore::AmazonStore)
+    {
+        if(GameInfo::getVersion() == Version::Premium)
+        {
+            hints_10.setParameter("asku", "joiny.premium.hints_10");
+            hints_100.setParameter("asku", "joiny.premium.hints_100");
+            hints_1000.setParameter("asku", "joiny.premium.hints_1000");
+        }
+    }
 
     if(GameInfo::getVersion() != Version::Premium)
         ADInApp::addProduct(unlock_full);
@@ -272,9 +281,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     ADLanguage::setDefaultLanguage("en");
     ADLanguage::getLanguage();
 
+    initInAppPurchases();
     if(GameInfo::getVersion() != Version::Premium)
     {
-        initInAppPurchases();
+
         initTapJoy();
     }
     else
@@ -342,8 +352,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pDirector->runWithScene(pScene);
 
 
-
-    initAds();
+    if(GameInfo::getVersion() != Version::Premium)
+    {
+        initAds();
+    }
 
     return true;
 }

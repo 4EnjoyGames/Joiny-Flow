@@ -5,9 +5,9 @@ working_directory = os.path.dirname(os.path.realpath(__file__))
 screen_directory = os.path.join(working_directory, 'Resources')
 
 devices = [ #'IPhone3GS',
-    'IPhone4GS',
-    'IPhone5',
-    'IPad2',
+    #'IPhone4GS',
+    #'IPhone5',
+    #'IPad2',
     #'IPad4',
     #'Galaxy_Ace2',
     #'Galaxy_Mini2',
@@ -21,7 +21,7 @@ devices = [ #'IPhone3GS',
     #'Kindle_Fire',
     #'Microsoft_Surface_10',
     #'HD_720p',
-    #'Custom'
+    'Custom'
 ]
 
 languages = ['en']#, 'uk']

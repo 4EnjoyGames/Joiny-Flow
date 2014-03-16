@@ -29,8 +29,8 @@ int CALLBACK WinMain(
     DeviceConfig custom(Device::Custom);
     custom.setDeviceName("Custom");
     custom.setScreenDencity(1.0);
-    custom.setScreenWidth(800);
-    custom.setScreenHeight(480);
+    custom.setScreenWidth(1920);
+    custom.setScreenHeight(1200);
     emulator->setCustomDevice(custom);
 
 

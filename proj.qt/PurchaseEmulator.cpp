@@ -28,4 +28,4 @@ std::string ADLanguage::platformGetDeviceLanguage()
 }
 
 #include "GameInfo.h"
-Version GameInfo::_version = Version::Premium;
+Version GameInfo::_version = Version::Free;
