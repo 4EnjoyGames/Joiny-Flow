@@ -20,7 +20,6 @@
 		8402CE7318A41B0500703CF7 /* ADNotification.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE7218A41B0500703CF7 /* ADNotification.mm */; };
 		8402CE7818A41DD600703CF7 /* ADBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE7718A41DD600703CF7 /* ADBrowser.mm */; };
 		840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840AE31D18A02F5200189085 /* libcocos2dx.a */; };
-		84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84129DA718A3F27700C24960 /* PlatformEmulator.cpp */; };
 		841B2C6018D5B6ED0064AA59 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841B2C5E18D5B6ED0064AA59 /* AdSupport.framework */; };
 		841B2C6118D5B6ED0064AA59 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841B2C5F18D5B6ED0064AA59 /* iAd.framework */; };
 		84B0AA8A18D5C17500E0C39A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA8918D5C17500E0C39A /* CoreTelephony.framework */; };
@@ -29,6 +28,7 @@
 		84B0AA9D18D5C61900E0C39A /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA9918D5C61900E0C39A /* libAdapterIAd.a */; };
 		84B0AA9E18D5C61900E0C39A /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA9A18D5C61900E0C39A /* libGoogleAdMobAds.a */; };
 		84B0AA9F18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B0AA9B18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt */; };
+		84B0AAA218D5C73C00E0C39A /* ADInApp_iTunes.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B0AAA118D5C73C00E0C39A /* ADInApp_iTunes.mm */; };
 		84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B11547F06B00633F88 /* OpenAL.framework */; };
 		84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B31547F06B00633F88 /* AudioToolbox.framework */; };
 		84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B51547F06B00633F88 /* AVFoundation.framework */; };
@@ -152,7 +152,6 @@
 		8402CE7218A41B0500703CF7 /* ADNotification.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADNotification.mm; sourceTree = "<group>"; };
 		8402CE7718A41DD600703CF7 /* ADBrowser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADBrowser.mm; sourceTree = "<group>"; };
 		840AE31818A02F4D00189085 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
-		84129DA718A3F27700C24960 /* PlatformEmulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformEmulator.cpp; sourceTree = "<group>"; };
 		841B2C5E18D5B6ED0064AA59 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		841B2C5F18D5B6ED0064AA59 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		84B0AA8918D5C17500E0C39A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -170,6 +169,7 @@
 		84B0AA9918D5C61900E0C39A /* libAdapterIAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterIAd.a; sourceTree = "<group>"; };
 		84B0AA9A18D5C61900E0C39A /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		84B0AA9B18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HOW_TO_INTEGRATE.txt; sourceTree = "<group>"; };
+		84B0AAA118D5C73C00E0C39A /* ADInApp_iTunes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADInApp_iTunes.mm; sourceTree = "<group>"; };
 		84E80D9718A2BA000003E3D5 /* CocosDenshion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocosDenshion.xcodeproj; path = ../../../CocosDenshion/proj.ios/CocosDenshion.xcodeproj; sourceTree = "<group>"; };
 		84F197E518D5986F006A5221 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		84F197E618D5986F006A5221 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -441,6 +441,7 @@
 		8402CE5618A4071700703CF7 /* ADLibImpl */ = {
 			isa = PBXGroup;
 			children = (
+				84B0AAA018D5C73C00E0C39A /* ADInApp_iTunes */,
 				84B0AA8D18D5C61900E0C39A /* ADAds_AdMob */,
 				84F198B018D59A9A006A5221 /* ADVirtualCurrency_TapJoy */,
 				8402CE7618A41DD600703CF7 /* ADBrowser */,
@@ -536,6 +537,15 @@
 				84B0AA9A18D5C61900E0C39A /* libGoogleAdMobAds.a */,
 			);
 			path = AdMobSDK;
+			sourceTree = "<group>";
+		};
+		84B0AAA018D5C73C00E0C39A /* ADInApp_iTunes */ = {
+			isa = PBXGroup;
+			children = (
+				84B0AAA118D5C73C00E0C39A /* ADInApp_iTunes.mm */,
+			);
+			name = ADInApp_iTunes;
+			path = ../libraries/ADLib/platform/iOS/ADInApp_iTunes;
 			sourceTree = "<group>";
 		};
 		84E80D9818A2BA000003E3D5 /* Products */ = {
@@ -800,7 +810,6 @@
 				BF365AA712A103F70050DCF4 /* AppController.mm */,
 				BF4DE6AB138BB89600CF907D /* RootViewController.h */,
 				BF4DE6AC138BB89600CF907D /* RootViewController.mm */,
-				84129DA718A3F27700C24960 /* PlatformEmulator.cpp */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -964,6 +973,7 @@
 				84F1984A18D5986F006A5221 /* MenuSpriteBatch.cpp in Sources */,
 				84F1985C18D5986F006A5221 /* Hints.cpp in Sources */,
 				84F198AC18D59985006A5221 /* ADBlurSprite.cpp in Sources */,
+				84B0AAA218D5C73C00E0C39A /* ADInApp_iTunes.mm in Sources */,
 				84F1985618D5986F006A5221 /* DebugLayer.cpp in Sources */,
 				84F1984918D5986F006A5221 /* GraphicsManager.cpp in Sources */,
 				84F1984B18D5986F006A5221 /* MusicSettings.cpp in Sources */,
@@ -985,7 +995,6 @@
 				84B0AA9C18D5C61900E0C39A /* ADAds_AdMob.mm in Sources */,
 				84F198AB18D59985006A5221 /* ADBakeNode.cpp in Sources */,
 				84F1984218D5986F006A5221 /* AppDelegate.cpp in Sources */,
-				84129DA918A3F27700C24960 /* PlatformEmulator.cpp in Sources */,
 				84F198AE18D59985006A5221 /* ADColoredSprite.cpp in Sources */,
 				84F1985818D5986F006A5221 /* YesNoDialog.cpp in Sources */,
 			);
