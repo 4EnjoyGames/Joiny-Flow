@@ -220,7 +220,7 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
     {
         working = label_color;
     }
-    else if (isFreeOpenFullGame())
+    else if (isFreeOpenFullGame() || GameInfo::getVersion() == Version::Premium)
     {
         RW::getLevelManager().makeFullGameVersion();
         working = label_color;
@@ -340,13 +340,27 @@ bool SelectCollection::init()
                                                "level-end/big_stars.png");
     _stars_spl->inject();
 
-    unsigned int collection_id_first = 1;
+    unsigned int collection_id_first = 0;
+
+    unsigned int* order = nullptr;
+
+    if(GameInfo::getVersion() == Version::Premium)
+    {
+        unsigned int arr[10] = {1,2,3,10,4,9,5,8,6,7};
+        order = arr;
+    }
+    else
+    {
+        unsigned int arr[10] = {1,2,3,4,5,6,7,8,9,10};
+        order = arr;
+    }
+
     float working_y = height-s.height/2+margin;
     for(unsigned int y=0; y<rows; ++y)
     {
         float working_x = s.width / 2 + margin;
 
-        const JoinyCollectionID coll_id = collection_id_first;
+        const JoinyCollectionID coll_id = order[collection_id_first];
         const JoinyCollection* l = RW::getLevelManager().getCollection(coll_id);
 
         AnimatedMenuItem* item = createCollectionItem(l, _col_spl);

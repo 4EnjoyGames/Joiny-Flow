@@ -121,7 +121,10 @@ void initInAppPurchases()
     ADStore store = ADInfo::getStore();
     if(store == ADStore::GooglePlay)
     {
-        ADInApp::setStoreKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzjm8X23+3Aws5jkK8wBdau9jWYmIOSSdW9VfEg3E5f2lwolhWxxMpn7+o1SqZ2HljKDwvLyeVRLKuBjiwW/0OzMzFwW/JSFQdz/zFKL8UsypmKTdLc3dTo6mgPgUshgchse6ArF3xRWMFYVzmf8ePLDozCfGp71jhSbO5Rx5mQrq9se0eThRpuGUcNUC9PNvvQOnSm6ddkpnuVfxvLGwBRM7RlDCT60ClrfTY+/A6x0+YSiz7C+LJDaxkUg0X1U3nzQbVG8V9L0nk0dW6Fdtc5vY6wAcwtAV5KsX7tbQwrTM+OD2+R7h/3MqM/BH2/MWFXcoT9hakx6ZrYlc8hDZIwIDAQAB");
+        if(GameInfo::getVersion() != Version::Premium)
+            ADInApp::setStoreKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzjm8X23+3Aws5jkK8wBdau9jWYmIOSSdW9VfEg3E5f2lwolhWxxMpn7+o1SqZ2HljKDwvLyeVRLKuBjiwW/0OzMzFwW/JSFQdz/zFKL8UsypmKTdLc3dTo6mgPgUshgchse6ArF3xRWMFYVzmf8ePLDozCfGp71jhSbO5Rx5mQrq9se0eThRpuGUcNUC9PNvvQOnSm6ddkpnuVfxvLGwBRM7RlDCT60ClrfTY+/A6x0+YSiz7C+LJDaxkUg0X1U3nzQbVG8V9L0nk0dW6Fdtc5vY6wAcwtAV5KsX7tbQwrTM+OD2+R7h/3MqM/BH2/MWFXcoT9hakx6ZrYlc8hDZIwIDAQAB");
+        else
+            ADInApp::setStoreKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoIhqi4akTyYD9cYWD+GN5yWqhu2obg+bq2i/Bu5aipras7LinAXGZapVDMd+lrQ+EmrauyBL/lrdhzXdZryQ77ExxJUMXxBm0wVkpNeSYe4DBs6eh/g7/r7D4YqZ73uHldHN+UcTTnZj9O/O46S9n6i5F0Sgu2hvMdGKfYgH+Dg+21UCsxc3drXkytNvAoq1dFz+Zi2kWsnTMscSrQ5rqVw8nLfEQR3vXg2JXeZJkxATj8Ew4CXlEzMCFE02GBDyosSz0dL7xxoSs10yrkcW+Xs0p7k68yyuxgiCt+I5FUI2pIYuF5Qp2mr5k21s3FaSleLRdY9oa2XQkzB3y7TWkwIDAQAB");
         unlock_full.setParameter("type", "non-consumable");
         hints_10.setParameter("type", "consumable");
         hints_100.setParameter("type", "consumable");
@@ -129,14 +132,26 @@ void initInAppPurchases()
     }
     else if(store == ADStore::SamsungStore)
     {
-        ADInApp::setStoreKey("100000102739");
-        unlock_full.setParameter("samsung-id", "000001013715");
-        hints_10.setParameter("samsung-id", "000001013712");
-        hints_100.setParameter("samsung-id", "000001013713");
-        hints_1000.setParameter("samsung-id", "000001013714");
+        if(GameInfo::getVersion() != Version::Premium)
+        {
+            ADInApp::setStoreKey("100000102739");
+            unlock_full.setParameter("samsung-id", "000001013715");
+            hints_10.setParameter("samsung-id", "000001013712");
+            hints_100.setParameter("samsung-id", "000001013713");
+            hints_1000.setParameter("samsung-id", "000001013714");
+        }
+        else
+        {
+            ADInApp::setStoreKey("100000103136");
+            hints_10.setParameter("samsung-id", "000001016100");
+            hints_100.setParameter("samsung-id", "000001016101");
+            hints_1000.setParameter("samsung-id", "000001016103");
+        }
     }
 
-    ADInApp::addProduct(unlock_full);
+    if(GameInfo::getVersion() != Version::Premium)
+        ADInApp::addProduct(unlock_full);
+
     ADInApp::addProduct(hints_10);
     ADInApp::addProduct(hints_100);
     ADInApp::addProduct(hints_1000);
@@ -228,10 +243,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
     RW::onInit();
 
     //Statistics init
-    if(ADInfo::getPlatform() == ADPlatform::Android)
-        ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
-    else if(ADInfo::getPlatform() == ADPlatform::iOS)
-        ADStatistics::setApplicationKey("2CKY6VTP8TQ5XR7CPR5Y");
+    if(GameInfo::getVersion() != Version::Premium)
+    {
+        if(ADInfo::getPlatform() == ADPlatform::Android)
+            ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
+        else if(ADInfo::getPlatform() == ADPlatform::iOS)
+            ADStatistics::setApplicationKey("2CKY6VTP8TQ5XR7CPR5Y");
+    }
+    else
+    {
+        if(ADInfo::getPlatform() == ADPlatform::Android)
+            ADStatistics::setApplicationKey("B2QN6WVFZ2W259SCYDYJ");
+        else if(ADInfo::getPlatform() == ADPlatform::iOS)
+            ADStatistics::setApplicationKey("95YVYC295ZX5RB6BKJ9S");
+    }
     ADStatistics::startSession();
     ADInfo::getStore();
 
@@ -247,8 +272,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
     ADLanguage::setDefaultLanguage("en");
     ADLanguage::getLanguage();
 
-    initInAppPurchases();
-    initTapJoy();
+    if(GameInfo::getVersion() != Version::Premium)
+    {
+        initInAppPurchases();
+        initTapJoy();
+    }
+    else
+    {
+        ADAds::disableAds();
+    }
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();
