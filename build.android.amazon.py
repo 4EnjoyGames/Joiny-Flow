@@ -18,6 +18,8 @@ ard_mode = sys.argv[1]
 from build_android_config import *
 project.addModule('android_ADInfo_Store_AmazonStore')
 project.addModule('android_ADInApp_Amazon')
+project.addModule('android_ADVirtualCurrency_None')
+
 project.output_name = 'proj.android.amazon'
 
 if ard_mode == 'debug':

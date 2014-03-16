@@ -25,11 +25,11 @@ int CALLBACK WinMain(
     //Configure emulator
     ADDeviceEmulator* emulator = ADDeviceEmulator::getInstance();
 
-//    DeviceConfig custom(Device::Custom);
-//    custom.setScreenDencity(1.0);
-//    custom.setScreenWidth(558);
-//    custom.setScreenHeight(418);
-//    emulator->setCustomDevice(custom);
+    DeviceConfig custom(Device::Custom);
+    custom.setScreenDencity(1.0);
+    custom.setScreenWidth(800);
+    custom.setScreenHeight(480);
+    emulator->setCustomDevice(custom);
 
     emulator->setFitTheScreen(true);
     emulator->setDevice(Device::Galaxy_Y);
