@@ -7,10 +7,11 @@
 #include "Flow/FlowRenderer.h"
 #include "ADLib/ADString.h"
 #include "Logic/Hints.h"
+#include "ADLib/Device/ADAds.h"
 
 LevelManager::LevelManager()
     : _hints_number(10),
-      _full_version(0),
+      _full_version(false),
       _full_version_path(FileUtils::getStorageFilePath("full_version.ad")),
       _save_path(FileUtils::getStorageFilePath("save.ad")),
       _settings_path(FileUtils::getStorageFilePath("settings.ad")),
@@ -20,8 +21,9 @@ LevelManager::LevelManager()
 
 void LevelManager::onInit()
 {
-    loadLevelsInfo();
     loadSettings();
+    loadLevelsInfo();
+
 }
 
 void LevelManager::onDestroy()
@@ -39,6 +41,19 @@ void LevelManager::onPause()
 void LevelManager::onRun()
 {
     loadGame();
+}
+const JoinyLevel* LevelManager::getLevel(const JoinyCollectionID id,
+                                         const JoinyLevelID l_id) const
+{
+    CollectionMap::const_iterator it = _collections.find(id);
+    if(it == _collections.end())
+        return nullptr;
+    else
+    {
+        JoinyCollection*  coll = it->second.get();
+        return coll->getLevel(l_id);
+    }
+
 }
 const JoinyCollection* LevelManager::getCollection(const JoinyCollectionID id) const
 {
@@ -89,6 +104,9 @@ void LevelManager::loadLevelsInfo()
 
     std::vector<std::string> coll_files = info->getCollectionFiles();
 
+    if(isFullGameVersion())
+        ADAds::disableAds();
+
     for(unsigned int j=0; j<coll_files.size(); ++j)
     {
         std::string file = coll_files[j];
@@ -113,11 +131,25 @@ void LevelManager::loadLevelsInfo()
             is >> g;
             is >> b;
 
+            //TODO: improve
+            //read info
+            uint32_t open_coll = 0;
+            is >> open_coll;
+
+            bool open = true;
+            if(!isFullGameVersion())
+            {
+                //which coll must be closed
+                if (j>=5)
+                    open = false;
+            }
+
 
             std::vector<JoinyPuzzle> inp;
             is >> inp;
 
             CollectionPtr col(new JoinyCollection);
+            col->_open = open;
             col->_id = j+1;
             col->_levels = std::shared_ptr<JoinyCollection::LevelsVector>(
                         new JoinyCollection::LevelsVector(level_num,
@@ -175,8 +207,8 @@ void LevelManager::saveSettings()
     std::stringstream ss3(std::ios::out | std::ios::binary);
     OutputBinaryStream os3(ss3,BinaryStream::MaxProtocolVersion);
 
-    bool full_version = false;
-    if(full_version)
+
+    if(_full_version)
         os3 << uint16_t(1);
     else
         os3 << uint16_t(0);
@@ -438,4 +470,10 @@ bool LevelManager::isFullGameVersion() const
 void LevelManager::makeFullGameVersion()
 {
     _full_version = true;
+
+    for(auto& i : _collections)
+    {
+        (i.second)->openCollection();
+    }
+    ADAds::disableAds();
 }

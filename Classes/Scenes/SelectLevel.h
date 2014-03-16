@@ -7,6 +7,7 @@
 #include "Layers/PopUpWindow.h"
 #include "BackButton.h"
 #include "Core/DrawLayer.h"
+#include <ADLib/Rendering/ADBMFont.h>
 class SelectLevel : public DrawLayer //CCLayer//public cocos2d::CCLayer
 {
 public:
@@ -21,6 +22,9 @@ public:
         keyBackClicked();
     }
 private:
+    ADBMFont* _font;
+    CCLabelTTF * _collections;
+
     BackButton _back;
     CCMenu* _back_menu;
     void onLevelSelect(CCObject* pSender);

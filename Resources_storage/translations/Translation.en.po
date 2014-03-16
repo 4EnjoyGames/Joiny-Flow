@@ -1,0 +1,194 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Joiny\n"
+"POT-Creation-Date: 2014-03-09 13:22+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../../Classes\n"
+
+#: ../../Classes/AppDelegate.cpp:71
+msgid "iap.error.billing_unavaliable"
+msgstr "Error"
+
+#: ../../Classes/AppDelegate.cpp:76
+msgid "iap.error.purchase_error"
+msgstr "Restore Purchase error"
+
+#: ../../Classes/AppDelegate.cpp:84
+msgid "iap.restore_purchases.success"
+msgstr "Successfully restored purchases"
+
+#: ../../Classes/AppDelegate.cpp:89
+msgid "iap.restore_purchases.failed"
+msgstr "Restore Purchase failed"
+
+#: ../../Classes/Scenes/DeveloperScene.cpp:66
+msgid "diana"
+msgstr "Diana Sirenko"
+
+#: ../../Classes/Scenes/DeveloperScene.cpp:74
+msgid "andrii"
+msgstr "Andrii Chaika"
+
+#: ../../Classes/Scenes/DeveloperScene.cpp:83
+msgid "test_list"
+msgstr ""
+"Music\n"
+"Aziyan Nasir - \"Silly Fun\"\n"
+"Löhstana David - \n"
+"\"Demain je change de vie\"\n"
+"\n"
+"Thanks to\n"
+"Andrew Afonin\n"
+"Illya Spas"
+
+#: ../../Classes/Scenes/DeveloperScene.cpp:123
+msgid "copy"
+msgstr "© 2014"
+
+#: ../../Classes/Scenes/LevelScene.cpp:43
+msgid "RateMePopUp.RateLabel"
+msgstr "Is the game good?"
+
+#: ../../Classes/Scenes/LevelScene.cpp:89
+msgid "RateMePopUp.RateText"
+msgstr "Rate the game"
+
+#: ../../Classes/Scenes/LevelScene.cpp:170
+msgid "Test_level_end"
+msgstr "How do you rate this level?"
+
+#: ../../Classes/Scenes/LevelScene.cpp:206
+msgid "Good_level"
+msgstr "Good"
+
+#: ../../Classes/Scenes/LevelScene.cpp:228
+msgid "So_level"
+msgstr "I don`t know"
+
+#: ../../Classes/Scenes/LevelScene.cpp:249
+msgid "Bad_level"
+msgstr "Bad"
+
+#: ../../Classes/Scenes/LevelScene.cpp:293
+msgid "BuyHint"
+msgstr "Buy Hints"
+
+#: ../../Classes/Scenes/LevelScene.cpp:316
+msgid "buyHint_free"
+msgstr "Free"
+
+#: ../../Classes/Scenes/LevelScene.cpp:427
+msgid "End_bad"
+msgstr "Level failed!"
+
+#: ../../Classes/Scenes/LevelScene.cpp:431
+msgid "End_good"
+msgstr "Score"
+
+#: ../../Classes/Scenes/LevelScene.cpp:504
+msgid "Retry"
+msgstr "Retry"
+
+#: ../../Classes/Scenes/LevelScene.cpp:534
+msgid "Next"
+msgstr "Next"
+
+#: ../../Classes/Scenes/MainScene.cpp:40
+msgid "Sure"
+msgstr ""
+"Would you like\n"
+"to leave the game?"
+
+#: ../../Classes/Scenes/MainScene.cpp:77
+#: ../../Classes/Scenes/SettingScene.cpp:76
+msgid "Yes"
+msgstr "Yes"
+
+#: ../../Classes/Scenes/MainScene.cpp:99
+#: ../../Classes/Scenes/SettingScene.cpp:98
+msgid "No"
+msgstr "No"
+
+#: ../../Classes/Scenes/SelectCollection.cpp:44
+msgid "SelectColection.BuyFullVerdionPopUp.BuyTitle"
+msgstr "Get 3 stars everywhere"
+
+#: ../../Classes/Scenes/SelectCollection.cpp:62
+msgid "SelectColection.BuyFullVerdionPopUp.OrText"
+msgstr "or"
+
+#: ../../Classes/Scenes/SelectCollection.cpp:96
+msgid "SelectColection.BuyFullVerdionPopUp.Yes"
+msgstr "Unlock now"
+
+#: ../../Classes/Scenes/SelectCollection.cpp:285
+msgid "Collection"
+msgstr "Collections"
+
+#: ../../Classes/Scenes/SettingScene.cpp:40
+msgid "Sure_reset"
+msgstr ""
+"Would you like\n"
+" to delete all progress ?"
+
+#: ../../Classes/Scenes/SettingScene.cpp:237
+msgid "Reset"
+msgstr "Reset Progress"
+
+#: ../../Classes/Scenes/SettingScene.cpp:249
+msgid "Restore"
+msgstr "Restore Purchases"
+
+#: ../../Classes/Scenes/SettingScene.cpp:259
+msgid "Developers"
+msgstr "Developers"
+
+#: ../../Classes/Scenes/SettingScene.cpp:269
+msgid "Rate"
+msgstr "Rate Me"
+
+#~ msgid "thank"
+#~ msgstr "Thanks to:"
+
+#~ msgid "Settings"
+#~ msgstr "Settings"
+
+#~ msgid "SelectColection.BuyFullVerdionPopUp.No"
+#~ msgstr "Cancel"
+
+#~ msgid "madeInUkraine"
+#~ msgstr "made in Ukraine"
+
+#~ msgid "main.exit.sure"
+#~ msgstr "Are you sure"
+
+#~ msgid "Sure_go_out"
+#~ msgstr "Are you sure?"
+
+#~ msgid "Go_out_the_game"
+#~ msgstr "Would you like to leave the game?"
+
+#~ msgid "Go_out"
+#~ msgstr "Would you like to leave the game?"
+
+#, fuzzy
+#~ msgid "No2"
+#~ msgstr "No"
+
+#~ msgid "thank1"
+#~ msgstr "Test1 Test1"
+
+#~ msgid "coppy"
+#~ msgstr "© 2014"
+
+#~ msgid "thank2"
+#~ msgstr "thank2rrrr"

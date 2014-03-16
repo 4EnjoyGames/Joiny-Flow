@@ -15,6 +15,12 @@
 #include <ADLib/Device/ADInApp.h>
 #include <ADLib/Device/ADNotification.h>
 #include "Localization/CCLocalizedString.h"
+#include "Logic/Hints.h"
+#include "Logic/RW.h"
+#include "Scenes/LevelScene.h"
+#include "Scenes/SelectCollection.h"
+#include "ADLib/Device/ADBrowser.h"
+#include <ADLib/Device/ADVirtualCurrency.h>
 USING_NS_CC;
 
 #ifdef CC_WIN8_METRO
@@ -40,7 +46,27 @@ class InAppDelegate : public ADInApp::Delegate
 public:
     void purchaseSuccessful(const ADInApp::ProductID & id)
     {
+        Hints hints;
+        if(id == "hints_10")
+            hints.increaseHintNumber(10);
+        else if(id == "hints_100")
+            hints.increaseHintNumber(100);
+        else if(id == "hints_1000")
+            hints.increaseHintNumber(1000);
+        else if(id == "unlock_full")
+            RW::getLevelManager().makeFullGameVersion();
+
         CCLog("Purchase %s finished successful", id.c_str());
+
+        if(id != "unlock_full")
+        {
+            RW::getLevelManager().saveSettings();
+            LevelScene::purchaseUpdateHints();
+        }
+        else
+            SelectCollection::purchaseUpdateFullGame();
+
+        //
     }
     void purchaseFailed(const ADInApp::ProductID & id,
                         const ADInApp::ErrorType error)
@@ -67,6 +93,19 @@ public:
     void restorePurchasesFailed()
     {
         ADNotification::showNotification(_("iap.restore_purchases.failed"));
+    }
+};
+
+class VirtualCurrencyDelegate : public ADVirtualCurrency::Delegate
+{
+    void onCurrencyAdded(const unsigned int number)
+    {
+        Hints hints;
+        cocos2d::CCLog("Hints recieved: %d", number);
+        hints.increaseHintNumber(number);
+        LevelScene::purchaseUpdateHints();
+
+        RW::getLevelManager().saveSettings();
     }
 };
 
@@ -104,12 +143,90 @@ void initInAppPurchases()
 
     ADInApp::setDelegate(std::make_shared<InAppDelegate>());
 
-    ADInApp::loadStore(ADInApp::Mode::TestSuccess);
+
 
 
 }
 
+/**
+ * @brief Performs init and configuration of AdMob and home ads
+ */
+void initAds()
+{
+    ADStore store = ADInfo::getStore();
+    ADPlatform platform = ADInfo::getPlatform();
+
+    std::stringstream pid_banner;
+    std::stringstream pid_interstitial;
+
+    pid_banner << "ca-app-pub-" << 16126979 << 60946304 << "/";
+    pid_interstitial << "ca-app-pub-" << 16126979 << 60946304 << "/";
+
+    if(platform == ADPlatform::Android)
+    {
+        if(store == ADStore::SamsungStore)
+        {
+            //ca-app-pub-1612697960946304/8892739877
+            pid_banner  << 8892739877;
+            //ca-app-pub-1612697960946304/4322939475
+            pid_interstitial << 4322939475;
+        }
+        else if(store == ADStore::GooglePlay)
+        {
+            //ca-app-pub-1612697960946304/5939273474
+            pid_banner << 5939273474;
+            //ca-app-pub-1612697960946304/1369473073
+            pid_interstitial << 1369473073;
+        }
+        else
+        {
+            //ca-app-pub-1612697960946304/7416006677
+            pid_banner << 7416006677;
+            //ca-app-pub-1612697960946304/2846206274
+            pid_interstitial << 2846206274;
+        }
+    }
+    else if(platform == ADPlatform::iOS)
+    {
+        //            //ca-app-pub-1097233306002326/5693181292
+        //            pid_banner << 5693181292;
+
+        //            //ca-app-pub-1097233306002326/7169914499
+        //            pid_interstitial << 7169914499;
+    }
+
+    ADAds::registerBannerType("BANNER", pid_banner.str());
+    ADAds::registerBannerType("IAB_BANNER", pid_banner.str());
+
+    ADAds::registerInterstitialType(pid_interstitial.str());
+
+    //ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
+    ADAds::addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
+    ADAds::addTestDevice("C31238A94F2B52E9F4B77E58270A3943"); //Tonya
+
+    ADAds::addCustomBanner(CCSprite::create("banners/mif_kids.png"),
+                           [](){
+        //TODO: select which game baner is it
+        ADBrowser::openApplicationPage(GameInfo::getPackageName("mif"));
+    },
+    "MiF");
+}
+
+void initTapJoy()
+{
+    if(ADInfo::getPlatform() == ADPlatform::Android)
+    {
+        std::stringstream ss;
+        ss << "f1041413-201e-443d-b03a-82b0bdb941b1" << "|" << "QZdV7bkpyvZiGxiwBDw2";
+        ADVirtualCurrency::initProvider(ss.str());
+    }
+
+    ADVirtualCurrency::setDelegate(std::make_shared<VirtualCurrencyDelegate>());
+}
+
 bool AppDelegate::applicationDidFinishLaunching() {
+    RW::onInit();
+
     //Statistics init
     if(ADInfo::getPlatform() == ADPlatform::Android)
         ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
@@ -120,16 +237,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     //Language init
     ADLanguage::addSupportedLanguage("en");
-    //ADLanguage::addSupportedLanguage("uk");
-    //ADLanguage::addSupportedLanguage("ru");
-    //ADLanguage::addSupportedLanguage("hu");
-    //ADLanguage::addSupportedLanguage("fr");
+    ADLanguage::addSupportedLanguage("uk");
+    //ADLanguage::addSupportedLanguage("pt");
+    ADLanguage::addSupportedLanguage("ru");
+    ADLanguage::addSupportedLanguage("hu");
+    ADLanguage::addSupportedLanguage("de");
     //ADLanguage::addSupportedLanguage("de");
 
     ADLanguage::setDefaultLanguage("en");
     ADLanguage::getLanguage();
 
     initInAppPurchases();
+    initTapJoy();
 
     // initialize director
     CCDirector* pDirector = CCDirector::sharedDirector();
@@ -177,7 +296,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
                     width_change));
 
     // turn on display FPS
-    pDirector->setDisplayStats(true);
+    //pDirector->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
@@ -192,16 +311,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
 
-    std::string pid = "ca-app-pub-1097233306002326/3272087699";
-    ADAds::registerBannerType("BANNER", pid);
-    ADAds::registerBannerType("IAB_BANNER", pid);
-
-    std::string pid_inter = "ca-app-pub-1097233306002326/5031020099";
-    ADAds::registerInterstitialType(pid_inter);
-
-    ADAds::addTestDevice("419CBB113860522A7AB95487DBB0CC2B"); //Andriy Tab
-    ADAds::addTestDevice("9AC43D4250441F63E2E677C2C06F5D41"); //Diana Tab
-    ADAds::addTestDevice("C31238A94F2B52E9F4B77E58270A3943"); //Tonya
+    initAds();
 
     return true;
 }
@@ -211,7 +321,7 @@ void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
 
     ADStatistics::stopSession();
-
+    ADVirtualCurrency::onPause();
     // if you use SimpleAudioEngine, it must be pause
     CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
     RW::onPause();
@@ -223,8 +333,8 @@ void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
 
     ADStatistics::startSession();
-
+    ADVirtualCurrency::onResume();
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-    DrawLayer::registerUpdateDrawingNodes();
+
 }

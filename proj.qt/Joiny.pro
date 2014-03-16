@@ -67,7 +67,9 @@ SOURCES += main.cpp \
     ../Classes/Localization/CCLocalizedString.cpp \
     ../Classes/Core/DrawLayer.cpp \
     ../Classes/Scenes/DeveloperScene.cpp \
-    ../Classes/Logic/Hints.cpp
+    ../Classes/Logic/Hints.cpp \
+    ../Classes/Core/Fonts.cpp \
+    ../Classes/Logic/Tutorial.cpp
 
 HEADERS += \
     ../Classes/AppMacros.h \
@@ -111,6 +113,8 @@ HEADERS += \
     ../Classes/Localization/CCLocalizedString.h \
     ../Classes/Core/DrawLayer.h \
     ../Classes/Scenes/DeveloperScene.h \
-    ../Classes/Logic/Hints.h
+    ../Classes/Logic/Hints.h \
+    ../Classes/Core/Fonts.h \
+    ../Classes/Logic/Tutorial.h
 
 

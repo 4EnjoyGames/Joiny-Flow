@@ -11,11 +11,23 @@ public:
     static CCScene* scene();
     static MainScene* create();
 
-    void onPlayClicked(CCObject*);
 private:
+    CCSprite* _main_logo;
+    AnimatedMenuItem* _play_button;
+    AnimatedMenuItem* _settings_button;
+    AnimatedMenuItem* _facebook_button;
+
+    PopUpWindowManager _pop_up_manager;
+    class GoOutPopUp;
     bool init();
 
+    void onPlayClicked(CCObject*);
+    void doOnPlayClicked();
+
+    void onFacebookClicked(CCObject*);
+
     void onSettingsClicked(CCObject*);
+    void doOnSettingsClicked();
 
     void hideEverything(CCCallFunc *callback);
     void doGoBack();

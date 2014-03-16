@@ -8,43 +8,18 @@ DrawLayer::DrawLayer()
 
 }
 
-CCRenderTexture* DrawLayer::_render = nullptr;
-CCSprite* DrawLayer::_sprite = nullptr;
+
+CCSprite* DrawLayer::_white_background = nullptr;
 CCSprite* DrawLayer::_background = nullptr;
-CCNode* DrawLayer::_transform = nullptr;
 DrawLayer* DrawLayer::_current_layer = nullptr;
 bool DrawLayer::_update_needed = false;
 
-void DrawLayer::registerUpdateDrawingNodes()
-{
-    _update_needed = true;
-}
 
-void DrawLayer::updateDrawingNodes()
-{
-    if(_current_layer && _render)
-    {
-        _sprite->removeFromParent();
-        _background->removeFromParent();
 
-        _render->release();
-        _sprite->release();
-        _transform->release();
-        _background->release();
 
-        _render = nullptr;
-        _sprite = nullptr;
-        _transform = nullptr;
-        _background = nullptr;
-
-        createDrawingNodes();
-        attachDrawingNodesToLayer(_current_layer);
-    }
-}
 
 void DrawLayer::createDrawingNodes()
 {
-    assert(_render == nullptr);
     const CCPoint ORIGIN = Screen::getOrigin();
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
@@ -53,75 +28,62 @@ void DrawLayer::createDrawingNodes()
     CCSize win_size = Screen::getFrameSize();
 
     //Create sprite for background
-    CCSprite* background_piece = CCSprite::create("universal/game_background.png");
+    CCSprite* background_piece = CCSprite::create("universal/game_background.jpg");
     CCTexture2D *texture = background_piece->getTexture();
     ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
     texture->setTexParameters(&params);
 
+
+    CCSprite* white_background_piece = CCSprite::create("universal/white-background.png");
+    CCTexture2D *white_texture = white_background_piece->getTexture();
+    white_texture->setTexParameters(&params);
+
+
     const float DESIGN_SCALE = Screen::getDesignResourceScale();
 
     _background = CCSprite::createWithTexture(texture,
-                                                  CCRectMake(0,
-                                                             0,
-                                                             win_size.width/DESIGN_SCALE,
-                                                             win_size.height/DESIGN_SCALE));
+                                              CCRectMake(0,
+                                                         0,
+                                                         win_size.width/DESIGN_SCALE,
+                                                         win_size.height/DESIGN_SCALE));
 
+
+    ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
+    _background->setBlendFunc(function);
 
     _background->setAnchorPoint(ccp(0,0));
     _background->setPosition(ORIGIN);
     _background->setScale(VISIBLE_SIZE.width/win_size.width*DESIGN_SCALE);
     _background->retain();
 
-    //Prepare render node
-    _render = CCRenderTexture::createNoScale(win_size.width/DESIGN_SCALE,
-                                             win_size.height/DESIGN_SCALE,
-                                             kTexture2DPixelFormat_RGBA8888);
-    _render->retain();
 
-    float _real_scale = win_size.width/VISIBLE_SIZE.width/SCALE/DESIGN_SCALE;
-    CCPoint _neg_origin = ORIGIN * -_real_scale;
+    _white_background = CCSprite::createWithTexture(white_texture,
+                                                    CCRectMake(0,
+                                                               0,
+                                                               win_size.width/DESIGN_SCALE,
+                                                               win_size.height/DESIGN_SCALE));
 
-    //Prepare transform for rendering
-    _transform = CCNode::create();
-    _transform->setPosition(_neg_origin);
-    _transform->setScale(_real_scale);
-    _transform->retain();
+    _white_background->setAnchorPoint(ccp(0,0));
+    _white_background->setPosition(ORIGIN);
+    _white_background->setScale(VISIBLE_SIZE.width/win_size.width*DESIGN_SCALE);
+    _white_background->retain();
 
 
-    //Create display sprite
-    _sprite = CCSprite::createWithTexture(_render->getSprite()->getTexture());
-    ccBlendFunc function = {GL_DST_COLOR, GL_ZERO};
-    _sprite->setBlendFunc(function);
-    _sprite->setAnchorPoint(ccp(0,0));
-    _sprite->setPosition(ORIGIN);
-    _sprite->setFlipY(true);
-    _sprite->setScale(1.0/_real_scale);
-    _sprite->retain();
 }
-void DrawLayer::attachDrawingNodesToLayer(DrawLayer* layer)
-{
-    if(_background->getParent())
-        _background->removeFromParent();
-    if(_sprite->getParent())
-        _sprite->removeFromParent();
 
-    layer->CCLayer::addChild(_background, 0, 0);
-    layer->CCLayer::addChild(_sprite, 0, 0);
-}
 
 bool DrawLayer::init()
 {
     if(!CCLayer::init())
         return false;
 
-    if(_render == nullptr)
+    if(_background == nullptr)
     {
         createDrawingNodes();
     }
 
 
     _main_node = CCNodeRGBA::create();
-    attachDrawingNodesToLayer(this);
     CCLayer::addChild(_main_node, 0, NO_DRAW);
 
     _current_layer = this;
@@ -131,7 +93,7 @@ bool DrawLayer::init()
 void DrawLayer::visit()
 {
 
-    redrawMainNode();
+    //redrawMainNode();
 
     // quick return if not visible. children won't be drawn.
     if (!m_bVisible)
@@ -146,6 +108,8 @@ void DrawLayer::visit()
     }
 
     this->transform();
+
+    _white_background->visit();
 
     CCNode* pNode = NULL;
     unsigned int i = 0;
@@ -163,8 +127,8 @@ void DrawLayer::visit()
             pNode = (CCNode*) arrayData->arr[i];
             if (pNode)
             {
-                if(pNode->getTag() != NO_DRAW)
-                    pNode->visit();
+                //if(pNode->getTag() != NO_DRAW)
+                pNode->visit();
             }
         }
     }
@@ -172,6 +136,8 @@ void DrawLayer::visit()
     {
         this->draw();
     }
+
+    _background->visit();
 
     // reset for next frame
     m_uOrderOfArrival = 0;
@@ -189,21 +155,21 @@ DrawLayer::~DrawLayer()
 }
 void DrawLayer::redrawMainNode()
 {
-    if(_update_needed)
-    {
-        _update_needed = false;
-        updateDrawingNodes();
-    }
-    _render->beginWithClear(1,1,1,1);
+    //    if(_update_needed)
+    //    {
+    //        _update_needed = false;
+    //        updateDrawingNodes();
+    //    }
+    //    _render->beginWithClear(1,1,1,1);
 
-    kmGLPushMatrix();
-    //Take transformation from dummy node
-    _transform->transform();
-    //Visit node with main content
-    _main_node->visit();
-    kmGLPopMatrix();
+    //    kmGLPushMatrix();
+    //    //Take transformation from dummy node
+    //    _transform->transform();
+    //    //Visit node with main content
+    //    _main_node->visit();
+    //    kmGLPopMatrix();
 
-    _render->end();
+    //    _render->end();
 }
 
 void DrawLayer::update(float a)

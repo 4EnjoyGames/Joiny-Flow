@@ -7,7 +7,109 @@
 #include "Localization/CCLocalizedString.h"
 #include <ADLib/Device/ADAds.h>
 #include <ADLib/ADString.h>
-SelectCollection::SelectCollection()
+#include "Core/Fonts.h"
+#include "Core/Screen.h"
+#include <ADLib/Device/ADInApp.h>
+#include <ADLib/Rendering/ADBMFont.h>
+class SelectCollection::BuyFullVerdionPopUp : public PopUpWindow::Content
+{
+public:
+
+    BuyFullVerdionPopUp(
+            SelectCollection* parent=0)
+        : _parent(parent)
+    {}
+private:
+    typedef BuyFullVerdionPopUp Me;
+    SelectCollection* _parent;
+    void onBuy(CCObject*)
+    {
+        //TODO: add functions
+        ADInApp::buyProduct("unlock_full");
+    }
+
+    void onCancle(CCObject*)
+    {
+        this->closeWindow();
+    }
+
+
+    void onCreate(CCNode *parent)
+    {
+
+        CCSize size = parent->getContentSize();
+        float x_middle = size.width / 2;
+        float vertical = size.height * 0.25f;
+
+        CCLabelTTF* label = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.BuyTitle"),
+                                               Fonts::getFontName(),
+                                               62);
+        label->setFontSize(48);
+        label->setPosition(ccp(x_middle, size.height*0.85f));
+        parent->addChild(label);
+
+        //add 3 stars
+        SpritesLoader spl = GraphicsManager::getLoaderFor(parent,
+                                                          "level-end/big_stars.plist",
+                                                          "level-end/big_stars.png");
+        spl->inject();
+        CCSprite* stars_spr = spl->loadSprite("big_stars_3.png");
+        stars_spr->setScale(0.75f);
+        stars_spr->setPosition(ccp(x_middle, size.height*0.65f));
+
+
+        //add "or" text
+        CCLabelTTF* or_text = CCLabelTTF::create(_("SelectColection.BuyFullVerdionPopUp.OrText"),
+                                               Fonts::getFontName(),
+                                               40);
+        or_text->setPosition(ccp(x_middle, size.height*0.5f));
+        parent->addChild(or_text);
+
+        /**
+         * @brief menu_spl
+         */
+        SpritesLoader menu_spl = GraphicsManager::getLoaderFor(0,
+                                                               "collection-menu/collection_button.plist",
+                                                               "collection-menu/collection_button.png");
+        MenuSpriteBatch* menu = MenuSpriteBatch::create(menu_spl);
+        menu->setPosition(ccp(0,0));
+        menu->setAnchorPoint(ccp(0,0));
+        menu->setContentSize(size);
+        parent->addChild(menu);
+
+        CCSprite* parent_rgb = (CCSprite*)parent->getChildByTag(123);
+        if(parent_rgb)
+            parent_rgb->setColor(GameInfo::getInstance()->getNegativeColor());
+
+        CCSprite* coll_button = menu_spl->loadSprite("collection_button.png");
+
+        //coll_button->setScale(coll_button->getContentSize().width/
+        //           parent->getContentSize().width*0.6);
+        AnimatedMenuItem *buy_item = AnimatedMenuItem::create(
+                    coll_button,
+                    this, menu_selector(Me::onBuy));
+        buy_item->setPosition(ccp(size.width*0.5,
+                                  vertical));
+        buy_item->setBaseScale(coll_button->getContentSize().width/
+                               parent->getContentSize().width*0.8);
+
+        std::string text = _("SelectColection.BuyFullVerdionPopUp.Yes");
+        std::string price = ADInApp::getProduct("unlock_full")->getPrice();
+        std::string button_buy_text = text +'\n' + price;
+        CCLabelTTF * buy_text = CCLabelTTF::create(button_buy_text.c_str(),
+                                                          Fonts::getFontName(),
+                                                          45);
+        buy_text->setColor(ccc3(255,255,255));
+        buy_text->setPosition(ccp(buy_item->getContentSize().width/2,
+                                  buy_item->getContentSize().height/2));
+        buy_item->addChild(buy_text);
+        menu->menu()->addChild(buy_item);
+    }
+};
+
+
+SelectCollection::SelectCollection():
+    _pop_up_manager(this)
 {
 }
 cocos2d::CCScene* SelectCollection::scene()
@@ -54,35 +156,75 @@ void SelectCollection::onCollectionSelect(CCObject* sender)
 
 
         _last_selected_collection = selected;
-        hideEverything(
-                    CCCallFunc::create(
-                        this,
-                        callfunc_selector(SelectCollection::doOpenCollection)));
 
+        //if the collection is opened - open it
+        //else show buy window
+        if(_last_selected_collection->isOpenCollection())
+        {
+            hideEverything(
+                        CCCallFunc::create(
+                            this,
+                            callfunc_selector(SelectCollection::doOpenCollection)));
+        }
+        else
+        {
+            _pop_up_manager.openWindow(new BuyFullVerdionPopUp(this));
+        }
 
     }
 }
+AnimatedMenuItem* SelectCollection::createStars(AnimatedMenuItem* item,
+                                                const JoinyCollection* collection)
+{
+    float SCALE = Screen::getScaleFactor();
+
+    unsigned int min_stars_num = RW::getLevelManager().getCollectionMinStars(collection);
+
+
+
+    CCSprite* stars_spr = 0;
+
+    if(min_stars_num == 0)
+        stars_spr = _stars_spl->loadSprite("big_stars_0.png");
+    else if(min_stars_num == 1)
+        stars_spr = _stars_spl->loadSprite("big_stars_1.png");
+    else if(min_stars_num == 2)
+        stars_spr = _stars_spl->loadSprite("big_stars_2.png");
+    else
+        stars_spr = _stars_spl->loadSprite("big_stars_3.png");
+
+    //CCPoint position = item->getPosition();
+    stars_spr->setPosition(item->getPosition());
+    ADBMFont::setPositionByChangingAnchorPoint(
+                stars_spr,
+                ccp(item->getPositionX(),
+                    item->getPositionY() - _item_size.height*0.5));
+
+    stars_spr->setScale(stars_spr->getContentSize().width/
+                        stars_spr->getContentSize().width*0.85);
+    item->addNephew(stars_spr);
+
+    return item;
+}
+
 AnimatedMenuItem* SelectCollection::createCollectionItem(
         const JoinyCollection* collection, const SpritesLoader& spl)
 {
-    float scaled = CCDirector::sharedDirector()->getContentScaleFactor();
-
-//    std::stringstream collection_number;
-//    collection_number << collection->getCollectionID();
-
-//    std::stringstream collection_name;
-//    collection_name << collection->getCollectionName();
-
-    //std::string collection_number = collection->getCollectionID();
-
     std::string collection_name = collection->getCollectionName();
 
     ccColor3B label_color = collection->getCollectionColor();
 
     static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
-    static ccColor3B working = closeLevel;
+    ccColor3B working = closeLevel;
     if(collection->isOpenCollection())
+    {
         working = label_color;
+    }
+    else if (isFreeOpenFullGame())
+    {
+        RW::getLevelManager().makeFullGameVersion();
+        working = label_color;
+    }
 
     CCSprite* background = spl->loadSprite("collection_button.png");
     background->setColor(working);
@@ -100,27 +242,38 @@ AnimatedMenuItem* SelectCollection::createCollectionItem(
 
     std::string label_text = collection_name + "  "+ l_curr_str + '/'  + l_num_str ;
     CCLabelTTF* label = CCLabelTTF::create(label_text.c_str(),
-                                           "fonts/Fredoka One.ttf",
-                                           60/scaled);
+                                           Fonts::getFontName(),
+                                           75);
+    label->setTag(123);
     item->addChild(label);
 
+    _item_size = background->getContentSize();
+
     float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
-    label->setPosition(ccp(background->getContentSize().width/2-3*scale, background->getContentSize().height/2));
+    _scale = scale;
+
+    label->setPosition(ccp(background->getContentSize().width*0.5,
+                           background->getContentSize().height*0.5));
     label->setAnchorPoint(ccp(0.5, 0.5));
     label->setScale(scale);
-
-
     label->setColor(working);
-    //label->setColor(working);
 
     return item;
 }
+void SelectCollection::onEnter()
+{
+    _last_scene = this;
+    DrawLayer::onEnter();
+}
+
+void SelectCollection::onExit()
+{
+    _last_scene = 0;
+    DrawLayer::onExit();
+}
+
 bool SelectCollection::init()
 {
-    //    if (!CCLayer::init() )
-    //    {
-    //        return false;
-    //    }
     if (!DrawLayer::init())
     {
         return false;
@@ -129,33 +282,19 @@ bool SelectCollection::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
-    //    CCMenu* main_menu = CCMenu::create();
-    //    main_menu->setPosition(ccp(0,0));
-
-
-    //    //Load one piece
-    //    CCSprite* sp_noise = CCSprite::create("main-menu/back.png");
-
-    //    //Take the texture from sprite
-    //    CCTexture2D *texture = sp_noise->getTexture();
-
-    //    //Set parameters GL_MIRRORED_REPEAT mean that texture should repeat one time mirrored other time not
-    //    ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_MIRRORED_REPEAT, GL_MIRRORED_REPEAT};
-    //    texture->setTexParameters(&params);
-
-    //    //Final sprite
-    //    CCSprite *noise = CCSprite::createWithTexture(texture, CCRectMake(0, 0, VISIBLE_SIZE.width, VISIBLE_SIZE.height));
-    //    noise->setPosition(ccp(ORIGIN.x +  VISIBLE_SIZE.width/2,
-    //                           ORIGIN.y + VISIBLE_SIZE.height/2));
-    //    this->addChild(noise);
-
-    CCLabelTTF * collections = CCLabelTTF::create( _("Collection"),
-                                                   "fonts/Fredoka One.ttf",
+    _collections = CCLabelTTF::create( _("Collection"),
+                                                   Fonts::getFontName(),
                                                    72);
-    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
-                                 ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
-    collections->setColor(GameInfo::getInstance()->getTitleColor());
-    this->addChild(collections);
+
+    auto button_show = [](){return CCFadeTo::create(0.1f, 255);};
+    _collections->setOpacity(0);
+    _collections->runAction(button_show());
+
+
+    _collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+                               ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
+    _collections->setColor(GameInfo::getInstance()->getTitleColor());
+    this->addChild(_collections);
 
 
     //Back Button
@@ -188,7 +327,7 @@ bool SelectCollection::init()
     image->removeFromParent();
 
     float margin = s.width * 0.15f;
-    float margin_vertical = s.width * 0.05f;
+    float margin_vertical = s.width * 0.09f;
     float width = s.width*in_row + margin*(in_row - 1);
 
     unsigned int rows = GameInfo::getInstance()->getCollectionNumber();
@@ -196,6 +335,10 @@ bool SelectCollection::init()
 
     _buttons_menu->setContentSize(CCSize(width+margin*2, height+margin*2));
 
+    _stars_spl = GraphicsManager::getLoaderFor(_buttons_menu,
+                                               "level-end/big_stars.plist",
+                                               "level-end/big_stars.png");
+    _stars_spl->inject();
 
     unsigned int collection_id_first = 1;
     float working_y = height-s.height/2+margin;
@@ -211,23 +354,43 @@ bool SelectCollection::init()
 
         item->setPosition(ccp(working_x, working_y));
 
+        item = createStars(item,l);
+
         _buttons_map[item] = l;
 
         working_x += s.width + margin;
         collection_id_first++;
         working_y -= s.height + margin_vertical;
     }
+
+
+
     newScrolling(_buttons_menu);
+
+    for(auto& i:_buttons_map)
+    {
+        AnimatedMenuItem* item = i.first;
+
+        //animation
+        float scale_button = item->getScale();
+        item->setScale(scale_button*0.9);
+        item->setAnchorPoint(ccp(0.5, 0.5));
+        item->runAction(CCEaseElasticOut::create(
+                                  CCScaleTo::create(0.7f, scale_button),
+                                  0.4f));
+    }
 
     return true;
 }
 
 void SelectCollection::keyBackClicked()
 {
-    hideEverything(
-                CCCallFunc::create(
-                    this,
-                    callfunc_selector(SelectCollection::doGoBack)));
+    if(!_pop_up_manager.backAction())
+    {
+        this->hideEverything(CCCallFunc::create(
+                                 this, callfunc_selector(SelectCollection::doGoBack)));
+
+    }
 }
 
 void SelectCollection::doGoBack()
@@ -241,17 +404,25 @@ void SelectCollection::doOpenCollection()
 }
 
 void SelectCollection::hideEverything(cocos2d::CCCallFunc *callback)
-{
+{   
+    float duration = 0.15f;
+    CCFadeTo* logo_move = CCFadeTo::create(duration, 0);
+    _collections->runAction(logo_move);
+    auto button_hide = [](){return CCFadeTo::create(0.15f, 0);};
+
+    for(auto & i: _buttons_map)
+    {
+        AnimatedMenuItem* item = i.first;
+        item->runAction(button_hide());
+    }
+
+
+    float delay = 0.2;
     this->runAction(
                 CCSequence::create(
-                    CCDelayTime::create(0),
+                    CCDelayTime::create(delay),
                     callback,
                     NULL));
-}
-
-void SelectCollection::buildCollectionTiles()
-{
-
 }
 
 void SelectCollection::newScrolling(MenuSpriteBatch* menu)
@@ -322,4 +493,66 @@ void SelectCollection::newScrolling(MenuSpriteBatch* menu)
     menu->setPosition(ccp(0,
                           0));
 
+    _pop_up_manager.addOnHideWindowAction([_collections_scroll_view](){
+        _collections_scroll_view->setTouchEnabled(true);
+    });
+    _pop_up_manager.addOnShowWindowAction([_collections_scroll_view](){
+        _collections_scroll_view->setTouchEnabled(false);
+    });
+    _pop_up_manager.addMenuToAutoDisable(menu->menu());
+
+}
+SelectCollection* SelectCollection::_last_scene = 0;
+void SelectCollection::purchaseUpdateFullGame()
+{
+    if(_last_scene)
+    {
+        updateItems();
+        _last_scene->_pop_up_manager.backAction();
+    }
+}
+void SelectCollection::updateItems()
+{
+    for(auto & i: (_last_scene->_buttons_map) )
+    {
+        AnimatedMenuItem* item = i.first;
+        const JoinyCollection* col = i.second;
+        ccColor3B coll_color = col->getCollectionColor();
+
+        CCLabelTTF* label = dynamic_cast<CCLabelTTF*>(item->getChildByTag(123));
+        if(label)
+        {
+            label->setColor(coll_color);
+        }
+
+        item->setColor(coll_color);
+    }
+}
+/**
+ * @brief SelectCollection::isFreeOpenFullGame
+ *if the player has min 3 stars in all Collections
+ *return true - and open full game
+ * @return
+ */
+bool SelectCollection::isFreeOpenFullGame()
+{
+    bool result = true;
+    unsigned int coll_num = GameInfo::getInstance()->getCollectionNumber();
+    unsigned int min_stars = 0;
+
+    for(unsigned int i=1; i<=coll_num; ++i)
+    {
+        const JoinyCollection* col = RW::getLevelManager().getCollection(i);
+        if(col->isOpenCollection())
+        {
+            min_stars = RW::getLevelManager().getCollectionMinStars(col);
+            if(min_stars<3)
+            {
+                result = false;
+                break;
+            }
+        }
+    }
+
+    return result;
 }

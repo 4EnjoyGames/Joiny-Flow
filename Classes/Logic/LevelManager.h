@@ -10,6 +10,7 @@ class LevelManager
 {
 public:
     typedef std::shared_ptr<JoinyCollection> CollectionPtr;
+    const JoinyLevel* getLevel( const JoinyLevelID id, const JoinyLevelID l_id) const;
     const JoinyCollection *getCollection(const JoinyCollectionID id) const;
 
     const JoinyLevel* getNextLevel(const JoinyLevel* level) const;

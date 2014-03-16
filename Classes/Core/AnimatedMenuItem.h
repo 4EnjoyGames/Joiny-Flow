@@ -49,6 +49,12 @@ public:
 
     virtual void setOpacityModifyRGB(bool bValue) {CC_UNUSED_PARAM(bValue);}
     virtual bool isOpacityModifyRGB(void) { return false;}
+
+    void updateDisplayedOpacity(GLubyte parentOpacity)
+    {
+        this->setOpacity(parentOpacity);
+    }
+
 protected:
     virtual void updateImagesVisibility();
 private:

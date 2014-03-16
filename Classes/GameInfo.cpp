@@ -11,13 +11,19 @@ GameInfo::GameInfo()
 
 void GameInfo::setInfo()
 {
-    _coll_files.push_back("puzzle_5x5_1.ad");
-    //_coll_files.push_back("puzzle_5x5_2.ad");
-    //_coll_files.push_back("puzzle_6x6_1.ad");
+    _coll_files.push_back("levels/puzzle_5x5_1.ad");
+    _coll_files.push_back("levels/puzzle_5x5_2.ad");
+    _coll_files.push_back("levels/puzzle_6x6_1.ad");
+    _coll_files.push_back("levels/puzzle_7x7_1.ad");
+    _coll_files.push_back("levels/puzzle_8x8_1.ad");
 
-    //_colors.push_back(ccc3(248,105,159));
-    //_colors.push_back(ccc3(100,243,248));
-    //_colors.push_back(ccc3(64,255,68));
+
+    _coll_files.push_back("levels/puzzle_9x9_2.ad");
+    _coll_files.push_back("levels/puzzle_9x9_1.ad");
+    _coll_files.push_back("levels/puzzle_8x8_2.ad");
+    _coll_files.push_back("levels/puzzle_7x7_2.ad");
+    _coll_files.push_back("levels/puzzle_6x6_2.ad");
+
 
 
     _close_color = ccc3(170,170,170);
@@ -25,9 +31,11 @@ void GameInfo::setInfo()
     _title_color = ccc3(11,216,224);
 
     _negative_color = ccc3(255,30,99);
-    _positive_color = ccc3(0,255,0);
 
-    _gray_color = ccc3(233,234,234);
+    _positive_color = ccc3(117,253,51);
+    //_positive_color = ccc3(0,255,0);
+
+    _gray_color = ccc3(134,203,226);
 }
 
 GameInfo* GameInfo::getInstance( )
@@ -69,16 +77,36 @@ const ccColor3B& GameInfo::getPositiveColor()
  }
 #include <ADLib/Device/ADInfo.h>
 
-std::string doGetPackageName()
+const std::string GameInfo::doGetPackageName(const std::string game_name)
 {
-    if(ADInfo::getPlatform() == ADPlatform::iOS)
-        return "id657095501";
+    if(game_name =="mif")
+    {
+        if(ADInfo::getPlatform() == ADPlatform::iOS)
+            return "id657095501";
+        else
+            return "com.x4enjoy.mathisfun";
+    }
+    if(game_name == "junior")
+    {
+        if(ADInfo::getPlatform() == ADPlatform::iOS)
+            return "id657096722";
+        else
+            return "com.x4enjoy.mathisfunjunior";
+    }
     else
-        return "com.x4enjoy.joiny";
+    {
+        //TODO: put real package name
+        if(ADInfo::getPlatform() == ADPlatform::iOS)
+            return "id816101116";
+        else
+            return "com.x4enjoy.joiny";
+    }
+
+
+
 }
 
-const std::string& GameInfo::getPackageName()
+const std::string GameInfo::getPackageName(std::string game_name)
 {
-    static std::string package_name = doGetPackageName();
-    return package_name;
+    return doGetPackageName(game_name);
 }

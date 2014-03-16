@@ -57,3 +57,9 @@ proj.ios/Resources/
 xcuserdata
 profile
 *.moved-aside
+
+
+documentation/html
+documentation/latex
+*.pyc
+

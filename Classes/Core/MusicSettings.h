@@ -6,7 +6,9 @@
 class MusicSettings
 {
 public:
-	static const char* BACKGROUND_MUSIC;
+    static const char* BACKGROUND_MUSIC;
+    static const char* LEVEL_SCENE_MUSIC;
+
     inline static const bool isMusicOn(void)
     {
         return _ms.do_isMusicOn();
@@ -60,8 +62,8 @@ private:
     void do_turnOnMusic(void)
     {
         _music_on=true;
-//        CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
-//                ("music/silly_fun.ogg", true);
+        //        CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
+        //                ("music/silly_fun.ogg", true);
     }
     void do_turnOffMusic(void)
     {
@@ -87,18 +89,23 @@ private:
         }
 
     }
-     void do_playMusic(const char* str)
+    void do_playMusic(const char* str)
     {
-         if (_music_on)
-         {
+        if (_music_on)
+        {
+            if(_past_music_file_name!=str)
+            {
+                CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
+                        (str, true);
+            }
+            else if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying()==false)
+            {
+                CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
+                        (str, true);
+            }
 
-              if (CocosDenshion::SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying()==false)
-              {
-                  CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic
-                          (str, true);
-              }
-             //"music/math_is_fun.ogg"
-         }
+            _past_music_file_name = str;
+        }
     }
     void do_stopMusicForBackgrHolder(void)
     {
@@ -117,6 +124,8 @@ private:
     bool _sound_effect_on;
 
     bool _backgrounholder_music_on;
+
+    const char* _past_music_file_name;
 };
 
 

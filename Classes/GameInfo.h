@@ -24,7 +24,7 @@ class GameInfo
 
        const ccColor3B& getGrayColor();
 
-       static const std::string& getPackageName();
+       static const std::string getPackageName(std::string game_name);
 
 
    private:
@@ -35,6 +35,7 @@ class GameInfo
        void operator=(GameInfo const&); // don't implement
        static GameInfo* instance;
 
+       static const std::string doGetPackageName(const std::string game_name);
 
        //std::vector<std::string> _coll_names;
        //std::vector<FlowPoint> _flow_points;

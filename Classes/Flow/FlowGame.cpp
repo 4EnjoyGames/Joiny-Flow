@@ -1,8 +1,14 @@
 #include "FlowGame.h"
 #include <algorithm>
+#include "Logic/Tutorial.h"
+#include "Core/MusicSettings.h"
+
 using namespace cocos2d;
+
 FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
-    : _renderer(FlowRenderer::create(table)), _table(0), _is_touch_active(false),
+    : _is_tracking_touch(false),
+      _renderer(FlowRenderer::create(table)),
+      _table(0), _is_touch_active(false),
       _active_touch_id(-1), _active_traces(), _submitted_traces(),
       _working_color(-1), _finish_lock(false), _delegate(delegate),
       _last_point(0,0), _working_trace_id(0,0), _score(0)
@@ -19,12 +25,29 @@ FlowGame::FlowGame(const FlowTable &table, DelegatePtr delegate)
     _submitted_traces = _active_traces;
 
     //Start listening for touch
-    CCDirector* pDirector = CCDirector::sharedDirector();
-    pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
+    startTrackingTouch();
     CCLog("Game start output");
     traceDebug();
 }
+void FlowGame::startTrackingTouch()
+{
+    if(!_is_tracking_touch)
+    {
+        _is_tracking_touch = true;
+        CCDirector* pDirector = CCDirector::sharedDirector();
+        pDirector->getTouchDispatcher()->addTargetedDelegate(this, kCCMenuHandlerPriority, false);
 
+    }
+}
+
+void FlowGame::stopTrackingTouch()
+{
+    if(_is_tracking_touch)
+    {
+        _is_tracking_touch = false;
+        CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    }
+}
 
 FlowGame* FlowGame::create(const FlowTable& table, DelegatePtr delegate)
 {
@@ -80,6 +103,18 @@ void FlowGame::ccTouchEnded(cocos2d::CCTouch *pTouch,
         touchEnded(touchToCellCordinates(touchToLocalCords(pTouch)));
         _renderer->hideActiveCircle();
     }
+
+//    //if the trace is that we would like the user touched
+//    if(Tutorial::getInstance()->isActive() &&
+//            hasUserThisPath(Tutorial::getInstance()->getCurrentTutorialHintPath()))
+//    {
+//        if(Tutorial::getInstance()->hasTutorial())
+//            Tutorial::getInstance()->showTutorial();
+//    }
+}
+void FlowGame::drawTable()
+{
+    _renderer->drawTable(this->getScale(), this->getContentSize());
 }
 
 void FlowGame::ccTouchCancelled(cocos2d::CCTouch *pTouch,
@@ -102,17 +137,13 @@ cocos2d::CCPoint FlowGame::touchToLocalCords(cocos2d::CCTouch* touch)
 
 FlowPoint FlowGame::touchToCellCordinates(cocos2d::CCPoint local_cords)
 {
-
+    if(local_cords.x < 0 || local_cords.y < 0)
+        return FlowPoint::UNDEFINED;
 
     CCSize cell_size = _renderer->getNodeSize();
 
     int x = static_cast<int>(local_cords.x / cell_size.width);
     int y = static_cast<int>(local_cords.y / cell_size.height);
-
-    if(x < 0)
-        x = _table->getWidth();
-    if(y < 0)
-        y = _table->getHeight();
 
     return FlowPoint(x, y);
 }
@@ -260,8 +291,15 @@ void FlowGame::touchMoved(const FlowPoint& p)
 }
 void FlowGame::endGame()
 {
-    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    stopTrackingTouch();
 }
+//void FlowGame::playMusic(const FlowPoint& p)
+//{
+//    FlowColor color = getCellColor(p)+1;
+//    std::stringstream file_name;
+//    file_name << "music/flow_game/note" << color << ".wav";
+//    MusicSettings::playSoundEffect(file_name.str().c_str());
+//}
 
 void FlowGame::touchEnded(const FlowPoint& p)
 {
@@ -272,10 +310,17 @@ void FlowGame::touchEnded(const FlowPoint& p)
     _finish_lock = false;
     updateHighlighted();
 
+    //if the point is on the table
+    //if((p.x() < _table->getWidth() && p.y() < _table->getHeight()))
+    {
+        //play sound effect
+        MusicSettings::playSoundEffect("music/flow_click.wav");
+    }
+
     updateScore();
     if(checkWinCondition())
     {
-        //CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+        //stopTrackingTouch();
         if(_delegate.get() != 0)
         {
             _delegate->onWin();
@@ -361,27 +406,92 @@ void FlowGame::disconnectHintPoints(const FlowPoint &a_p, const FlowPoint &b_p)
     else
     {
         CCLog("ERROR: Points are not connected");
-        assert(false);
+        //assert(false);
     }
 
 }
+bool FlowGame::connectedFlowPoints(FlowPointState st_current,
+                                   FlowPointState st_previous) const
+{
+    bool result = false;
+
+    if(st_previous.getLineColor() == st_current.getLineColor())
+    {
+        if(st_current.hasPrevious())
+        {
+            if(st_current.getPreviousCordinates() == st_previous.getCordinates())
+                result = true;
+        }
+        if(st_current.hasNext())
+        {
+            if(st_current.getNextCordinates() == st_previous.getCordinates())
+                result = true;
+        }
+        if(st_previous.hasNext())
+        {
+            if(st_previous.getNextCordinates() == st_current.getCordinates())
+                result = true;
+        }
+        if(st_previous.hasPrevious())
+        {
+            if(st_previous.getPreviousCordinates() == st_current.getCordinates())
+                result = true;
+        }
+    }
+    return result;
+}
+bool FlowGame::areFlowPointsConnected(const FlowPoint& a, const FlowPoint& b)
+{
+    FlowPointState st_current = _table->get(a);
+    FlowPointState st_previous = _table->get(b);
+    return connectedFlowPoints(st_current, st_previous);
+}
+
+int FlowGame::getHintPathBreakPosition(const std::vector< FlowPoint>& path)
+{
+    int i = 0;
+    FlowPointState st_current;
+    FlowPointState st_previous;
+
+    for(i=0; i< path.size(); ++i)
+    {
+        st_previous = st_current;
+        st_current = _table->get(path[i]);
+
+        //if we have previous
+        if(i!=0)
+        {
+            if(!connectedFlowPoints(st_current, st_previous))
+            {
+
+                break;
+            }
+        }
+    }
+    return i;
+}
+
 //verify has the user drow this path
 bool FlowGame::hasUserThisPath(
         const std::vector< FlowPoint>& path) const
 {
 
     bool result = true;
+    FlowPointState st_current;
+    FlowPointState st_previous;
     for(unsigned int i=0; i< path.size(); ++i)
     {
-        FlowPointState st = _table->get(path[i]);
+        st_previous = st_current;
+        st_current = _table->get(path[i]);
 
-        if(st.hasNext() || st.hasPrevious())
+        //if we have previous
+        if(i!=0)
         {
-        }
-        else
-        {
-            result = false;
-            break;
+            if(!connectedFlowPoints(st_current, st_previous))
+            {
+                result = false;
+                break;
+            }
         }
     }
 

@@ -49,7 +49,7 @@ bool Hints::showHint()
     {
         if (findSubVector(showed_ids,hint_path[j]))
         {
-            //we find hint[j] in showed ides
+            //we find hint[j] in showed_ides
             //delete this ellement
             hint_path.erase(hint_path.begin()+j);
             --j;
@@ -151,13 +151,16 @@ void Hints::useHint()
 }
 void Hints::decreaseHintNumber(const unsigned int num)
 {
-    --_hint_number;
-    RW::getLevelManager().decreaseHintNumber(num);
+    if(_hint_number-num >= 0)
+    {
+        _hint_number-=num;
+        RW::getLevelManager().decreaseHintNumber(num);
+    }
 }
 
 void Hints::increaseHintNumber(const unsigned int num)
 {
-    ++_hint_number;
+    _hint_number+=num;
     RW::getLevelManager().increaseHintNumber(num);
 }
 
@@ -166,4 +169,35 @@ bool Hints::hasHint()
     _hint_number = RW::getLevelManager().getHintNumber();
     return (_hint_number!=0);
 }
+bool Hints::hasTutorial()
+{
+    std::vector < std::vector<FlowPoint> > hint_path =
+    _level->getPuzzle().getJoinyInfo().getPathes();
 
+    return (hint_path.size() < _tutorial_path_id);
+}
+
+unsigned int Hints::_tutorial_path_id = 0;
+void Hints::showTutorial()
+{
+    std::vector < std::vector<FlowPoint> > hint_path =
+    _level->getPuzzle().getJoinyInfo().getPathes();
+
+    std::vector<FlowPoint> curr_path = hint_path[_tutorial_path_id];
+    FlowColor color = _flow_game->getCellColor(curr_path[0]);
+
+
+    for(unsigned int j=1; j<curr_path.size(); ++j)
+    {
+        //CCLog("Tutorial Hints::(%d, %d) -> (%d, %d)",
+        //      curr_path[j-1].x(),curr_path[j-1].y(),
+        //       curr_path[j].x(),curr_path[j].y());
+
+        _flow_game->connectHintPoints(curr_path[j-1],
+                curr_path[j],
+                color);
+    }
+
+    ++_tutorial_path_id;
+
+}

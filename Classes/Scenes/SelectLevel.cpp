@@ -7,6 +7,8 @@
 #include "ADLib/Device/ADAds.h"
 #include "ADLib/ADString.h"
 #include "Logic/JoinyLevel.h"
+#include "Core/Fonts.h"
+
 SelectLevel::SelectLevel(const JoinyCollection *collection)
     :  _last_selected_level(nullptr), _current_collection(collection)
 {
@@ -86,14 +88,14 @@ void SelectLevel::onLevelSelect(CCObject* sender)
 AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                                                const SpritesLoader& spl)
 {
-    const float SCALE = Screen::getScaleFactor();
-    JoinyLevelID joiny_level_id = level->getLevelId();
+    //const float SCALE = Screen::getScaleFactor();
+    //JoinyLevelID joiny_level_id = level->getLevelId();
 
 
     ccColor3B openLevel = _current_collection->getCollectionColor();
     static ccColor3B closeLevel = GameInfo::getInstance()->getCloseColor();
 
-    static ccColor3B labelColor(ccc3(255,255,255));
+    //static ccColor3B labelColor(ccc3(255,255,255));
 
     ccColor3B working = openLevel;
     unsigned int stars = level->getStarsNumber(level->getHighScore());
@@ -107,19 +109,6 @@ AnimatedMenuItem* SelectLevel::createLevelItem(const JoinyLevel* level,
                     background,
                     this,
                     menu_selector(SelectLevel::onLevelSelect));
-
-    CCLabelTTF* label = CCLabelTTF::create(AD_to_string(joiny_level_id).c_str(),
-                                           "fonts/Fredoka One.ttf",
-                                           60/SCALE);
-    item->addChild(label);
-    float scale = MIN(1, background->getContentSize().width * 0.7 / label->getContentSize().width);
-    if(_scale==0)
-        _scale  = scale;
-    label->setPosition(ccp(background->getContentSize().width/2-3*SCALE,
-                           background->getContentSize().height/2 + 10/SCALE));
-    label->setAnchorPoint(ccp(0.5, 0.5));
-    label->setScale(scale);
-    label->setColor(labelColor);
 
     return item;
 }
@@ -143,10 +132,61 @@ AnimatedMenuItem* SelectLevel::createStars(AnimatedMenuItem* item,
 
 
     CCPoint position = item->getPosition();
-    stars_spr->setPosition(ccp(position.x,
-                               position.y - 40/SCALE));
-    stars_spr->setScale(_scale);
+    stars_spr->setPosition(position);
+    ADBMFont::setPositionByChangingAnchorPoint(stars_spr,
+                                               ccp(position.x,
+                                                   position.y - 40/SCALE));
+    stars_spr->setScale(item->getContentSize().width/
+                        stars_spr->getContentSize().width);
     item->addNephew(stars_spr);
+
+    //Get level id
+    JoinyLevelID joiny_level_id = level->getLevelId();
+    //Convert it to string
+    std::string id = AD_to_string(joiny_level_id);
+
+    //Font dependent margin
+    static float top_margin = 0;
+    static float height_coef = 0;
+    if(top_margin == 0)
+    {
+        if(Fonts::getBMFontName() == std::string("fonts/Lasco-Bold.fnt"))
+        {
+            top_margin = 5/SCALE;
+            height_coef = 0.6f;
+        }
+        else
+        {
+            top_margin = 10/SCALE;
+            height_coef = 0.7f;
+        }
+    }
+
+
+    //Calculate maximum label size
+    const float label_max_width = item->getContentSize().width*0.7;
+    const float label_max_height = item->getContentSize().height*height_coef;
+
+    //Array for each letter in the lable (max 3)
+    CCSprite* ch_img[3] = {nullptr, nullptr, nullptr};
+
+    //Load letter for each char
+    for(unsigned int i=0; i<id.size(); ++i)
+    {
+        CCSprite* sp = _font->getCharSprite(id[i]);
+        item->addNephew(sp);
+        ch_img[i] = sp;
+    }
+
+
+
+    //Arrange chars on button
+    ADBMFont::arrangeLabel(ch_img, id.size(),
+                           ccp(item->getPositionX(),
+                               item->getPositionY()+top_margin),
+                           CCSize(label_max_width, label_max_height),
+                           item->getPosition());
+
 
     return item;
 }
@@ -166,17 +206,24 @@ bool SelectLevel::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
+    _font = ADBMFont::create(Fonts::getBMFontName());
 
     _scale = 0;
     //create collection name label
     ccColor3B openLevel = _current_collection->getCollectionColor();
 
     const std::string coll_name = _current_collection->getCollectionName();
-    CCLabelTTF * collections = CCLabelTTF::create( coll_name.c_str(),"fonts/Fredoka One.ttf",72);
-    collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
+    _collections = CCLabelTTF::create( coll_name.c_str(),
+                                                   Fonts::getFontName(),
+                                                   72);
+    _collections->setPosition(ccp(ORIGIN.x + VISIBLE_SIZE.width*0.5,
                           ORIGIN.y + VISIBLE_SIZE.height - 70/SCALE));
-    collections->setColor(openLevel);
-    this->addChild(collections);
+    _collections->setColor(openLevel);
+    this->addChild(_collections);
+
+    auto button_show = [](){return CCFadeTo::create(0.1f, 255);};
+    _collections->setOpacity(0);
+    _collections->runAction(button_show());
 
 
     //Back Button
@@ -241,14 +288,30 @@ bool SelectLevel::init()
         }
         working_y -= s.height + margin;
     }
+    _buttons_menu->addChild(_font, 1000);
+    _font->setAnchorPoint(ccp(0,0));
+    _font->setPosition(ccp(0,0));
     newScrolling(_buttons_menu);
+
+    for(auto& i:_buttons_map)
+    {
+        AnimatedMenuItem* item = i.first;
+
+        //animation
+        float scale_button = item->getScale();
+        item->setScale(scale_button*0.9);
+        item->setAnchorPoint(ccp(0.5, 0.5));
+        item->runAction(CCEaseElasticOut::create(
+                                  CCScaleTo::create(0.7f, scale_button),
+                                  0.4f));
+    }
 
     return true;
 }
 
 void SelectLevel::doOpenLevel()
 {
-    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_last_selected_level));
+    CCDirector::sharedDirector()->replaceScene(LevelScene::scene(_last_selected_level,true));
 }
 
 void SelectLevel::newScrolling(MenuSpriteBatch* menu)
@@ -320,15 +383,24 @@ void SelectLevel::newScrolling(MenuSpriteBatch* menu)
 
 }
 
-void SelectLevel::hideEverything(CCCallFunc *callback)
+void SelectLevel::hideEverything(cocos2d::CCCallFunc *callback)
 {
+    float duration = 0.15f;
+    CCFadeTo* logo_move = CCFadeTo::create(duration, 0);
+    _collections->runAction(logo_move);
+    auto button_hide = [](){return CCFadeTo::create(0.15f, 0);};
 
-    //_collections_scroll_view->runAction(CCFadeTo::create(fade_out_duration, 0));
+    for(auto & i: _buttons_map)
+    {
+        AnimatedMenuItem* item = i.first;
+        item->runAction(button_hide());
+    }
+
+
+    float delay = 0.2;
     this->runAction(
                 CCSequence::create(
-                    CCDelayTime::create(0),
+                    CCDelayTime::create(delay),
                     callback,
                     NULL));
-
 }
-

@@ -18,6 +18,8 @@ ard_mode = sys.argv[1]
 from build_android_config import *
 project.addModule('android_ADInfo_Store_GooglePlay')
 project.addModule('android_ADInApp_GooglePlay')
+project.addModule('android_ADVirtualCurrency_TapJoy')
+
 project.output_name = 'proj.android'
 
 if ard_mode == 'debug':

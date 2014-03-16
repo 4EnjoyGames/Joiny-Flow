@@ -9,23 +9,33 @@
 #include "BackButton.h"
 #include "Core/DrawLayer.h"
 #include "Logic/Hints.h"
+#include <ADLib/Device/ADAds.h>
 
 class LevelScene : public DrawLayer //cocos2d::CCLayer
 {
 private:
+    class RateMePopUp;
     class TesterEndPopUp;
     class BuyHintPopUp;
     class LevelEndPopUp;
     class FlowDelegate;
 
 
-    void onNextLevel();
+    CCSequence* createHintAction();
+    CCSequence* _hint_action;
+    AnimatedMenuItem* _hint_button;
+
+    void doShowRateMe();
+    bool showRateMe();
+    void onNextLevel(const bool show_ads=true);
 
 
     Hints _hints;
     CCLabelTTF* _score_label;
     PopUpWindowManager _pop_up_manager;
     void hideEverything(cocos2d::CCCallFunc *callback);
+    //use to back button clicked
+    void hideEverythingAndBack(cocos2d::CCCallFunc *callback);
 
     //on back clicked
     void keyBackClicked();
@@ -34,6 +44,11 @@ private:
         keyBackClicked();
     }
 
+    //for renew hints after purchase
+    static LevelScene* _last_scene;
+    void renewOneHint();
+
+    void hintBlink();
 
     void onScoreChanged(const FlowScore);
     void onWin();
@@ -46,7 +61,10 @@ private:
     void onPreviousLevelClicked(CCObject*);
     void onNextLevelClicked(CCObject*);
     void onReloadLevelClicked(CCObject*);
-    void onHintClicked(CCObject*);
+
+
+    bool _show_open_animation;
+    void showAnimation();
 
     FlowScore _last_score;
     FlowScore _bronze;
@@ -60,6 +78,9 @@ private:
     const JoinyLevel* _current_level;
     const JoinyLevel* _next_level;
     const JoinyLevel* _previous_level;
+
+    bool _showed_ads;
+    bool _show_rate_me;
 
     CCProgressTimer* _progress_timer;
     float _procc;
@@ -78,18 +99,38 @@ private:
     MenuSpriteBatch* _buttons_menu;
 
     CCLabelTTF* _hint_number_text;
+
+    CCMenu* _back_menu;
+
+    //progress bar title
+    CCSprite* _progress ;
+
+    //buttons
+    std::vector<AnimatedMenuItem*> _buttons;
+    ADAds::Banner* _banner;
 public:
-    LevelScene(const JoinyLevel *);
+    LevelScene(const JoinyLevel *l,
+               bool show_animation,
+               bool show_rate_me);
 
-
+    static void purchaseUpdateHints();
+    void onHintClicked(CCObject*);
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
+    void onEnter();
+    void onExit();
 
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene(const JoinyLevel *current_level);
+    static cocos2d::CCScene* scene(const JoinyLevel *current_level,
+                                   bool show_animation = false,
+                                   bool show_rate_me = false);
 
 
-    static LevelScene* create(const JoinyLevel *level);
+    static LevelScene* create(const JoinyLevel *level,
+                              bool show_animation,
+                              bool show_rate_me);
+
+    void onHintClickedHelper();
 
 };
 

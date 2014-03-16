@@ -26,6 +26,9 @@ public:
 
     void endGame();
 
+    //play click sound - diff for all colors
+    //void playMusic(const FlowPoint& p);
+
     FlowGame(const FlowTable& table, DelegatePtr delegate);
     static FlowGame* create(const FlowTable& table, DelegatePtr delegate);
 
@@ -42,11 +45,38 @@ public:
     void deleteInterferePathes(const std::vector< FlowPoint>& path);
 
     void showPath(const std::vector< FlowPoint>& path);
-
+    void drawTable();
     //return the cell color
     const FlowColor getCellColor(const FlowPoint& point) const;
 
+    /**
+     * @brief The user input is tracked. The CCTouchDelegate is attached
+     * to CCDirector
+     */
+    void startTrackingTouch();
+    /**
+     * @brief The user input is no more tracked. The CCTouchDelegate is
+     * removed from CCDirector
+     */
+    void stopTrackingTouch();
+
+    /**
+     * @brief returns position where path is broken
+     * @return
+     */
+    int getHintPathBreakPosition(const std::vector< FlowPoint>& path);
+
+    bool areFlowPointsConnected(const FlowPoint& a, const FlowPoint& b);
 private:
+    /**
+     * @brief If true than the TouchDelegate is attached to CCDirector
+     */
+    bool _is_tracking_touch;
+
+    bool connectedFlowPoints(FlowPointState st1,
+                             FlowPointState st_previous) const;
+
+
     FlowRenderer* _renderer;
     const FlowTable* _table;
 

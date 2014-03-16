@@ -30,12 +30,20 @@ bool operator<(const JoinyPair& a, const JoinyPair& b)
     return false;
 }
 
-bool isGoodJoiny(const JoinyTask& task, const JoinyInfo& info)
+bool isGoodJoiny(const JoinyTask& task,JoinyInfo& info)
 {
-    Score precision = info.getGold()/20;
-    if(info.getBronze() + precision <= info.getSilver() &&
-            info.getSilver() <= info.getGold())
+    //Score precision = info.getGold()/25;
+    if(info.getBronze()!=0 && info.getSilver()!=0 &&
+            info.getGold()!=0)
     {
+//        if(info.getBronze() + precision <= info.getSilver() &&
+//                info.getSilver() <= info.getGold())
+//        {
+//            info.setBronze(info.getBronze()*0.7);
+//            return true;
+//        }
+//        else
+//            return false;
         return true;
     }
     else
@@ -48,8 +56,8 @@ bool isGooTask(const FlowTask& task)
     for(FlowTask::const_iterator it = task.begin(); it!=task.end(); ++it)
     {
         const FlowStartEnd& s = *it;
-//        if(s.size() != 2)
-//            return false;
+        //        if(s.size() != 2)
+        //            return false;
         if(areNeighboors(s.first, s.second))
             return false;
     }
@@ -95,24 +103,42 @@ bool operator<(const JoinyPuzzle& a, const JoinyPuzzle& b)
 JoinyInfo mergeInfo(const JoinyInfo a, const JoinyInfo b)
 {
     assert(a.getSilver() >= a.getBronze());
-    unsigned int step = a.getSilver() - a.getBronze();
-    if(step >= 1000)
-        step /= 2;
+
     unsigned int gold = std::max(a.getGold(), b.getGold());
-    JoinyInfo res(gold - 2*step,
-                  gold - step,
+    Score precision = gold/10;
+
+//    unsigned int step = a.getSilver() - a.getBronze();
+//    if(step >= 1000)
+//        step /= 2;
+
+    unsigned int bronze1 = std::min(a.getBronze(), b.getBronze());
+    unsigned int bronze2 = gold*0.7;
+
+    unsigned int silver1 = std::min(a.getSilver(), b.getSilver());
+    unsigned int silver2 = gold - precision;
+
+    unsigned int bronze = std::min(bronze1, bronze2);
+    unsigned int silver = std::min(silver1, silver2);
+
+    if(silver - bronze < precision ||
+            gold - silver < precision)
+    {
+        silver = (gold + bronze)/2;
+    }
+    JoinyInfo res(bronze,
+                  silver,
                   gold);
 
     if(a.getGold() > b.getGold())
-        res.getPathes() = a.getPathes();
+        res.setPathes(a.getPathes());
     else
-        res.getPathes() = b.getPathes();
+        res.setPathes(b.getPathes());
     return res;
 }
 void GenerateLevels(const unsigned int tablo_size,
-                const unsigned int level_number,
-                const unsigned int min_colors,
-                const unsigned int max_colors)
+                    const unsigned int level_number,
+                    const unsigned int min_colors,
+                    const unsigned int max_colors)
 {
 
     srand(time(0));
@@ -131,7 +157,7 @@ void GenerateLevels(const unsigned int tablo_size,
         FlowTask t = generate(joiny_size,joiny_size);
         std::sort(t.begin(), t.end());
 
-        //if(isGooTask(t))
+        if(isGooTask(t))
         {
             unsigned int colors = max;
 
@@ -149,43 +175,57 @@ void GenerateLevels(const unsigned int tablo_size,
             //std::sort(task.begin(), task.end());
 
 
-            //JoinyInfo info_old = solveJoiny(task,
-            //                                joiny_size,
-            //                                joiny_size);
+            JoinyInfo info_old = solveJoiny(task,
+                                            joiny_size,
+                                            joiny_size,
+                                            false);
 
             JoinyTask task_origin = flowToJoinyStaightforward(t);
             JoinyInfo info_origin = solveJoiny(task_origin,
                                                joiny_size,
-                                               joiny_size);
+                                               joiny_size,
+                                               true);
 
-            //JoinyInfo info = mergeInfo(info_old, info_origin);
-
-            if(1>2)//(info.getGold() > 100000)
+            if(info_origin.getGold() == 0)
             {
-                std::cout << "Bug!!" << endl;
+                std::cout << "No solution" << std::endl;
             }
-            else //if(isGoodJoiny(task, info))
+            else
             {
 
-                //std::sort(task.begin(), task.end());
-                //JoinyPuzzle puzzle(task, info);
-                JoinyPuzzle puzzle(task,info_origin);
+                JoinyInfo info = mergeInfo(info_old, info_origin);
 
-                good_tasks.insert(puzzle);
-                ++good;
+                if(info.getGold() > 1000000)
+                {
+                    std::cout << "Bug!!" << endl;
+                }
+                else if(isGoodJoiny(task, info))
+                {
 
+                    //std::sort(task.begin(), task.end());
+                    JoinyPuzzle puzzle(task, info);
+                    //JoinyPuzzle puzzle(task,info_origin);
+
+                    good_tasks.insert(puzzle);
+                    ++good;
+
+                }
             }
         }
         generated++;
-        if(generated % 10 == 0)
+        if(generated % 100 == 0)
             tabulate(generated, good, good_tasks.size());
     }
 
+    //suffle levels
+    std::vector<JoinyPuzzle> puzzle_vector(good_tasks.begin(),
+                                           good_tasks.end());
+    std::random_shuffle(puzzle_vector.begin(),puzzle_vector.end());
 
     //write in file all ell from the set
     unsigned int num = 0;
-    for(std::set<JoinyPuzzle>::iterator it = good_tasks.begin();
-        it != good_tasks.end();
+    for(std::vector<JoinyPuzzle>::iterator it = puzzle_vector.begin();
+        it != puzzle_vector.end();
         ++it)
     {
         JoinyPuzzle puzzle = *it;
@@ -248,7 +288,13 @@ void SaveCollection(std::string plan_file,
     uint32_t b_uint = std::stoi(b);
 
 
+    // read is this collection open or close
+    std::getline(infile, line);
+    std::string open_or_close = line;
+    uint32_t open_or_close_i = std::stoi(open_or_close);
 
+    //one more white line
+    std::getline(infile,line);
 
     std::vector<std::string> level_files_name;
     for(unsigned int i=0; i<level_num_i; ++i)
@@ -274,6 +320,7 @@ void SaveCollection(std::string plan_file,
     }
 
     //recolor puzzle
+    int i=0;
     for(std::vector<JoinyPuzzle>::iterator it = good_tasks.begin();
         it != good_tasks.end();
         ++it)
@@ -287,10 +334,11 @@ void SaveCollection(std::string plan_file,
         if(_past_palete == _curr_palete)
         {
             recolorJoiny(puzzle_ptr->getJoinyTask(),
-                                              _curr_palete);
+                         _curr_palete);
             _curr_palete = getPalete(*it);
         }
-
+        cout<<"recolored "<<i<<endl;
+        i++;
 
     }
 
@@ -314,6 +362,9 @@ void SaveCollection(std::string plan_file,
     os << r_uint;
     os << g_uint;
     os << b_uint;
+
+    //open or close
+    os << open_or_close_i;
 
     //levels
     os << good_tasks;

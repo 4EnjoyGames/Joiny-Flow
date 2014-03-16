@@ -675,14 +675,14 @@ bool CCScrollView::ccTouchBegan(CCTouch* touch, CCEvent* ev)
         m_tScrollDistance = ccp(0.0f, 0.0f);
         m_fTouchLength    = 0.0f;
     }
-    else if (m_pTouches->count() == 2)
-    {
-        m_tTouchPoint  = ccpMidpoint(this->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(0)),
-                                   this->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(1)));
-        m_fTouchLength = ccpDistance(m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(0)),
-                                   m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(1)));
-        m_bDragging  = false;
-    } 
+//    else if (m_pTouches->count() == 2)
+//    {
+//        m_tTouchPoint  = ccpMidpoint(this->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(0)),
+//                                   this->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(1)));
+//        m_fTouchLength = ccpDistance(m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(0)),
+//                                   m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(1)));
+//        m_bDragging  = false;
+//    }
 
 
     return true;
@@ -751,12 +751,12 @@ void CCScrollView::ccTouchMoved(CCTouch* touch, CCEvent* ev)
                 this->setContentOffset(ccp(newX, newY));
             }
         }
-        else if (m_pTouches->count() == 2 && !m_bDragging)
-        {
-            const float len = ccpDistance(m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(0)),
-                                            m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(1)));
-            this->setZoomScale(this->getZoomScale()*len/m_fTouchLength);
-        }
+//        else if (m_pTouches->count() == 2 && !m_bDragging)
+//        {
+//            const float len = ccpDistance(m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(0)),
+//                                            m_pContainer->convertTouchToNodeSpace((CCTouch*)m_pTouches->objectAtIndex(1)));
+//            this->setZoomScale(this->getZoomScale()*len/m_fTouchLength);
+//        }
     }
 
 

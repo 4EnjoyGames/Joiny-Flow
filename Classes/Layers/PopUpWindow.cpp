@@ -211,6 +211,9 @@ PopUpWindow* PopUpWindowManager::openWindow(PopUpWindow::Content* content,
  void PopUpWindowManager::do_openWindow(PopUpWindow* window,
                                         bool vertical_mode)
  {
+     if(_opened_window == nullptr)
+         runOnShowWindowActions();
+
      setMenusAvaliablitity(false);
      _opened_window = window;
      window->showWindow(vertical_mode);
@@ -222,7 +225,10 @@ void PopUpWindowManager::onLastClosed()
 {
     setMenusAvaliablitity(true);
     if(_pending_window == 0)
+    {
         _opened_window = 0;
+        runOnHideWindowActions();
+    }
     _pending_window = 0;
 }
 void PopUpWindowManager::addMenuToAutoDisable(cocos2d::CCMenu* menu)
@@ -246,6 +252,7 @@ void PopUpWindowManager::setMenusAvaliablitity(bool enabled)
         CCScrollView* m = _scroll_views[i];
         m->setTouchEnabled(enabled);
     }
+
 }
 
 bool PopUpWindowManager::backAction()
@@ -256,4 +263,26 @@ bool PopUpWindowManager::backAction()
         return true;
     }
     return false;
+}
+
+void PopUpWindowManager::addOnShowWindowAction(const Action& action)
+{
+    _show_window_action.push_back(action);
+}
+
+void PopUpWindowManager::addOnHideWindowAction(const Action& action)
+{
+    _hide_window_action.push_back(action);
+}
+
+void PopUpWindowManager::runOnShowWindowActions()
+{
+    for(auto& it : _show_window_action)
+        it();
+}
+
+void PopUpWindowManager::runOnHideWindowActions()
+{
+    for(auto& it : _hide_window_action)
+        it();
 }

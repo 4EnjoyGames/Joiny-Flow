@@ -1,4 +1,5 @@
 #include "AnimatedMenuItem.h"
+#include "Core/MusicSettings.h"
 
 //
 //CCAnimatedMenuItem
@@ -257,8 +258,8 @@ bool AnimatedMenuItem::initWithNormalSprite(CCNode* normalSprite, CCObject* targ
  */
 void AnimatedMenuItem::activate()
 {
-    //TODO: place music effect on click
-    //MusicSettings::playSoundEffect("music/choose.wav");
+    //place music effect on click
+    MusicSettings::playSoundEffect("music/choose.wav");
     CCMenuItem::activate();
 }
 

@@ -41,6 +41,8 @@ public:
     typedef map<unsigned int, OneTabloPathes > AllTablosPathes;
     AllTablosPathes _all_pathes;
 
+    bool _find_full_table_solution;
+
 
     NumberLink(const Distance width,
                const Distance height):
@@ -55,7 +57,9 @@ public:
         start_(size_ + 1),
         connected_x_(size_),
         connected_y_(size_),
-        memo_(size_) {}
+        memo_(size_),
+        _find_full_table_solution(false)
+    {}
 
     void Initialize()
     {
@@ -150,7 +154,7 @@ public:
         if (cell_key == size_)
         {
             Print();
-            return 1.0;
+            _find_full_table_solution = true;
         }
         else
         {
@@ -161,11 +165,26 @@ public:
         const vector<CellKey> mate_tuple(mates_.begin() + start_[cell_key],
                                          mates_.begin() + cell_key);
         const Hash mate_hash = GetHash(mate_tuple);
-        if (!memo_[cell_key].count(mate_hash))
+        if(cell_key < (width_ * height_) )
         {
-            memo_[cell_key][mate_hash] = Connect(cell_key);
+            if (!memo_[cell_key].count(mate_hash))
+            {
+                memo_[cell_key][mate_hash] = Connect(cell_key);
+            }
         }
-        return memo_[cell_key][mate_hash];
+
+        if(cell_key < (width_ * height_) )
+            return memo_[cell_key][mate_hash];
+        else
+        {
+            return 2.0;
+        }
+
+    }
+
+    bool findFullTableSolution()
+    {
+        return _find_full_table_solution;
     }
 
     double Connect(const CellKey cell_key)
@@ -227,7 +246,7 @@ public:
     }
 
     std::vector<bool> _traversed;
-    std::vector<bool> _hint_traveled;
+
 
     unsigned int traverse(const unsigned int x,
                           const unsigned int y,
@@ -277,10 +296,11 @@ public:
 
     void SaveAllPath()
     {
-        cout<<"Tablo"<<endl;
+        //cout<<"Tablo"<<endl;
 
-        _hint_traveled = std::vector<bool>(height_ * width_, false);
+        std::vector<int> _hint_traveled = std::vector<int>(height_ * width_, 0);
         _one_path.clear();//(height_ * width_, 0);
+        _one_tablo_pathes.clear();
 
         unsigned int result = 0;
 
@@ -289,25 +309,25 @@ public:
             for (Distance x = 0; x < width_ && !stop; x++)
             {
                 if (table_[GetCellKey(x, y)] &&
-                        !_hint_traveled[GetCellKey(x, y)])
+                        _hint_traveled[GetCellKey(x, y)] != 1)
                 {
                     CellNumber number = table_[GetCellKey(x, y)];
 
-                    result = saveOnePath(x,y,0,number);
+                    result = saveOnePath(x,y,0,number,_hint_traveled);
                     _one_tablo_pathes.push_back(_one_path);
 
 
-                    cout<<endl;
+                    //cout<<endl;
                     _one_path.clear();
 
-                    if(result == 0)
-                        stop = true;
+                    //if(result == 0)
+                    //    stop = true;
                 }
             }
-        if(result > 0)
-        {
+        //if(result > 0)
+        //{
             //add path to data base
-        }
+        //}
 
 
 
@@ -316,70 +336,72 @@ public:
     unsigned int saveOnePath(const unsigned int x,
                   const unsigned int y,
                   unsigned int path_lenth,
-                  const CellNumber& cell_number)
+                  const CellNumber& cell_number,
+                             std::vector<int>& _hint_traveled)
     {
-        _hint_traveled[GetCellKey(x, y)] = true;
+        _hint_traveled[GetCellKey(x, y)] = 1;
+        _one_path.push_back(FlowPoint(x,y));
 
-        if(path_lenth > 0 && table_[GetCellKey(x, y)])
+        if(path_lenth > 0 && table_[GetCellKey(x, y)]==1)
         {
-            cout << 'l' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
-            _one_path.push_back(FlowPoint(x,y));
+           // cout << 'l' << '(' << x << ',' << y << ')' << " = "
+           //      << static_cast<int>(cell_number)
+           //      << " = " << outCellCordinates(x, y) << endl;
+//            _one_path.push_back(FlowPoint(x,y));
             return 100;
         }
 
 
         //Next go to left?
         if(x > 0 && connected_x_[GetCellKey(x, y)] &&
-                !_hint_traveled[GetCellKey(x-1, y)])
+                _hint_traveled[GetCellKey(x-1, y)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
-            cout << 'l' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 'l' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x-1, y, path_lenth+1, cell_number);
+            return saveOnePath(x-1, y, path_lenth+1, cell_number,_hint_traveled);
         }
 
         //Next go to top?
         if(y > 0 && connected_y_[GetCellKey(x, y)] &&
-                !_hint_traveled[GetCellKey(x, y-1)])
+                _hint_traveled[GetCellKey(x, y-1)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
-            cout << 'b' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 'b' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x, y-1, path_lenth+1, cell_number);
+            return saveOnePath(x, y-1, path_lenth+1, cell_number,_hint_traveled);
         }
 
         //Next go to right?
         if(x+1 < width_ && connected_x_[GetCellKey(x+1, y)] &&
-                !_hint_traveled[GetCellKey(x+1, y)])
+                _hint_traveled[GetCellKey(x+1, y)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
-            cout << 'r' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 'r' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x+1, y, path_lenth+1, cell_number);
+            return saveOnePath(x+1, y, path_lenth+1, cell_number,_hint_traveled);
         }
 
         //Next go bottom?
         if(y+1 < height_ && connected_y_[GetCellKey(x, y+1)] &&
-                !_hint_traveled[GetCellKey(x, y+1)])
+                _hint_traveled[GetCellKey(x, y+1)]!=1)
         {
-            _one_path.push_back(FlowPoint(x,y));
+            //_one_path.push_back(FlowPoint(x,y));
 
-            cout << 't' << '(' << x << ',' << y << ')' << " = "
-                 << static_cast<int>(cell_number)
-                 << " = " << outCellCordinates(x, y) << endl;
+//            cout << 't' << '(' << x << ',' << y << ')' << " = "
+//                 << static_cast<int>(cell_number)
+//                 << " = " << outCellCordinates(x, y) << endl;
 
-            return saveOnePath(x, y+1, path_lenth+1, cell_number);
+            return saveOnePath(x, y+1, path_lenth+1, cell_number,_hint_traveled);
         }
 
         return 0;
@@ -741,10 +763,25 @@ unsigned int clamp(const unsigned int num, const unsigned int clamper)
 {
     return (num / clamper) * clamper;
 }
-
+std::vector<NumberLink::Scores> getScores(const JoinyTask& task,
+                                          const unsigned int width,
+                                          const unsigned int height)
+{
+    return std::vector<NumberLink::Scores>();
+}
+unsigned int getPathesSize(const NumberLink::OneTabloPathes& tablo_pathes)
+{
+    unsigned int result = 0;
+    for(unsigned int i=0; i<tablo_pathes.size(); ++i)
+    {
+        result += tablo_pathes[i].size();
+    }
+    return result;
+}
 JoinyInfo solveJoiny(const JoinyTask& task,
                      const unsigned int width,
-                     const unsigned int height)
+                     const unsigned int height,
+                     bool full_board_solution)
 {
     NumberLink nl((int)width, (int)height);
     nl.Initialize();
@@ -761,10 +798,9 @@ JoinyInfo solveJoiny(const JoinyTask& task,
 
     }
 
-    unsigned int solution_count = nl.Solve();
-    //cout << "Solutions found: " << solution_count << endl;
+    int solution_count = nl.Solve();
 
-    if(solution_count > 0)
+    if(solution_count >0 /*&& nl.findFullTableSolution()*/)
     {
 
         NumberLink::Scores& sc = nl._scores;
@@ -804,13 +840,23 @@ JoinyInfo solveJoiny(const JoinyTask& task,
             has_pathes = true;
         }
 
-        unsigned int average = sum/n;
-        JoinyInfo info = JoinyInfo(clamp(average, 500),
-                         clamp((average + max)/2, 500),
-                         clamp(max, 500));
-        if(has_pathes)
-            info.getPathes() = tablo_pathes;
-        return info;
+        //firstly see is corect info abou "full table solution"
+        unsigned int tablo_size = width*height;
+        unsigned int solution_size = getPathesSize(tablo_pathes);
+
+        if(tablo_size==solution_size || !full_board_solution)
+        {
+            unsigned int average = sum/n;
+            JoinyInfo info = JoinyInfo(clamp(average, 500),
+                             clamp((average + max)/2, 500),
+                             clamp(max, 500));
+
+            //if(nl.findFullTableSolution())
+            info.setPathes(tablo_pathes);
+            return info;
+        }
+        else
+            return JoinyInfo(0,0,0);
     }
     return JoinyInfo(0,0,0);
 }
@@ -845,15 +891,41 @@ void palete4(unsigned int c1, unsigned int c2,
 }
 void JoinyColorSchemeInit()
 {
-    palete2(0,1);
+    //palete2(0,1);
     palete2(2,6);
+    palete2(7,5);
 
-    palete3(2,5,6);
-    palete3(0,2,1);
+    palete2(4,1);
+    palete2(7,6);
+    palete2(2,3);
+
+    //palete3(3,5,6);
+    palete3(4,2,1);
+
+    palete3(6,7,2);
+    palete3(0,3,2);
 
     palete4(0,1,3,2);
     palete4(2,7,5,3);
+
+    palete4(0,5,6,7);
+    palete4(4,1,2,5);
 }
+
+bool equalPalete(const Palete& p1, const Palete& p2)
+{
+    bool res = true;
+    for(unsigned int i=0; i<p1.size(); ++i)
+    {
+        if(p1[i]!=p2[i])
+        {
+            res = false;
+            break;
+        }
+    }
+    return res;
+}
+
 const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
 {
     static bool init = false;
@@ -866,11 +938,21 @@ const Palete& getColorSchemeExceptBadPalete(const Palete& bad_palete)
 
 
     auto& paletes = _paletes[bad_palete.size()];
-    for(unsigned int i=0; i<paletes.size(); ++i)
+//    for(unsigned int i=0; i<paletes.size(); ++i)
+//    {
+//        if(paletes[i]!=bad_palete)
+//            return paletes[i];
+//    }
+
+    int min = 0;
+    int max = paletes.size()-1;
+    int num =  min + (rand() % (int)(max - min + 1));
+
+    while(equalPalete(paletes[num],bad_palete))
     {
-        if(paletes[i]!=bad_palete)
-            return paletes[i];
+        num =  min + (rand() % (int)(max - min + 1));
     }
+    return paletes[num];
 
 }
 
