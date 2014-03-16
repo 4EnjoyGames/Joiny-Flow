@@ -26,13 +26,14 @@ int CALLBACK WinMain(
     ADDeviceEmulator* emulator = ADDeviceEmulator::getInstance();
 
 //    DeviceConfig custom(Device::Custom);
+//    custom.setDeviceName("Custom");
 //    custom.setScreenDencity(1.0);
-//    custom.setScreenWidth(558);
-//    custom.setScreenHeight(418);
+//    custom.setScreenWidth(800);
+//    custom.setScreenHeight(480);
 //    emulator->setCustomDevice(custom);
 
     emulator->setFitTheScreen(true);
-    emulator->setDevice(Device::Galaxy_Y);
+    emulator->setDevice(Device::Galaxy_Ace2);
     emulator->setLanguage("en");
     emulator->setOrientation(Orientation::Portrait);
 
