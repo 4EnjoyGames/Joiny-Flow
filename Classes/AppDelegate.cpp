@@ -157,6 +157,15 @@ void initInAppPurchases()
             hints_1000.setParameter("asku", "joiny.premium.hints_1000");
         }
     }
+    else if(store == ADStore::iTunes)
+    {
+        if(GameInfo::getVersion() == Version::Premium)
+        {
+            hints_10.setParameter("asku", "joiny.premium.hints_10");
+            hints_100.setParameter("asku", "joiny.premium.hints_100");
+            hints_1000.setParameter("asku", "joiny.premium.hints_1000");
+        }
+    }
 
     if(GameInfo::getVersion() != Version::Premium)
         ADInApp::addProduct(unlock_full);
