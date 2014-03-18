@@ -21,14 +21,11 @@
 		8402CE7818A41DD600703CF7 /* ADBrowser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8402CE7718A41DD600703CF7 /* ADBrowser.mm */; };
 		840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840AE31D18A02F5200189085 /* libcocos2dx.a */; };
 		841B2C6018D5B6ED0064AA59 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841B2C5E18D5B6ED0064AA59 /* AdSupport.framework */; };
-		841B2C6118D5B6ED0064AA59 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841B2C5F18D5B6ED0064AA59 /* iAd.framework */; };
-		84B0AA8A18D5C17500E0C39A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA8918D5C17500E0C39A /* CoreTelephony.framework */; };
 		84B0AA8C18D5C17F00E0C39A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA8B18D5C17F00E0C39A /* MessageUI.framework */; };
-		84B0AA9C18D5C61900E0C39A /* ADAds_AdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B0AA8E18D5C61900E0C39A /* ADAds_AdMob.mm */; };
-		84B0AA9D18D5C61900E0C39A /* libAdapterIAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA9918D5C61900E0C39A /* libAdapterIAd.a */; };
-		84B0AA9E18D5C61900E0C39A /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B0AA9A18D5C61900E0C39A /* libGoogleAdMobAds.a */; };
-		84B0AA9F18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B0AA9B18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt */; };
 		84B0AAA218D5C73C00E0C39A /* ADInApp_iTunes.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B0AAA118D5C73C00E0C39A /* ADInApp_iTunes.mm */; };
+		84DFD8A318D8D15D00CA3500 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84DFD8A118D8D15D00CA3500 /* PlatformEmulator.cpp */; };
+		84DFD8A618D8D20E00CA3500 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84DFD8A518D8D20E00CA3500 /* version.cpp */; };
+		84DFD8AF18D8D9DD00CA3500 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DFD8AE18D8D9DD00CA3500 /* StoreKit.framework */; };
 		84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B11547F06B00633F88 /* OpenAL.framework */; };
 		84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B31547F06B00633F88 /* AudioToolbox.framework */; };
 		84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B51547F06B00633F88 /* AVFoundation.framework */; };
@@ -91,7 +88,6 @@
 		84F198AD18D59985006A5221 /* ADBMFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1989D18D59985006A5221 /* ADBMFont.cpp */; };
 		84F198AE18D59985006A5221 /* ADColoredSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1989F18D59985006A5221 /* ADColoredSprite.cpp */; };
 		84F198AF18D59985006A5221 /* ADShaderSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F198A118D59985006A5221 /* ADShaderSprite.cpp */; };
-		84F198B218D59A9A006A5221 /* ADVirtualCurrency.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84F198B118D59A9A006A5221 /* ADVirtualCurrency.mm */; };
 		84F198BD18D59E85006A5221 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198B318D59E85006A5221 /* Default-568h@2x.png */; };
 		84F198BE18D59E85006A5221 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198B418D59E85006A5221 /* Default.png */; };
 		84F198BF18D59E85006A5221 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198B518D59E85006A5221 /* Default@2x.png */; };
@@ -105,7 +101,6 @@
 		84F198CE18D5A9C9006A5221 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F198CA18D5A9C9006A5221 /* Default-Portrait.png */; };
 		84F198CF18D5A9C9006A5221 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 84F198CB18D5A9C9006A5221 /* iTunesArtwork */; };
 		84F198D018D5A9C9006A5221 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 84F198CC18D5A9C9006A5221 /* iTunesArtwork@2x */; };
-		84F198DC18D5ACB2006A5221 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F198DB18D5ACB2006A5221 /* StoreKit.framework */; };
 		BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492D4B1289302400A09262 /* OpenGLES.framework */; };
 		BF1373F0128A899500D9F789 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492C21128924A800A09262 /* libxml2.dylib */; };
 		BF1373F1128A899E00D9F789 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF492B6912891AC600A09262 /* libz.dylib */; };
@@ -156,20 +151,11 @@
 		841B2C5F18D5B6ED0064AA59 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		84B0AA8918D5C17500E0C39A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		84B0AA8B18D5C17F00E0C39A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		84B0AA8E18D5C61900E0C39A /* ADAds_AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADAds_AdMob.mm; sourceTree = "<group>"; };
-		84B0AA9018D5C61900E0C39A /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		84B0AA9118D5C61900E0C39A /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		84B0AA9218D5C61900E0C39A /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		84B0AA9318D5C61900E0C39A /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		84B0AA9418D5C61900E0C39A /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		84B0AA9518D5C61900E0C39A /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		84B0AA9618D5C61900E0C39A /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		84B0AA9718D5C61900E0C39A /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		84B0AA9818D5C61900E0C39A /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		84B0AA9918D5C61900E0C39A /* libAdapterIAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdapterIAd.a; sourceTree = "<group>"; };
-		84B0AA9A18D5C61900E0C39A /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		84B0AA9B18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HOW_TO_INTEGRATE.txt; sourceTree = "<group>"; };
 		84B0AAA118D5C73C00E0C39A /* ADInApp_iTunes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADInApp_iTunes.mm; sourceTree = "<group>"; };
+		84DFD8A118D8D15D00CA3500 /* PlatformEmulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformEmulator.cpp; sourceTree = "<group>"; };
+		84DFD8A518D8D20E00CA3500 /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = version.cpp; sourceTree = "<group>"; };
+		84DFD8A918D8D97E00CA3500 /* Joiny.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Joiny.entitlements; sourceTree = "<group>"; };
+		84DFD8AE18D8D9DD00CA3500 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		84E80D9718A2BA000003E3D5 /* CocosDenshion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocosDenshion.xcodeproj; path = ../../../CocosDenshion/proj.ios/CocosDenshion.xcodeproj; sourceTree = "<group>"; };
 		84F197E518D5986F006A5221 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		84F197E618D5986F006A5221 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -303,7 +289,6 @@
 		84F198A018D59985006A5221 /* ADColoredSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADColoredSprite.h; sourceTree = "<group>"; };
 		84F198A118D59985006A5221 /* ADShaderSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADShaderSprite.cpp; sourceTree = "<group>"; };
 		84F198A218D59985006A5221 /* ADShaderSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADShaderSprite.h; sourceTree = "<group>"; };
-		84F198B118D59A9A006A5221 /* ADVirtualCurrency.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ADVirtualCurrency.mm; sourceTree = "<group>"; };
 		84F198B318D59E85006A5221 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		84F198B418D59E85006A5221 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		84F198B518D59E85006A5221 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -317,7 +302,6 @@
 		84F198CA18D5A9C9006A5221 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = SOURCE_ROOT; };
 		84F198CB18D5A9C9006A5221 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = SOURCE_ROOT; };
 		84F198CC18D5A9C9006A5221 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = SOURCE_ROOT; };
-		84F198DB18D5ACB2006A5221 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BF137426128A8E4600D9F789 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BF365AA612A103F70050DCF4 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		BF365AA712A103F70050DCF4 /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
@@ -335,21 +319,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8402CE6D18A411D000703CF7 /* SystemConfiguration.framework in Frameworks */,
-				84B0AA9D18D5C61900E0C39A /* libAdapterIAd.a in Frameworks */,
-				84F198DC18D5ACB2006A5221 /* StoreKit.framework in Frameworks */,
 				84B0AA8C18D5C17F00E0C39A /* MessageUI.framework in Frameworks */,
-				84B0AA8A18D5C17500E0C39A /* CoreTelephony.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */,
 				84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */,
 				841B2C6018D5B6ED0064AA59 /* AdSupport.framework in Frameworks */,
-				841B2C6118D5B6ED0064AA59 /* iAd.framework in Frameworks */,
 				8402CE6B18A411BB00703CF7 /* Security.framework in Frameworks */,
 				8402CE6918A4118D00703CF7 /* libFlurry_4.3.1.a in Frameworks */,
 				84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */,
+				84DFD8AF18D8D9DD00CA3500 /* StoreKit.framework in Frameworks */,
 				84E80D9D18A2BA860003E3D5 /* libCocosDenshion.a in Frameworks */,
 				840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */,
-				84B0AA9E18D5C61900E0C39A /* libGoogleAdMobAds.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				BF1373EF128A898400D9F789 /* OpenGLES.framework in Frameworks */,
@@ -373,6 +353,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				84DFD8A918D8D97E00CA3500 /* Joiny.entitlements */,
+				84DFD8A418D8D20E00CA3500 /* Premium */,
 				84F1987618D59985006A5221 /* ADLib */,
 				84F197E418D5986E006A5221 /* Classes */,
 				8402CE5618A4071700703CF7 /* ADLibImpl */,
@@ -389,11 +371,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84DFD8AE18D8D9DD00CA3500 /* StoreKit.framework */,
 				84B0AA8B18D5C17F00E0C39A /* MessageUI.framework */,
 				84B0AA8918D5C17500E0C39A /* CoreTelephony.framework */,
 				841B2C5E18D5B6ED0064AA59 /* AdSupport.framework */,
 				841B2C5F18D5B6ED0064AA59 /* iAd.framework */,
-				84F198DB18D5ACB2006A5221 /* StoreKit.framework */,
 				8402CE6C18A411D000703CF7 /* SystemConfiguration.framework */,
 				8402CE6A18A411B900703CF7 /* Security.framework */,
 				BF492B6912891AC600A09262 /* libz.dylib */,
@@ -442,8 +424,6 @@
 			isa = PBXGroup;
 			children = (
 				84B0AAA018D5C73C00E0C39A /* ADInApp_iTunes */,
-				84B0AA8D18D5C61900E0C39A /* ADAds_AdMob */,
-				84F198B018D59A9A006A5221 /* ADVirtualCurrency_TapJoy */,
 				8402CE7618A41DD600703CF7 /* ADBrowser */,
 				8402CE7118A41B0500703CF7 /* ADNotification */,
 				8402CE6E18A4174800703CF7 /* ADInfo */,
@@ -510,35 +490,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84B0AA8D18D5C61900E0C39A /* ADAds_AdMob */ = {
-			isa = PBXGroup;
-			children = (
-				84B0AA8E18D5C61900E0C39A /* ADAds_AdMob.mm */,
-				84B0AA8F18D5C61900E0C39A /* AdMobSDK */,
-				84B0AA9B18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt */,
-			);
-			name = ADAds_AdMob;
-			path = ../libraries/ADLib/platform/iOS/ADAds_AdMob;
-			sourceTree = "<group>";
-		};
-		84B0AA8F18D5C61900E0C39A /* AdMobSDK */ = {
-			isa = PBXGroup;
-			children = (
-				84B0AA9018D5C61900E0C39A /* GADAdMobExtras.h */,
-				84B0AA9118D5C61900E0C39A /* GADAdNetworkExtras.h */,
-				84B0AA9218D5C61900E0C39A /* GADAdSize.h */,
-				84B0AA9318D5C61900E0C39A /* GADBannerView.h */,
-				84B0AA9418D5C61900E0C39A /* GADBannerViewDelegate.h */,
-				84B0AA9518D5C61900E0C39A /* GADInterstitial.h */,
-				84B0AA9618D5C61900E0C39A /* GADInterstitialDelegate.h */,
-				84B0AA9718D5C61900E0C39A /* GADRequest.h */,
-				84B0AA9818D5C61900E0C39A /* GADRequestError.h */,
-				84B0AA9918D5C61900E0C39A /* libAdapterIAd.a */,
-				84B0AA9A18D5C61900E0C39A /* libGoogleAdMobAds.a */,
-			);
-			path = AdMobSDK;
-			sourceTree = "<group>";
-		};
 		84B0AAA018D5C73C00E0C39A /* ADInApp_iTunes */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,6 +497,15 @@
 			);
 			name = ADInApp_iTunes;
 			path = ../libraries/ADLib/platform/iOS/ADInApp_iTunes;
+			sourceTree = "<group>";
+		};
+		84DFD8A418D8D20E00CA3500 /* Premium */ = {
+			isa = PBXGroup;
+			children = (
+				84DFD8A518D8D20E00CA3500 /* version.cpp */,
+			);
+			name = Premium;
+			path = ../VersionSelector/Premium;
 			sourceTree = "<group>";
 		};
 		84E80D9818A2BA000003E3D5 /* Products */ = {
@@ -793,15 +753,6 @@
 			path = Rendering;
 			sourceTree = "<group>";
 		};
-		84F198B018D59A9A006A5221 /* ADVirtualCurrency_TapJoy */ = {
-			isa = PBXGroup;
-			children = (
-				84F198B118D59A9A006A5221 /* ADVirtualCurrency.mm */,
-			);
-			name = ADVirtualCurrency_TapJoy;
-			path = ../libraries/ADLib/platform/iOS/ADVirtualCurrency_TapJoy;
-			sourceTree = "<group>";
-		};
 		BF5681CC1313A84D0055EEAC /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -810,6 +761,7 @@
 				BF365AA712A103F70050DCF4 /* AppController.mm */,
 				BF4DE6AB138BB89600CF907D /* RootViewController.h */,
 				BF4DE6AC138BB89600CF907D /* RootViewController.mm */,
+				84DFD8A118D8D15D00CA3500 /* PlatformEmulator.cpp */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -848,11 +800,14 @@
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
+							com.apple.Passbook = {
+								enabled = 0;
+							};
 						};
 					};
 				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Joiny" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JoinyPremium" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -910,7 +865,6 @@
 				84F1986F18D598A0006A5221 /* banners in Resources */,
 				84F1987518D598A0006A5221 /* translations in Resources */,
 				84F198CE18D5A9C9006A5221 /* Default-Portrait.png in Resources */,
-				84B0AA9F18D5C61900E0C39A /* HOW_TO_INTEGRATE.txt in Resources */,
 				84F1987118D598A0006A5221 /* images-normal in Resources */,
 				84F198C118D59E85006A5221 /* Icon-72.png in Resources */,
 				84F198BD18D59E85006A5221 /* Default-568h@2x.png in Resources */,
@@ -947,7 +901,6 @@
 				84F1984D18D5986F006A5221 /* FlowPointState.cpp in Sources */,
 				84F198A418D59985006A5221 /* ADAds.cpp in Sources */,
 				84F1985218D5986F006A5221 /* ThreeBlockShuffle.cpp in Sources */,
-				84F198B218D59A9A006A5221 /* ADVirtualCurrency.mm in Sources */,
 				84F1985918D5986F006A5221 /* CCLocalizedString.cpp in Sources */,
 				84F1986418D5986F006A5221 /* MainScene.cpp in Sources */,
 				84F1986018D5986F006A5221 /* Tutorial.cpp in Sources */,
@@ -956,12 +909,14 @@
 				8402CE6818A4118D00703CF7 /* ADStatistics_Flurry.mm in Sources */,
 				84F1984618D5986F006A5221 /* DrawLayer.cpp in Sources */,
 				84F1985E18D5986F006A5221 /* JoinyLevel.cpp in Sources */,
+				84DFD8A318D8D15D00CA3500 /* PlatformEmulator.cpp in Sources */,
 				84F1984418D5986F006A5221 /* AnimatedMenuItem.cpp in Sources */,
 				84F1984518D5986F006A5221 /* CCScrollView.cpp in Sources */,
 				84F198A318D59985006A5221 /* ADRandom.cpp in Sources */,
 				84F198AA18D59985006A5221 /* ADVirtualCurrency.cpp in Sources */,
 				84F1985518D5986F006A5221 /* BackgroundHolder.cpp in Sources */,
 				84F198A718D59985006A5221 /* ADInfo.cpp in Sources */,
+				84DFD8A618D8D20E00CA3500 /* version.cpp in Sources */,
 				84F1985018D5986F006A5221 /* FlowTable.cpp in Sources */,
 				84F1985318D5986F006A5221 /* TwoShuffle.cpp in Sources */,
 				84F1985118D5986F006A5221 /* FGenerator.cpp in Sources */,
@@ -992,7 +947,6 @@
 				84F1984318D5986F006A5221 /* BackButton.cpp in Sources */,
 				84F1986118D5986F006A5221 /* DeveloperScene.cpp in Sources */,
 				84F198A818D59985006A5221 /* ADLanguage.cpp in Sources */,
-				84B0AA9C18D5C61900E0C39A /* ADAds_AdMob.mm in Sources */,
 				84F198AB18D59985006A5221 /* ADBakeNode.cpp in Sources */,
 				84F1984218D5986F006A5221 /* AppDelegate.cpp in Sources */,
 				84F198AE18D59985006A5221 /* ADColoredSprite.cpp in Sources */,
@@ -1047,7 +1001,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Joiny;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "AE166AA6-4C96-426E-8C7F-6875CC854E9A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv6 armv7 i386";
@@ -1095,7 +1049,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Joiny;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "AE166AA6-4C96-426E-8C7F-6875CC854E9A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1144,7 +1098,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Joiny" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "JoinyPremium" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
