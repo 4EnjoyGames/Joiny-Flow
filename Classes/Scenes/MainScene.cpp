@@ -6,7 +6,7 @@
 #include "Localization/CCLocalizedString.h"
 #include "GameInfo.h"
 #include "Core/Fonts.h"
-
+#include "Logic/RW.h"
 
 class MainScene::GoOutPopUp : public PopUpWindow::Content
 {
@@ -26,6 +26,7 @@ private:
 
     void onYes(CCObject*)
     {
+        RW::getLevelManager().saveSettings();
         CCDirector::sharedDirector()->end();
         //TODO: leave the game
     }

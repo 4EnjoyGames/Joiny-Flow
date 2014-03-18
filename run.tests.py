@@ -9,7 +9,7 @@ devices = [ #'IPhone3GS',
     #'IPhone5',
     #'IPad2',
     #'IPad4',
-    #'Galaxy_Ace2',
+    'Galaxy_Ace2',
     #'Galaxy_Mini2',
     #'HTC_One_S',
     #'Motorola_Droid',
@@ -21,7 +21,7 @@ devices = [ #'IPhone3GS',
     #'Kindle_Fire',
     #'Microsoft_Surface_10',
     #'HD_720p',
-    'Custom'
+    #'Custom'
 ]
 
 languages = ['en']#, 'uk']
