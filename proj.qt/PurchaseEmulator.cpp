@@ -26,3 +26,6 @@ std::string ADLanguage::platformGetDeviceLanguage()
 {
     return ADDeviceEmulator::getInstance()->getDeviceLanguage();
 }
+
+#include "GameInfo.h"
+Version GameInfo::_version = Version::Free;

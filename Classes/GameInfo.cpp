@@ -95,11 +95,21 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
     }
     else
     {
-        //TODO: put real package name
-        if(ADInfo::getPlatform() == ADPlatform::iOS)
-            return "id816101116";
+        if(GameInfo::getVersion() == Version::Premium)
+        {
+            if(ADInfo::getPlatform() == ADPlatform::iOS)
+                return "id842057927";
+            else
+                return "com.x4enjoy.joinypremium";
+
+        }
         else
-            return "com.x4enjoy.joiny";
+        {
+            if(ADInfo::getPlatform() == ADPlatform::iOS)
+                return "id816101116";
+            else
+                return "com.x4enjoy.joiny";
+        }
     }
 
 
@@ -109,4 +119,9 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
 const std::string GameInfo::getPackageName(std::string game_name)
 {
     return doGetPackageName(game_name);
+}
+
+Version GameInfo::getVersion()
+{
+    return _version;
 }

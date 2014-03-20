@@ -15,12 +15,12 @@ if len(sys.argv) < 2:
 ard_mode = sys.argv[1]
 
 
-from build_android_config import *
-project.addModule('android_ADInfo_Store_AmazonStore')
-project.addModule('android_ADInApp_Amazon')
+from build_android_config_premium import *
+project.addModule('android_ADInfo_Store_GooglePlay')
+project.addModule('android_ADInApp_GooglePlay')
 project.addModule('android_ADVirtualCurrency_None')
 
-project.output_name = 'proj.android.amazon'
+project.output_name = 'proj.android.premium'
 
 if ard_mode == 'debug':
     project.debuggable = True

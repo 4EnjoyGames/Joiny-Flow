@@ -17,6 +17,8 @@ LevelManager::LevelManager()
       _settings_path(FileUtils::getStorageFilePath("settings.ad")),
       _hints_path(FileUtils::getStorageFilePath("hints.ad"))
 {
+    if(GameInfo::getVersion() == Version::Premium)
+        _hints_number = 100;
 }
 
 void LevelManager::onInit()
