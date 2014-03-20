@@ -147,6 +147,7 @@
     </ClCompile>
     <ClCompile Include="PlatformImpl.cpp" />
     <ClCompile Include="..\..\..\..\VersionSelector\Free\version.cpp" />
+    <ClCompile Include="EditBoxEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProvider.h" />
@@ -337,6 +338,7 @@
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADShaderSprite.h">
       <Filter>ADLib\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="EditBoxEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Classes">

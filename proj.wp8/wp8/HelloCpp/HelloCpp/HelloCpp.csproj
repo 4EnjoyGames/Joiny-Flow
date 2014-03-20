@@ -90,19 +90,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\App.xaml.cs">
-      <Link>App.xaml.cs</Link>
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\EditBox.xaml.cs">
-      <Link>EditBox.xaml.cs</Link>
-      <DependentUpon>EditBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\MainPage.xaml.cs">
-      <Link>MainPage.xaml.cs</Link>
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="App.xaml.cs" />
+    <Compile Include="EditBox.xaml.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="MainPage.xaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -155,19 +146,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\App.xaml">
-      <Link>App.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="App.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\EditBox.xaml">
-      <Link>EditBox.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="EditBox.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\MainPage.xaml">
-      <Link>MainPage.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

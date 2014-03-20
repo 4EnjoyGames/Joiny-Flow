@@ -237,6 +237,7 @@
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBMFont.h" />
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADColoredSprite.h" />
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADShaderSprite.h" />
+    <ClInclude Include="EditBoxEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Cocos2dRenderer.cpp">
@@ -322,6 +323,7 @@
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADColoredSprite.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADShaderSprite.cpp" />
     <ClCompile Include="..\..\..\..\VersionSelector\Free\version.cpp" />
+    <ClCompile Include="EditBoxEvent.cpp" />
     <ClCompile Include="PlatformImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
