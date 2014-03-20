@@ -146,6 +146,7 @@
       <Filter>ADLib\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="PlatformImpl.cpp" />
+    <ClCompile Include="..\..\..\..\VersionSelector\Free\version.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProvider.h" />

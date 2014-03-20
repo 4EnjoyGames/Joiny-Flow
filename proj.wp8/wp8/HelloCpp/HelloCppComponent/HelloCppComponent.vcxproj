@@ -321,6 +321,7 @@
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBMFont.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADColoredSprite.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADShaderSprite.cpp" />
+    <ClCompile Include="..\..\..\..\VersionSelector\Free\version.cpp" />
     <ClCompile Include="PlatformImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
