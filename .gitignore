@@ -3,6 +3,10 @@
 *.lo
 *.o
 
+*.opensdf
+*.sdf
+*.suo
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
@@ -16,7 +20,7 @@ JoinyGenerator/*.ad
 JoinyGenerator/release
 Resources
 build
-assets
+proj.androi*/assets
 bin
 gen
 obj
@@ -62,4 +66,6 @@ profile
 documentation/html
 documentation/latex
 *.pyc
+
+
 

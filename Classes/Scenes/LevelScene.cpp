@@ -1409,6 +1409,6 @@ void LevelScene::keyBackClicked()
 }
 void LevelScene::onHintClickedHelper()
 {
-    CCObject* obj;
-    onHintClicked(obj);
+    //CCObject* obj;
+    onHintClicked(0);
 }

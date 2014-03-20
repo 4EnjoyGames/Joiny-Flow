@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{a4834eea-6196-4053-94db-fe9f3a75f67c}</ProjectGuid>
+    <RootNamespace>PhoneDirect3DXamlAppComponent</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <WinMDAssembly>true</WinMDAssembly>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup>
+    <!-- If OutDir was set outside of the project file, then we will append ProjectName -->
+    <OutDir Condition="'$(OutDirWasSpecified)' == 'true'">$(OutDir)\$(MSBuildProjectName)\</OutDir>
+    <!-- else, OutDir needs to have project specific directory in order to handle files with unique names -->
+    <OutDir Condition="'$(OutDirWasSpecified)' != 'true' and '$(Platform)' == 'Win32'">$(SolutionDir)$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <OutDir Condition="'$(OutDirWasSpecified)' != 'true' and '$(Platform)' != 'Win32'">$(SolutionDir)$(Platform)\$(Configuration)\$(MSBuildProjectName)\</OutDir>
+    <!-- After OutDir has been fixed, disable Microsoft.common.targets from fixing it again -->
+    <OutDirWasSpecified>false</OutDirWasSpecified>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>../../../../Classes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>../../../../Classes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>../../../../Classes;../../../../libraries/ADLib/src;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>../../../../Classes;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;WP8;_WP8;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\wp8;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\winrt;$(ProjectDir)..\..\..\Classes;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common;$(ProjectDir)..\..\..\..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\..\..\..\extensions;$(ProjectDir)..\..\..\..\..\..\external;$(ProjectDir)..\..\..\..\..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\..\..\..\cocos2dx\kazmath\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4267;4251;4244;4453;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;WP8;_WP8;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\wp8;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\winrt;$(ProjectDir)..\..\..\Classes;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common;$(ProjectDir)..\..\..\..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\..\..\..\extensions;$(ProjectDir)..\..\..\..\..\..\external;$(ProjectDir)..\..\..\..\..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\..\..\..\cocos2dx\kazmath\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4267;4251;4244;4453;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;WP8;_WP8;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\wp8;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\winrt;$(ProjectDir)..\..\..\Classes;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common;$(ProjectDir)..\..\..\..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\..\..\..\extensions;$(ProjectDir)..\..\..\..\..\..\external;$(ProjectDir)..\..\..\..\..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\..\..\..\cocos2dx\kazmath\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4267;4251;4244;4453;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PreprocessorDefinitions>_WINRT_DLL;WP8;_WP8;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalUsingDirectories>$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <CompileAsWinRT>true</CompileAsWinRT>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\wp8;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\winrt;$(ProjectDir)..\..\..\Classes;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\include;$(ProjectDir)..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common;$(ProjectDir)..\..\..\..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\..\..\..\extensions;$(ProjectDir)..\..\..\..\..\..\external;$(ProjectDir)..\..\..\..\..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\..\..\..\..\cocos2dx\kazmath\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4267;4251;4244;4453;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalDependencies>d3d11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="platform.winmd">
+      <IsWinMDFile>true</IsWinMDFile>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Cocos2dRenderer.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProvider.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProviderBase.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DInterop.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\DirectXBase.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\DirectXHelper.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InputEvent.h" />
+    <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InputEventTypes.h" />
+    <ClInclude Include="..\..\..\..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\..\..\..\Classes\AppMacros.h" />
+    <ClInclude Include="..\..\..\..\Classes\BackButton.h" />
+    <ClInclude Include="..\..\..\..\Classes\cocos2d-A.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\AnimatedMenuItem.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\CCScrollView.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\CCTime.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\DrawLayer.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\FileUtils.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\Fonts.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\GraphicsManager.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\MenuSpriteBatch.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\MusicSettings.h" />
+    <ClInclude Include="..\..\..\..\Classes\Core\Screen.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowColor.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowGame.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowPoint.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowPointPair.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowPointState.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowRenderer.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowRendererNode.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\FlowTable.h" />
+    <ClInclude Include="..\..\..\..\Classes\Flow\JoinyPair.h" />
+    <ClInclude Include="..\..\..\..\Classes\GameInfo.h" />
+    <ClInclude Include="..\..\..\..\Classes\Layers\BackgroundHolder.h" />
+    <ClInclude Include="..\..\..\..\Classes\Layers\DebugLayer.h" />
+    <ClInclude Include="..\..\..\..\Classes\Layers\PopUpWindow.h" />
+    <ClInclude Include="..\..\..\..\Classes\Layers\YesNoDialog.h" />
+    <ClInclude Include="..\..\..\..\Classes\Localization\CCLocalizedString.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\Hints.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\JoinyCollection.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\JoinyLevel.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\LevelManager.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\RW.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\RWGeneric.h" />
+    <ClInclude Include="..\..\..\..\Classes\Logic\Tutorial.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\DeveloperScene.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\LevelScene.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\Loading.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\MainScene.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\SelectCollection.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\SelectLevel.h" />
+    <ClInclude Include="..\..\..\..\Classes\Scenes\SettingScene.h" />
+    <ClInclude Include="..\..\..\..\Classes\Store.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\ADRandom.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\ADString.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADAds.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADBrowser.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADInApp.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADInfo.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADLanguage.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADNotification.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADScreen.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADStatistics.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADVirtualCurrency.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBakeNode.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBlurSprite.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBMFont.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADColoredSprite.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADShaderSprite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Cocos2dRenderer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProvider.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProviderBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DInterop.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\DirectXBase.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\InputEvent.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\BackButton.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\AnimatedMenuItem.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\CCScrollView.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\DrawLayer.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\FileUtils.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\Fonts.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\GraphicsManager.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\MenuSpriteBatch.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Core\MusicSettings.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Flow\FlowGame.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Flow\FlowPointState.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Flow\FlowRenderer.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Flow\FlowRendererNode.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Flow\FlowTable.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\GameInfo.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Layers\BackgroundHolder.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Layers\DebugLayer.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Layers\PopUpWindow.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Layers\YesNoDialog.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Localization\CCLocalizedString.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Logic\Hints.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Logic\JoinyCollection.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Logic\JoinyLevel.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Logic\LevelManager.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Logic\Tutorial.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\DeveloperScene.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\LevelScene.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\Loading.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\MainScene.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\SelectCollection.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\SelectLevel.cpp" />
+    <ClCompile Include="..\..\..\..\Classes\Scenes\SettingScene.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\ADRandom.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADAds.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADBrowser.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADInApp.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADInfo.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADLanguage.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADScreen.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADVirtualCurrency.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBakeNode.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBlurSprite.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADBMFont.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADColoredSprite.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Rendering\ADShaderSprite.cpp" />
+    <ClCompile Include="PlatformImpl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common\esUtil_phone.vcxproj">
+      <Project>{d2d857bf-346e-4014-b9cf-50d5e1f8a357}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\preprocessor\preprocessor_phone.vcxproj">
+      <Project>{8b1820bf-48e1-4308-b529-3e58e7fafc6f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\translator_common_phone.vcxproj">
+      <Project>{4206a313-d487-461d-9462-bcd7127a7ecc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\translator_hlsl_phone.vcxproj">
+      <Project>{500b47df-7711-4ff3-b63e-14508a00f979}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\src\libEGL\libEGL_phone.vcxproj">
+      <Project>{ab42a170-e370-4707-8cc6-1c51349c146f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\platform\third_party\winrt\angleproject\src\libGLESv2\libGLESv2_phone.vcxproj">
+      <Project>{0592f9c3-d727-4d41-bc9e-e43b269ad877}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\cocos2dx\proj.wp8\libcocos2d.vcxproj">
+      <Project>{871aadce-3905-48ef-ac2b-c67c335b0dcc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\..\CocosDenshion\proj.wp8\CocosDenshion.vcxproj">
+      <Project>{72ddd46b-55b1-4531-9eea-72081acbcaa2}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsPhone\v$(TargetPlatformVersion)\Microsoft.Cpp.WindowsPhone.$(TargetPlatformVersion).targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

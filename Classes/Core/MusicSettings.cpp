@@ -4,7 +4,7 @@
 const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.wav";
 const char* MusicSettings::LEVEL_SCENE_MUSIC = "music/demain_je_change.wav";
 #else
-#ifdef CC_WIN8_PHONE
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WP8
     const char* MusicSettings::BACKGROUND_MUSIC = "music/silly_fun.wav";
     const char* MusicSettings::LEVEL_SCENE_MUSIC = "music/demain_je_change.wav";
 #else
