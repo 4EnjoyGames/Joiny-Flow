@@ -221,6 +221,7 @@
     <ClInclude Include="..\..\..\..\Classes\Scenes\SelectLevel.h" />
     <ClInclude Include="..\..\..\..\Classes\Scenes\SettingScene.h" />
     <ClInclude Include="..\..\..\..\Classes\Store.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\platform\wp8\WP8Adlib.h" />
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\ADRandom.h" />
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\ADString.h" />
     <ClInclude Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADAds.h" />
@@ -309,6 +310,8 @@
     <ClCompile Include="..\..\..\..\Classes\Scenes\SelectCollection.cpp" />
     <ClCompile Include="..\..\..\..\Classes\Scenes\SelectLevel.cpp" />
     <ClCompile Include="..\..\..\..\Classes\Scenes\SettingScene.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADBrowser_impl.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADLanguage_impl.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\ADRandom.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADAds.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADBrowser.cpp" />

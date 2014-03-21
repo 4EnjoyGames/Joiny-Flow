@@ -148,6 +148,12 @@
     <ClCompile Include="PlatformImpl.cpp" />
     <ClCompile Include="..\..\..\..\VersionSelector\Free\version.cpp" />
     <ClCompile Include="EditBoxEvent.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADLanguage_impl.cpp">
+      <Filter>ADLibImpl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADBrowser_impl.cpp">
+      <Filter>ADLibImpl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProvider.h" />
@@ -339,6 +345,9 @@
       <Filter>ADLib\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="EditBoxEvent.h" />
+    <ClInclude Include="..\..\..\..\libraries\ADLib\platform\wp8\WP8Adlib.h">
+      <Filter>ADLibImpl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Classes">
@@ -370,6 +379,9 @@
     </Filter>
     <Filter Include="ADLib\Rendering">
       <UniqueIdentifier>{11f1ea73-6368-4060-bab4-9b54d82d85b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ADLibImpl">
+      <UniqueIdentifier>{67412bc6-eedc-4b98-b2ba-6e3ea1bc9e7c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
