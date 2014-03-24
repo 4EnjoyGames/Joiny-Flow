@@ -30,9 +30,9 @@ namespace PhoneDirect3DXamlAppInterop
 
         // invisible XAML TextBox for Cocos2d-x keyboard input
         TextBox m_textBox = null;
-        static Grid main_layout = null;
+        static Canvas main_layout = null;
 
-        public static Grid getMainLayout()
+        public static Canvas getMainLayout()
         {
             return main_layout;
         }
@@ -41,7 +41,7 @@ namespace PhoneDirect3DXamlAppInterop
         public MainPage()
         {
             InitializeComponent();
-            main_layout = LayoutRoot;
+            main_layout = Overlay;
         }
 
         private void DrawingSurface_Loaded(object sender, RoutedEventArgs e)
@@ -49,6 +49,12 @@ namespace PhoneDirect3DXamlAppInterop
             if (m_d3dInterop == null)
             {
                 m_d3dInterop = new Direct3DInterop();
+
+                //LayoutRoot.Width = GridRoot.ActualWidth;
+                //LayoutRoot.Height = GridRoot.ActualHeight;
+
+                DrawingSurface.Width = LayoutRoot.ActualWidth;
+                DrawingSurface.Height = LayoutRoot.ActualHeight;
 
                 // Set WindowBounds to size of DrawingSurface
                 m_d3dInterop.WindowBounds = new Windows.Foundation.Size(
