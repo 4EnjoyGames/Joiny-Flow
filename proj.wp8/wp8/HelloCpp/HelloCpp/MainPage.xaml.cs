@@ -30,11 +30,18 @@ namespace PhoneDirect3DXamlAppInterop
 
         // invisible XAML TextBox for Cocos2d-x keyboard input
         TextBox m_textBox = null;
+        static Grid main_layout = null;
+
+        public static Grid getMainLayout()
+        {
+            return main_layout;
+        }
 
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+            main_layout = LayoutRoot;
         }
 
         private void DrawingSurface_Loaded(object sender, RoutedEventArgs e)

@@ -91,7 +91,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADBrowserManaged.cs" />
-    <Compile Include="App.xaml.cs" />
+    <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADAdsManaged.cs" />
+	<Compile Include="App.xaml.cs" />
     <Compile Include="EditBox.xaml.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs" />
@@ -159,6 +160,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ADLibImpl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GoogleAds">
+      <HintPath>..\..\..\..\libraries\ADLib\platform\wp8\AdMob\GoogleAds.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

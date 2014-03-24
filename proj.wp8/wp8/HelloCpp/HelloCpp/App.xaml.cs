@@ -29,6 +29,7 @@ namespace PhoneDirect3DXamlAppInterop
         public App()
         {
             PhoneDirect3DXamlAppComponent.ADBrowserManaged.init();
+            PhoneDirect3DXamlAppComponent.ADAdsManaged.init();
 
             // Global handler for uncaught exceptions.
             UnhandledException += Application_UnhandledException;

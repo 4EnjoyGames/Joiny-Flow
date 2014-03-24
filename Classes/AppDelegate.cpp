@@ -227,9 +227,20 @@ void initAds()
             //ca-app-pub-1612697960946304/5715287478
             pid_interstitial << 5715287478;
     }
+	else if(platform == ADPlatform::WindowsPhone)
+	{
+		//ca-app-pub-1612697960946304/9611946677
+        pid_banner << 9611946677;
+
+        //ca-app-pub-1612697960946304/2088679871
+        pid_interstitial << 2088679871;
+	}
 
     ADAds::registerBannerType("BANNER", pid_banner.str());
-    ADAds::registerBannerType("IAB_BANNER", pid_banner.str());
+
+	//Windows Phone supports only one banner type
+	if(platform != ADPlatform::WindowsPhone)
+		ADAds::registerBannerType("IAB_BANNER", pid_banner.str());
 
     ADAds::registerInterstitialType(pid_interstitial.str());
 

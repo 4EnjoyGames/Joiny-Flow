@@ -310,6 +310,7 @@
     <ClCompile Include="..\..\..\..\Classes\Scenes\SelectCollection.cpp" />
     <ClCompile Include="..\..\..\..\Classes\Scenes\SelectLevel.cpp" />
     <ClCompile Include="..\..\..\..\Classes\Scenes\SettingScene.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADAds_AdMob.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADBrowser_impl.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADInfo_WP8.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADLanguage_impl.cpp" />
