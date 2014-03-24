@@ -379,13 +379,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     return true;
 }
-
+#include <ADLib/Device/ADDeviceEvents.h>
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     CCDirector::sharedDirector()->stopAnimation();
 
-    ADStatistics::stopSession();
-    ADVirtualCurrency::onPause();
+    //ADStatistics::stopSession();
+    //ADVirtualCurrency::onPause();
+    ADDeviceEvents::onPause();
     // if you use SimpleAudioEngine, it must be pause
     CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
     RW::onPause();
@@ -396,8 +397,9 @@ void AppDelegate::applicationDidEnterBackground() {
 void AppDelegate::applicationWillEnterForeground() {
     CCDirector::sharedDirector()->startAnimation();
 
-    ADStatistics::startSession();
-    ADVirtualCurrency::onResume();
+    ADDeviceEvents::onResume();
+    //ADStatistics::startSession();
+    //ADVirtualCurrency::onResume();
     // if you use SimpleAudioEngine, it must resume here
     CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 

@@ -84,8 +84,12 @@ const cocos2d::CCPoint FlowRenderer::getNodePosition(const FlowPoint& pos)
     //    return CCPoint( _textures_size * pos.x(),
     //                    _textures_size * pos.y());
 }
-void FlowRenderer::drawTable(float scale, CCSize tablo_size)
+
+void FlowRenderer::doDrawTable()
 {
+    float scale = _table_scale;
+    CCSize tablo_size = _table_size;
+
     //const CCPoint ORIGIN = Screen::getOrigin();
     //const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     //const float SCALE = Screen::getScaleFactor();
@@ -179,12 +183,26 @@ void FlowRenderer::drawTable(float scale, CCSize tablo_size)
     //Finish rendering
     render->end();
 
+    const int TABLE_TAG = 10055;
+    CCNode* old = this->getChildByTag(TABLE_TAG);
+    if(old)
+        old->removeFromParent();
+
     //Create sprite with drawing result
     CCSprite* res = CCSprite::createWithTexture(render->getSprite()->getTexture());
     res->setAnchorPoint(ccp(0,1-DESIGN_SCALE));
     res->setPosition(ccp(0,0));
     res->setScale(tablo_size.width / tablo_size_real.width * SCALE);
-    this->addChild(res, -1);
+    this->addChild(res, -1, TABLE_TAG);
+}
+#include <ADLib/Device/ADDeviceEvents.h>
+void FlowRenderer::drawTable(float scale, CCSize tablo_size)
+{
+    _table_scale = scale;
+    _table_size = tablo_size;
+    doDrawTable();
+    CONNECT(ADDeviceEvents::signalOnResume,
+            this, &FlowRenderer::doDrawTable);
 }
 
 void FlowRenderer::createBackground()

@@ -4,8 +4,8 @@
 #include "FlowTable.h"
 #include "FlowRendererNode.h"
 #include "Core/GraphicsManager.h"
-
-class FlowRenderer : public cocos2d::CCNode
+#include <ADLib/ADSignals.h>
+class FlowRenderer : public cocos2d::CCNode, public HasSlots
 {
 public:
     FlowRenderer(const FlowTable&);
@@ -53,8 +53,9 @@ private:
     SpritesLoader _spl_layer1;
 
 
-
-
+    void doDrawTable();
+    float _table_scale;
+    cocos2d::CCSize _table_size;
 
 
 
