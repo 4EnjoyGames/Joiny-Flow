@@ -90,7 +90,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ADBrowserManaged.cs" />
+    <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADBrowserManaged.cs" />
     <Compile Include="App.xaml.cs" />
     <Compile Include="EditBox.xaml.cs" />
     <Compile Include="LocalizedStrings.cs" />

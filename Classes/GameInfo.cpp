@@ -107,6 +107,10 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
         {
             if(ADInfo::getPlatform() == ADPlatform::iOS)
                 return "id816101116";
+			else if(ADInfo::getPlatform() == ADPlatform::WindowsPhone)
+			{
+				return "4beb014f-d3f0-4576-8e83-100c8fa09c8f";
+			}
             else
                 return "com.x4enjoy.joiny";
         }

@@ -317,6 +317,7 @@
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\ADRandom.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADAds.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADBrowser.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADDeviceEvents.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADInApp.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADInfo.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADLanguage.cpp" />
