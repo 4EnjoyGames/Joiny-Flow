@@ -166,6 +166,9 @@
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADAds_AdMob.cpp">
       <Filter>ADLibImpl</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADStatistics_Flurry.cpp">
+      <Filter>ADLibImpl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\cocos2dx\platform\wp8-xaml\Direct3DContentProvider.h" />

@@ -92,7 +92,8 @@
   <ItemGroup>
     <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADBrowserManaged.cs" />
     <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADAdsManaged.cs" />
-	<Compile Include="App.xaml.cs" />
+    <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADStatisticsManaged.cs" />
+    <Compile Include="App.xaml.cs" />
     <Compile Include="EditBox.xaml.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs" />
@@ -162,6 +163,9 @@
     <Folder Include="ADLibImpl\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FlurryWP8SDK">
+      <HintPath>..\..\..\..\libraries\ADLib\platform\wp8\Flurry\FlurryWP8SDK.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleAds">
       <HintPath>..\..\..\..\libraries\ADLib\platform\wp8\AdMob\GoogleAds.dll</HintPath>
     </Reference>

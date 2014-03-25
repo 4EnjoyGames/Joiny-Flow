@@ -278,6 +278,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
             ADStatistics::setApplicationKey("2YHVNKMPHQW5FF459KJJ");
         else if(ADInfo::getPlatform() == ADPlatform::iOS)
             ADStatistics::setApplicationKey("2CKY6VTP8TQ5XR7CPR5Y");
+		else if(ADInfo::getPlatform() == ADPlatform::WindowsPhone)
+			ADStatistics::setApplicationKey("CP65XWB4YWTCQF5J9B6W");
     }
     else
     {
