@@ -83,6 +83,8 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
     {
         if(ADInfo::getPlatform() == ADPlatform::iOS)
             return "id657095501";
+		else if(ADInfo::getPlatform() == ADPlatform::WindowsPhone)
+			return "4a78dd6e-321f-4b21-829c-5b35490671c9"; //Junior
         else
             return "com.x4enjoy.mathisfun";
     }
@@ -90,6 +92,8 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
     {
         if(ADInfo::getPlatform() == ADPlatform::iOS)
             return "id657096722";
+		else if(ADInfo::getPlatform() == ADPlatform::WindowsPhone)
+			return "4a78dd6e-321f-4b21-829c-5b35490671c9"; //Junior
         else
             return "com.x4enjoy.mathisfunjunior";
     }
@@ -109,7 +113,7 @@ const std::string GameInfo::doGetPackageName(const std::string game_name)
                 return "id816101116";
 			else if(ADInfo::getPlatform() == ADPlatform::WindowsPhone)
 			{
-				return "4beb014f-d3f0-4576-8e83-100c8fa09c8f";
+				return "013aa07d-8dfe-439c-80b9-8f3cae0f426c";
 			}
             else
                 return "com.x4enjoy.joiny";
