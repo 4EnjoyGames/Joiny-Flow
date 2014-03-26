@@ -6,7 +6,7 @@
     <Language code="uk" />
     <Language code="ru" />
   </Languages>
-  <App xmlns="" ProductID="{ee29a261-80d0-4bdf-89bd-28b1ebbc8bd3}" Title="Joiny Flow: Colorful Dots" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="4Enjoy: Diana Sirenko, Andrii Chaika" Description="Joiny is a FREE puzzle game. You have to solve the puzzle by connecting the colorful dots. Joiny differs from other numberlink games. All dots on the level could have the same color. It gives more challenge to the Joiny. " Publisher="4Enjoy" PublisherID="{be025a6e-6b64-4724-95d0-ed19445d9bdb}">
+  <App xmlns="" ProductID="{013aa07d-8dfe-439c-80b9-8f3cae0f426c}" Title="Joiny Flow: Colorful Dots" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="4Enjoy: Diana Sirenko, Andrii Chaika" Description="Joiny is a FREE puzzle game. You have to solve the puzzle by connecting the colorful dots. Joiny differs from other numberlink games. All dots on the level could have the same color. It gives more challenge to the Joiny. " Publisher="4Enjoy" PublisherID="{be025a6e-6b64-4724-95d0-ed19445d9bdb}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
