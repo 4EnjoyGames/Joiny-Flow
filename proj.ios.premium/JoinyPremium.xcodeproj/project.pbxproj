@@ -26,6 +26,7 @@
 		84DFD8A318D8D15D00CA3500 /* PlatformEmulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84DFD8A118D8D15D00CA3500 /* PlatformEmulator.cpp */; };
 		84DFD8A618D8D20E00CA3500 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84DFD8A518D8D20E00CA3500 /* version.cpp */; };
 		84DFD8AF18D8D9DD00CA3500 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84DFD8AE18D8D9DD00CA3500 /* StoreKit.framework */; };
+		84E0CBFB18E3469B001A2A08 /* ADDeviceEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E0CBFA18E3469B001A2A08 /* ADDeviceEvents.cpp */; };
 		84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B11547F06B00633F88 /* OpenAL.framework */; };
 		84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B31547F06B00633F88 /* AudioToolbox.framework */; };
 		84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B51547F06B00633F88 /* AVFoundation.framework */; };
@@ -156,6 +157,7 @@
 		84DFD8A518D8D20E00CA3500 /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = version.cpp; sourceTree = "<group>"; };
 		84DFD8A918D8D97E00CA3500 /* Joiny.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Joiny.entitlements; sourceTree = "<group>"; };
 		84DFD8AE18D8D9DD00CA3500 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		84E0CBFA18E3469B001A2A08 /* ADDeviceEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADDeviceEvents.cpp; sourceTree = "<group>"; };
 		84E80D9718A2BA000003E3D5 /* CocosDenshion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocosDenshion.xcodeproj; path = ../../../CocosDenshion/proj.ios/CocosDenshion.xcodeproj; sourceTree = "<group>"; };
 		84F197E518D5986F006A5221 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		84F197E618D5986F006A5221 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 		84F1987A18D59985006A5221 /* Device */ = {
 			isa = PBXGroup;
 			children = (
+				84E0CBFA18E3469B001A2A08 /* ADDeviceEvents.cpp */,
 				84F1987B18D59985006A5221 /* ADAds.cpp */,
 				84F1987C18D59985006A5221 /* ADAds.h */,
 				84F1987D18D59985006A5221 /* ADBrowser.cpp */,
@@ -919,6 +922,7 @@
 				84DFD8A618D8D20E00CA3500 /* version.cpp in Sources */,
 				84F1985018D5986F006A5221 /* FlowTable.cpp in Sources */,
 				84F1985318D5986F006A5221 /* TwoShuffle.cpp in Sources */,
+				84E0CBFB18E3469B001A2A08 /* ADDeviceEvents.cpp in Sources */,
 				84F1985118D5986F006A5221 /* FGenerator.cpp in Sources */,
 				84F1984E18D5986F006A5221 /* FlowRenderer.cpp in Sources */,
 				BF4DE6AD138BB89600CF907D /* RootViewController.mm in Sources */,
