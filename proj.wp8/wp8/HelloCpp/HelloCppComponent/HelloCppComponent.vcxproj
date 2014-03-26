@@ -312,10 +312,12 @@
     <ClCompile Include="..\..\..\..\Classes\Scenes\SettingScene.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADAds_AdMob.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADBrowser_impl.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADInApp_wp8.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADInfo_WP8.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADLanguage_impl.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADNotification_impl.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\ADStatistics_Flurry.cpp" />
+    <ClCompile Include="..\..\..\..\libraries\ADLib\platform\wp8\WP8Adlib.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\ADRandom.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADAds.cpp" />
     <ClCompile Include="..\..\..\..\libraries\ADLib\src\ADLib\Device\ADBrowser.cpp" />

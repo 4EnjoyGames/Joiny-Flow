@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{d90b344f-2fbb-489e-b668-271ae7b196d6}" Title="HelloCpp-XAML" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PhoneDirect3DXamlAppInterop author" Description="Sample description" Publisher="PhoneDirect3DXamlAppInterop" PublisherID="{e5cee7c5-82f7-4267-bb45-8a73e00ac090}">
+  <DefaultLanguage xmlns="" code="en" />
+  <Languages xmlns="">
+    <Language code="en" />
+    <Language code="uk" />
+    <Language code="ru" />
+  </Languages>
+  <App xmlns="" ProductID="{ee29a261-80d0-4bdf-89bd-28b1ebbc8bd3}" Title="Joiny Flow: Colorful Dots" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="4Enjoy: Diana Sirenko, Andrii Chaika" Description="Joiny is a FREE puzzle game. You have to solve the puzzle by connecting the colorful dots. Joiny differs from other numberlink games. All dots on the level could have the same color. It gives more challenge to the Joiny. " Publisher="4Enjoy" PublisherID="{be025a6e-6b64-4724-95d0-ed19445d9bdb}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -20,7 +25,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>HelloCpp-XAML</Title>
+          <Title>Joiny</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

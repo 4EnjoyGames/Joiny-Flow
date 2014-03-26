@@ -93,6 +93,7 @@
     <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADBrowserManaged.cs" />
     <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADAdsManaged.cs" />
     <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADStatisticsManaged.cs" />
+    <Compile Include="..\..\..\..\libraries\ADLib\platform\wp8\Managed\ADInAppManaged.cs" />
     <Compile Include="App.xaml.cs" />
     <Compile Include="EditBox.xaml.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -116,19 +117,10 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
