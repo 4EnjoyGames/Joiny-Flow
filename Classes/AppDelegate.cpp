@@ -269,7 +269,9 @@ void initTapJoy()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-    RW::onInit();
+    
+    //if(ADInfo::getPlatform() == ADPlatform::Android)
+        RW::onInit();
 
     //Statistics init
     if(GameInfo::getVersion() != Version::Premium)
@@ -378,7 +380,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     {
         initAds();
     }
-
+    
+    
+    
     return true;
 }
 #include <ADLib/Device/ADDeviceEvents.h>

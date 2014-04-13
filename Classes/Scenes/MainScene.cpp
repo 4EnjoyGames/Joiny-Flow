@@ -161,6 +161,20 @@ bool MainScene::init()
     const CCSize VISIBLE_SIZE = Screen::getVisibleSize();
     const float SCALE = Screen::getScaleFactor();
 
+    
+    /*std::stringstream stv;
+    stv << "T: ";
+    
+    for(auto it : RW::getLevelManager()._collections)
+    {
+        stv << it.first << " ";
+    }
+    
+    CCLabelTTF* labt = CCLabelTTF::create(stv.str().c_str(), "Arial", 100);
+    this->addChild(labt);
+    labt->setColor(ccc3(0,0,0));
+    labt->setPosition(ORIGIN + VISIBLE_SIZE*0.5f);*/
+    
     //game logo
     _main_logo = CCSprite::create("main-menu/main-logo.png");
 

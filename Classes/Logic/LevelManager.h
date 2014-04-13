@@ -39,6 +39,9 @@ public:
     //return is resetting succesfull or no
     bool resetProgress();
 
+    typedef std::map<JoinyLevelID, CollectionPtr> CollectionMap;
+    
+    CollectionMap _collections;
 private:
     LevelManager();
     void onInit();
@@ -61,9 +64,7 @@ private:
 
     bool _full_version;
 
-    typedef std::map<JoinyLevelID, CollectionPtr> CollectionMap;
-
-    CollectionMap _collections;
+    
 
     RWManager
 };

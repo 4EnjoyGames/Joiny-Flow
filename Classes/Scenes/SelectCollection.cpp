@@ -344,15 +344,17 @@ bool SelectCollection::init()
 
     unsigned int* order = nullptr;
 
+    unsigned int arr_premium[10] = {1,2,3,10,4,9,5,8,6,7};
+    unsigned int arr_normal[10] = {1,2,3,4,5,6,7,8,9,10};
     if(GameInfo::getVersion() == Version::Premium)
     {
-        unsigned int arr[10] = {1,2,3,10,4,9,5,8,6,7};
-        order = arr;
+        
+        order = arr_premium;
     }
     else
     {
-        unsigned int arr[10] = {1,2,3,4,5,6,7,8,9,10};
-        order = arr;
+        
+        order = arr_normal;
     }
 
     float working_y = height-s.height/2+margin;

@@ -76,13 +76,16 @@ void Loading::loadingCallBack(CCObject *)
 
     }
 }
-
+#include <ADLib/Device/ADInfo.h>
 #include "Logic/RW.h"
 #include "AppDelegate.h"
 void Loading::initRW()
 {
 	//TODO: write cleanup
     //RW::onInit();
+    /*if(ADInfo::getPlatform() != ADPlatform::Android)
+        RW::onInit();*/
+
 }
 void Loading::addAll()
 {

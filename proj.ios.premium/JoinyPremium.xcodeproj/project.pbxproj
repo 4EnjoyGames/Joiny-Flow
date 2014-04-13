@@ -31,6 +31,13 @@
 		84E6532418A2C05200708286 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B31547F06B00633F88 /* AudioToolbox.framework */; };
 		84E6532518A2C05B00708286 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 781C33B51547F06B00633F88 /* AVFoundation.framework */; };
 		84E80D9D18A2BA860003E3D5 /* libCocosDenshion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E80D9C18A2BA060003E3D5 /* libCocosDenshion.a */; };
+		84EC262F18F9BB6A00411374 /* banners in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262818F9BB6A00411374 /* banners */; };
+		84EC263018F9BB6A00411374 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262918F9BB6A00411374 /* fonts */; };
+		84EC263118F9BB6A00411374 /* images-normal in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262A18F9BB6A00411374 /* images-normal */; };
+		84EC263218F9BB6A00411374 /* images-small in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262B18F9BB6A00411374 /* images-small */; };
+		84EC263318F9BB6A00411374 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262C18F9BB6A00411374 /* levels */; };
+		84EC263418F9BB6A00411374 /* music in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262D18F9BB6A00411374 /* music */; };
+		84EC263518F9BB6A00411374 /* translations in Resources */ = {isa = PBXBuildFile; fileRef = 84EC262E18F9BB6A00411374 /* translations */; };
 		84F1984218D5986F006A5221 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F197E518D5986F006A5221 /* AppDelegate.cpp */; };
 		84F1984318D5986F006A5221 /* BackButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F197E818D5986F006A5221 /* BackButton.cpp */; };
 		84F1984418D5986F006A5221 /* AnimatedMenuItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F197EF18D5986F006A5221 /* AnimatedMenuItem.cpp */; };
@@ -69,13 +76,6 @@
 		84F1986518D5986F006A5221 /* SelectCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1983B18D5986F006A5221 /* SelectCollection.cpp */; };
 		84F1986618D5986F006A5221 /* SelectLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1983D18D5986F006A5221 /* SelectLevel.cpp */; };
 		84F1986718D5986F006A5221 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1983F18D5986F006A5221 /* SettingScene.cpp */; };
-		84F1986F18D598A0006A5221 /* banners in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986818D598A0006A5221 /* banners */; };
-		84F1987018D598A0006A5221 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986918D598A0006A5221 /* fonts */; };
-		84F1987118D598A0006A5221 /* images-normal in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986A18D598A0006A5221 /* images-normal */; };
-		84F1987218D598A0006A5221 /* images-small in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986B18D598A0006A5221 /* images-small */; };
-		84F1987318D598A0006A5221 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986C18D598A0006A5221 /* levels */; };
-		84F1987418D598A0006A5221 /* music in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986D18D598A0006A5221 /* music */; };
-		84F1987518D598A0006A5221 /* translations in Resources */ = {isa = PBXBuildFile; fileRef = 84F1986E18D598A0006A5221 /* translations */; };
 		84F198A318D59985006A5221 /* ADRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1987718D59985006A5221 /* ADRandom.cpp */; };
 		84F198A418D59985006A5221 /* ADAds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1987B18D59985006A5221 /* ADAds.cpp */; };
 		84F198A518D59985006A5221 /* ADBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F1987D18D59985006A5221 /* ADBrowser.cpp */; };
@@ -159,6 +159,13 @@
 		84DFD8AE18D8D9DD00CA3500 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		84E0CBFA18E3469B001A2A08 /* ADDeviceEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADDeviceEvents.cpp; sourceTree = "<group>"; };
 		84E80D9718A2BA000003E3D5 /* CocosDenshion.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocosDenshion.xcodeproj; path = ../../../CocosDenshion/proj.ios/CocosDenshion.xcodeproj; sourceTree = "<group>"; };
+		84EC262818F9BB6A00411374 /* banners */ = {isa = PBXFileReference; lastKnownFileType = folder; name = banners; path = ../proj.ios/Resources/banners; sourceTree = "<group>"; };
+		84EC262918F9BB6A00411374 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../proj.ios/Resources/fonts; sourceTree = "<group>"; };
+		84EC262A18F9BB6A00411374 /* images-normal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "images-normal"; path = "../proj.ios/Resources/images-normal"; sourceTree = "<group>"; };
+		84EC262B18F9BB6A00411374 /* images-small */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "images-small"; path = "../proj.ios/Resources/images-small"; sourceTree = "<group>"; };
+		84EC262C18F9BB6A00411374 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../proj.ios/Resources/levels; sourceTree = "<group>"; };
+		84EC262D18F9BB6A00411374 /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = music; path = ../proj.ios/Resources/music; sourceTree = "<group>"; };
+		84EC262E18F9BB6A00411374 /* translations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = translations; path = ../proj.ios/Resources/translations; sourceTree = "<group>"; };
 		84F197E518D5986F006A5221 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		84F197E618D5986F006A5221 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84F197E718D5986F006A5221 /* AppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacros.h; sourceTree = "<group>"; };
@@ -244,13 +251,6 @@
 		84F1983F18D5986F006A5221 /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingScene.cpp; sourceTree = "<group>"; };
 		84F1984018D5986F006A5221 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingScene.h; sourceTree = "<group>"; };
 		84F1984118D5986F006A5221 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
-		84F1986818D598A0006A5221 /* banners */ = {isa = PBXFileReference; lastKnownFileType = folder; name = banners; path = Resources/banners; sourceTree = SOURCE_ROOT; };
-		84F1986918D598A0006A5221 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = Resources/fonts; sourceTree = SOURCE_ROOT; };
-		84F1986A18D598A0006A5221 /* images-normal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "images-normal"; path = "Resources/images-normal"; sourceTree = SOURCE_ROOT; };
-		84F1986B18D598A0006A5221 /* images-small */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "images-small"; path = "Resources/images-small"; sourceTree = SOURCE_ROOT; };
-		84F1986C18D598A0006A5221 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = Resources/levels; sourceTree = SOURCE_ROOT; };
-		84F1986D18D598A0006A5221 /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; name = music; path = Resources/music; sourceTree = SOURCE_ROOT; };
-		84F1986E18D598A0006A5221 /* translations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = translations; path = Resources/translations; sourceTree = SOURCE_ROOT; };
 		84F1987718D59985006A5221 /* ADRandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADRandom.cpp; sourceTree = "<group>"; };
 		84F1987818D59985006A5221 /* ADRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRandom.h; sourceTree = "<group>"; };
 		84F1987918D59985006A5221 /* ADString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADString.h; sourceTree = "<group>"; };
@@ -320,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DFD8AF18D8D9DD00CA3500 /* StoreKit.framework in Frameworks */,
 				8402CE6D18A411D000703CF7 /* SystemConfiguration.framework in Frameworks */,
 				84B0AA8C18D5C17F00E0C39A /* MessageUI.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -329,7 +330,6 @@
 				8402CE6B18A411BB00703CF7 /* Security.framework in Frameworks */,
 				8402CE6918A4118D00703CF7 /* libFlurry_4.3.1.a in Frameworks */,
 				84E6532118A2C04600708286 /* OpenAL.framework in Frameworks */,
-				84DFD8AF18D8D9DD00CA3500 /* StoreKit.framework in Frameworks */,
 				84E80D9D18A2BA860003E3D5 /* libCocosDenshion.a in Frameworks */,
 				840AE31E18A030A900189085 /* libcocos2dx.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -397,6 +397,13 @@
 		784521C214EBA449009D533B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84EC262818F9BB6A00411374 /* banners */,
+				84EC262918F9BB6A00411374 /* fonts */,
+				84EC262A18F9BB6A00411374 /* images-normal */,
+				84EC262B18F9BB6A00411374 /* images-small */,
+				84EC262C18F9BB6A00411374 /* levels */,
+				84EC262D18F9BB6A00411374 /* music */,
+				84EC262E18F9BB6A00411374 /* translations */,
 				84F198CA18D5A9C9006A5221 /* Default-Portrait.png */,
 				84F198CB18D5A9C9006A5221 /* iTunesArtwork */,
 				84F198CC18D5A9C9006A5221 /* iTunesArtwork@2x */,
@@ -410,13 +417,6 @@
 				84F198BA18D59E85006A5221 /* Icon-120.png */,
 				84F198BB18D59E85006A5221 /* Icon-144.png */,
 				84F198BC18D59E85006A5221 /* Icon-152.png */,
-				84F1986818D598A0006A5221 /* banners */,
-				84F1986918D598A0006A5221 /* fonts */,
-				84F1986A18D598A0006A5221 /* images-normal */,
-				84F1986B18D598A0006A5221 /* images-small */,
-				84F1986C18D598A0006A5221 /* levels */,
-				84F1986D18D598A0006A5221 /* music */,
-				84F1986E18D598A0006A5221 /* translations */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -861,26 +861,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EC262F18F9BB6A00411374 /* banners in Resources */,
+				84EC263118F9BB6A00411374 /* images-normal in Resources */,
 				84F198C018D59E85006A5221 /* Icon-57.png in Resources */,
 				84F198BF18D59E85006A5221 /* Default@2x.png in Resources */,
 				84F198C218D59E85006A5221 /* Icon-76.png in Resources */,
+				84EC263318F9BB6A00411374 /* levels in Resources */,
+				84EC263518F9BB6A00411374 /* translations in Resources */,
+				84EC263218F9BB6A00411374 /* images-small in Resources */,
 				84F198C418D59E85006A5221 /* Icon-120.png in Resources */,
-				84F1986F18D598A0006A5221 /* banners in Resources */,
-				84F1987518D598A0006A5221 /* translations in Resources */,
 				84F198CE18D5A9C9006A5221 /* Default-Portrait.png in Resources */,
-				84F1987118D598A0006A5221 /* images-normal in Resources */,
 				84F198C118D59E85006A5221 /* Icon-72.png in Resources */,
 				84F198BD18D59E85006A5221 /* Default-568h@2x.png in Resources */,
-				84F1987218D598A0006A5221 /* images-small in Resources */,
-				84F1987318D598A0006A5221 /* levels in Resources */,
 				84F198C618D59E85006A5221 /* Icon-152.png in Resources */,
+				84EC263418F9BB6A00411374 /* music in Resources */,
 				84F1985A18D5986F006A5221 /* Localized_en in Resources */,
 				84F198C318D59E85006A5221 /* Icon-114.png in Resources */,
+				84EC263018F9BB6A00411374 /* fonts in Resources */,
 				84F198D018D5A9C9006A5221 /* iTunesArtwork@2x in Resources */,
 				84F1985B18D5986F006A5221 /* Localized_zh in Resources */,
 				84F198CF18D5A9C9006A5221 /* iTunesArtwork in Resources */,
-				84F1987418D598A0006A5221 /* music in Resources */,
-				84F1987018D598A0006A5221 /* fonts in Resources */,
 				84F198C518D59E85006A5221 /* Icon-144.png in Resources */,
 				84F198BE18D59E85006A5221 /* Default.png in Resources */,
 			);
