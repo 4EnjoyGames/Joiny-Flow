@@ -323,11 +323,23 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     pDirector->setOpenGLView(pEGLView);
 
+    CCSize frameSize = pEGLView->getFrameSize();
+
     // Set the design resolution
-    pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
+    if(frameSize.width > frameSize.height)
+    {
+        //Mode for Samsung who launches in wrong mode
+        ADAds::disableAds();
+        pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionShowAll);
+    }
+    else
+    {
+        // Set the design resolution
+        pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
+    }
     CCSize vsize = pEGLView->getVisibleSize();
 
-    CCSize frameSize = pEGLView->getFrameSize();
+
     //std::cout << "TESST" <<std::endl;
     // In this demo, we select resource according to the frame's height.
     // If the resource size is different from design resolution size, you need to set contentScaleFactor.

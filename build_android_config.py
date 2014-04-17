@@ -19,6 +19,8 @@ project.addModule('android_ADStatistics_Flurry')
 project.addModule('android_ADLanguage')
 project.addModule('android_ADNotification')
 project.addModule('android_ADBrowser')
+project.addModule('android_ADHttp_None')
+project.addModule('android_ADFacebook_None')
 
 
 project.project_name = 'Joiny'

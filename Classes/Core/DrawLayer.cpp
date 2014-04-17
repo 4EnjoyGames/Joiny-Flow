@@ -1,6 +1,6 @@
 #include "DrawLayer.h"
 #include "Core/Screen.h"
-
+using namespace cocos2d;
 
 DrawLayer::DrawLayer()
     : _main_node(nullptr)
@@ -26,6 +26,11 @@ void DrawLayer::createDrawingNodes()
 
     //Init global rendering
     CCSize win_size = Screen::getFrameSize();
+    if(win_size.width > win_size.height)
+    {
+        //We are on samsung
+        win_size = Screen::getVisibleSize();
+    }
 
     //Create sprite for background
     CCSprite* background_piece = CCSprite::create("universal/game_background.jpg");
