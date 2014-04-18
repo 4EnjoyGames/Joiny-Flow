@@ -241,6 +241,8 @@ bool SettingScene::init()
 
     //////////////////////////////////////////////////////////////////
 
+    if(GameInfo::getVersion() != Version::Premium)
+    {
     CCPoint position_restor(ccp(VISIBLE_SIZE.width*0.5,restore_position_y));
 
     AnimatedMenuItem* restor_button = createButton(CCSprite::create("settings-menu/node.png"),
@@ -249,6 +251,7 @@ bool SettingScene::init()
                  _("Restore"),
                  GameInfo::getInstance()->getTitleColor());
     _buttons.push_back(restor_button);
+    }
 
     //////////////////////////////////////////////////////////////////
 
